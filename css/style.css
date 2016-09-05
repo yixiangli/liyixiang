@@ -124,7 +124,7 @@ body,
 }
 body {
   background: #eee;
-  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 14px "Chalkboard SE", "Source Han Sans CN", Tahoma, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei Light", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 .outer {
@@ -311,6 +311,9 @@ body {
   height: 300px;
   position: relative;
   border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+  -webkit-box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+  box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
 }
 #header:before,
 #header:after {
@@ -482,7 +485,7 @@ body {
   background: none;
   color: #555;
   width: 100%;
-  font: 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 13px "Chalkboard SE", "Source Han Sans CN", Tahoma, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei Light", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   outline: none;
 }
 .search-form-input::-webkit-search-results-decoration,
@@ -631,7 +634,7 @@ a.article-title:hover {
 .article-entry blockquote footer {
   font-size: 14px;
   margin: 1.6em 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Chalkboard SE", "Source Han Sans CN", Tahoma, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei Light", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -836,7 +839,7 @@ a.article-title:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 14px "Chalkboard SE", "Source Han Sans CN", Tahoma, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei Light", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   padding: 0 15px;
   color: #555;
   outline: none;
@@ -1094,11 +1097,12 @@ a.article-title:hover {
 .article-entry pre,
 .article-entry .highlight {
   background: #2d2d2d;
-  margin: 0 -20px;
+  margin: auto;
   padding: 15px 20px;
   border-style: solid;
   border-color: #ddd;
   border-width: 1px 0;
+  border-radius: 8px;
   overflow: auto;
   color: #ccc;
   line-height: 22.400000000000002px;
@@ -1195,7 +1199,7 @@ a.article-title:hover {
 .article-entry .gist .gist-file .gist-meta {
   background: #2d2d2d;
   color: #999;
-  font: 0.85em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 0.85em "Chalkboard SE", "Source Han Sans CN", Tahoma, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei Light", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   text-shadow: 0 0;
   padding: 0;
   margin-top: 1em;
