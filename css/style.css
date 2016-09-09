@@ -869,6 +869,9 @@ a.article-title:hover {
 .article-share-links:after {
   clear: both;
 }
+.article-share-sina,
+.article-share-qq,
+.article-share-wechat,
 .article-share-twitter,
 .article-share-facebook,
 .article-share-pinterest,
@@ -881,6 +884,9 @@ a.article-title:hover {
   color: #999;
   text-shadow: 0 1px #fff;
 }
+.article-share-sina:before,
+.article-share-qq:before,
+.article-share-wechat:before,
 .article-share-twitter:before,
 .article-share-facebook:before,
 .article-share-pinterest:before,
@@ -896,11 +902,35 @@ a.article-title:hover {
   margin-left: -10px;
   text-align: center;
 }
+.article-share-sina:hover,
+.article-share-qq:hover,
+.article-share-wechat:hover,
 .article-share-twitter:hover,
 .article-share-facebook:hover,
 .article-share-pinterest:hover,
 .article-share-google:hover {
   color: #fff;
+}
+.article-share-sina:before {
+  content: "\f18a";
+}
+.article-share-sina:hover {
+  background: #ff8140;
+  text-shadow: 0 1px #ff5700;
+}
+.article-share-qq:before {
+  content: "\f1d6";
+}
+.article-share-qq:hover {
+  background: #fc3;
+  text-shadow: 0 1px #f5b800;
+}
+.article-share-wechat:before {
+  content: "\f1d7";
+}
+.article-share-wechat:hover {
+  background: #44b549;
+  text-shadow: 0 1px #36913a;
 }
 .article-share-twitter:before {
   content: "\f099";
