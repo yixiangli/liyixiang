@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>breeze官方文档 | 李轶翔的博客</title>
+  <title>Java开发之常见问题 | 李轶翔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人主页">
+  <meta name="description" content="#概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
+##常见问题
+###Maven1.maven install时
+1Please ensure you are using JDK 1.4 or above and [ERROR] not a JRE (the com.sun.tools.javac.Main class is required）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="breeze官方文档">
-<meta property="og:url" content="https://yixiangli.github.io/2016/09/08/breeze官方文档/index.html">
+<meta property="og:title" content="Java开发之常见问题">
+<meta property="og:url" content="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
-<meta property="og:description" content="个人主页">
-<meta property="og:updated_time" content="2016-09-08T02:11:03.000Z">
+<meta property="og:description" content="#概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
+##常见问题
+###Maven1.maven install时
+1Please ensure you are using JDK 1.4 or above and [ERROR] not a JRE (the com.sun.tools.javac.Main class is required）">
+<meta property="og:updated_time" content="2016-09-12T09:17:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="breeze官方文档">
-<meta name="twitter:description" content="个人主页">
+<meta name="twitter:title" content="Java开发之常见问题">
+<meta name="twitter:description" content="#概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
+##常见问题
+###Maven1.maven install时
+1Please ensure you are using JDK 1.4 or above and [ERROR] not a JRE (the com.sun.tools.javac.Main class is required）">
   
     <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
   
@@ -80,7 +89,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-breeze官方文档" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Java开发之常见问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -88,15 +97,15 @@
         
   
     <h1 class="article-title" itemprop="name">
-      breeze官方文档
+      Java开发之常见问题
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-    	<a href="/2016/09/08/breeze官方文档/" class="article-date">
-  <time datetime="2016-09-08T02:11:03.000Z" itemprop="datePublished">2016-09-08</time>
+    	<a href="/2016/09/12/Java开发之常见问题/" class="article-date">
+  <time datetime="2016-09-12T09:07:03.000Z" itemprop="datePublished">2016-09-12</time>
 </a>
     	
   	</div>
@@ -109,15 +118,21 @@
             
         </div>
     
-        
+        <p>#概述<br>作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案</p>
+<p>##常见问题</p>
+<p>###Maven<br>1.maven install时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Please ensure you are using JDK 1.4 or above and [ERROR] not a JRE (the com.sun.tools.javac.Main class is required）</div></pre></td></tr></table></figure>
+<p>原因：<br>Eclipse/MyEclipse默认是使用jre作为运行环境，而maven编译需要jdk作为运行环境 ;</p>
+<p>解决方案：<br>```<br>进入eclipse properties设置，点击Java Build Path，选中JRE System Library,将JRE环境改为workspace default JRE,当然，eclipse默认的JRE环境各位要提前配置好。</p>
+
       
     </div>
     <footer class="article-footer">
 	  
-	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/09/08/breeze官方文档/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
       
       
-        <a href="https://yixiangli.github.io/2016/09/08/breeze官方文档/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/08/breeze官方文档/">评论</a>
+        <a href="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/12/Java开发之常见问题/">评论</a>
       
       
     </footer>
@@ -126,15 +141,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/09/09/hexo搭建个人GitHub博客心得/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          hexo搭建个人GitHub博客心得
-        
-      </div>
-    </a>
   
+    <a href="/2016/09/09/hexo搭建个人GitHub博客心得/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo搭建个人GitHub博客心得</div>
+    </a>
   
 </nav>
 
@@ -144,7 +155,7 @@
 
 <section id="comments">
 <!-- 多说评论框 start -->
-	<div id="ds-thread" class="ds-thread" data-thread-key="2016/09/08/breeze官方文档/" data-title="breeze官方文档" data-url="https://yixiangli.github.io/2016/09/08/breeze官方文档/"></div>
+	<div id="ds-thread" class="ds-thread" data-thread-key="2016/09/12/Java开发之常见问题/" data-title="Java开发之常见问题" data-url="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/"></div>
 <!-- 多说评论框 end -->
 </section>
 </section>

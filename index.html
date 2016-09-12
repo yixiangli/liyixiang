@@ -81,6 +81,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java开发之常见问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/12/Java开发之常见问题/">Java开发之常见问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/09/12/Java开发之常见问题/" class="article-date">
+  <time datetime="2016-09-12T09:07:03.000Z" itemprop="datePublished">2016-09-12</time>
+</a>
+    	
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <p>#概述<br>作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案</p>
+<p>##常见问题</p>
+<p>###Maven<br>1.maven install时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Please ensure you are using JDK 1.4 or above and [ERROR] not a JRE (the com.sun.tools.javac.Main class is required）</div></pre></td></tr></table></figure>
+<p>原因：<br>Eclipse/MyEclipse默认是使用jre作为运行环境，而maven编译需要jdk作为运行环境 ;</p>
+<p>解决方案：<br>```<br>进入eclipse properties设置，点击Java Build Path，选中JRE System Library,将JRE环境改为workspace default JRE,当然，eclipse默认的JRE环境各位要提前配置好。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/" data-id="ciszu6qe80000yos6x82ew074" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/12/Java开发之常见问题/">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hexo搭建个人GitHub博客心得" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -134,7 +182,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/09/hexo搭建个人GitHub博客心得/" data-id="cisx0qzle0001nbs6krjru5di" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/09/hexo搭建个人GitHub博客心得/" data-id="ciszu6qec0001yos6neqvbqyl" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/09/hexo搭建个人GitHub博客心得/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/09/hexo搭建个人GitHub博客心得/">评论</a>
@@ -176,7 +224,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/08/breeze官方文档/" data-id="cisx0qzl90000nbs6lg0r276s" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/08/breeze官方文档/" data-id="ciszu6qef0002yos6nyyoemje" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/08/breeze官方文档/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/08/breeze官方文档/">评论</a>
@@ -217,6 +265,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/12/Java开发之常见问题/">Java开发之常见问题</a>
+          </li>
         
           <li>
             <a href="/2016/09/09/hexo搭建个人GitHub博客心得/">hexo搭建个人GitHub博客心得</a>
