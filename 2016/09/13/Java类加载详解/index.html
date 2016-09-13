@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="概述最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。
 类加载机的分类">
-<meta property="og:updated_time" content="2016-09-13T10:30:56.000Z">
+<meta property="og:updated_time" content="2016-09-13T10:31:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java类加载详解">
 <meta name="twitter:description" content="概述最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。
@@ -137,7 +137,7 @@
 </ol>
 <h4 id="Custom-ClassLoader（用户自定义类加载器）"><a href="#Custom-ClassLoader（用户自定义类加载器）" class="headerlink" title="Custom ClassLoader（用户自定义类加载器）"></a>Custom ClassLoader（用户自定义类加载器）</h4><p>继承ClassLoader,加载自定义的类</p>
 <h4 id="Context-ClassLoader（线程上下文加载器）"><a href="#Context-ClassLoader（线程上下文加载器）" class="headerlink" title="Context ClassLoader（线程上下文加载器）"></a>Context ClassLoader（线程上下文加载器）</h4><p>默认为System ClassLoader，验证如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ClassLoaderTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">    // TODO Auto-generated method stub</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader());</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader().getParent());</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader().getParent().getParent());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ClassLoaderTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        // TODO Auto-generated method stub</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader());</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader().getParent());</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader().getParent().getParent());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sun.misc.Launcher$AppClassLoader@234f79cb</div><div class="line">sun.misc.Launcher$ExtClassLoader@36c51089</div><div class="line">null</div></pre></td></tr></table></figure>
 <p>可以看出，Context ClassLoader默认为System ClassLoader，且父加载器为ExtClassLoader，上层加载器为BootStrap ClassLoader，由于BootStrap ClassLoader是C++生成，因此显示null,由此也引出一个概念－－－双亲委派模型</p>
 
