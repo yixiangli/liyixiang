@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
 常见问题">
-<meta property="og:updated_time" content="2016-09-21T06:19:39.000Z">
+<meta property="og:updated_time" content="2016-10-09T02:42:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java开发之常见问题">
 <meta name="twitter:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
@@ -113,7 +113,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven"><span class="toc-number">1.1.1.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Errors"><span class="toc-number">1.1.2.</span> <span class="toc-text">Java Errors</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven"><span class="toc-number">1.1.1.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Errors"><span class="toc-number">1.1.2.</span> <span class="toc-text">Java Errors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-env"><span class="toc-number">1.1.3.</span> <span class="toc-text">Mac env</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案</p>
@@ -130,6 +130,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">开发项目的时候，有可能突然Eclipse抽风，一些外部接口类import进来后报错，可能代码都没动过，突然某天出来。</div></pre></td></tr></table></figure>
 <p>原因：据网上描述有可能存在Jar冲突或者jdk版本问题，但是如果确认这两部分没问题的话，那就可能是由于某些特殊原因，eclipse没能自动编译源代码到build/classes（或其他classes目录），导致类型查找不到。</p>
 <p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">点击导航栏Project—-&gt;选中Clean，选择出现这种问题的项目。</div></pre></td></tr></table></figure></p>
+<h3 id="Mac-env"><a href="#Mac-env" class="headerlink" title="Mac env"></a>Mac env</h3><p>1.cd Internet Plug-Ins — No such file or directory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mac下中java目录会被放到一个叫Internet Plug-Ins的目录下，看到了吧，这目录还带空格，怎么(cd)处理呢？</div></pre></td></tr></table></figure>
+<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd Internet\ Plug-Ins/</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -198,7 +201,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/教程/">教程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/文档/">文档</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/MessageQueue/">MessageQueue</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/教程/">教程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/文档/">文档</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -209,6 +212,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/10/09/MessageQueue大全/">MessageQueue大全</a>
+          </li>
         
           <li>
             <a href="/2016/09/28/美国签证血泪史/">美国签证血泪史</a>
@@ -224,10 +231,6 @@
         
           <li>
             <a href="/2016/09/09/hexo搭建个人GitHub博客心得/">hexo搭建个人GitHub博客心得</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/08/breeze官方文档/">breeze官方文档</a>
           </li>
         
       </ul>
