@@ -6,18 +6,18 @@
   <title>Git使用手册 | 李轶翔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="概述GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，https://github.com/yixiangli
-常见问题GitHub commit之后不显示contributions作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面一查">
+常见问题GitHub commit之后不显示contributions作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面通过">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git使用手册">
 <meta property="og:url" content="https://yixiangli.github.io/2016/10/19/Git使用手册/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="概述GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，https://github.com/yixiangli
-常见问题GitHub commit之后不显示contributions作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面一查">
-<meta property="og:updated_time" content="2016-10-19T06:33:49.000Z">
+常见问题GitHub commit之后不显示contributions作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面通过">
+<meta property="og:updated_time" content="2016-10-22T21:58:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git使用手册">
 <meta name="twitter:description" content="概述GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，https://github.com/yixiangli
-常见问题GitHub commit之后不显示contributions作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面一查">
+常见问题GitHub commit之后不显示contributions作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面通过">
   
     <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
   
@@ -117,7 +117,8 @@
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，<a href="https://github.com/yixiangli" target="_blank" rel="external">https://github.com/yixiangli</a></p>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="GitHub-commit之后不显示contributions"><a href="#GitHub-commit之后不显示contributions" class="headerlink" title="GitHub commit之后不显示contributions"></a>GitHub commit之后不显示contributions</h4><p>作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面一查发现博主所在公司项目使用的gitlab，之前配置的时候把user.name user.email配置成了公司邮箱的账号，Github就认为关联不到账号，解决方法是在仓库下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name xxxx</div><div class="line">git config --global user.email xxxx</div></pre></td></tr></table></figure></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="GitHub-commit之后不显示contributions"><a href="#GitHub-commit之后不显示contributions" class="headerlink" title="GitHub commit之后不显示contributions"></a>GitHub commit之后不显示contributions</h4><p>作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面通过指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --list</div></pre></td></tr></table></figure></p>
+<p>一查发现博主所在公司项目使用的gitlab，之前配置的时候把user.name user.email配置成了公司邮箱的账号，Github就认为关联不到账号，解决方法是在仓库下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name xxxx</div><div class="line">git config --global user.email xxxx</div></pre></td></tr></table></figure></p>
 
       
     </div>
