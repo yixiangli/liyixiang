@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
 常见问题">
-<meta property="og:updated_time" content="2016-10-09T02:42:02.000Z">
+<meta property="og:updated_time" content="2016-10-24T11:38:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java开发之常见问题">
 <meta name="twitter:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
@@ -113,7 +113,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven"><span class="toc-number">1.1.1.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Errors"><span class="toc-number">1.1.2.</span> <span class="toc-text">Java Errors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-env"><span class="toc-number">1.1.3.</span> <span class="toc-text">Mac env</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven"><span class="toc-number">1.1.1.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Errors"><span class="toc-number">1.1.2.</span> <span class="toc-text">Java Errors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-env"><span class="toc-number">1.1.3.</span> <span class="toc-text">Mac env</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-Eclipse"><span class="toc-number">1.1.4.</span> <span class="toc-text">Mac Eclipse</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案</p>
@@ -133,6 +133,8 @@
 <h3 id="Mac-env"><a href="#Mac-env" class="headerlink" title="Mac env"></a>Mac env</h3><p>1.cd Internet Plug-Ins — No such file or directory</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mac下中java目录会被放到一个叫Internet Plug-Ins的目录下，看到了吧，这目录还带空格，怎么(cd)处理呢？</div></pre></td></tr></table></figure>
 <p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd Internet\ Plug-Ins/</div></pre></td></tr></table></figure></p>
+<h3 id="Mac-Eclipse"><a href="#Mac-Eclipse" class="headerlink" title="Mac Eclipse"></a>Mac Eclipse</h3><p>1.设置工作空间编码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mac下使用Eclipse新建一个工作空间，默认编码是EUC_CN，可以通过选中项目后右键，Properties中修改，但是每个子项目都要修改很麻烦</div></pre></td></tr></table></figure></p>
+<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">选择偏好设置－－&gt; General－－&gt; WorkSpace</div></pre></td></tr></table></figure></p>
 
       
     </div>
