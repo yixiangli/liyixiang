@@ -3,21 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Java类加载详解 | 李轶翔的博客</title>
+  <title>归档: 2016/11 | 李轶翔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概述最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。
-类加载机的分类">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java类加载详解">
-<meta property="og:url" content="https://yixiangli.github.io/2016/09/13/Java类加载详解/index.html">
+  <meta name="description" content="个人主页">
+<meta property="og:type" content="website">
+<meta property="og:title" content="李轶翔的博客">
+<meta property="og:url" content="https://yixiangli.github.io/archives/2016/11/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
-<meta property="og:description" content="概述最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。
-类加载机的分类">
-<meta property="og:updated_time" content="2016-09-13T10:31:53.000Z">
+<meta property="og:description" content="个人主页">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java类加载详解">
-<meta name="twitter:description" content="概述最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。
-类加载机的分类">
+<meta name="twitter:title" content="李轶翔的博客">
+<meta name="twitter:description" content="个人主页">
   
     <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
   
@@ -83,108 +79,40 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Java类加载详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Java类加载详解
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/11/10/Maven一探究竟/" class="archive-article-date">
+  <time datetime="2016-11-10T08:56:17.000Z" itemprop="datePublished">11月 10</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/11/10/Maven一探究竟/">Maven一探究竟</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/09/13/Java类加载详解/" class="article-date">
-  <time datetime="2016-09-13T07:31:35.000Z" itemprop="datePublished">2016-09-13</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>
+    </header>
   </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <div id="toc" class="toc-article">
-            <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载机的分类"><span class="toc-number">1.1.</span> <span class="toc-text">类加载机的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Bootstrap-ClassLoader（引导类加载器）"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">Bootstrap ClassLoader（引导类加载器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Extension-ClassLoader（扩展类加载器）"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">Extension ClassLoader（扩展类加载器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#App-System-ClassLoader（系统类加载器）"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">App/System ClassLoader（系统类加载器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Custom-ClassLoader（用户自定义类加载器）"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">Custom ClassLoader（用户自定义类加载器）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Context-ClassLoader（线程上下文加载器）"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">Context ClassLoader（线程上下文加载器）</span></a></li></ol></li></ol></li></ol></li></ol>
-        </div>
-    
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。</p>
-<h2 id="类加载机的分类"><a href="#类加载机的分类" class="headerlink" title="类加载机的分类"></a>类加载机的分类</h2><a id="more"></a>
-<h4 id="Bootstrap-ClassLoader（引导类加载器）"><a href="#Bootstrap-ClassLoader（引导类加载器）" class="headerlink" title="Bootstrap ClassLoader（引导类加载器）"></a>Bootstrap ClassLoader（引导类加载器）</h4><p>作为JVM的一部分无法在应用程序中直接引用，由C/C++实现。<br>负责范围：</p>
-<ol>
-<li><java>/jre/lib目录下特定的Jar(rt.jar)</java></li>
-<li>-Xbootclasspath参数所指定的目录 </li>
-<li>系统属性sun.boot.class.path指定的目录中特定名称的jar包<br>在JVM启动时将通过Bootstrap ClassLoader加载rt.jar，并初始化sun.misc.Launcher从而创建Extension ClassLoader和System ClassLoader实例，和将System ClassLoader实例设置为主线程的默认Context ClassLoader（线程上下文加载器）</li>
-</ol>
-<h4 id="Extension-ClassLoader（扩展类加载器）"><a href="#Extension-ClassLoader（扩展类加载器）" class="headerlink" title="Extension ClassLoader（扩展类加载器）"></a>Extension ClassLoader（扩展类加载器）</h4><p>从源码上看，Extension ClassLoader是加载器sun.misc.Launcher的静态内部类，因此仅含一个实例，由 sun.misc.Launcher$ExtClassLoader 实现，负责范围：</p>
-<ol>
-<li><java_home>/jre/lib/ext目录 </java_home></li>
-<li>系统属性java.ext.dirs所指定的目录 中的所有类库。</li>
-</ol>
-<h4 id="App-System-ClassLoader（系统类加载器）"><a href="#App-System-ClassLoader（系统类加载器）" class="headerlink" title="App/System ClassLoader（系统类加载器）"></a>App/System ClassLoader（系统类加载器）</h4><p>与Extension ClassLoader相同，仅含一个实例，由 sun.misc.Launcher$AppClassLoader 实现，可通过 java.lang.ClassLoader.getSystemClassLoader 获取。负责范围：</p>
-<ol>
-<li>系统环境变量ClassPath</li>
-<li>-cp </li>
-<li>系统属性java.class.path 所指定的目录下的类库。</li>
-</ol>
-<h4 id="Custom-ClassLoader（用户自定义类加载器）"><a href="#Custom-ClassLoader（用户自定义类加载器）" class="headerlink" title="Custom ClassLoader（用户自定义类加载器）"></a>Custom ClassLoader（用户自定义类加载器）</h4><p>继承ClassLoader,加载自定义的类</p>
-<h4 id="Context-ClassLoader（线程上下文加载器）"><a href="#Context-ClassLoader（线程上下文加载器）" class="headerlink" title="Context ClassLoader（线程上下文加载器）"></a>Context ClassLoader（线程上下文加载器）</h4><p>默认为System ClassLoader，验证如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ClassLoaderTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        // TODO Auto-generated method stub</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader());</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader().getParent());</div><div class="line">        System.out.println(Thread.currentThread().getContextClassLoader().getParent().getParent());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sun.misc.Launcher$AppClassLoader@234f79cb</div><div class="line">sun.misc.Launcher$ExtClassLoader@36c51089</div><div class="line">null</div></pre></td></tr></table></figure>
-<p>可以看出，Context ClassLoader默认为System ClassLoader，且父加载器为ExtClassLoader，上层加载器为BootStrap ClassLoader，由于BootStrap ClassLoader是C++生成，因此显示null,由此也引出一个概念－－－双亲委派模型</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/09/13/Java类加载详解/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
-      
-      
-        <a href="https://yixiangli.github.io/2016/09/13/Java类加载详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/13/Java类加载详解/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JRE/">JRE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类加载/">类加载</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/09/28/美国签证血泪史/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          美国签证血泪史
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/09/12/Java开发之常见问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java开发之常见问题</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<section id="comments">
-<!-- 多说评论框 start -->
-	<div id="ds-thread" class="ds-thread" data-thread-key="2016/09/13/Java类加载详解/" data-title="Java类加载详解" data-url="https://yixiangli.github.io/2016/09/13/Java类加载详解/"></div>
-<!-- 多说评论框 end -->
-</section>
 </section>
         
           <aside id="sidebar">
