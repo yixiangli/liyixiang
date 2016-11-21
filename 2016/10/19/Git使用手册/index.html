@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="概述GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，https://github.com/yixiangli
 常见问题GitHub commit之后不显示contributions作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面通过">
-<meta property="og:updated_time" content="2016-10-22T21:58:40.000Z">
+<meta property="og:updated_time" content="2016-11-21T10:24:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git使用手册">
 <meta name="twitter:description" content="概述GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，https://github.com/yixiangli
@@ -113,12 +113,14 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHub-commit之后不显示contributions"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">GitHub commit之后不显示contributions</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHub-commit之后不显示contributions"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">GitHub commit之后不显示contributions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GIT-绑定两个远程仓库"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">GIT 绑定两个远程仓库</span></a></li></ol></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，<a href="https://github.com/yixiangli" target="_blank" rel="external">https://github.com/yixiangli</a></p>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="GitHub-commit之后不显示contributions"><a href="#GitHub-commit之后不显示contributions" class="headerlink" title="GitHub commit之后不显示contributions"></a>GitHub commit之后不显示contributions</h4><p>作为程序狗当然都希望自己能做点惊天动地的事情，至少为软件行业做出点贡献也行啊，但是博主就遇到git commit提交之后 Github上并不显示contributions，很让博主伤心，后面通过指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --list</div></pre></td></tr></table></figure></p>
 <p>一查发现博主所在公司项目使用的gitlab，之前配置的时候把user.name user.email配置成了公司邮箱的账号，Github就认为关联不到账号，解决方法是在仓库下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.name xxxx</div><div class="line">git config --global user.email xxxx</div></pre></td></tr></table></figure></p>
+<h4 id="GIT-绑定两个远程仓库"><a href="#GIT-绑定两个远程仓库" class="headerlink" title="GIT 绑定两个远程仓库"></a>GIT 绑定两个远程仓库</h4><p>作为公司的一枚程序狗，日常工作一般都会用公司自己搭建的GitLab(山寨版Github),正巧自己平时开发了一些工具类的小框架想造福更多的人，但是是两个不同仓库，同步自己的commit是一件很蛋疼的事，还好Git也有这个解决方案。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">直接配置.git/config文件</div><div class="line"></div><div class="line">在配置中添加：</div><div class="line">[remote &quot;all&quot;]  </div><div class="line">    url = https://github.com/xxxx/Mapper.git  </div><div class="line">    url = https://git.oschina.net/xxxx/Mapper.git</div></pre></td></tr></table></figure></p>
+<p>然后只需要在命令行输入(注意是两个- markdown好像打不出来)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push all - -all</div></pre></td></tr></table></figure></p>
 
       
     </div>
