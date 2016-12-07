@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 签证 | 李轶翔的博客</title>
+  <title>zookeeper实战 | 李轶翔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人主页">
-<meta property="og:type" content="website">
-<meta property="og:title" content="李轶翔的博客">
-<meta property="og:url" content="https://yixiangli.github.io/tags/签证/index.html">
+  <meta name="description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
+亮点配置管理一致性分布式锁
+集群搭建步骤1.根据dataDir的配置路径，在该路径下新建文件夹myid文件， server.X 这个数字就是对应 myid中的数字。
+2.配置文件zoo.cfg
+1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper实战">
+<meta property="og:url" content="https://yixiangli.github.io/2016/12/07/zookeeper实战/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
-<meta property="og:description" content="个人主页">
+<meta property="og:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
+亮点配置管理一致性分布式锁
+集群搭建步骤1.根据dataDir的配置路径，在该路径下新建文件夹myid文件， server.X 这个数字就是对应 myid中的数字。
+2.配置文件zoo.cfg
+1234567891011">
+<meta property="og:updated_time" content="2016-12-07T06:41:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="李轶翔的博客">
-<meta name="twitter:description" content="个人主页">
+<meta name="twitter:title" content="zookeeper实战">
+<meta name="twitter:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
+亮点配置管理一致性分布式锁
+集群搭建步骤1.根据dataDir的配置路径，在该路径下新建文件夹myid文件， server.X 这个数字就是对应 myid中的数字。
+2.配置文件zoo.cfg
+1234567891011">
   
     <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
   
@@ -79,40 +92,82 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
+        <section id="main"><article id="post-zookeeper实战" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
     
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/09/28/美国签证血泪史/" class="archive-article-date">
-  <time datetime="2016-09-27T16:10:04.000Z" itemprop="datePublished">9月 28</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/09/28/美国签证血泪史/">美国签证血泪史</a>
+    <h1 class="article-title" itemprop="name">
+      zookeeper实战
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/12/07/zookeeper实战/" class="article-date">
+  <time datetime="2016-12-07T06:28:35.000Z" itemprop="datePublished">2016-12-07</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Zookeeper/">Zookeeper</a>
   </div>
-</article>
-  
-  
-    </div></section>
-  
 
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#亮点"><span class="toc-number">1.1.</span> <span class="toc-text">亮点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集群搭建步骤"><span class="toc-number">1.1.1.</span> <span class="toc-text">集群搭建步骤</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><pre><code>Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
+</code></pre><h2 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h2><p>配置管理<br>一致性<br>分布式锁</p>
+<h3 id="集群搭建步骤"><a href="#集群搭建步骤" class="headerlink" title="集群搭建步骤"></a>集群搭建步骤</h3><p>1.根据dataDir的配置路径，在该路径下新建文件夹myid文件， server.X 这个数字就是对应 myid中的数字。</p>
+<p>2.配置文件zoo.cfg</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"># The number of milliseconds of each tick</div><div class="line">tickTime=2000</div><div class="line"># The number of ticks that the initial</div><div class="line"># synchronization phase can take</div><div class="line">initLimit=10</div><div class="line"># The number of ticks that can pass between</div><div class="line"># sending a request and getting an acknowledgement</div><div class="line">syncLimit=5 </div><div class="line"># the directory where the snapshot is stored.</div><div class="line"># do not use /tmp for storage, /tmp here is just</div><div class="line"># example sakes.</div><div class="line">dataDir=/letv/data/zookeeper</div><div class="line"># the port at which the clients will connect clientPort=2181</div><div class="line"># the maximum number of client connections.</div><div class="line"># increase this if you need to handle more clients</div><div class="line">#maxClientCnxns=60</div><div class="line">#</div><div class="line"># Be sure to read the maintenance section of the</div><div class="line"># administrator guide before turning on autopurge.</div><div class="line"># # http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</div><div class="line"># # The number of snapshots to retain in dataDir </div><div class="line">#autopurge.snapRetainCount=3</div><div class="line"># Purge task interval in hours</div><div class="line"># Set to &quot;0&quot; to disable auto purge feature</div><div class="line">#autopurge.purgeInterval=1</div><div class="line">server.1=10.185.28.73:2888:3888</div><div class="line">server.2=10.185.31.189:2888:3888</div><div class="line">server.3=10.185.31.197:2888:3888</div></pre></td></tr></table></figure>
+<p>3.启动<br>./zkServer.sh start</p>
+<p>4.客户端连接<br>./zkCli.sh -server 127.0.0.1:2181</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/12/07/zookeeper实战/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2016/12/07/zookeeper实战/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/07/zookeeper实战/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zookeeper/">Zookeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集群/">集群</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/10/Maven一探究竟/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Maven一探究竟</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<!-- 多说评论框 start -->
+	<div id="ds-thread" class="ds-thread" data-thread-key="2016/12/07/zookeeper实战/" data-title="zookeeper实战" data-url="https://yixiangli.github.io/2016/12/07/zookeeper实战/"></div>
+<!-- 多说评论框 end -->
+</section>
 </section>
         
           <aside id="sidebar">
