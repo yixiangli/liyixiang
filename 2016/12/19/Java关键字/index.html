@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/19/Java关键字/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="Java关键字Java语言规定关键字不能作为标识符。目前共有50个Java关键字，其中，”const”和”goto”这两个关键字在Java语言中并没有具体含义。">
-<meta property="og:updated_time" content="2016-12-19T09:10:44.000Z">
+<meta property="og:updated_time" content="2016-12-22T08:23:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java关键字">
 <meta name="twitter:description" content="Java关键字Java语言规定关键字不能作为标识符。目前共有50个Java关键字，其中，”const”和”goto”这两个关键字在Java语言中并没有具体含义。">
@@ -110,7 +110,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java关键字"><span class="toc-number">1.</span> <span class="toc-text">Java关键字</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java关键字"><span class="toc-number">1.</span> <span class="toc-text">Java关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#重点关键字详解"><span class="toc-number">1.1.</span> <span class="toc-text">重点关键字详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile"><span class="toc-number">1.1.1.</span> <span class="toc-text">volatile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#transient"><span class="toc-number">1.1.2.</span> <span class="toc-text">transient</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="Java关键字"><a href="#Java关键字" class="headerlink" title="Java关键字"></a>Java关键字</h1><p>Java语言规定关键字不能作为标识符。目前共有50个Java关键字，其中，”const”和”goto”这两个关键字在Java语言中并没有具体含义。<br><a id="more"></a></p>
@@ -159,7 +159,7 @@
 <li>final</li>
 <li>native</li>
 <li>synchronized</li>
-<li>条件语言<ul>
+<li>条件语言</li>
 <li>for</li>
 <li>do</li>
 <li>while</li>
@@ -171,9 +171,7 @@
 <li>return </li>
 <li>break</li>
 <li>continue</li>
-</ul>
-</li>
-<li>不常用<ul>
+<li>不常用</li>
 <li>goto </li>
 <li>assert</li>
 <li>const</li>
@@ -183,8 +181,9 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
+<hr>
+<h2 id="重点关键字详解"><a href="#重点关键字详解" class="headerlink" title="重点关键字详解"></a>重点关键字详解</h2><h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><p>概念：修饰的变量jvm只保证从主内存加载到工作线程中的值是最新的<br>关键点：无法解决并发问题 并发问题还是需要使用concurrent包<br>作用：volatile变量具有可见性特性，在一些有限的情形下（如读远远大于写）使用volatile代替锁，避免锁带来的线程阻塞以及提高可伸缩性。</p>
+<h3 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h3><p>概念：瞬时<br>关键点：一般用于序列化（serialization）与反序列化（deserialization）<br>作用：被修饰的变量不会被序列化，一种语言级的标记方法。</p>
 
       
     </div>
