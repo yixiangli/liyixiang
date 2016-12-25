@@ -5,16 +5,16 @@
   
   <title>Java集合详解 | 李轶翔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="集合">
+  <meta name="description" content="集合 Or 容器CopyOnWrite容器基本概念简称COW,是一种用于程序设计中的优化策略,即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合详解">
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/25/Java集合详解/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
-<meta property="og:description" content="集合">
-<meta property="og:updated_time" content="2016-12-25T09:48:33.000Z">
+<meta property="og:description" content="集合 Or 容器CopyOnWrite容器基本概念简称COW,是一种用于程序设计中的优化策略,即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何">
+<meta property="og:updated_time" content="2016-12-25T10:38:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合详解">
-<meta name="twitter:description" content="集合">
+<meta name="twitter:description" content="集合 Or 容器CopyOnWrite容器基本概念简称COW,是一种用于程序设计中的优化策略,即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何">
   
     <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
   
@@ -110,10 +110,15 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集合"><span class="toc-number">1.</span> <span class="toc-text">集合</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集合-Or-容器"><span class="toc-number">1.</span> <span class="toc-text">集合 Or 容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CopyOnWrite容器"><span class="toc-number">1.1.</span> <span class="toc-text">CopyOnWrite容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">1.1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意事项"><span class="toc-number">1.1.3.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">1.1.4.</span> <span class="toc-text">缺点</span></a></li></ol></li></ol></li></ol>
         </div>
     
-        <h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1>
+        <h1 id="集合-Or-容器"><a href="#集合-Or-容器" class="headerlink" title="集合 Or 容器"></a>集合 Or 容器</h1><h2 id="CopyOnWrite容器"><a href="#CopyOnWrite容器" class="headerlink" title="CopyOnWrite容器"></a>CopyOnWrite容器</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>简称COW,是一种用于程序设计中的优化策略,即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>CopyOnWrite并发容器用于读多写少的并发场景。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.减少扩容开销，预估容器大小。<br>2.尽量使用批量添加，减少容器复制次数。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>1.内存占用问题<br>因为CopyOnWrite的写时复制机制，所以在进行写操作的时候，内存里会同时驻扎两个对象的内存，旧的对象和新写入的对象（注意:在复制的时候只是复制容器里的引用，只是在写的时候会创建新对象添加到新容器里，而旧容器的对象还在使用，所以有两份对象内存）。如果这些对象占用的内存比较大，比如说200M左右，那么再写入100M数据进去，内存就会占用300M，那么这个时候很有可能造成频繁的Yong GC和Full GC。<br>针对内存占用问题，可以通过压缩容器中的元素的方法来减少大对象的内存消耗，比如，如果元素全是10进制的数字，可以考虑把它压缩成36进制或64进制，或者不使用CopyOnWrite容器，而使用其他的并发容器，如ConcurrentHashMap。</p>
+<p>2.数据一致性问题<br>数据一致性问题。CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的实时一致性。所以如果你希望写入的的数据，马上能读到，请不要使用CopyOnWrite容器。</p>
+
       
     </div>
     <footer class="article-footer">
