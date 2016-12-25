@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis指南 | 李轶翔的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概述废话不多说，官方文档在此http://doc.redisfans.com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis指南">
+<meta property="og:url" content="https://yixiangli.github.io/2016/12/25/Redis指南/index.html">
+<meta property="og:site_name" content="李轶翔的博客">
+<meta property="og:description" content="概述废话不多说，官方文档在此http://doc.redisfans.com">
+<meta property="og:updated_time" content="2016-12-25T10:27:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis指南">
+<meta name="twitter:description" content="概述废话不多说，官方文档在此http://doc.redisfans.com">
+  
+    <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李轶翔的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个神奇老司机的博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Redis指南" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/12/25/Redis指南/" class="article-date">
+  <time datetime="2016-12-25T09:53:23.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/缓存/">缓存</a>►<a class="article-category-link" href="/categories/技术贴/缓存/redis/">redis</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-number">1.1.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-字符串"><span class="toc-number">1.1.1.</span> <span class="toc-text">String(字符串)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hash-Hash类型"><span class="toc-number">1.1.2.</span> <span class="toc-text">hash(Hash类型)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List-双向链表"><span class="toc-number">1.1.3.</span> <span class="toc-text">List(双向链表)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set-集合"><span class="toc-number">1.1.4.</span> <span class="toc-text">Set(集合)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sorted-set-有序集合"><span class="toc-number">1.1.5.</span> <span class="toc-text">Sorted set(有序集合)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">1.2.</span> <span class="toc-text">常用命令</span></a></li></ol></li></ol>
+        </div>
+    
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>废话不多说，官方文档在此<br><a href="http://doc.redisfans.com" target="_blank" rel="external">http://doc.redisfans.com</a><br><a id="more"></a></p>
+<hr>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String(字符串)"></a>String(字符串)</h3><h3 id="hash-Hash类型"><a href="#hash-Hash类型" class="headerlink" title="hash(Hash类型)"></a>hash(Hash类型)</h3><h3 id="List-双向链表"><a href="#List-双向链表" class="headerlink" title="List(双向链表)"></a>List(双向链表)</h3><h3 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set(集合)"></a>Set(集合)</h3><h3 id="Sorted-set-有序集合"><a href="#Sorted-set-有序集合" class="headerlink" title="Sorted set(有序集合)"></a>Sorted set(有序集合)</h3><hr>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>1.String 存入字符类型<br>        set name yixiangli  设置name = yixiangli 存储<br>        get name                获取设置好的name的值<br>        setnx name yixiangli 设置name键值为yixiangli 如果存在,则返回0 不存在返回1<br>        mset name yixiangli  age 23 salary 100000 设置多个键值对 (全成功,全失败)<br>        msetnx name xiaoyu age 23 hoby sleep 如果设置多个键值对中有存在则返回失败<br>        mget name age salary 获取多个键的值<br>        getset name xiaoyu 获取name的值,并设置新的值为xiaoyu<br>        setrange name 4 zhu 将键name 4个字符后面的进行替换 结果为xiaozhu<br>        getrange name 4 6 获取键name的值 结果为zhu<br>        append name .com 给键name追加.com,结果为xiaozhu.com<br>        incr age 设置每个值自增 返回结果为24<br>        incrby age 6 给age加上6 如果是负数则减<br>        decr 与incr相反<br>        decrby 与decrby相反<br>        strlen 返回键对应的值得字符长度</p>
+<p>2.Hash 方便存对象,键值对<br>        hset user:001 name yixiangli   设置哈希表名user:001 key:name value:yixiangli<br>        hsetnx user name yixiangli    设置哈希表名字中的name,若已存在,则设置不成功<br>        hget user:001 name 获取hash表名为user001的键值对<br>        hmset user:003 name yixiangli age 23 批量设置<br>        hmget user:003 name age 批量获取user:003的值<br>        hincrby user:003 age 3     给hash表的age值加上3<br>        hexists user:003 name 判断hash表中式否存在name的键<br>        hlen user:003 返回hash表的所有的字段的数目<br>        hkeys user:003 返回hash表的所有字段<br>        hvals user:003 返回hash表中所有的值<br>        hgetall user:003 返回所有的字段和值<br>        hdel user:003 name 对hash的name的值和键删除</p>
+<p>3.list 链表 (双向链表)<br>    1.栈:先进后出 队列:先进先出<br>    2.lpush 从头压入<br>        lpush list1 “world”<br>        lpush list1 “hello”<br>        lrange list1 0 -1 把链表中的数据从头到尾全部取出<br>        结果： hello world</p>
+<pre><code>3 rpush 从尾部压入
+    rpush list2 &quot;world&quot; 
+    rpush list2 &quot;hello&quot; 
+    lrange list2 0 -1
+    结果： world hello
+</code></pre><p>到此未完</p>
+<pre><code>4.linsert 插入出入数据
+    rpush list3 luowen
+    rpush list3 maomao
+    Lrange list3 0 -1
+    Luowen
+    Maomao
+
+    Linsert list3 before maomao love
+    Lrange list3 0 -1
+    Luowen
+    Love
+    maomao
+
+
+    Linsert list3 after luowen love
+    Lrange list3 0 -1
+    Luowen
+    Love
+    Maomao
+
+5 lset 给某个元素复制
+    Rpush list5 luowen
+    Rpush list5 maomao
+
+    Lset list5 0 “deom”
+
+    Demo
+    maomao 
+
+6 lrem 删除list表中的数据
+    Rpush list6 luowen
+    Rpush list6 luowen1
+    Rpush list6 luowen2
+    Rpush list6 luowen3
+    Rpush list6 luowen4
+
+    Lrem list6 1 “luowen”
+    删除list6 中值为luowen的值
+7.ltrim 
+    Lpush list7 luowen1
+    Lpush list7 luowen2
+    Lpush list7 luowen3
+    Lpush list7 luowen4
+    Lpush list7 luowen5
+
+    Ltrim list7 1 2 (1 2 为保留的范围)
+    Lpush list7 luowen2
+    Lpush list7 luowen3
+8 lpop 从链表的头部弹出一个元素
+    Lpush list8 luowen1
+    Lpush list8 luowen2
+    Lpush list8 luowen3
+
+    Lpop list8 
+    Lpush list8 luowen2
+    Lpush list8 luowen3
+9 rpop 从链表的尾部弹出一个元素
+    Lpush list8 luowen1
+    Lpush list8 luowen2
+    Lpush list8 luowen3
+
+    rpop list8 
+    Lpush list8 luowen1
+    Lpush list8 luowen2
+10 rpoplpush 从一个链表弹出,在从头部压入到另一个链表
+
+    List demo1 
+    Demo1A
+    Demo1B
+    Demo1C
+
+    List demo2
+    Demo2A
+    Demo2B
+    Demo2C
+
+    Rpoplpush demo1 demo2
+
+    List demo1 
+    Demo1A
+    Demo1B
+
+    List demo2
+    Demo1C
+    Demo2A
+    Demo2B
+    Demo2C
+11 lindex 返回一个list小标的索引值
+    List11
+    one
+    two
+
+    lindex list11 1(list小标)
+    two
+    lindex list11 0
+    one
+12 llen 返回这个链表的元素的长度
+</code></pre><p>4.set无序集合<br>    1 sadd 向集合中插入一条数据<br>        Sadd myset1 luowen<br>    2 srem 删除集合中的一个元素<br>        Srem myset1 luowen<br>    3 smembers 查看集合中的元素<br>        Smembers myset1<br>    4 spop 从集合随机弹出一个元素,返回键值<br>    5 sdiff 两个集合的差集 返回两个集合不一样的,根据第一个集合为标准<br>        Setdemo1<br>        One<br>        two</p>
+<pre><code>    setdemo2
+    one 
+    three    
+
+    sdiff setdemo1 setdemo2
+    two(与setdemo2不一样)
+    sdiff setdemo2 setdeo1
+    three(与setdemo1 不一样)
+6 sdiffstroe 将两个差集存储到另外一个集合
+
+    Sdiffstore setdemo1 setdemo2 setdemo3
+    将setdemo1 setdemo2 的差集放到 setdemo3中
+7 sinter 将两个集合的交集
+8 sinterstore 将两个集合的交集存储到另外一个集合中
+9 sunion 将两个集合并集
+10 sunionstore 将两个集合并集并存储到另外一个集合中
+11 smove 将以个集合中的元素移动到另外一个集合中
+    Eg smove myset1 mysetA two mysetB 集合中的two元素移动到mysetB中
+12 scard 查看集合中元素的个数
+    Scard myset1查看myset12元素的个数
+13 sismember 判断是否是集合中的元素
+    Sismember myset13 luowen 判断luowen是否在myset13中的元素
+14 srandmember myset14 随机取出myset1 中的元素
+
+15 zadd 添加到有序集合中区
+    Zadd myzsent 1 luowen1
+    Zadd myzsent 2 luowen2
+    Zadd myzsent 3 luowen3
+    Zadd myzsent 4 luowen4
+
+    Zrange myzsent 0 -1 withscores
+16 zrem 删除有序集合中的元素
+    Zrem myzsent luowen1 删除myzsent集合中的luowen1
+17 zincrby myzsent luowen1 3将myzsent luown1的序号更改为4
+    如果没有,就创建他
+18 zrank 找到myzsent 对应值得索引
+19 zrevrank 反过来去索引
+20 zrangebyscore 返回集合中指定的元素
+    Zrangebyscore mysetdeom 2 5 withscores
+    返回mysetdemo中2-5中的元素
+21 zcount 返回指定空间的数量
+    Zcount myset 2  4 返回2 4中的元素个数
+22 zcard 返回集合中所有元素的个数
+23 zremrangbyrank 删除集合中指定区间的元素,并将索引进行排序
+24 zremrangbyscore 删除集合中指定元素,按循序进行排序
+</code></pre><p>5 Redis常用命令</p>
+<pre><code>Key-values
+1 keys * 匹配键所有的键. 模糊匹配 keys my* 取出所有以my开头的键
+2 exists 判断是否键 exists name判断是否有name这个键是否存在
+3 del 删除键 del name 删除name的键
+4 expire 设置过期时间 expire key time 
+5 ttl key 查看键的过期时间
+6 select database 选择数据库
+7 move key dababase1 讲key移动dao database1中的数据库中
+8 persist 取消键的过期时间 
+9 randomkey 随机返回一个键的值
+10 rename 重命名一个键
+11 type key 判断key的数据类型
+
+Server
+1 ping ping我们的主机能否链接 链接是否存活
+2 echo 命令 echo demo直接输出
+3 select 选择数据库 select 0-16个数据库
+4 quit exit 退出链接
+5 dbsize 返回数据库的键的个数
+6 info 返回服务器相关信息
+7 config get 返回服务配置信息
+8 flush db 清空数据库
+9 flushall 删除所有数据库中所有的键
+</code></pre><p>6 Redis 高级应用</p>
+<pre><code>1 在配置文件里面设置 requirepass password
+2 进入后 auth 密码 进行授权 方法二: 登入或在后面加上 –a 加上密码
+3 主从复制:
+    One: 一个master服务器可以拥有多个slave
+    Two: 一个salve可以有多个master 并且还可以与其他的salve相连接
+配置salve
+    打开salveof注释 并添加主机的ip以及端口
+    主机加了密码的时候还需要配置masterauth 密码
+4 redis 的事务处理
+    输入:multi 打开一个上下文
+    Set age 10
+    Set age 144
+    -----------------------------------------------------------
+    上面的全部放入队列最后执行
+Exec 
+    最后age为144
+    回滚
+    Discard    
+
+    Watch 监视键的命令
+
+5 Redis的持久化
+    方式一:  snapshotting (快照)将内存的数据写入到文件中 save 500 32 500秒内有32个键发生变化则发起快照到文件中
+    方式二: append only file 将没次写修改的命令保存到文件中
+    配置:打开append only
+            Appendfsync yes
+            Appendfsync always 每次都写入
+            Appendfsync everysec    每个一秒写入
+            Appendfsync no    不写入
+6 发布和订阅消息
+    订阅:
+　　 Subscribe tv1 tv2 订阅了两个频道
+    发布:
+    Publish tv1 luweo
+    注:publish tv1的信息 订阅的信息都可以收到
+7 虚拟内存
+    方式一:暂时把不使用的数据放到硬盘里面
+　方式二:可以把数据分割到其他的slave数据服务器中
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/12/25/Redis指南/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2016/12/25/Redis指南/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Redis指南/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/">cache</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/25/Java集合详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java集合详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<!-- 多说评论框 start -->
+	<div id="ds-thread" class="ds-thread" data-thread-key="2016/12/25/Redis指南/" data-title="Redis指南" data-url="https://yixiangli.github.io/2016/12/25/Redis指南/"></div>
+<!-- 多说评论框 end -->
+</section>
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>生态哥 / 化反帝</li>
+    
+    <li>微信公众号：暂无</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/MessageQueue/">MessageQueue</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/教程/">教程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/文档/">文档</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/缓存/">缓存</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/缓存/redis/">redis</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/25/Redis指南/">Redis指南</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/25/Java集合详解/">Java集合详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/19/Java关键字/">Java关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/07/zookeeper实战/">zookeeper实战</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/10/Maven一探究竟/">Maven一探究竟</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;Dolphin的主页－生态首席后端架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2016 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liyixiang"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = '/js/ds_embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>
