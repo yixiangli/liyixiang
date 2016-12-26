@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/25/Redis指南/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="概述废话不多说，官方文档在此http://doc.redisfans.com">
-<meta property="og:updated_time" content="2016-12-25T10:29:47.000Z">
+<meta property="og:updated_time" content="2016-12-26T12:11:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis指南">
 <meta name="twitter:description" content="概述废话不多说，官方文档在此http://doc.redisfans.com">
@@ -124,71 +124,58 @@
     rpush list2 &quot;hello&quot; 
     lrange list2 0 -1
     结果： world hello
-</code></pre><p>到此未完 以下部分待整理</p>
-<pre><code>4.linsert 插入出入数据
-    rpush list3 luowen
-    rpush list3 maomao
-    Lrange list3 0 -1
-    Luowen
-    Maomao
 
-    Linsert list3 before maomao love
-    Lrange list3 0 -1
-    Luowen
-    Love
-    maomao
+4.linsert 插入数据
+    rpush list3 yixiangli
+    rpush list3 xiaoyu
+    lrange list3 0 -1
 
+    linsert list3 before xiaoyu love
+    lrange list3 0 -1
 
-    Linsert list3 after luowen love
-    Lrange list3 0 -1
-    Luowen
-    Love
-    Maomao
+    linsert list3 after yixiangli love
+    lrange list3 0 -1
 
-5 lset 给某个元素复制
-    Rpush list5 luowen
-    Rpush list5 maomao
-
-    Lset list5 0 “deom”
-
-    Demo
-    maomao 
+5 lset 替换
+    rpush list5 yixiangli
+    rpush list5 xiaoyu
+    lset list5 0 &quot;demo&quot;
 
 6 lrem 删除list表中的数据
-    Rpush list6 luowen
-    Rpush list6 luowen1
-    Rpush list6 luowen2
-    Rpush list6 luowen3
-    Rpush list6 luowen4
+    rpush list6 yixiang1
+    rpush list6 yixiang2
+    rpush list6 yixiang3
+    rpush list6 yixiang4
+    rpush list6 yixiang5
+    lrem list6 1 yixiang1
+    删除list6 中值为yixiang1的值
 
-    Lrem list6 1 “luowen”
-    删除list6 中值为luowen的值
-7.ltrim 
-    Lpush list7 luowen1
-    Lpush list7 luowen2
-    Lpush list7 luowen3
-    Lpush list7 luowen4
-    Lpush list7 luowen5
+7.ltrim 保留范围
+    lpush list7 yixiang1
+    lpush list7 yixiang2
+    lpush list7 yixiang3
+    lpush list7 yixiang4
+    lpush list7 yixiang5
+    ltrim list7 1 2 (1 2 为保留的范围)
+    lpush list7 yixiang2
+    lpush list7 yixiang3
 
-    Ltrim list7 1 2 (1 2 为保留的范围)
-    Lpush list7 luowen2
-    Lpush list7 luowen3
 8 lpop 从链表的头部弹出一个元素
-    Lpush list8 luowen1
-    Lpush list8 luowen2
-    Lpush list8 luowen3
+    lpush list8 yixiang1
+    lpush list8 yixiang2
+    lpush list8 yixiang3
+    lpop list8 
+    lpush list8 yixiang2
+    lpush list8 yixiang3
 
-    Lpop list8 
-    Lpush list8 luowen2
-    Lpush list8 luowen3
 9 rpop 从链表的尾部弹出一个元素
-    Lpush list8 luowen1
-    Lpush list8 luowen2
-    Lpush list8 luowen3
-
+    lpush list8 yixiang1
+    lpush list8 yixiang2
+    lpush list8 yixiang3
     rpop list8 
-    Lpush list8 luowen1
-    Lpush list8 luowen2
+    lpush list8 yixiang1
+    lpush list8 yixiang2
+
 10 rpoplpush 从一个链表弹出,在从头部压入到另一个链表
 
     List demo1 
@@ -201,7 +188,7 @@
     Demo2B
     Demo2C
 
-    Rpoplpush demo1 demo2
+    命令：rpoplpush demo1 demo2
 
     List demo1 
     Demo1A
@@ -212,6 +199,7 @@
     Demo2A
     Demo2B
     Demo2C
+
 11 lindex 返回一个list小标的索引值
     List11
     one
@@ -221,8 +209,10 @@
     two
     lindex list11 0
     one
+
 12 llen 返回这个链表的元素的长度
-</code></pre><p>4.set无序集合<br>    1 sadd 向集合中插入一条数据<br>        Sadd myset1 luowen<br>    2 srem 删除集合中的一个元素<br>        Srem myset1 luowen<br>    3 smembers 查看集合中的元素<br>        Smembers myset1<br>    4 spop 从集合随机弹出一个元素,返回键值<br>    5 sdiff 两个集合的差集 返回两个集合不一样的,根据第一个集合为标准<br>        Setdemo1<br>        One<br>        two</p>
+</code></pre><p>整理到此 以下未整理    </p>
+<p>4.set无序集合<br>    1 sadd 向集合中插入一条数据<br>        Sadd myset1 yixiang<br>    2 srem 删除集合中的一个元素<br>        Srem myset1 yixiang<br>    3 smembers 查看集合中的元素<br>        Smembers myset1<br>    4 spop 从集合随机弹出一个元素,返回键值<br>    5 sdiff 两个集合的差集 返回两个集合不一样的,根据第一个集合为标准<br>        Setdemo1<br>        One<br>        two</p>
 <pre><code>    setdemo2
     one 
     three    
@@ -244,19 +234,19 @@
 12 scard 查看集合中元素的个数
     Scard myset1查看myset12元素的个数
 13 sismember 判断是否是集合中的元素
-    Sismember myset13 luowen 判断luowen是否在myset13中的元素
+    Sismember myset13 yixiang 判断yixiang是否在myset13中的元素
 14 srandmember myset14 随机取出myset1 中的元素
 
 15 zadd 添加到有序集合中区
-    Zadd myzsent 1 luowen1
-    Zadd myzsent 2 luowen2
-    Zadd myzsent 3 luowen3
-    Zadd myzsent 4 luowen4
+    Zadd myzsent 1 yixiang1
+    Zadd myzsent 2 yixiang2
+    Zadd myzsent 3 yixiang3
+    Zadd myzsent 4 yixiang4
 
     Zrange myzsent 0 -1 withscores
 16 zrem 删除有序集合中的元素
-    Zrem myzsent luowen1 删除myzsent集合中的luowen1
-17 zincrby myzsent luowen1 3将myzsent luown1的序号更改为4
+    Zrem myzsent yixiang1 删除myzsent集合中的yixiang1
+17 zincrby myzsent yixiang1 3将myzsent luown1的序号更改为4
     如果没有,就创建他
 18 zrank 找到myzsent 对应值得索引
 19 zrevrank 反过来去索引
