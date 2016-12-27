@@ -117,7 +117,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cix6y9ipx001ifts68fdab0qg" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cix6ybour000ggqs6z4370rr8" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Redis指南/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Redis指南/">评论</a>
@@ -158,27 +158,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="集合-Or-容器"><a href="#集合-Or-容器" class="headerlink" title="集合 Or 容器"></a>集合 Or 容器</h1><p>java.util.*</p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>equals AND deepEquals<br>(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。<br>(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。</p>
-<h2 id="CopyOnWrite容器"><a href="#CopyOnWrite容器" class="headerlink" title="CopyOnWrite容器"></a>CopyOnWrite容器</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>简称COW,是一种用于程序设计中的优化策略,即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>CopyOnWrite并发容器用于读多写少的并发场景。</p>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.减少扩容开销，预估容器大小。<br>2.尽量使用批量添加，减少容器复制次数。</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>1.内存占用问题<br>因为CopyOnWrite的写时复制机制，所以在进行写操作的时候，内存里会同时驻扎两个对象的内存，旧的对象和新写入的对象（注意:在复制的时候只是复制容器里的引用，只是在写的时候会创建新对象添加到新容器里，而旧容器的对象还在使用，所以有两份对象内存）。如果这些对象占用的内存比较大，比如说200M左右，那么再写入100M数据进去，内存就会占用300M，那么这个时候很有可能造成频繁的Yong GC和Full GC。<br>针对内存占用问题，可以通过压缩容器中的元素的方法来减少大对象的内存消耗，比如，如果元素全是10进制的数字，可以考虑把它压缩成36进制或64进制，或者不使用CopyOnWrite容器，而使用其他的并发容器，如ConcurrentHashMap。</p>
-<p>2.数据一致性问题<br>数据一致性问题。CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的实时一致性。所以如果你希望写入的的数据，马上能读到，请不要使用CopyOnWrite容器。</p>
-<h2 id="IdentityHashMap"><a href="#IdentityHashMap" class="headerlink" title="IdentityHashMap"></a>IdentityHashMap</h2><h3 id="与HashMap的区别"><a href="#与HashMap的区别" class="headerlink" title="与HashMap的区别"></a>与HashMap的区别</h3><ul>
-<li>等值比较<br>Identity使用 “==” 进行比较，普通map使用”equals”</li>
-<li>hashCode<br>identity使用System.identityHashCode,普通map使用重写的hashCode查找位置</li>
-</ul>
-<p>因此IdentityHashMap可以允许key重复或者为null,这就引出了它的使用场景</p>
-<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><p>IdentityHashMap有其特殊用途，比如序列化或者深度复制。或者记录对象代理。<br>举个例子，jvm中的所有对象都是独一无二的，哪怕两个对象是同一个class的对象，而且两个对象的数据完全相同，对于jvm来说，他们也是完全不同的，如果要用一个map来记录这样jvm中的对象，你就需要用IdentityHashMap，而不能使用其他Map实现。</p>
-
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>equals AND deepEquals<br>(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。<br>(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/25/Java集合详解/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="cix6y9iox0004fts604f7b123" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="cix6yboue0006gqs6y6tl1b13" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Java集合详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Java集合详解/">评论</a>
@@ -229,7 +220,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/19/Java关键字/" data-id="cix6y9ioo0000fts61o9ullbz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/19/Java关键字/" data-id="cix6ybou40001gqs6l2ydpcn1" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/19/Java关键字/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/19/Java关键字/">评论</a>
@@ -284,7 +275,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/07/zookeeper实战/" data-id="cix6y9iq2001nfts6zg1zrx71" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/07/zookeeper实战/" data-id="cix6ybouw000kgqs6cc4v0e2h" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/07/zookeeper实战/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/07/zookeeper实战/">评论</a>
@@ -336,7 +327,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cix6y9ip4000afts6b764fhc4" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cix6yboui000agqs61k5x0tws" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/11/10/Maven一探究竟/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/11/10/Maven一探究竟/">评论</a>

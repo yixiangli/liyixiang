@@ -6,21 +6,18 @@
   <title>Java集合详解 | 李轶翔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="集合 Or 容器java.util.*
-源码Objectsequals AND deepEquals(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。
-CopyOnWrite容器基本概念简称COW,是一种用于程序设计中的优化策略,即写">
+源码Objectsequals AND deepEquals(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合详解">
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/25/Java集合详解/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="集合 Or 容器java.util.*
-源码Objectsequals AND deepEquals(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。
-CopyOnWrite容器基本概念简称COW,是一种用于程序设计中的优化策略,即写">
-<meta property="og:updated_time" content="2016-12-27T03:24:54.000Z">
+源码Objectsequals AND deepEquals(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。">
+<meta property="og:updated_time" content="2016-12-27T03:26:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合详解">
 <meta name="twitter:description" content="集合 Or 容器java.util.*
-源码Objectsequals AND deepEquals(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。
-CopyOnWrite容器基本概念简称COW,是一种用于程序设计中的优化策略,即写">
+源码Objectsequals AND deepEquals(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。">
   
     <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
   
@@ -120,7 +117,7 @@ CopyOnWrite容器基本概念简称COW,是一种用于程序设计中的优化�
         </div>
     
         <h1 id="集合-Or-容器"><a href="#集合-Or-容器" class="headerlink" title="集合 Or 容器"></a>集合 Or 容器</h1><p>java.util.*</p>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>equals AND deepEquals<br>(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。<br>(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>equals AND deepEquals<br>(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。<br>(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。<br><a id="more"></a></p>
 <h2 id="CopyOnWrite容器"><a href="#CopyOnWrite容器" class="headerlink" title="CopyOnWrite容器"></a>CopyOnWrite容器</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>简称COW,是一种用于程序设计中的优化策略,即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
 <h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>CopyOnWrite并发容器用于读多写少的并发场景。</p>
 <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.减少扩容开销，预估容器大小。<br>2.尽量使用批量添加，减少容器复制次数。</p>
