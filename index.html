@@ -122,15 +122,29 @@
 <p>返回码还是200 原因是当调用ngx.say/ngx.print时自动发送响应状态码 因此必须<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location = /hello &#123;</div><div class="line">    content_by_lua &apos;</div><div class="line">        ngx.status(404)</div><div class="line">        ngx.say(&quot;hello&quot;)</div><div class="line">        ngx.exit(404)</div><div class="line">    &apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>且执行顺序靠前的代码中不能存在调用ngx.say/ngx.print的逻辑</p>
 <h3 id="nginx配置编写事项"><a href="#nginx配置编写事项" class="headerlink" title="nginx配置编写事项"></a>nginx配置编写事项</h3><p>1.空格 空格 空格<br>先看一段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>报错  unknown directive “if($status”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;else&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>报错  unknown directive “if($status”</p>
+<ol>
+<li>if else 不是每个语言都支持<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;else&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>报错  unknown directive “else”</p>
 <p>原因：<br>（1）nginx if 后必须加空格 否则if 和 ( 缺一个空格 ，如果没有空格他把if($status当成一个指令了，没有这个指令<br>（2）不存在if else这种嵌套写法，如果需要可以曲线救国<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;;</div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            echo $status;</div><div class="line">            if ( $status = 404)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">            if ( $status = 200)&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>nginx module<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;;</div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            echo $status;</div><div class="line">            if ( $status = 404)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">            if ( $status = 200)&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>报错  unknown directive “echo”<br>原因：<br>这个模块不包含在 Nginx 源码中，安装方法：</p>
+<ol>
+<li>首先下载模块源码：<a href="https://github.com/agentzh/echo-nginx-module/tags" target="_blank" rel="external">https://github.com/agentzh/echo-nginx-module/tags</a></li>
+<li>解压到某个路径，假设为 /path/to/echo-nginx-module</li>
+<li>使用下面命令编译并安装 Nginx</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cixl7bo7g000be5s6fk2jpm7t" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cixl7lcjz000gf5s69sbde3pw" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -181,7 +195,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cixl7bo8s0029e5s6c8v5yzii" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cixl7lck9000rf5s65jo7i7sk" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
@@ -232,7 +246,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixl7bo7m000ee5s6d6a53u2z" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixl7lcju000bf5s63si7kzos" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>
@@ -285,7 +299,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="cixl7bo770004e5s6dlkblld0" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="cixl7lcjo0006f5s6pp6okodg" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Java常用工具类/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Java常用工具类/">评论</a>
@@ -336,7 +350,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cixl7bo8k0020e5s6jc3znyxb" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cixl7lck3000kf5s6w3pz71xw" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Redis指南/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Redis指南/">评论</a>

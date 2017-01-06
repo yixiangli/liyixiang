@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="NginxLua安装Nginx安装Nginx
 安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gzcd LuaJIT-2.1.0-beta2make PREFIX=/usr/local/luajitmake install PREFIX=">
-<meta property="og:updated_time" content="2017-01-06T02:47:14.000Z">
+<meta property="og:updated_time" content="2017-01-06T02:55:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx+Lua初探">
 <meta name="twitter:description" content="NginxLua安装Nginx安装Nginx
@@ -129,9 +129,23 @@
 <p>返回码还是200 原因是当调用ngx.say/ngx.print时自动发送响应状态码 因此必须<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location = /hello &#123;</div><div class="line">    content_by_lua &apos;</div><div class="line">        ngx.status(404)</div><div class="line">        ngx.say(&quot;hello&quot;)</div><div class="line">        ngx.exit(404)</div><div class="line">    &apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>且执行顺序靠前的代码中不能存在调用ngx.say/ngx.print的逻辑</p>
 <h3 id="nginx配置编写事项"><a href="#nginx配置编写事项" class="headerlink" title="nginx配置编写事项"></a>nginx配置编写事项</h3><p>1.空格 空格 空格<br>先看一段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>报错  unknown directive “if($status”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;else&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>报错  unknown directive “if($status”</p>
+<ol>
+<li>if else 不是每个语言都支持<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;else&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>报错  unknown directive “else”</p>
 <p>原因：<br>（1）nginx if 后必须加空格 否则if 和 ( 缺一个空格 ，如果没有空格他把if($status当成一个指令了，没有这个指令<br>（2）不存在if else这种嵌套写法，如果需要可以曲线救国<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;;</div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            echo $status;</div><div class="line">            if ( $status = 404)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">            if ( $status = 200)&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>nginx module<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;;</div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            echo $status;</div><div class="line">            if ( $status = 404)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">            if ( $status = 200)&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>报错  unknown directive “echo”<br>原因：<br>这个模块不包含在 Nginx 源码中，安装方法：</p>
+<ol>
+<li>首先下载模块源码：<a href="https://github.com/agentzh/echo-nginx-module/tags" target="_blank" rel="external">https://github.com/agentzh/echo-nginx-module/tags</a></li>
+<li>解压到某个路径，假设为 /path/to/echo-nginx-module</li>
+<li>使用下面命令编译并安装 Nginx</li>
+</ol>
 
       
     </div>
