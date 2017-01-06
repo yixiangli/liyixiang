@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="李轶翔的博客">
 <meta property="og:description" content="NginxLua安装Nginx安装Nginx
 安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gzcd LuaJIT-2.1.0-beta2make PREFIX=/usr/local/luajitmake install PREFIX=">
-<meta property="og:updated_time" content="2016-12-30T07:01:33.000Z">
+<meta property="og:updated_time" content="2017-01-06T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx+Lua初探">
 <meta name="twitter:description" content="NginxLua安装Nginx安装Nginx
@@ -113,7 +113,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx"><span class="toc-number">1.</span> <span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lua"><span class="toc-number">1.1.</span> <span class="toc-text">Lua</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Nginx-1"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装LuaJIT-2-1"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">安装LuaJIT 2.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ngx-devel-kit（NDK）模块（无需安装）"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">ngx_devel_kit（NDK）模块（无需安装）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua-nginx-module-模块（无需安装）"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">lua-nginx-module 模块（无需安装）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置环境变量"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">设置环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编译"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lua坑爹之处"><span class="toc-number">1.1.2.</span> <span class="toc-text">lua坑爹之处</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx"><span class="toc-number">1.</span> <span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lua"><span class="toc-number">1.1.</span> <span class="toc-text">Lua</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Nginx-1"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装LuaJIT-2-1"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">安装LuaJIT 2.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ngx-devel-kit（NDK）模块（无需安装）"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">ngx_devel_kit（NDK）模块（无需安装）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua-nginx-module-模块（无需安装）"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">lua-nginx-module 模块（无需安装）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置环境变量"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">设置环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编译"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lua坑爹之处"><span class="toc-number">1.1.2.</span> <span class="toc-text">lua坑爹之处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx配置编写事项"><span class="toc-number">1.1.3.</span> <span class="toc-text">nginx配置编写事项</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="Nginx-1"><a href="#Nginx-1" class="headerlink" title="Nginx"></a>Nginx</h4><p>安装Nginx</p>
@@ -128,6 +128,10 @@
 <p>查看nginx.error.log 发现 attempt to set status 404 via ngx.exit after sending out the response status 200</p>
 <p>返回码还是200 原因是当调用ngx.say/ngx.print时自动发送响应状态码 因此必须<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location = /hello &#123;</div><div class="line">    content_by_lua &apos;</div><div class="line">        ngx.status(404)</div><div class="line">        ngx.say(&quot;hello&quot;)</div><div class="line">        ngx.exit(404)</div><div class="line">    &apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>且执行顺序靠前的代码中不能存在调用ngx.say/ngx.print的逻辑</p>
+<h3 id="nginx配置编写事项"><a href="#nginx配置编写事项" class="headerlink" title="nginx配置编写事项"></a>nginx配置编写事项</h3><p>1.空格 空格 空格<br>先看一段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>报错  unknown directive “if($status”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;else&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>报错  unknown directive “else”</p>
+<p>原因：<br>（1）nginx if 后必须加空格 否则if 和 ( 缺一个空格 ，如果没有空格他把if($status当成一个指令了，没有这个指令<br>（2）不存在if else这种嵌套写法，如果需要可以曲线救国<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;;</div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            echo $status;</div><div class="line">            if ( $status = 404)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">            if ( $status = 200)&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -258,7 +262,7 @@
   <!--
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 Liyixiang<br>
+      &copy; 2017 Liyixiang<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -269,7 +273,7 @@
       <table width="100%" border="0">
         <tr>
           <td style="text-align:left">
-            Copyright &copy; 2016-2016 Liyixiang<br>
+            Copyright &copy; 2016-2017 Liyixiang<br>
             Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
           </td>
           <td style="text-align:right">
