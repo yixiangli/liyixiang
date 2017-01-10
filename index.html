@@ -111,7 +111,7 @@
     
         <h1 id="一张图"><a href="#一张图" class="headerlink" title="一张图"></a>一张图</h1><p><img src="/img/protocol.jpg" alt="协议大全"></p>
 <h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>缺省端口：80<br>使用TCP协议</p>
-<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p>1××    以1字字开头的三位数表示服务器已经接受到请求，并且正在处理中<br>2×× 以2字开头的三位数 表示请求成功<br>3×× 以3字开头的三位数表示请求被重定向(比如跳出服务器去github上请求jquery)<br>4<strong>    以4字开头的三位书表示客户请求错误(比如客户请求的资源不存在)<br>5</strong>    以5字开头的三位数表示服务器内部出错</p>
+<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p>1××    以1字字开头的三位数表示服务器已经接受到请求，并且正在处理中<br>2×× 以2字开头的三位数 表示请求成功<br>3×× 以3字开头的三位数表示请求被重定向(比如跳出服务器去github上请求jquery)<br>4xx    以4字开头的三位书表示客户请求错误(比如客户请求的资源不存在)<br>5xx    以5字开头的三位数表示服务器内部出错</p>
 <h5 id="部分状态码详解"><a href="#部分状态码详解" class="headerlink" title="部分状态码详解"></a>部分状态码详解</h5><h5 id="405"><a href="#405" class="headerlink" title="405"></a>405</h5><p>这个状态码还比较常见，get请求去访问一个post接口。因此这个状态码就是检测请求方法是否符合服务端设置</p>
 <h5 id="413"><a href="#413" class="headerlink" title="413"></a>413</h5><p>这个状态码一般是请求实体过大，我遇到的时候是文件上传时大小被服务端限制，比如要上传一个500M的文件，而服务端如果在nginx没有配置相应的限制的话默认只有1M,就会被返回413.</p>
 <p>nginx配置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location /v1 &#123;</div><div class="line">            proxy_pass   http://lepush_server;</div><div class="line">            client_max_body_size   500m;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -134,7 +134,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cixrc7715000vyas6cuw1ig3g" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cixrce9lg000o0is698ftahy6" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/10/协议入门/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
@@ -187,7 +187,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cixrc771c0015yas663mksikz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cixrce9lr00130is64pwmgfkb" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/09/锁/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
@@ -269,7 +269,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cixrc770v000jyas6zagk0gan" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cixrce9l9000e0is6yirunt54" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -320,7 +320,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cixrc7719000yyas6v2d5efvi" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cixrce9lp00100is6xje2m3uv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
@@ -371,7 +371,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixrc770l000ayas6xqnqzkfz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixrce9kv00050is6fn4hssan" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>
