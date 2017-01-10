@@ -110,8 +110,13 @@
       	<!-- Table of Contents -->
     
         <h1 id="一张图"><a href="#一张图" class="headerlink" title="一张图"></a>一张图</h1><p><img src="/img/protocol.jpg" alt="协议大全"></p>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>缺省端口：80</p>
-<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>域名系统，作用是将域名和ip对应起来，方便互联网用户使用（贼长的ip想记也记不住几个啊） </p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>缺省端口：80<br>使用TCP协议</p>
+<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p>1××    以1字字开头的三位数表示服务器已经接受到请求，并且正在处理中<br>2×× 以2字开头的三位数 表示请求成功<br>3×× 以3字开头的三位数表示请求被重定向(比如跳出服务器去github上请求jquery)<br>4<strong>    以4字开头的三位书表示客户请求错误(比如客户请求的资源不存在)<br>5</strong>    以5字开头的三位数表示服务器内部出错</p>
+<h5 id="部分状态码详解"><a href="#部分状态码详解" class="headerlink" title="部分状态码详解"></a>部分状态码详解</h5><h5 id="413"><a href="#413" class="headerlink" title="413"></a>413</h5><p>这个状态码一般是请求实体过大，我遇到的时候是文件上传时大小被服务端限制，比如要上传一个500M的文件，而服务端如果在nginx没有配置相应的限制的话默认只有1M,就会被返回413.</p>
+<p>nginx配置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location /v1 &#123;</div><div class="line">            proxy_pass   http://lepush_server;</div><div class="line">            client_max_body_size   500m;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一般web服务会使用spring做上传功能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;multipartResolver&quot; class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;</div><div class="line">    	&lt;!-- 编码方式 --&gt;</div><div class="line">        &lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot; /&gt;</div><div class="line">        &lt;!-- 最大上传文件大小500M = 524288000 byte = 500*1024*1024 byte 文件大小限制将在控制器中 --&gt;</div><div class="line">        &lt;property name=&quot;maxUploadSize&quot; value=&quot;524288000&quot; /&gt;</div><div class="line">        &lt;!-- 最大占用内存大小 2M = 2097152 byte = 2*1024*1024 byte --&gt;</div><div class="line">        &lt;property name=&quot;maxInMemorySize&quot; value=&quot;2097152&quot; /&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+<p>具体实现还是请自行学习上传，本文重点状态码。</p>
+<h5 id="499"><a href="#499" class="headerlink" title="499"></a>499</h5><h5 id="502"><a href="#502" class="headerlink" title="502"></a>502</h5><h5 id="504"><a href="#504" class="headerlink" title="504"></a>504</h5><h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>域名系统，作用是将域名和ip对应起来，方便互联网用户使用（贼长的ip想记也记不住几个啊） </p>
 <p>缺省端口：53<br>使用UDP协议</p>
 <p>Linux : DNS服务器的IP地址保存在/etc/resolv.conf文件</p>
 <p>常见小白问题：<br>某人：我的电脑为什么可以登录qq，但是上不去网啊？<br>博主：DNS的问题呀</p>
@@ -124,7 +129,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cixr84lb2000lu9s6bz3sfw19" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cixr91v59000pvos6rk8c1ijo" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/10/协议入门/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
@@ -177,7 +182,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cixr84lbn0013u9s6e5ahl108" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cixr91v5h000yvos6xofggw79" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/09/锁/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
@@ -259,7 +264,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cixr84lb0000ju9s6azjbrdiz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cixr91v5k0015vos6zgegngf8" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -310,7 +315,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cixr84lbg000wu9s61nn4zcdl" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cixr91v5f000vvos6rad321wk" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
@@ -361,7 +366,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixr84laq000au9s61caqw22x" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixr91v4q0006vos6f0kqsyc3" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>
