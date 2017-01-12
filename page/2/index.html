@@ -110,14 +110,15 @@
       	<!-- Table of Contents -->
     
         <h1 id="内核参数"><a href="#内核参数" class="headerlink" title="内核参数"></a>内核参数</h1><p>/etc/sysctl.conf</p>
-<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><p>net.ipv4.tcp_fin_timeout，默认60s，减小fin_timeout，减少TIME_WAIT连接数量。<br>net.ipv4.tcp_tw_reuse = 1表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；<br>net.ipv4.tcp_tw_recycle = 1表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。</p>
+<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><p>net.ipv4.tcp_fin_timeout<br>默认60s，减小fin_timeout，减少TIME_WAIT连接数量。<br>net.ipv4.tcp_tw_reuse = 1<br>表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；<br>net.ipv4.tcp_tw_recycle = 1<br>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。<br>net.ipv4.tcp_syncookies = 1<br>表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；<br>net.ipv4.tcp_keepalive_time = 1200<br>表示当keepalive起用的时候，TCP发送keepalive消息的频度。缺省是2小时，改为20分钟。<br>net.ipv4.ip_local_port_range = 10000 65000<br>表示用于向外连接的端口范围。缺省情况下很小：32768到61000，改为10000到65000。（注意：这里不要将最低值设的太低，否则可能会占用掉正常的端口！）<br>net.ipv4.tcp_max_syn_backlog = 8192<br>表示SYN队列的长度，默认为1024，加大队列长度为8192，可以容纳更多等待连接的网络连接数。<br>net.ipv4.tcp_max_tw_buckets = 5000<br>表示系统同时保持TIME_WAIT的最大数量，如果超过这个数字，TIME_WAIT将立刻被清除并打印警告信息。默 认为180000，改为5000。对于Apache、Nginx等服务器，上几行的参数可以很好地减少TIME_WAIT套接字数量，但是对于 Squid，效果却不大。此项参数可以控制TIME_WAIT的最大数量，避免Squid服务器被大量的TIME_WAIT拖死。</p>
+<h2 id="一些经验"><a href="#一些经验" class="headerlink" title="一些经验"></a>一些经验</h2><p>（1）遇到过一次故障：查看/var/log/messages系统日志发现possible SYN flooding on port 80. Sending cookies （类似syn洪水攻击）后经查询断定是请求过大导致<br>net.ipv4.tcp_syncookies = 1  配置这个参数有一定的效果，但如果量过大，还是会gg的<br>（2）time-wait数量快速回收<br>查看服务器time-wait数量 sudo netstat -antp |grep TIME_WAIT |wc -l<br>net.ipv4.tcp_tw_reuse = 1<br>net.ipv4.tcp_tw_recycle = 1<br>配置这两个参数可以大大减少time_wait数量，不信你就试试</p>
 <h2 id="生效"><a href="#生效" class="headerlink" title="生效"></a>生效</h2><p>sysctl -p</p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixu1npqz000br8s6ld1v8cyn" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cixu2bjnv0005sgs6tqz039ud" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>
@@ -170,7 +171,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="cixu1npqo0004r8s630m2dmj8" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="cixu2bjni0000sgs66exp20ah" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Java常用工具类/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Java常用工具类/">评论</a>
@@ -221,7 +222,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cixu1npr9000or8s6bzl456g9" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cixu2bjog000osgs68wkoy01m" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Redis指南/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Redis指南/">评论</a>
@@ -273,7 +274,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="cixu1npqu0006r8s6z5tunnr6" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="cixu2bjny0006sgs6qpb1xjeq" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Java集合详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Java集合详解/">评论</a>
@@ -324,7 +325,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/19/Java关键字/" data-id="cixu1npqj0001r8s6b2sfk0k5" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/19/Java关键字/" data-id="cixu2bjns0004sgs6etdndqgr" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/19/Java关键字/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/19/Java关键字/">评论</a>

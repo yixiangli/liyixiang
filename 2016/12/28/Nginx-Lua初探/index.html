@@ -5,22 +5,28 @@
   
   <title>Nginx+Lua初探 | 李轶翔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Nginxmakemake upgrade 平滑升级
-Lua安装Nginx安装Nginx
-安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gzcd LuaJIT-2.1.0-beta2make PREFIX=/usr/local/luaj">
+  <meta name="description" content="Nginx不解释了，还是看我专门介绍Nginx的博客吧。。
+makemake upgrade 平滑升级
+Lua一门小众语言，资料不是很多，用起来也优点费劲
+安装Nginx安装Nginx
+安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx+Lua初探">
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/index.html">
 <meta property="og:site_name" content="李轶翔的博客">
-<meta property="og:description" content="Nginxmakemake upgrade 平滑升级
-Lua安装Nginx安装Nginx
-安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gzcd LuaJIT-2.1.0-beta2make PREFIX=/usr/local/luaj">
-<meta property="og:updated_time" content="2017-01-11T02:10:49.000Z">
+<meta property="og:description" content="Nginx不解释了，还是看我专门介绍Nginx的博客吧。。
+makemake upgrade 平滑升级
+Lua一门小众语言，资料不是很多，用起来也优点费劲
+安装Nginx安装Nginx
+安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gz">
+<meta property="og:updated_time" content="2017-01-12T07:23:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx+Lua初探">
-<meta name="twitter:description" content="Nginxmakemake upgrade 平滑升级
-Lua安装Nginx安装Nginx
-安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gzcd LuaJIT-2.1.0-beta2make PREFIX=/usr/local/luaj">
+<meta name="twitter:description" content="Nginx不解释了，还是看我专门介绍Nginx的博客吧。。
+makemake upgrade 平滑升级
+Lua一门小众语言，资料不是很多，用起来也优点费劲
+安装Nginx安装Nginx
+安装LuaJIT 2.112345wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gztar zxf LuaJIT-2.1.0-beta2.tar.gz">
   
     <link rel="alternate" href="/atom.xml" title="李轶翔的博客" type="application/atom+xml">
   
@@ -119,8 +125,10 @@ Lua安装Nginx安装Nginx
             <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx"><span class="toc-number">1.</span> <span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lua"><span class="toc-number">1.1.</span> <span class="toc-text">Lua</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Nginx-1"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装LuaJIT-2-1"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">安装LuaJIT 2.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ngx-devel-kit（NDK）模块（无需安装）"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">ngx_devel_kit（NDK）模块（无需安装）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua-nginx-module-模块（无需安装）"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">lua-nginx-module 模块（无需安装）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置环境变量"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">设置环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编译"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lua坑爹之处"><span class="toc-number">1.1.2.</span> <span class="toc-text">lua坑爹之处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx配置编写事项"><span class="toc-number">1.1.3.</span> <span class="toc-text">nginx配置编写事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些值得练手的功能"><span class="toc-number">1.1.4.</span> <span class="toc-text">一些值得练手的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#根据post请求的某些参数做相应的服务处理"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">根据post请求的某些参数做相应的服务处理</span></a></li></ol></li></ol></li></ol></li></ol>
         </div>
     
-        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>make<br>make upgrade 平滑升级</p>
-<h2 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="Nginx-1"><a href="#Nginx-1" class="headerlink" title="Nginx"></a>Nginx</h4><p>安装Nginx</p>
+        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>不解释了，还是看我专门介绍Nginx的博客吧。。</p>
+<p>make<br>make upgrade 平滑升级</p>
+<h2 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h2><p>一门小众语言，资料不是很多，用起来也优点费劲</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="Nginx-1"><a href="#Nginx-1" class="headerlink" title="Nginx"></a>Nginx</h4><p>安装Nginx</p>
 <h4 id="安装LuaJIT-2-1"><a href="#安装LuaJIT-2-1" class="headerlink" title="安装LuaJIT 2.1"></a>安装LuaJIT 2.1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gz</div><div class="line">tar zxf LuaJIT-2.1.0-beta2.tar.gz</div><div class="line">cd LuaJIT-2.1.0-beta2</div><div class="line">make PREFIX=/usr/local/luajit</div><div class="line">make install PREFIX=/usr/local/luajit</div></pre></td></tr></table></figure>
 <h4 id="ngx-devel-kit（NDK）模块（无需安装）"><a href="#ngx-devel-kit（NDK）模块（无需安装）" class="headerlink" title="ngx_devel_kit（NDK）模块（无需安装）"></a>ngx_devel_kit（NDK）模块（无需安装）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div><div class="line">wget https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz</div><div class="line">tar -xzvf v0.2.19.tar.gz</div></pre></td></tr></table></figure>
 <h4 id="lua-nginx-module-模块（无需安装）"><a href="#lua-nginx-module-模块（无需安装）" class="headerlink" title="lua-nginx-module 模块（无需安装）"></a>lua-nginx-module 模块（无需安装）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div><div class="line">wget https://github.com/openresty/lua-nginx-module/archive/v0.10.2.tar.gz</div><div class="line">tar -xzvf v0.10.2.tar.gz</div></pre></td></tr></table></figure>
