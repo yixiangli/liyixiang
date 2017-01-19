@@ -81,6 +81,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/19/Linux命令详解/">Linux命令详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/19/Linux命令详解/" class="article-date">
+  <time datetime="2017-01-19T02:59:55.000Z" itemprop="datePublished">2017-01-19</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Linux/">Linux</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理</p>
+<h3 id="硬链接-amp-软链接"><a href="#硬链接-amp-软链接" class="headerlink" title="硬链接&amp;软链接"></a>硬链接&amp;软链接</h3><p>在Linux中链接分为硬链接(hard link)与软链接(symbolic link)<br>为了分清区别，博主特别找了台服务器尝试下</p>
+<p>源文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 postfile20.txt</div></pre></td></tr></table></figure></p>
+<p>硬链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 lnying.txt</div></pre></td></tr></table></figure></p>
+<p>软链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lrwxrwxrwx  1 root root    14 Jan 19 10:57 ruan.txt -&gt; postfile20.txt</div></pre></td></tr></table></figure></p>
+<p>软链接：<br>1.软链接，以路径的形式存在，类似于Windows操作系统中的快捷方式，从结果看 软链接的大小是很小的，就是一个路径左右的存储大小。<br>2.软链接可以 跨文件系统 ，硬链接不可以<br>3.软链接可以对一个不存在的文件名进行链接<br>4.软链接可以对目录进行链接</p>
+<p>硬链接:<br>1.硬链接，以文件副本的形式存在。但不占用实际空间，从结果看，硬链接大小和源文件一模一样，<br>2.不允许给目录创建硬链接<br>3.硬链接只有在同一个文件系统中才能创建</p>
+<p>共同特点：<br>同步性，无论硬链接还是软链接，只要改动一处（源文件｜硬链接出的文件｜软链接出的文件），其他文件都同步修改。</p>
+<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln [参数] [源地址] [目标地址]</div></pre></td></tr></table></figure>
+<p>硬链接：ln<br>软链接：ln -s</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/01/19/Linux命令详解/" data-id="ciy3t6epr0006i8s67us8xi7w" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/01/19/Linux命令详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/19/Linux命令详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-设计模式－结构型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -120,7 +178,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－结构型/" data-id="ciy2repai003r25s6em07h5go" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－结构型/" data-id="ciy3t6eqx001ki8s6hdnzo5fs" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/18/设计模式－结构型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/设计模式－结构型/">评论</a>
@@ -168,7 +226,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－创建型/" data-id="ciy2repa5003d25s61u5uwzz1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－创建型/" data-id="ciy3t6eqp001ai8s6siefq1jz" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/18/设计模式－创建型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/设计模式－创建型/">评论</a>
@@ -224,7 +282,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="ciy2rep8t000l25s6bccbh8yz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="ciy3t6eqc000ni8s6f95x2d18" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/11/Nginx配置详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/11/Nginx配置详解/">评论</a>
@@ -295,66 +353,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="ciy2repaa003i25s6kvn2l2ea" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="ciy3t6eqo0017i8s65eo8vm44" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/10/协议入门/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协议-http-smtp-tcp/">协议 http  smtp tcp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-锁" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/09/锁/">锁</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/01/09/锁/" class="article-date">
-  <time datetime="2017-01-09T07:55:06.000Z" itemprop="datePublished">2017-01-09</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/数据库/">数据库</a>►<a class="article-category-link" href="/categories/技术贴/数据库/理论/">理论</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>锁，顾名思义，就是把一定的资源加上某种限制，提高安全性，绝大部分房间都是有门的，而门内一般都是有锁，对整个空间起到保护作用，在软件工程中也是如此，尤其是数据库，数据就是资源，而加锁是为了保护数据不出现（如：脏读，幻读，更新丢失等）</p>
-<h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><p>世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>1.version<br>将表新增一列字段，如version,每次读取数据时同时带上version,更新操作时与库中数据进行version校验，相同则更新，不同则失败。</p>
-<h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p>悲天悯人，觉得全世界都不公平，所以要实现绝对的公平，每次操作都要上锁，保证了数据的强一致性，同样也会带来性能损耗。</p>
-<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>1.加锁－ －</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="ciy2repab003l25s6gbq6t6cr" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/01/09/锁/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁-并发/">锁 并发</a></li></ul>
 
     </footer>
   </div>
@@ -391,7 +396,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/">数据库</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/理论/">理论</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/">数据库</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/理论/">理论</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -402,6 +407,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/19/Linux命令详解/">Linux命令详解</a>
+          </li>
         
           <li>
             <a href="/2017/01/18/设计模式－结构型/">设计模式－结构型</a>
@@ -417,10 +426,6 @@
         
           <li>
             <a href="/2017/01/10/协议入门/">协议入门</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/09/锁/">锁</a>
           </li>
         
       </ul>
