@@ -81,6 +81,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nginx配置详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/11/Nginx配置详解/">Nginx配置详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/11/Nginx配置详解/" class="article-date">
+  <time datetime="2017-01-11T02:11:07.000Z" itemprop="datePublished">2017-01-11</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/web中间件/">web中间件</a>►<a class="article-category-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="what-is-Nginx"><a href="#what-is-Nginx" class="headerlink" title="what is Nginx"></a>what is Nginx</h1><p>一款高性能反向代理Web服务器</p>
+<h2 id="正向-amp-反向代理"><a href="#正向-amp-反向代理" class="headerlink" title="正向&amp;反向代理"></a>正向&amp;反向代理</h2><p>正向：比较好理解，访问不了google，然后买个代理账号或者搭个vpn，它可以访问，你只需要借助它来对外访问。<br>反向：<br>（1）真正服务器的替身，你访问反向代理，它其实是从真正存储或者处理内容的服务器上获取结果，然后转发回客户端，但是在客户端认为，他就是目的源。<br>（2）负载均衡<br> 可以在一个组织内使用多个代理服务器来平衡各 Web 服务器间的请求负载，这个很常见，一般互联网公司都是使用nginx作为软负载均衡，还记得之前一般用lvs，后面大部分都切换成nginx了，原因之一是因为lvs跨机房性能会急剧下降，水平扩展性相对来说要差点。</p>
+<h2 id="一份较为完整的conf配置"><a href="#一份较为完整的conf配置" class="headerlink" title="一份较为完整的conf配置"></a>一份较为完整的conf配置</h2><p>服务器硬件配置<br>128G 24U</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line">## 定义Nginx运行的用户和用户组</div><div class="line">user  root;</div><div class="line"></div><div class="line">## 此处要根据机器硬件情况来配置</div><div class="line">worker_processes  24;</div><div class="line">worker_cpu_affinity 000000000000000000000001 000000000000000000000010 000000000000000000000100 000000000000000000001000 000000000000000000010000 000000000000000000100000 000000000000000001000000 000000000000000010000000 000000000000000100000000 000000000000001000000000 000000000000010000000000 000000000000100000000000 000000000001000000000000 000000000010000000000000 000000000100000000000000 000000001000000000000000 000000010000000000000000 000000100000000000000000 000001000000000000000000 000010000000000000000000 000100000000000000000000 001000000000000000000000 010000000000000000000000 100000000000000000000000;</div><div class="line"></div><div class="line"></div><div class="line">## 全局错误日志定义类型，[ debug | info | notice | warn | error | crit ]  其他不解释了 crit  意为记录最少错误信息（应该是减少日志写压力）  如果说实在不需要记录，error_log /dev/null crit;   将日志丢到Linux黑洞里 注意error_log off并不能关闭日志记录功能，它将日志文件写入一个文件名为off的文件中</div><div class="line">error_log  /letv/logs/nginx.error.log;</div><div class="line"></div><div class="line"></div><div class="line">## pid（进程标识符）：cat一下这个文件发现记录的是进程号</div><div class="line">pid  logs/nginx.pid;</div><div class="line"></div><div class="line"></div><div class="line">## 指定进程可以打开的最大描述符数 这个值最好和ulimit -n的值相同</div><div class="line">worker_rlimit_nofile 102400;</div><div class="line"></div><div class="line"></div><div class="line">## nginx 事件模块</div><div class="line">events &#123;</div><div class="line"></div><div class="line">    网上摘录一段较为详细的解释</div><div class="line">    使用epoll的I/O 模型。linux建议epoll，FreeBSD建议采用kqueue，window下不指定。</div><div class="line">    补充说明:</div><div class="line">        与apache相类，nginx针对不同的操作系统，有不同的事件模型</div><div class="line">        A）标准事件模型</div><div class="line">        Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll</div><div class="line">        B）高效事件模型</div><div class="line">        Kqueue：使用于FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X.使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。</div><div class="line">        Epoll：使用于Linux内核2.6版本及以后的系统。</div><div class="line">        dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。</div><div class="line">        Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁。    </div><div class="line"></div><div class="line">    use epoll;</div><div class="line">    ## 每个工作进程的最大连接数量 这个最好也根据硬件资源调整</div><div class="line">    worker_connections  102400;</div><div class="line">&#125;</div><div class="line"></div><div class="line">## nginx http模块</div><div class="line">http &#123;</div><div class="line">    include       mime.types;</div><div class="line">    default_type  application/octet-stream;</div><div class="line"></div><div class="line">    charset  utf-8;</div><div class="line"></div><div class="line">    log_format  main  &apos;$http_x_real_ip - [$time_local] &apos;</div><div class="line">                      &apos;&quot;$request&quot; $status &apos;</div><div class="line">                      &apos;&quot;$http_user_agent&quot; &apos; </div><div class="line">                      &apos;$upstream_addr  $upstream_response_time  $upstream_status $request_time&apos;;</div><div class="line">    </div><div class="line">    #$remote_addr 上游的ip 如果前端还有代理层，请勿配置</div><div class="line">    #$http_x_real_ip 客户端真实的ip 如果代理比较复杂，使用这个</div><div class="line">    #$proxy_add_x_forwarded_for 可能会有多个ip 代理层会加上自己的ip向下透传	                      </div><div class="line">    #$time_local 记录访问时间与时区          </div><div class="line">    #$request    请求url与http方法</div><div class="line">    #$status      记录请求状态码</div><div class="line">    #$http_user_agent   客户端的相关信息</div><div class="line">    #$upstream_addr     访问的后端服务地址</div><div class="line">    #$upstream_response_time   访问后端服务消耗的时间</div><div class="line">    #$upstream_status  访问后端服务后服务返回的状态码</div><div class="line">    #$request_time  整体请求消耗的时间</div><div class="line"></div><div class="line">    sendfile        on;</div><div class="line">    tcp_nopush     on;</div><div class="line">    tcp_nodelay on;</div><div class="line">    keepalive_timeout  0;</div><div class="line">    #跳至错误页面关闭nginx数字版本</div><div class="line">    server_tokens off;  </div><div class="line">    client_header_buffer_size 4k;   </div><div class="line">    #开启gzip模块</div><div class="line">    gzip  on;</div><div class="line">    #设置允许压缩的页面最小字节数，页面字节数从header头中的Content-Length中进行获取。</div><div class="line">    #默认值是0，不管页面多大都压缩。</div><div class="line">    #建议设置成大于1k的字节数，小于1k可能会越压越大</div><div class="line">    gzip_min_length 1k;</div><div class="line">    #设置所能接收的最大请求体的大小</div><div class="line">    client_max_body_size    2M;</div><div class="line">    #设置用户请求头的超时时间</div><div class="line">    #client_header_timeout   120;</div><div class="line">    #设置用户请求体的超时时间</div><div class="line">    #client_body_timeout     120;</div><div class="line">    #指定客户端的响应超时时间</div><div class="line">    #send_timeout            120;</div><div class="line">    #lingering_close生效后，在关闭连接前，会检测是否有用户发送的数据到达服务器，</div><div class="line">    #如果超过lingering_timeout时间后还没有数据可读，就直接关闭连接；否则，必须在读取完连接缓冲区上的数据并丢弃掉后才会关闭连接。</div><div class="line">    lingering_timeout       30;</div><div class="line">    #不允许代理端主动关闭连接</div><div class="line">    proxy_ignore_client_abort on;</div><div class="line"></div><div class="line">    upstream lepush_server &#123;</div><div class="line">       server 10.140.90.209:8089;</div><div class="line">    &#125;</div><div class="line">    upstream lepush_api&#123;</div><div class="line">       server 127.0.0.1:9040;</div><div class="line">       server 127.0.0.1:9041;</div><div class="line">       server 127.0.0.1:9042;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        listen       80;</div><div class="line">        server_name  localhost;</div><div class="line"></div><div class="line">        access_log  /letv/logs/nginx.access.log  main;</div><div class="line"></div><div class="line">        location /v1 &#123;</div><div class="line">            proxy_pass   http://lepush_server;</div><div class="line">            client_max_body_size   500m;  </div><div class="line">        &#125;</div><div class="line"></div><div class="line">        location /client &#123;</div><div class="line">            proxy_pass   http://lepush_api;</div><div class="line">	    proxy_redirect    off;</div><div class="line">	    </div><div class="line">	    # nginx代理 后台js无法访问的问题  需要添加</div><div class="line">	    # 原因：请求js要有来源路径，需要把请求的主机传到应用容器</div><div class="line">            proxy_set_header  Host             $host;</div><div class="line">            proxy_set_header  X-Real-IP  $http_x_real_ip;</div><div class="line">	    #proxy_read_timeout 1;</div><div class="line">	    #proxy_next_upstream http_502 http_504 error invalid_header;</div><div class="line">            </div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        location / &#123;</div><div class="line">            proxy_pass   http://lepush_api;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        error_page   500 502 503 504  /50x.html;</div><div class="line">        location = /50x.html &#123;</div><div class="line">            root   html;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="location-正则匹配"><a href="#location-正则匹配" class="headerlink" title="location 正则匹配"></a>location 正则匹配</h3><p>先看官网的语法规则</p>
+<p>location<br>syntax: location [=|~|~*|^~|@] /uri/ { … }<br>default: no<br>context: server</p>
+<p>一个网上博客的错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">= 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求。</div><div class="line">~ 为区分大小写匹配(可用正则表达式)</div><div class="line">!~为区分大小写不匹配</div><div class="line">~* 为不区分大小写匹配(可用正则表达式)</div><div class="line">!~*为不区分大小写不匹配</div><div class="line">^~ 如果把这个前缀用于一个常规字符串,那么告诉nginx 如果路径匹配那么不测试正则表达式。</div><div class="line"></div><div class="line">。。。</div><div class="line">location !~ xhtml &#123;</div><div class="line">&#125;</div><div class="line"></div><div class="line">location !~* png &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>大家一定要注意，实践证明，location后面是无法匹配!的,reload直接报错，如果有不匹配某种规则这种需求，可以这么做<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">location  /client &#123;</div><div class="line">    if ($request_uri !~* /list?) &#123;</div><div class="line">        proxy_pass   http://common_api; </div><div class="line">    &#125;</div><div class="line">    if ($request_uri ~* /list?) &#123;</div><div class="line">        proxy_pass   http://lepush_api;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="ciyaxbp7y000seq6it0gimz6b" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/01/11/Nginx配置详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/11/Nginx配置详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-协议入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -137,7 +193,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="ciyawti07002ldn6iqbfxhsld" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="ciyaxbp890019eq6ic4a751xv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/10/协议入门/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
@@ -190,7 +246,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="ciyawti0b002qdn6in573pa80" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="ciyaxbp8k001req6i2l8niea8" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/09/锁/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
@@ -274,7 +330,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="ciyawthzq0020dn6ik9n3qqwh" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="ciyaxbp7v000peq6ixhhlxqp2" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -328,65 +384,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="ciyawti02002gdn6izuprg8hh" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="ciyaxbp8b001ceq6ig49naw0s" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三次握手/">三次握手</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux内核参数优化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/Linux内核参数优化/">Linux内核参数优化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/12/27/Linux内核参数优化/" class="article-date">
-  <time datetime="2016-12-27T09:14:22.000Z" itemprop="datePublished">2016-12-27</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Linux/">Linux</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="内核参数"><a href="#内核参数" class="headerlink" title="内核参数"></a>内核参数</h1><p>/etc/sysctl.conf</p>
-<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><p>net.ipv4.tcp_fin_timeout<br>默认60s，减小fin_timeout，减少TIME_WAIT连接数量。<br>net.ipv4.tcp_tw_reuse = 1<br>表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；<br>net.ipv4.tcp_tw_recycle = 1<br>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。<br>net.ipv4.tcp_syncookies = 1<br>表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；<br>net.ipv4.tcp_keepalive_time = 1200<br>表示当keepalive起用的时候，TCP发送keepalive消息的频度。缺省是2小时，改为20分钟。<br>net.ipv4.ip_local_port_range = 10000 65000<br>表示用于向外连接的端口范围。缺省情况下很小：32768到61000，改为10000到65000。（注意：这里不要将最低值设的太低，否则可能会占用掉正常的端口！）<br>net.ipv4.tcp_max_syn_backlog = 8192<br>表示SYN队列的长度，默认为1024，加大队列长度为8192，可以容纳更多等待连接的网络连接数。<br>net.ipv4.tcp_max_tw_buckets = 5000<br>表示系统同时保持TIME_WAIT的最大数量，如果超过这个数字，TIME_WAIT将立刻被清除并打印警告信息。默 认为180000，改为5000。对于Apache、Nginx等服务器，上几行的参数可以很好地减少TIME_WAIT套接字数量，但是对于 Squid，效果却不大。此项参数可以控制TIME_WAIT的最大数量，避免Squid服务器被大量的TIME_WAIT拖死。</p>
-<h2 id="一些经验"><a href="#一些经验" class="headerlink" title="一些经验"></a>一些经验</h2><p>（1）遇到过一次故障：查看/var/log/messages系统日志发现possible SYN flooding on port 80. Sending cookies （类似syn洪水攻击）后经查询断定是请求过大导致<br>net.ipv4.tcp_syncookies = 1  配置这个参数有一定的效果，但如果量过大，还是会gg的<br>（2）time-wait数量快速回收<br>查看服务器time-wait数量 sudo netstat -antp |grep TIME_WAIT |wc -l<br>net.ipv4.tcp_tw_reuse = 1<br>net.ipv4.tcp_tw_recycle = 1<br>配置这两个参数可以大大减少time_wait数量，不信你就试试</p>
-<h2 id="生效"><a href="#生效" class="headerlink" title="生效"></a>生效</h2><p>sysctl -p</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="ciyawthyq000edn6iph9q714o" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内核/">内核</a></li></ul>
 
     </footer>
   </div>
@@ -423,7 +427,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/">数据库</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/理论/">理论</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/">数据库</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/理论/">理论</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -434,6 +438,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/24/Java并发编程/">Java并发编程</a>
+          </li>
         
           <li>
             <a href="/2017/01/24/Netty实战/">Netty实战</a>
@@ -449,10 +457,6 @@
         
           <li>
             <a href="/2017/01/18/设计模式－创建型/">设计模式－创建型</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/11/Nginx配置详解/">Nginx配置详解</a>
           </li>
         
       </ul>
