@@ -122,7 +122,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="ciyjq721k000s3z6ijgsqr2g3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="ciyk22xci000pdg6id82mfmsv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/11/Nginx配置详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/11/Nginx配置详解/">评论</a>
@@ -177,6 +177,8 @@
 <p>那么解决这个问题的办法也众说风云，不过经过博主的实践，在nginx上配置<br>proxy_ignore_client_abort on 表示#不允许代理端主动关闭连接 </p>
 <h5 id="502"><a href="#502" class="headerlink" title="502"></a>502</h5><p>服务不可用，一般公司运维团队都会自己做slb(接入负载均衡)，那么slb的策略是后端机器如果一段时间大量504，就会认为后端服务出了问题，slb会进行剔除操作，将有问题的机器剔除，此时返回状态码为502。<br>当然还有一种情况那就是后端就是挂了或者服务正在部署升级，web服务器直接返回502。</p>
 <h5 id="504"><a href="#504" class="headerlink" title="504"></a>504</h5><p>网关超时，一般都是后端响应慢</p>
+<h4 id="长连接和短连接"><a href="#长连接和短连接" class="headerlink" title="长连接和短连接"></a>长连接和短连接</h4><h5 id="面向连接"><a href="#面向连接" class="headerlink" title="面向连接"></a>面向连接</h5><p>Http的长连接与短连接本质上就是tcp的长连接与短连接，tcp作为http传输层使用的协议，解决如何在IP层之上可靠的传递数据包，而在网络层使用ip协议解决网络路由和寻址问题，TCP有可靠，面向连接的特点，因此http是面向连接的协议。</p>
+<h5 id="无状态"><a href="#无状态" class="headerlink" title="无状态"></a>无状态</h5><p>无状态很好解释，这次你上网打开一个网页和下一次再打开这个网页之间没有任何联系，服务没有任何关联性与记忆能力，因此http是一种无状态的协议</p>
 <h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>以安全为目标的HTTP通道，可以理解为HTTP的安全版，HTTPS与HTTP的主要区别就是在会话层加入了SSL,由SSL对详细内进行加密，保证了安全性。</p>
 <p>缺省端口：443<br>使用TCP协议</p>
 <h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>域名系统，作用是将域名和ip对应起来，方便互联网用户使用（贼长的ip想记也记不住几个啊） </p>
@@ -187,13 +189,13 @@
 <h2 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h2><h2 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h2><h3 id="ldap"><a href="#ldap" class="headerlink" title="ldap"></a>ldap</h3><p>轻量级目录访问协议<br>缺省端口：389<br>一般在sso中使用</p>
 <h3 id="ssl"><a href="#ssl" class="headerlink" title="ssl"></a>ssl</h3><p>安全套接字层协议<br>缺省端口：443<br>使用TCP协议<br>apple提供的官网推送服务APNs<br>服务端与APNs交互使用的就是ssl协议 </p>
 <h3 id="tls"><a href="#tls" class="headerlink" title="tls"></a>tls</h3><p>安全传输层协议<br>使用TCP协议<br>TLS是SSL v3.0的升级版，目前市面上所有的https都是用的是TLS，而不是SSL。</p>
-<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h2 id="其他协议"><a href="#其他协议" class="headerlink" title="其他协议"></a>其他协议</h2><h3 id="AMQP"><a href="#AMQP" class="headerlink" title="AMQP"></a>AMQP</h3><p>AMQP是一个提供统一消息服务的应用层标准协议，基于此协议的客户端与消息中间件可传递消息，并不受客户端/中间件不同产品，不同开发语言等条件的限制!</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h2 id="其他协议"><a href="#其他协议" class="headerlink" title="其他协议"></a>其他协议</h2><h3 id="AMQP"><a href="#AMQP" class="headerlink" title="AMQP"></a>AMQP</h3><p>AMQP是一个提供统一消息服务的应用层标准协议，基于此协议的客户端与消息中间件可传递消息，并不受客户端/中间件不同产品，不同开发语言等条件的限制!</p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="ciyjq721w001c3z6iw39smu8o" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="ciyk22xco000ydg6idncqs1av" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/10/协议入门/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
@@ -246,7 +248,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="ciyjq7224001r3z6i54e9u8ao" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="ciyk22xeb004ddg6i56iqq6z4" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/09/锁/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
@@ -330,7 +332,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="ciyjq721h000p3z6i5ew1tun3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="ciyk22xck000sdg6i1yku8iqs" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -384,7 +386,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="ciyjq721u00193z6iuy3tjjsj" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="ciyk22xdz003zdg6ip4gwobsl" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
