@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="命令链接链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理
 硬链接&amp;amp;软链接在Linux中链接分为硬链接(hard link)与软链接(symbolic link">
-<meta property="og:updated_time" content="2017-02-04T03:52:19.000Z">
+<meta property="og:updated_time" content="2017-02-04T03:56:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令详解">
 <meta name="twitter:description" content="命令链接链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理
@@ -118,6 +118,7 @@
     
         <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理</p>
 <h3 id="硬链接-amp-软链接"><a href="#硬链接-amp-软链接" class="headerlink" title="硬链接&amp;软链接"></a>硬链接&amp;软链接</h3><p>在Linux中链接分为硬链接(hard link)与软链接(symbolic link)<br>为了分清区别，博主特别找了台服务器尝试下</p>
+<a id="more"></a>
 <p>源文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 postfile20.txt</div></pre></td></tr></table></figure></p>
 <p>硬链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 lnying.txt</div></pre></td></tr></table></figure></p>
 <p>软链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lrwxrwxrwx  1 root root    14 Jan 19 10:57 ruan.txt -&gt; postfile20.txt</div></pre></td></tr></table></figure></p>

@@ -118,7 +118,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/24/Java并发编程/" data-id="ciyqpep1w0005hps6pkdqtq19" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/24/Java并发编程/" data-id="ciyqpkv010005j0s6tyqwq87d" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/24/Java并发编程/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/24/Java并发编程/">评论</a>
@@ -159,16 +159,17 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
-        <h1 id="什么是Netty"><a href="#什么是Netty" class="headerlink" title="什么是Netty"></a>什么是Netty</h1><h3 id="5-0被废弃了"><a href="#5-0被废弃了" class="headerlink" title="5.0被废弃了"></a>5.0被废弃了</h3><p>听到这个消息，博主感到很震惊，之前做breeze框架（<a href="http://www.fishfly.cn/2016/09/08/breeze官方文档/）" target="_blank" rel="external">http://www.fishfly.cn/2016/09/08/breeze官方文档/）</a> 中主要使用的就是Netty框架天生异步高性能优势，当时Netty5.0才出不久，所以博主选择的是4.0的版本，不过很多5.0的口子都已经开了，如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">	protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		messageReceived(ctx,request);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * </div><div class="line">	 * @use 方便今后升级netty5</div><div class="line">	 * @param</div><div class="line">	 * @return</div><div class="line">	 */</div><div class="line">	private void messageReceived(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception &#123;</div><div class="line">		template.process(ctx, request);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<p>万万没想到，作者居然自己给废弃了，那么废弃一定是有原因的，大致的原因作者在自己的GitHub上也进行了说明（<a href="https://github.com/netty/netty/issues/4466）" target="_blank" rel="external">https://github.com/netty/netty/issues/4466）</a>  大概看了下，也综合了下其他爱好者的说法，大致是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. netty5 中使用了 ForkJoinPool，增加了代码的复杂度，但是对性能的改善却不明显</div><div class="line">2. 多个分支的代码同步工作量很大</div><div class="line">3. 作者觉得当下还不到发布一个新版本的时候</div><div class="line">4. 在发布版本之前，还有更多问题需要调查一下，比如是否应该废弃 exceptionCaught， 是否暴露EventExecutorChooser等等。</div></pre></td></tr></table></figure></p>
-
+        <h1 id="什么是Netty"><a href="#什么是Netty" class="headerlink" title="什么是Netty"></a>什么是Netty</h1><h3 id="5-0被废弃了"><a href="#5-0被废弃了" class="headerlink" title="5.0被废弃了"></a>5.0被废弃了</h3><p>听到这个消息，博主感到很震惊，之前做breeze框架（<a href="http://www.fishfly.cn/2016/09/08/breeze官方文档/）">http://www.fishfly.cn/2016/09/08/breeze官方文档/）</a> 中主要使用的就是Netty框架天生异步高性能优势，当时Netty5.0才出不久，所以博主选择的是4.0的版本，不过很多5.0的口子都已经开了，如<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/24/Netty实战/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/24/Netty实战/" data-id="ciyqpep2i000ohps6a0edigp4" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/24/Netty实战/" data-id="ciyqpkv0r000oj0s6szf5odze" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/24/Netty实战/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/24/Netty实战/">评论</a>
@@ -209,34 +210,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理</p>
 <h3 id="硬链接-amp-软链接"><a href="#硬链接-amp-软链接" class="headerlink" title="硬链接&amp;软链接"></a>硬链接&amp;软链接</h3><p>在Linux中链接分为硬链接(hard link)与软链接(symbolic link)<br>为了分清区别，博主特别找了台服务器尝试下</p>
-<p>源文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 postfile20.txt</div></pre></td></tr></table></figure></p>
-<p>硬链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 lnying.txt</div></pre></td></tr></table></figure></p>
-<p>软链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lrwxrwxrwx  1 root root    14 Jan 19 10:57 ruan.txt -&gt; postfile20.txt</div></pre></td></tr></table></figure></p>
-<p>软链接：<br>1.软链接，以路径的形式存在，类似于Windows操作系统中的快捷方式，从结果看 软链接的大小是很小的，就是一个路径左右的存储大小。<br>2.软链接可以 跨文件系统 ，硬链接不可以<br>3.软链接可以对一个不存在的文件名进行链接<br>4.软链接可以对目录进行链接</p>
-<p>硬链接:<br>1.硬链接，以文件副本的形式存在。但不占用实际空间，从结果看，硬链接大小和源文件一模一样，<br>2.不允许给目录创建硬链接<br>3.硬链接只有在同一个文件系统中才能创建</p>
-<p>共同特点：<br>同步性，无论硬链接还是软链接，只要改动一处（源文件｜硬链接出的文件｜软链接出的文件），其他文件都同步修改。</p>
-<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln [参数] [源地址] [目标地址]</div></pre></td></tr></table></figure>
-<p>硬链接：ln<br>软链接：ln -s</p>
-<h2 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h2><p>在操作系统中，每一个文件都有一个固定的地址去存放，外部访问时就需要通过这个地址去访问，那么如何快速知晓某个文件的位置，就需要用到一些寻址命令</p>
-<h3 id="常见的几个命令"><a href="#常见的几个命令" class="headerlink" title="常见的几个命令"></a>常见的几个命令</h3><p>which  查看可执行文件的位置。<br>whereis 查看文件的位置。<br>locate   配合数据库查看文件位置。<br>find   实际搜寻硬盘查询文件名称。</p>
-<h4 id="which"><a href="#which" class="headerlink" title="which"></a>which</h4><p>一般是用来查找系统命令，如java。很多java程序猿一般都需要通过一些jdk自带的命令来检测jvm等运行情况，但是往往有可能不知道命令的具体位置，这个时候只需要<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">which jstat or  which java</div></pre></td></tr></table></figure></p>
-<p>一定要注意，这里的java  jstat一定是系统可执行文件。</p>
-<p>接下来 我们找cd命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">which cd</div><div class="line"></div><div class="line">/usr/bin/which: no cd in (/letv/apps/jdk/bin:/letv/apps/jdk/bin:/letv/apps/jdk/bin:/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin)</div></pre></td></tr></table></figure></p>
-<p>居然没有找到，再一看提示发现，实际上which命令只会在PATH目录下寻找，而cd是bash 内建的命令。</p>
-<h4 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h4><p>一般是用来查找定位可执行文件(whereis -b xxx)、源代码文件(whereis -s xxx)、帮助文件(whereis -m xxx)在文件系统中的位置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">whereis nginx   |   whereis -b nginx</div><div class="line"></div><div class="line">nginx: /usr/local/nginx</div></pre></td></tr></table></figure>
-<p>找到了nginx可执行文件，由于没有源代码和帮助文件，因此-s -m 没有结果。拿find为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@WebServer-9788C4 aaa]# whereis find</div><div class="line">find: /bin/find /usr/bin/find /usr/share/man/man1/find.1.gz /usr/share/man/man1p/find.1p.gz</div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# whereis -s find</div><div class="line">find:</div><div class="line">[root@WebServer-9788C4 aaa]# whereis -m find</div><div class="line">find: /usr/share/man/man1/find.1.gz /usr/share/man/man1p/find.1p.gz</div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# whereis -b find</div><div class="line">find: /bin/find /usr/bin/find</div></pre></td></tr></table></figure></p>
-<p>find命令存在可执行文件以及帮助文件，没有源代码文件。</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/01/19/Linux命令详解/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/19/Linux命令详解/" data-id="ciyqpep2c000ghps6r3yssh9q" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/19/Linux命令详解/" data-id="ciyqpkv0k000gj0s6a7koif18" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/19/Linux命令详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/19/Linux命令详解/">评论</a>
@@ -290,7 +275,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－结构型/" data-id="ciyqpep36001mhps6qq29qtl8" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－结构型/" data-id="ciyqpkv1d001mj0s6kycr4ij7" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/18/设计模式－结构型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/设计模式－结构型/">评论</a>
@@ -353,7 +338,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－创建型/" data-id="ciyqpep34001jhps6ovknasjw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－创建型/" data-id="ciyqpkv1b001jj0s6148k9iem" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/18/设计模式－创建型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/设计模式－创建型/">评论</a>
