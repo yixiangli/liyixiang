@@ -15,7 +15,7 @@
 <meta property="og:description" content="创建型设计模式来源于生活，在面向对象的世界里，世间万物皆对象，那么对象的创建方式就存在多种多样，自然也就形成了几种通用的设计模式。
 种类单例模式             SingleTon原型模式         Prototype建造者模式         Builder工厂模式         Factory抽象工厂模式     AbstractFactory
 单例模式适用场景：    应用程">
-<meta property="og:updated_time" content="2017-02-13T07:48:11.000Z">
+<meta property="og:updated_time" content="2017-02-13T10:34:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式－创建型">
 <meta name="twitter:description" content="创建型设计模式来源于生活，在面向对象的世界里，世间万物皆对象，那么对象的创建方式就存在多种多样，自然也就形成了几种通用的设计模式。
@@ -116,7 +116,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#创建型"><span class="toc-number">1.</span> <span class="toc-text">创建型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#种类"><span class="toc-number">1.1.</span> <span class="toc-text">种类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单例模式"><span class="toc-number">1.1.1.</span> <span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#双重校验锁"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">双重校验锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态内部类"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">静态内部类</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#创建型"><span class="toc-number">1.</span> <span class="toc-text">创建型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#种类"><span class="toc-number">1.1.</span> <span class="toc-text">种类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单例模式"><span class="toc-number">1.1.1.</span> <span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#双重校验锁"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">双重校验锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态内部类"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">静态内部类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型模式"><span class="toc-number">1.1.2.</span> <span class="toc-text">原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建造者模式"><span class="toc-number">1.1.3.</span> <span class="toc-text">建造者模式</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h1><p>设计模式来源于生活，在面向对象的世界里，世间万物皆对象，那么对象的创建方式就存在多种多样，自然也就形成了几种通用的设计模式。</p>
@@ -124,234 +124,40 @@
 <h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>适用场景：<br>    应用程序中的某个类只需要或者只能有一份实例在系统运行状态下。<br>博主提示：<br>    一定要注意并发场景，最普通的（或者大学老师教的）那种单例还是不要写了，博主不废话，直接给出两种终极版，具体原因百度一下，这种博客太多了。</p>
 <a id="more"></a>
 <h4 id="双重校验锁"><a href="#双重校验锁" class="headerlink" title="双重校验锁"></a>双重校验锁</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月10日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function	</div><div class="line"> * 		双重加锁单例</div><div class="line"> * 无法完全避免错误</div><div class="line"> * </div><div class="line"> * 或者在静态实例加上volatile关键字 但是需要jdk1.5以上 而且代码书写相对复杂</div><div class="line"> * </div><div class="line"> * 首先要明白在JVM创建新的对象时，主要要经过三步。</div><div class="line"></div><div class="line">              1.分配内存</div><div class="line"></div><div class="line">              2.初始化构造器</div><div class="line"></div><div class="line">              3.将对象指向分配的内存的地址</div><div class="line"></div><div class="line">              这种顺序在上述双重加锁的方式是没有问题的，因为这种情况下JVM是完成了整个对象的构造才将内存的地址交给了对象。但是如果2和3步骤是相反的（2和3可能是相反的是因为JVM会针对字节码进行调优，而其中的一项调优便是调整指令的执行顺序），就会出现问题了。</div><div class="line"></div><div class="line">              因为这时将会先将内存地址赋给对象，针对上述的双重加锁，就是说先将分配好的内存地址指给synchronizedSingleton，然后再进行初始化构造器，这时候后面的线程去请求getInstance方法时，会认为synchronizedSingleton对象已经实例化了，直接返回一个引用。如果在初始化构造器之前，这个线程使用了synchronizedSingleton，就会产生莫名的错误。</div><div class="line"> */</div><div class="line">public class DoubleSyncSingleTon &#123;</div><div class="line">	//一个静态实例</div><div class="line">	private volatile static DoubleSyncSingleTon dss;</div><div class="line">	//构造方法私有</div><div class="line">	private DoubleSyncSingleTon()&#123;&#125;</div><div class="line">	</div><div class="line">	public static DoubleSyncSingleTon getInstance()&#123;</div><div class="line">		if(null == dss)&#123;</div><div class="line">			synchronized (DoubleSyncSingleTon.class) &#123;</div><div class="line">				//再次判断dss是否为null</div><div class="line">				/**</div><div class="line">				 * 假设我们去掉同步块中的是否为null的判断，有这样一种情况，</div><div class="line">				 * 假设A线程和B线程都在同步块外面判断了synchronizedSingleton为null，</div><div class="line">				 * 结果A线程首先获得了线程锁，进入了同步块，然后A线程会创造一个实例，</div><div class="line">				 * 此时synchronizedSingleton已经被赋予了实例，A线程退出同步块，</div><div class="line">				 * 直接返回了第一个创造的实例，此时B线程获得线程锁，也进入同步块，</div><div class="line">				 * 此时A线程其实已经创造好了实例，B线程正常情况应该直接返回的，</div><div class="line">				 * 但是因为同步块里没有判断是否为null，直接就是一条创建实例的语句，</div><div class="line">				 * 所以B线程也会创造一个实例返回，此时就造成创造了多个实例的情况。</div><div class="line">				 */</div><div class="line">				if(null == dss)&#123;</div><div class="line">					dss = new DoubleSyncSingleTon();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return dss;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月10日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		语言级别无法完全避免错误的发生</div><div class="line"> * 		不考虑反射等强行突破，较为完美的单例模式解决方案，将该任务交给JVM</div><div class="line"> */</div><div class="line"></div><div class="line">/*</div><div class="line"> *           1.Singleton最多只有一个实例，在不考虑反射强行突破访问限制的情况下。</div><div class="line"></div><div class="line">             2.保证了并发访问的情况下，不会发生由于并发而产生多个实例。</div><div class="line"></div><div class="line">             3.保证了并发访问的情况下，不会由于初始化动作未完全完成而造成使用了尚未正确初始化的实例。</div><div class="line"> */</div><div class="line">public class PerfectSingleTon &#123;</div><div class="line"></div><div class="line">	private PerfectSingleTon()&#123;&#125;</div><div class="line">	</div><div class="line">	//一个类的静态属性只会在第一次加载类时初始化，这是JVM帮我们保证的</div><div class="line">	public static PerfectSingleTon getInstance()&#123;</div><div class="line">		return SingleTonInstance.instance;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//由于静态变量只初始化一次，所以singleton仍然是单例的。</div><div class="line">	public static class SingleTonInstance &#123;</div><div class="line">		static PerfectSingleTon instance = new PerfectSingleTon();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line">    </div><div class="line">### 原型模式</div><div class="line">适用场景：</div><div class="line">    1.对象的创建比较复杂（如需要大量的setXXX），那么这个时候使用原型模式可以快速复制出大量的相同对象，而无需知道创建细节。</div><div class="line">    2.在不知道该对象的创建方式情况下，使用该模式也能创建出相同的对象进行使用，或者获取到这个对象的运行状态。 </div><div class="line">博主提示：</div><div class="line">    3.由于clone方法是由虚拟机直接复制内存块执行，所以在速度上比使用new的方式创建对象要快，如果遇到需要大量相同对象的需求，那么new一个之后再各种clone效率更高（这点很好解释，上学的时候抄作业不用动脑子）</div><div class="line">    注意概念：浅拷贝&amp;深拷贝。记得博主大四参加百度校招还遇到过这个笔试题，当时并不知道这是个什么概念。</div><div class="line">先来看浅拷贝</div></pre></td></tr></table></figure>
-<p>/**</p>
+<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月10日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		语言级别无法完全避免错误的发生</div><div class="line"> * 		不考虑反射等强行突破，较为完美的单例模式解决方案，将该任务交给JVM</div><div class="line"> */</div><div class="line"></div><div class="line">/*</div><div class="line"> *           1.Singleton最多只有一个实例，在不考虑反射强行突破访问限制的情况下。</div><div class="line"></div><div class="line">             2.保证了并发访问的情况下，不会发生由于并发而产生多个实例。</div><div class="line"></div><div class="line">             3.保证了并发访问的情况下，不会由于初始化动作未完全完成而造成使用了尚未正确初始化的实例。</div><div class="line"> */</div><div class="line">public class PerfectSingleTon &#123;</div><div class="line"></div><div class="line">	private PerfectSingleTon()&#123;&#125;</div><div class="line">	</div><div class="line">	//一个类的静态属性只会在第一次加载类时初始化，这是JVM帮我们保证的</div><div class="line">	public static PerfectSingleTon getInstance()&#123;</div><div class="line">		return SingleTonInstance.instance;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//由于静态变量只初始化一次，所以singleton仍然是单例的。</div><div class="line">	public static class SingleTonInstance &#123;</div><div class="line">		static PerfectSingleTon instance = new PerfectSingleTon();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>适用场景：<br>    1.对象的创建比较复杂（如需要大量的setXXX），那么这个时候使用原型模式可以快速复制出大量的相同对象，而无需知道创建细节。<br>    2.在不知道该对象的创建方式情况下，使用该模式也能创建出相同的对象进行使用，或者获取到这个对象的运行状态。<br>博主提示：<br>    3.由于clone方法是由虚拟机直接复制内存块执行，所以在速度上比使用new的方式创建对象要快，如果遇到需要大量相同对象的需求，那么new一个之后再各种clone效率更高（这点很好解释，上学的时候抄作业不用动脑子）<br>    注意概念：浅拷贝&amp;深拷贝。记得博主大四参加百度校招还遇到过这个笔试题，当时并不知道这是个什么概念。<br>先来看浅拷贝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		浅拷贝的例子</div><div class="line"> */</div><div class="line">public class ShallowPrototype implements Cloneable&#123;</div><div class="line"></div><div class="line">	private int x;</div><div class="line">	private int y;</div><div class="line">	private int z;</div><div class="line">	private A a;</div><div class="line">	</div><div class="line">	public ShallowPrototype() &#123;</div><div class="line">		// TODO Auto-generated constructor stub</div><div class="line">		this.x = 2;</div><div class="line">        this.y = 3;</div><div class="line">        this.z = 4;</div><div class="line">        this.a = new A();</div><div class="line">        this.a.setA(5);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public A getA()&#123;</div><div class="line">		return a;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public ShallowPrototype clone() &#123;</div><div class="line">		Object obj = null;</div><div class="line">		try &#123;</div><div class="line">			obj = super.clone();</div><div class="line">		&#125; catch (CloneNotSupportedException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		return (ShallowPrototype) obj;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public String toString() &#123;</div><div class="line">        return &quot;[&quot; + x + &quot;,&quot; + y + &quot;,&quot; + z + &quot;,&quot; + a.getA() + &quot;]&quot;;</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">        ShallowPrototype prototype1 = new ShallowPrototype();</div><div class="line">        System.out.println(prototype1);</div><div class="line">        System.out.println(prototype1.getA());</div><div class="line">        ShallowPrototype prototype2 = prototype1.clone();</div><div class="line">        System.out.println(prototype2);</div><div class="line">        System.out.println(prototype2.getA());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">结果</div><div class="line">[2,3,4,5]</div><div class="line">com.li.leader.dm.bean.A@677327b6</div><div class="line">[2,3,4,5]</div><div class="line">com.li.leader.dm.bean.A@677327b6</div></pre></td></tr></table></figure>
+<p>重点来了，博主在编写的时候漏掉了实现Cloneable接口，看了下Cloneable接口，并没有任何方法，由于真正的clone方法是在Object类中，以protected native声明，以为不需要实现，但是在运行的时候却报java.lang.CloneNotSupportedException错，查阅了资料发现类 Object 的 clone() 方法首先会检查 this.getClass() 是否实现了 Cloneable 接口</p>
 <ul>
-<li>@developer liyixiang</li>
-<li>@date 2017年2月12日</li>
-<li>@since JDK 1.8</li>
-<li>@function</li>
-<li><p>浅拷贝的例子<br>*/<br>public class ShallowPrototype implements Cloneable{</p>
-<p>private int x;<br>private int y;<br>private int z;<br>private A a;</p>
-<p>public ShallowPrototype() {<br>// TODO Auto-generated constructor stub<br>this.x = 2;<br>this.y = 3;<br>this.z = 4;<br>this.a = new A();<br>this.a.setA(5);<br>}</p>
-<p>public A getA(){<br>return a;<br>}</p>
-<p>public ShallowPrototype clone() {<br>Object obj = null;<br>try {<br> obj = super.clone();<br>} catch (CloneNotSupportedException e) {<br> // TODO Auto-generated catch block<br> e.printStackTrace();<br>}<br>return (ShallowPrototype) obj;<br>}</p>
-<p>public String toString() {<br>return “[“ + x + “,” + y + “,” + z + “,” + a.getA() + “]”;<br>}</p>
-<p>public static void main(String[] args) {<br>ShallowPrototype prototype1 = new ShallowPrototype();<br>System.out.println(prototype1);<br>System.out.println(prototype1.getA());<br>ShallowPrototype prototype2 = prototype1.clone();<br>System.out.println(prototype2);<br>System.out.println(prototype2.getA());<br>}<br>}</p>
-</li>
+<li>如果 this.getClass() 没有实现 Cloneable 接口， clone() 就会抛 CloneNotSupportedException 返回，这点十分重要。<br>本地方法Object.clone()的源代码</li>
 </ul>
-<p>结果<br>[2,3,4,5]<br>com.li.leader.dm.bean.A@677327b6<br>[2,3,4,5]<br>com.li.leader.dm.bean.A@677327b6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">重点来了，博主在编写的时候漏掉了实现Cloneable接口，看了下Cloneable接口，并没有任何方法，由于真正的clone方法是在Object类中，以protected native声明，以为不需要实现，但是在运行的时候却报java.lang.CloneNotSupportedException错，查阅了资料发现类 Object 的 clone() 方法首先会检查 this.getClass() 是否实现了 Cloneable 接口</div><div class="line"> * 如果 this.getClass() 没有实现 Cloneable 接口， clone() 就会抛 CloneNotSupportedException 返回，这点十分重要。</div><div class="line">本地方法Object.clone()的源代码</div></pre></td></tr></table></figure></p>
-<p>// Check if class of obj supports the Cloneable interface.<br>  // All arrays are considered to be cloneable (See JLS 20.1.5)<br>  if (!klass-&gt;is_cloneable()) {//这里检查了是否实现了Cloneable接口，如果没实现，会抛出异常CloneNotSupportException。<br>    ResourceMark rm(THREAD);<br>    THROW_MSG_0(vmSymbols::java_lang_CloneNotSupportedException(), klass-&gt;external_name());<br>  }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">深拷贝如何实现？</div><div class="line">一般有两种方法，第一种在重写的clone方法中显式声明要copy的对象</div></pre></td></tr></table></figure></p>
-<pre><code>protected DeepPrototype clone() {
-    Object object = null;
-    try {
-        object = super.clone();
-        ((DeepPrototype)object).field = this.field.clone();
-    } catch (CloneNotSupportedException exception) {
-        throw new RuntimeException(exception);
-    }
-    return (DeepPrototype) object;
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果说被克隆类中有包含一个field，就需要一行代码，那么n个属性，就需要n行，扩展性也不好，因此一般会采用第二种，利用Java序列化技术实现</div></pre></td></tr></table></figure>
-<p>/**</p>
-<pre><code> * 
- * @developer:liyixiang
- * @function:
- *         借用序列化来做深克隆
- *         但是被克隆对象必须可序列化
- * @param:
- *        
- * @return:
- *
- */
-public Object deepClone() throws IOException, ClassNotFoundException { 
-     //将对象写到流里 
-     ByteArrayOutputStream bo=new ByteArrayOutputStream(); 
-     ObjectOutputStream oo=new ObjectOutputStream(bo); 
-     oo.writeObject(this); 
-     //从流里读出来 
-     ByteArrayInputStream bi=new ByteArrayInputStream(bo.toByteArray()); 
-     ObjectInputStream oi=new ObjectInputStream(bi); 
-     return(oi.readObject()); 
-}
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">一个例子</div></pre></td></tr></table></figure>
-<p>/**</p>
-<ul>
-<li>@developer liyixiang</li>
-<li>@date 2017年2月13日</li>
-<li>@since JDK 1.8</li>
-<li>@function</li>
-<li><p>一个教师类<br><em>/<br>class Teacher implements Serializable{<br>/*</em></p>
-<ul>
-<li>@function:<br><em>
-</em>/<br>private static final long serialVersionUID = 1L;<br>String name;<br>int age;</li>
-</ul>
-<p>public Teacher(String name,int age){<br>this.name=name;<br>this.age=age;<br>}<br>}</p>
-</li>
-</ul>
-<p>public class Student implements Serializable{<br>     /**</p>
-<pre><code> * @function:
- *
- */
-private static final long serialVersionUID = -1718229499251306525L;
-String name;//常量对象
-int age;
-Teacher t;//学生1和学生2的引用值都是一样的。
-
-public Student(String name,int age,Teacher t){
-      this.name=name;
-      this.age=age;
-      this.t=t;
- }
-
- public static void main(String[] args) throws ClassNotFoundException, IOException{ 
-     Teacher t = new Teacher(&quot;tangliang&quot;,30);
-     Student s1 = new Student(&quot;zhangsan&quot;,18,t);
-     Student s2=(Student)s1.deepClone();
-     //修改s2 教师的属性
-     s2.t.name=&quot;tony&quot;;
-     s2.t.age=40;
-     //学生1的老师不改变
-     System.out.println(&quot;name=&quot;+s1.t.name+&quot;,&quot;+&quot;age=&quot;+s1.t.age);
-     System.out.println(&quot;name=&quot;+s2.t.name+&quot;,&quot;+&quot;age=&quot;+s2.t.age);
- }
-
- public Object deepClone() throws IOException, ClassNotFoundException { 
-     //将对象写到流里 
-     ByteArrayOutputStream bo=new ByteArrayOutputStream(); 
-     ObjectOutputStream oo=new ObjectOutputStream(bo); 
-     oo.writeObject(this); 
-     //从流里读出来 
-     ByteArrayInputStream bi=new ByteArrayInputStream(bo.toByteArray()); 
-     ObjectInputStream oi=new ObjectInputStream(bi); 
-     return(oi.readObject()); 
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">运行起来结果说明一切，值得一提的是</div></pre></td></tr></table></figure></p>
-<p>private static final long serialVersionUID = -1718229499251306525L;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">简单解释下就是Java序列化时为了保证序列化前后对象的唯一性，声明这样一个标记来保证版本的兼容性，开发者可以显式的定义，也可以不定义，那么JVM会根据类属性，运行环境等等策略计算而生成一个64位的哈希字段，但是要注意，不同JVM可能有所不同。</div><div class="line"></div><div class="line">### 建造者模式</div><div class="line">想了解建造者模式，先看一个例子</div></pre></td></tr></table></figure></p>
-<p>public class Person {</p>
-<pre><code>private int id;
-private String name;
-private int age;
-public int getId() {
-    return id;
-}
-public void setId(int id) {
-    this.id = id;
-}
-public String getName() {
-    return name;
-}
-public void setName(String name) {
-    this.name = name;
-}
-public int getAge() {
-    return age;
-}
-public void setAge(int age) {
-    this.age = age;
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这是一个表示”人“的类，那么如何创建这个人呢，通常的做法是</div></pre></td></tr></table></figure></p>
-<p>Person p = new Person();<br>p.setId()<br>p.setName()<br>p.setAge()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">现在，小用一下建造者模式，变形！！！</div></pre></td></tr></table></figure></p>
-<p>public class Person {</p>
-<pre><code>private int id;
-private String name;
-private int age;
-
-public Person setId(int id) {
-    this.id = id;
-    return this;
-}
-
-public Person setName(String name) {
-    this.name = name;
-    return this;
-}
-
-public Person setAge(int age) {
-    this.age = age;
-    return this;
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如何使用？</div></pre></td></tr></table></figure></p>
-<p>new Person().setAge(18).setId(12345).setName(“li”);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这样的写法对于客户端（需要使用这个类来创建对象的人）来说代码简洁了不少，这也就是比较提倡的流式风格，但是有的人问了，难道建造者模式就这点作用？往下看</div><div class="line"></div><div class="line">假设现在我们有一个新的类，这个类的属性有部分必填，有一些选填，那么如果用建造者模式，可以这么写</div></pre></td></tr></table></figure></p>
-<p>public class Person {</p>
-<pre><code>private final int id;
-private final String name;
-private final int age;
-private final String level;
-
-private Person(PersonBuilder builder){
-    this.id = builder.id;
-    this.name = builder.name;
-    this.age = builder.age;
-    this.level = builder.level;
-}
-
-public int getId() {
-    return id;
-}
-
-public String getName() {
-    return name;
-}
-
-public int getAge() {
-    return age;
-}
-
-public String getLevel() {
-    return level;
-}
-
-//人类的建造者
-public static class PersonBuilder {
-    private final String name;
-    private final int id;
-    private int age;
-    private String level;
-
-    public PersonBuilder(String name,int id){
-        this.id = id;
-        this.name = name;
-    }
-
-    public PersonBuilder age(int age){
-        this.age = age;
-        return this;
-    }
-
-    public PersonBuilder level(String level){
-        this.level = level;
-        return this;
-    }
-
-    //最后一哆嗦
-    public Person build() {
-                return new Person(this);
-           }
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这样我们的客户端使用起来只需要</div></pre></td></tr></table></figure></p>
-<pre><code>       new Person.PersonBuilder(&quot;li&quot;, 12345);
-//如果有可选参数 那么
-new Person.PersonBuilder(&quot;li&quot;, 12345)
-.age(18)
-.level(&quot;一级&quot;)
-.build();
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">既简洁又易懂，而且很灵活，可以创建出很多不同的对象（如18岁，28岁，58岁的人，只需要传递不同的参数），关键是安全性也比普通类调用set方法好，建造者模式生成的是一个完整的对象，不存在个别属性别篡改的情况。另外，对于一些属性的参数性校验，可以统一放在build这一步去处理，例如</div></pre></td></tr></table></figure>
-<pre><code>public Person build() {
-     if(age &gt; 120){
-         throw new Exception(&quot;&quot;);
-     }
-     return new Person(this);
- }
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">慢着，这种写法线程不安全</div></pre></td></tr></table></figure>
-<pre><code>public Person build() {
-    Person p = new Person(this);
-    if(age &gt; 120){
-        throw new Exception(&quot;&quot;);
-    }
-    return p;
-}
-</code></pre><p>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// Check if class of obj supports the Cloneable interface.</div><div class="line">  // All arrays are considered to be cloneable (See JLS 20.1.5)</div><div class="line">  if (!klass-&gt;is_cloneable()) &#123;//这里检查了是否实现了Cloneable接口，如果没实现，会抛出异常CloneNotSupportException。</div><div class="line">    ResourceMark rm(THREAD);</div><div class="line">    THROW_MSG_0(vmSymbols::java_lang_CloneNotSupportedException(), klass-&gt;external_name());</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>深拷贝如何实现？<br>一般有两种方法，第一种在重写的clone方法中显式声明要copy的对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">protected DeepPrototype clone() &#123;</div><div class="line">    Object object = null;</div><div class="line">    try &#123;</div><div class="line">        object = super.clone();</div><div class="line">        ((DeepPrototype)object).field = this.field.clone();</div><div class="line">    &#125; catch (CloneNotSupportedException exception) &#123;</div><div class="line">        throw new RuntimeException(exception);</div><div class="line">    &#125;</div><div class="line">    return (DeepPrototype) object;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果说被克隆类中有包含一个field，就需要一行代码，那么n个属性，就需要n行，扩展性也不好，因此一般会采用第二种，利用Java序列化技术实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">	 * </div><div class="line">	 * @developer:liyixiang</div><div class="line">	 * @function:</div><div class="line">	 * 		借用序列化来做深克隆</div><div class="line">	 * 		但是被克隆对象必须可序列化</div><div class="line">	 * @param:</div><div class="line">	 *		</div><div class="line">	 * @return:</div><div class="line">	 *</div><div class="line">	 */</div><div class="line">	public Object deepClone() throws IOException, ClassNotFoundException &#123; </div><div class="line">		 //将对象写到流里 </div><div class="line">		 ByteArrayOutputStream bo=new ByteArrayOutputStream(); </div><div class="line">		 ObjectOutputStream oo=new ObjectOutputStream(bo); </div><div class="line">		 oo.writeObject(this); </div><div class="line">		 //从流里读出来 </div><div class="line">		 ByteArrayInputStream bi=new ByteArrayInputStream(bo.toByteArray()); </div><div class="line">		 ObjectInputStream oi=new ObjectInputStream(bi); </div><div class="line">		 return(oi.readObject()); </div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>一个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月13日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		一个教师类</div><div class="line"> */</div><div class="line">class Teacher implements Serializable&#123;</div><div class="line">	  /**</div><div class="line">	   * @function:</div><div class="line">	   *</div><div class="line">	   */</div><div class="line">	private static final long serialVersionUID = 1L;</div><div class="line">	String name;</div><div class="line">	int age;</div><div class="line">	  </div><div class="line">	  public Teacher(String name,int age)&#123;</div><div class="line">		  this.name=name;</div><div class="line">		  this.age=age;</div><div class="line">	  &#125;</div><div class="line">&#125;</div><div class="line">	</div><div class="line">public class Student implements Serializable&#123;</div><div class="line">	 /**</div><div class="line">	 * @function:</div><div class="line">	 *</div><div class="line">	 */</div><div class="line">	private static final long serialVersionUID = -1718229499251306525L;</div><div class="line">	String name;//常量对象</div><div class="line">	int age;</div><div class="line">	Teacher t;//学生1和学生2的引用值都是一样的。</div><div class="line"></div><div class="line">	public Student(String name,int age,Teacher t)&#123;</div><div class="line">		  this.name=name;</div><div class="line">		  this.age=age;</div><div class="line">		  this.t=t;</div><div class="line">	 &#125;</div><div class="line">	 </div><div class="line">	 public static void main(String[] args) throws ClassNotFoundException, IOException&#123; </div><div class="line">		 Teacher t = new Teacher(&quot;tangliang&quot;,30);</div><div class="line">		 Student s1 = new Student(&quot;zhangsan&quot;,18,t);</div><div class="line">		 Student s2=(Student)s1.deepClone();</div><div class="line">		 //修改s2 教师的属性</div><div class="line">		 s2.t.name=&quot;tony&quot;;</div><div class="line">		 s2.t.age=40;</div><div class="line">		 //学生1的老师不改变</div><div class="line">		 System.out.println(&quot;name=&quot;+s1.t.name+&quot;,&quot;+&quot;age=&quot;+s1.t.age);</div><div class="line">		 System.out.println(&quot;name=&quot;+s2.t.name+&quot;,&quot;+&quot;age=&quot;+s2.t.age);</div><div class="line">	 &#125;</div><div class="line">	 </div><div class="line">	 public Object deepClone() throws IOException, ClassNotFoundException &#123; </div><div class="line">		 //将对象写到流里 </div><div class="line">		 ByteArrayOutputStream bo=new ByteArrayOutputStream(); </div><div class="line">		 ObjectOutputStream oo=new ObjectOutputStream(bo); </div><div class="line">		 oo.writeObject(this); </div><div class="line">		 //从流里读出来 </div><div class="line">		 ByteArrayInputStream bi=new ByteArrayInputStream(bo.toByteArray()); </div><div class="line">		 ObjectInputStream oi=new ObjectInputStream(bi); </div><div class="line">		 return(oi.readObject()); </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行起来结果说明一切，值得一提的是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">private static final long serialVersionUID = -1718229499251306525L;</div></pre></td></tr></table></figure>
+<p>简单解释下就是Java序列化时为了保证序列化前后对象的唯一性，声明这样一个标记来保证版本的兼容性，开发者可以显式的定义，也可以不定义，那么JVM会根据类属性，运行环境等等策略计算而生成一个64位的哈希字段，但是要注意，不同JVM可能有所不同。</p>
+<h3 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h3><p>想了解建造者模式，先看一个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class Person &#123;</div><div class="line"></div><div class="line">	private int id;</div><div class="line">	private String name;</div><div class="line">	private int age;</div><div class="line">	public int getId() &#123;</div><div class="line">		return id;</div><div class="line">	&#125;</div><div class="line">	public void setId(int id) &#123;</div><div class="line">		this.id = id;</div><div class="line">	&#125;</div><div class="line">	public String getName() &#123;</div><div class="line">		return name;</div><div class="line">	&#125;</div><div class="line">	public void setName(String name) &#123;</div><div class="line">		this.name = name;</div><div class="line">	&#125;</div><div class="line">	public int getAge() &#123;</div><div class="line">		return age;</div><div class="line">	&#125;</div><div class="line">	public void setAge(int age) &#123;</div><div class="line">		this.age = age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这是一个表示”人“的类，那么如何创建这个人呢，通常的做法是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Person p = new Person();</div><div class="line">p.setId()</div><div class="line">p.setName()</div><div class="line">p.setAge()</div></pre></td></tr></table></figure>
+<p>现在，小用一下建造者模式，变形！！！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class Person &#123;</div><div class="line"></div><div class="line">	private int id;</div><div class="line">	private String name;</div><div class="line">	private int age;</div><div class="line"></div><div class="line">	public Person setId(int id) &#123;</div><div class="line">		this.id = id;</div><div class="line">		return this;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public Person setName(String name) &#123;</div><div class="line">		this.name = name;</div><div class="line">		return this;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public Person setAge(int age) &#123;</div><div class="line">		this.age = age;</div><div class="line">		return this;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如何使用？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new Person().setAge(18).setId(12345).setName(&quot;li&quot;);</div></pre></td></tr></table></figure>
+<p>这样的写法对于客户端（需要使用这个类来创建对象的人）来说代码简洁了不少，这也就是比较提倡的流式风格，但是有的人问了，难道建造者模式就这点作用？往下看</p>
+<p>假设现在我们有一个新的类，这个类的属性有部分必填，有一些选填，那么如果用建造者模式，可以这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">public class Person &#123;</div><div class="line"></div><div class="line">	private final int id;</div><div class="line">	private final String name;</div><div class="line">	private final int age;</div><div class="line">	private final String level;</div><div class="line"></div><div class="line">	private Person(PersonBuilder builder)&#123;</div><div class="line">		this.id = builder.id;</div><div class="line">		this.name = builder.name;</div><div class="line">		this.age = builder.age;</div><div class="line">		this.level = builder.level;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public int getId() &#123;</div><div class="line">		return id;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getName() &#123;</div><div class="line">		return name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public int getAge() &#123;</div><div class="line">		return age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getLevel() &#123;</div><div class="line">		return level;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//人类的建造者</div><div class="line">	public static class PersonBuilder &#123;</div><div class="line">		private final String name;</div><div class="line">		private final int id;</div><div class="line">		private int age;</div><div class="line">		private String level;</div><div class="line">		</div><div class="line">		public PersonBuilder(String name,int id)&#123;</div><div class="line">			this.id = id;</div><div class="line">			this.name = name;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public PersonBuilder age(int age)&#123;</div><div class="line">			this.age = age;</div><div class="line">			return this;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public PersonBuilder level(String level)&#123;</div><div class="line">			this.level = level;</div><div class="line">			return this;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		//最后一哆嗦</div><div class="line">		public Person build() &#123;</div><div class="line">                    return new Person(this);</div><div class="line">               &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样我们的客户端使用起来只需要</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">             new Person.PersonBuilder(&quot;li&quot;, 12345);</div><div class="line">//如果有可选参数 那么</div><div class="line">new Person.PersonBuilder(&quot;li&quot;, 12345)</div><div class="line">.age(18)</div><div class="line">.level(&quot;一级&quot;)</div><div class="line">.build();</div></pre></td></tr></table></figure>
+<p>既简洁又易懂，而且很灵活，可以创建出很多不同的对象（如18岁，28岁，58岁的人，只需要传递不同的参数），关键是安全性也比普通类调用set方法好，建造者模式生成的是一个完整的对象，不存在个别属性别篡改的情况。另外，对于一些属性的参数性校验，可以统一放在build这一步去处理，例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public Person build() &#123;</div><div class="line">     if(age &gt; 120)&#123;</div><div class="line">         throw new Exception(&quot;&quot;);</div><div class="line">     &#125;</div><div class="line">     return new Person(this);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>慢着，这种写法线程不安全</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public Person build() &#123;</div><div class="line">    Person p = new Person(this);</div><div class="line">    if(age &gt; 120)&#123;</div><div class="line">        throw new Exception(&quot;&quot;);</div><div class="line">    &#125;</div><div class="line">    return p;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>

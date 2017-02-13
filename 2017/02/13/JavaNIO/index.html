@@ -15,9 +15,7 @@
 
 capacity
 position
-limit
-
-capaci">
+limit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaNIO">
 <meta property="og:url" content="https://yixiangli.github.io/2017/02/13/JavaNIO/index.html">
@@ -32,10 +30,8 @@ capaci">
 
 capacity
 position
-limit
-
-capaci">
-<meta property="og:updated_time" content="2017-02-13T09:59:45.000Z">
+limit">
+<meta property="og:updated_time" content="2017-02-13T10:31:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaNIO">
 <meta name="twitter:description" content="NIOBuffer剖析Buffer是nio中一个重要的概念，其本质上就是一块基于内存的缓冲区，可读也可写，在io中其实有缓冲的概念，flush方法就是将缓冲中余下数据写出，而在java1.4出现了nio后，Buffer作为通道(Channel)与通道之间连接的缓冲区，起到了重要作用。
@@ -48,9 +44,7 @@ capaci">
 
 capacity
 position
-limit
-
-capaci">
+limit">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -161,6 +155,7 @@ capaci">
 <li>position</li>
 <li>limit</li>
 </ul>
+<a id="more"></a>
 <p>capacity<br>首先capacity很好理解，不论是读模式还是写模式，capacity就是Buffer区的总大小，是一个固定的值，超过这个大小，写入将无法进行。</p>
 <p>position,位置标志<br>在写模式下，写数据到Buffer中时，position会向前移动到下一个可插入数据的Buffer单元，此时position表示当前可写入的位置，position最大可为capacity-1<br>在读模式下，position会被重置为0. 当从Buffer的position处读取数据时，position向前移动到下一个可读的位置。<br>看到这里，大家就会有个疑问，当写模式切换到读模式下，position被重置为0了，那么这个时候如果读模式又被切换回来了，Buffer怎么知道写到哪了呢。别着急，还有limit.</p>
 <p>limit<br>在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。所以写模式下，limit等于Buffer的capacity。<br>在读模式下，limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。</p>
