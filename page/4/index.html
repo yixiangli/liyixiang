@@ -81,6 +81,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-网络基础-TCP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/27/网络基础-TCP/">网络基础-TCP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/12/27/网络基础-TCP/" class="article-date">
+  <time datetime="2016-12-27T09:25:37.000Z" itemprop="datePublished">2016-12-27</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/网络/">网络</a>►<a class="article-category-link" href="/categories/技术贴/网络/TCP/">TCP</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="三次握手-四次挥手"><a href="#三次握手-四次挥手" class="headerlink" title="三次握手 四次挥手"></a>三次握手 四次挥手</h2><h3 id="手绘图"><a href="#手绘图" class="headerlink" title="手绘图"></a>手绘图</h3><p><img src="/img/tcp.jpg" alt="TCP三次握手"></p>
+<p>一些解释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这里的C端(client) S端(server) 并不要理解为客户端（移动设备）服务端（服务器），而是说连接建立发起方（主动方），连接关闭发起方（主动方）。</div></pre></td></tr></table></figure></p>
+<p>各个状态的意义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">LISTEN - 侦听来自远方TCP端口的连接请求； </div><div class="line">SYN-SENT -在发送连接请求后等待匹配的连接请求； </div><div class="line">SYN-RECEIVED - 在收到和发送一个连接请求后等待对连接请求的确认； </div><div class="line">ESTABLISHED- 代表一个打开的连接，数据可以传送给用户； </div><div class="line">FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认；</div><div class="line">FIN-WAIT-2 - 从远程TCP等待连接中断请求； </div><div class="line">CLOSE-WAIT - 等待从本地用户发来的连接中断请求； </div><div class="line">CLOSING -等待远程TCP对连接中断的确认； </div><div class="line">LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认； </div><div class="line">TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认； </div><div class="line">CLOSED - 没有任何连接状态；</div></pre></td></tr></table></figure></p>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>TCP是主机对主机层的传输控制协议，提供可靠的连接服务，采用三次握手确认建立一个连接，其中位码即tcp标志位,有6种标示:</p>
+<p>SYN(synchronous建立联机)<br>ACK(acknowledgement 确认)<br>PSH(push传送)<br>FIN(finish结束)<br>RST(reset重置)<br>URG(urgent紧急)</p>
+<p>Sequence number(顺序号码)<br>Acknowledge number(确认号码)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="ciz3jv3ls001tf9s6yegwuaz9" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三次握手/">三次握手</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux内核参数优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -118,7 +172,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="ciz2tay6h000g72s64xjsbc98" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="ciz3jv3kv000gf9s6gq2byrbj" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>
@@ -171,7 +225,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="ciz2tay62000672s6g1m1xm7e" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="ciz3jv3k90005f9s63uau14m1" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Java常用工具类/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Java常用工具类/">评论</a>
@@ -222,7 +276,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="ciz2tay6x001372s6x1ai7bur" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="ciz3jv3ld0012f9s6gze9hc4t" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Redis指南/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Redis指南/">评论</a>
@@ -274,64 +328,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="ciz2tay6j000j72s60w1uu3v7" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="ciz3jv3ky000lf9s6hurmtc59" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Java集合详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Java集合详解/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/List/">List</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Set/">Set</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合/">集合</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Java关键字" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/19/Java关键字/">Java关键字</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/12/19/Java关键字/" class="article-date">
-  <time datetime="2016-12-19T07:02:43.000Z" itemprop="datePublished">2016-12-19</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java关键字"><a href="#Java关键字" class="headerlink" title="Java关键字"></a>Java关键字</h1><p>Java语言规定关键字不能作为标识符。目前共有50个Java关键字，其中，”const”和”goto”这两个关键字在Java语言中并没有具体含义。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/12/19/Java关键字/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/12/19/Java关键字/" data-id="ciz2tay5x000472s65uorlq0a" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/12/19/Java关键字/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/19/Java关键字/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/关键字/">关键字</a></li></ul>
 
     </footer>
   </div>
@@ -368,7 +371,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -379,6 +382,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/13/Java线程基础/">Java线程基础</a>
+          </li>
         
           <li>
             <a href="/2017/02/12/Java异常剖析/">Java异常剖析</a>
@@ -394,10 +401,6 @@
         
           <li>
             <a href="/2017/02/06/jvm那些事儿/">jvm那些事儿</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/04/Linux基本介绍/">Linux基本介绍</a>
           </li>
         
       </ul>
