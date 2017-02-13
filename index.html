@@ -81,6 +81,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JavaNIO" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/13/JavaNIO/">JavaNIO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/13/JavaNIO/" class="article-date">
+  <time datetime="2017-02-13T08:50:02.000Z" itemprop="datePublished">2017-02-13</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h1><h2 id="Buffer剖析"><a href="#Buffer剖析" class="headerlink" title="Buffer剖析"></a>Buffer剖析</h2><p>Buffer是nio中一个重要的概念，其本质上就是一块基于内存的缓冲区，可读也可写，在io中其实有缓冲的概念，flush方法就是将缓冲中余下数据写出，而在java1.4出现了nio后，Buffer作为通道(Channel)与通道之间连接的缓冲区，起到了重要作用。</p>
+<h3 id="两模式与三要素"><a href="#两模式与三要素" class="headerlink" title="两模式与三要素"></a>两模式与三要素</h3><p>两模式</p>
+<ul>
+<li>写模式</li>
+<li>读模式</li>
+</ul>
+<p>三要素</p>
+<ul>
+<li>capacity</li>
+<li>position</li>
+<li>limit</li>
+</ul>
+<p>capacity<br>首先capacity很好理解，不论是读模式还是写模式，capacity就是Buffer区的总大小，是一个固定的值，超过这个大小，写入将无法进行。</p>
+<p>position,位置标志<br>在写模式下，写数据到Buffer中时，position会向前移动到下一个可插入数据的Buffer单元，此时position表示当前可写入的位置，position最大可为capacity-1<br>在读模式下，position会被重置为0. 当从Buffer的position处读取数据时，position向前移动到下一个可读的位置。<br>看到这里，大家就会有个疑问，当写模式切换到读模式下，position被重置为0了，那么这个时候如果读模式又被切换回来了，Buffer怎么知道写到哪了呢。别着急，还有limit.</p>
+<p>limit<br>在写模式下，Buffer的limit表示你最多能往Buffer里写多少数据。所以写模式下，limit等于Buffer的capacity。<br>在读模式下，limit表示你最多能读到多少数据。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。</p>
+<h3 id="常用api"><a href="#常用api" class="headerlink" title="常用api"></a>常用api</h3><p>说完了三要素，大家又觉得疑问了，怎么从读模式切换到写模式（或者说反过来），这就要说到flip方法了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="ciz3wxiub0004sjs60aj6djo2" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/13/JavaNIO/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/JavaNIO/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nio/">nio</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Java线程基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -118,7 +182,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="ciz3sszhg000epjs6b5sscfp5" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="ciz3wxiuv000gsjs6273ykf0z" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/Java线程基础/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/Java线程基础/">评论</a>
@@ -170,7 +234,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="ciz3sszhk000jpjs6cszvoxsh" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="ciz3wxiux000jsjs6ztnvrxx3" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/12/Java异常剖析/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/Java异常剖析/">评论</a>
@@ -223,7 +287,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="ciz3sszid001dpjs6612dmwva" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="ciz3wxivi001gsjs6oqhoneui" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/10/SPI/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/10/SPI/">评论</a>
@@ -297,7 +361,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/08/JavaIO/" data-id="ciz3sszgz0004pjs6aoecz7q7" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/08/JavaIO/" data-id="ciz3wxiu50001sjs6jjzgxq03" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/08/JavaIO/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/JavaIO/">评论</a>
@@ -312,62 +376,10 @@
 
 
   
-    <article id="post-jvm那些事儿" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/06/jvm那些事儿/">jvm那些事儿</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/02/06/jvm那些事儿/" class="article-date">
-  <time datetime="2017-02-06T03:07:29.000Z" itemprop="datePublished">2017-02-06</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>学Java的不懂点jvm那真是说不过去，对于研究jvm来说，不见得要把源码全部记下来，然后完全弄清楚来龙去脉（当然有精力且编程痴迷者忽略），对于jvm，大部分程序猿要做到的就是基本原理了熟于心，能进行基本的jvm调优且出了一些线上故障，要能通过观察当时内存，线程等程序的运行情况来揪出问题的根源。</p>
-<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/06/jvm那些事儿/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/02/06/jvm那些事儿/" data-id="ciz3sszim001lpjs69j3ec83g" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/02/06/jvm那些事儿/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/06/jvm那些事儿/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GC/">GC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -392,7 +404,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -403,6 +415,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/13/JavaNIO/">JavaNIO</a>
+          </li>
         
           <li>
             <a href="/2017/02/13/Java线程基础/">Java线程基础</a>
@@ -418,10 +434,6 @@
         
           <li>
             <a href="/2017/02/08/JavaIO/">JavaIO</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/06/jvm那些事儿/">jvm那些事儿</a>
           </li>
         
       </ul>
