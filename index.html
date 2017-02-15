@@ -128,7 +128,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="ciz6doncm0004ijs6xj7k7jwh" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="ciz6f2k0q0001l0s6pud4otpk" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/JavaNIO/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/JavaNIO/">评论</a>
@@ -175,12 +175,22 @@
 <h3 id="interrupt-amp-interrupted-amp-isInterrupted"><a href="#interrupt-amp-interrupted-amp-isInterrupted" class="headerlink" title="interrupt&amp;interrupted&amp;isInterrupted"></a>interrupt&amp;interrupted&amp;isInterrupted</h3><p>interrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个状态和java线程基本状态无关）,运行这个例子就很清楚了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月13日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class InterruptThread extends Thread&#123;</div><div class="line"></div><div class="line">	private boolean stop = false;</div><div class="line">	</div><div class="line">	public static void main(String[] args) throws Exception &#123;</div><div class="line">		InterruptThread thread = new InterruptThread();</div><div class="line">        System.out.println( &quot;Starting thread...&quot; );</div><div class="line">        thread.start();</div><div class="line">        Thread.sleep( 3000 );</div><div class="line">        System.out.println( &quot;Interrupting thread...&quot; );</div><div class="line">        thread.interrupt();</div><div class="line">        Thread.sleep( 3000 );</div><div class="line">        System.out.println(&quot;Stopping application...&quot; );</div><div class="line">        //System.exit(0);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		while(!stop)&#123;</div><div class="line">			System.out.println( &quot;Thread is running...&quot; );</div><div class="line">			System.out.println(Thread.currentThread().getState());</div><div class="line">            long time = System.currentTimeMillis();</div><div class="line">            while((System.currentTimeMillis()-time &lt; 1000)) &#123;</div><div class="line">            &#125;</div><div class="line">            System.out.println(&quot;Thread exiting under request...&quot; );</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>那么有了这个标志，如何获取或者做相关操作呢？这就用到了interrupted方法和isInterrupted方法。<br>interrupted是一个静态方法，作用于当前线程，调用native的isInterrupted方法，参数传true,意为返回线程的状态位后，要清掉原来的状态位（恢复成原来情况（非中断））。<br>isInterrupted是一个普通方法，作用于调用该方法的线程对象所对应的线程，也是调用native的isInterrupted方法，参数传false,只是返回线程的状态位。</p>
-
+<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>作用：解决多线程场景下，相同变量的访问冲突问题，保证线程安全使用。</p>
+<p>原理：<br>    当使用ThreadLocal维护变量时，ThreadLocal为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的副本，而不会影响其它线程所对应的副本。<br>    ThreadLocal是如何做到为每一个线程维护变量的副本的呢？其实实现的思路很简单：在ThreadLocal类中有一个Map，用于存储每一个线程的变量副本，Map中元素的键为线程对象，而值对应线程的变量副本。</p>
+<p>常用方法：<br>    jdk5.0之后支持泛型，主要方法为void set(T value)、T get()以及T initialValue()。一定要注意initialValue(),本身是一个protected方法，所以就是为子类覆盖所用，如果不实现，默认返回null，且该方法只会执行一次，执行时机在线程第1次调用get()或set(Object)时才执行</p>
+<p>使用：<br>    通过匿名内部类的方式定义ThreadLocal的子类。</p>
+<pre><code> private static ThreadLocal&lt;Date&gt; startDate= new ThreadLocal&lt;Date&gt;() {
+    protected Date initialValue() {
+        // TODO Auto-generated method stub
+        return new Date();
+    }
+};
+</code></pre>
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="ciz6doncw000aijs6hw9z0xzy" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="ciz6f2k1n000el0s6bg20ti3u" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/Java线程基础/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/Java线程基础/">评论</a>
@@ -232,7 +242,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="ciz6dond1000eijs6vnqzxr54" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="ciz6f2k1p000gl0s6hwebqey9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/12/Java异常剖析/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/Java异常剖析/">评论</a>
@@ -285,7 +295,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="ciz6dondp001eijs6z49xqdw1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="ciz6f2k2m001hl0s6gk1azwlu" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/10/SPI/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/10/SPI/">评论</a>
@@ -359,7 +369,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/08/JavaIO/" data-id="ciz6doncc0000ijs60zpbjfo1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/08/JavaIO/" data-id="ciz6f2k0w0004l0s6cigcbtet" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/08/JavaIO/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/JavaIO/">评论</a>
