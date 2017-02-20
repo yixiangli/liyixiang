@@ -81,6 +81,131 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nginx配置详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/11/Nginx配置详解/">Nginx配置详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/11/Nginx配置详解/" class="article-date">
+  <time datetime="2017-01-11T02:11:07.000Z" itemprop="datePublished">2017-01-11</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/web中间件/">web中间件</a>►<a class="article-category-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="what-is-Nginx"><a href="#what-is-Nginx" class="headerlink" title="what is Nginx"></a>what is Nginx</h1><p>一款高性能反向代理Web服务器</p>
+<h2 id="正向-amp-反向代理"><a href="#正向-amp-反向代理" class="headerlink" title="正向&amp;反向代理"></a>正向&amp;反向代理</h2><p>正向：比较好理解，访问不了google，然后买个代理账号或者搭个vpn，它可以访问，你只需要借助它来对外访问。<br>反向：<br>（1）真正服务器的替身，你访问反向代理，它其实是从真正存储或者处理内容的服务器上获取结果，然后转发回客户端，但是在客户端认为，他就是目的源。<br>（2）负载均衡<br> 可以在一个组织内使用多个代理服务器来平衡各 Web 服务器间的请求负载，这个很常见，一般互联网公司都是使用nginx作为软负载均衡，还记得之前一般用lvs，后面大部分都切换成nginx了，原因之一是因为lvs跨机房性能会急剧下降，水平扩展性相对来说要差点。<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/11/Nginx配置详解/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="cizdxjrqz0013t0s6r9x6olc5" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/01/11/Nginx配置详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/11/Nginx配置详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-协议入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/10/协议入门/">协议入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/10/协议入门/" class="article-date">
+  <time datetime="2017-01-10T02:30:59.000Z" itemprop="datePublished">2017-01-10</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/网络/">网络</a>►<a class="article-category-link" href="/categories/技术贴/网络/协议/">协议</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="一张图"><a href="#一张图" class="headerlink" title="一张图"></a>一张图</h1><p><img src="/img/protocol.jpg" alt="协议大全"></p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>缺省端口：80<br>使用TCP协议</p>
+<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p>1××    以1字字开头的三位数表示服务器已经接受到请求，并且正在处理中<br>2×× 以2字开头的三位数 表示请求成功<br>3×× 以3字开头的三位数表示请求被重定向(比如跳出服务器去github上请求jquery)<br>4xx    以4字开头的三位书表示客户请求错误(比如客户请求的资源不存在)<br>5xx    以5字开头的三位数表示服务器内部出错</p>
+<h5 id="部分状态码详解"><a href="#部分状态码详解" class="headerlink" title="部分状态码详解"></a>部分状态码详解</h5><h5 id="405"><a href="#405" class="headerlink" title="405"></a>405</h5><p>这个状态码还比较常见，get请求去访问一个post接口。因此这个状态码就是检测请求方法是否符合服务端设置</p>
+<h5 id="413"><a href="#413" class="headerlink" title="413"></a>413</h5><p>这个状态码一般是请求实体过大，我遇到的时候是文件上传时大小被服务端限制，比如要上传一个500M的文件，而服务端如果在nginx没有配置相应的限制的话默认只有1M,就会被返回413.</p>
+<p>nginx配置如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location /v1 &#123;</div><div class="line">            proxy_pass   http://lepush_server;</div><div class="line">            client_max_body_size   500m;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一般web服务会使用spring做上传功能<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;multipartResolver&quot; class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;</div><div class="line">    	&lt;!-- 编码方式 --&gt;</div><div class="line">        &lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot; /&gt;</div><div class="line">        &lt;!-- 最大上传文件大小500M = 524288000 byte = 500*1024*1024 byte 文件大小限制将在控制器中 --&gt;</div><div class="line">        &lt;property name=&quot;maxUploadSize&quot; value=&quot;524288000&quot; /&gt;</div><div class="line">        &lt;!-- 最大占用内存大小 2M = 2097152 byte = 2*1024*1024 byte --&gt;</div><div class="line">        &lt;property name=&quot;maxInMemorySize&quot; value=&quot;2097152&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+<p>具体实现还是请自行学习上传，本文重点状态码。</p>
+<h5 id="499"><a href="#499" class="headerlink" title="499"></a>499</h5><p>499这个状态码可以理解为是nginx中定义的状态码，因此在nginx日志中尤其是为用户移动设备提供服务的节点常会遇到，博主一开始遇到这个状态码后查了一些资料发现是客户端主动断开连接，不过客户端主动断开原因也有很多，经过调查发现可能存在如下几种情况<br>（1）客户端发出请求后，服务端还没有处理完（服务端正常处理），网络断了，一般这种情况时间比较短<br>（2）客户端发出请求后，服务端还没有处理完（服务端处理时间过长），过了客户端设置的超时时间，客户端主动断开，一般这种情况时间有一定规律，可以从客户端日志看</p>
+<p>那么解决这个问题的办法也众说风云，不过经过博主的实践，在nginx上配置<br>proxy_ignore_client_abort on 表示#不允许代理端主动关闭连接 </p>
+<h5 id="502"><a href="#502" class="headerlink" title="502"></a>502</h5><p>服务不可用，一般公司运维团队都会自己做slb(接入负载均衡)，那么slb的策略是后端机器如果一段时间大量504，就会认为后端服务出了问题，slb会进行剔除操作，将有问题的机器剔除，此时返回状态码为502。<br>当然还有一种情况那就是后端就是挂了或者服务正在部署升级，web服务器直接返回502。</p>
+<h5 id="504"><a href="#504" class="headerlink" title="504"></a>504</h5><p>网关超时，一般都是后端响应慢</p>
+<h4 id="长连接和短连接"><a href="#长连接和短连接" class="headerlink" title="长连接和短连接"></a>长连接和短连接</h4><h5 id="面向连接"><a href="#面向连接" class="headerlink" title="面向连接"></a>面向连接</h5><p>Http的长连接与短连接本质上就是tcp的长连接与短连接，tcp作为http传输层使用的协议，解决如何在IP层之上可靠的传递数据包，而在网络层使用ip协议解决网络路由和寻址问题，TCP有可靠，面向连接的特点，因此http是面向连接的协议。</p>
+<h5 id="无状态"><a href="#无状态" class="headerlink" title="无状态"></a>无状态</h5><p>无状态很好解释，这次你上网打开一个网页和下一次再打开这个网页之间没有任何联系，服务没有任何关联性与记忆能力，因此http是一种无状态的协议</p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>以安全为目标的HTTP通道，可以理解为HTTP的安全版，HTTPS与HTTP的主要区别就是在会话层加入了SSL,由SSL对详细内进行加密，保证了安全性。</p>
+<p>缺省端口：443<br>使用TCP协议</p>
+<h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>域名系统，作用是将域名和ip对应起来，方便互联网用户使用（贼长的ip想记也记不住几个啊） </p>
+<p>缺省端口：53<br>使用UDP协议</p>
+<p>Linux : DNS服务器的IP地址保存在/etc/resolv.conf文件</p>
+<p>常见小白问题：<br>某人：我的电脑为什么可以登录qq，但是上不去网啊？<br>博主：DNS的问题呀</p>
+<p>解决方法<br>1.有360的同学诊断下网络就会提示DNS出了问题<br>2.自己拿手机连3G 4G（电脑上不去网哟，写博客不能自相矛盾）百度下所在地DNS服务器地址，然后打开网络和共享中心，找到本地连接或者无线连接，属性，选择Internet ipv4，修改首选服务器DNS以及备用服务器DNS（具体的ip一百度就有，美国的是8.8.8.8）</p>
+<h2 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h2><h2 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h2><h3 id="ldap"><a href="#ldap" class="headerlink" title="ldap"></a>ldap</h3><p>轻量级目录访问协议<br>缺省端口：389<br>一般在sso中使用</p>
+<h3 id="ssl"><a href="#ssl" class="headerlink" title="ssl"></a>ssl</h3><p>安全套接字层协议<br>缺省端口：443<br>使用TCP协议<br>apple提供的官网推送服务APNs<br>服务端与APNs交互使用的就是ssl协议 </p>
+<h3 id="tls"><a href="#tls" class="headerlink" title="tls"></a>tls</h3><p>安全传输层协议<br>使用TCP协议<br>TLS是SSL v3.0的升级版，目前市面上所有的https都是用的是TLS，而不是SSL。</p>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><h2 id="其他协议"><a href="#其他协议" class="headerlink" title="其他协议"></a>其他协议</h2><h3 id="AMQP"><a href="#AMQP" class="headerlink" title="AMQP"></a>AMQP</h3><p>AMQP是一个提供统一消息服务的应用层标准协议，基于此协议的客户端与消息中间件可传递消息，并不受客户端/中间件不同产品，不同开发语言等条件的限制!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cizdxjrr9001lt0s67465z83b" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/01/10/协议入门/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协议-http-smtp-tcp/">协议 http  smtp tcp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-锁" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -121,7 +246,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="ciz83uveq002ercs6vnjq3xva" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cizdxjrrr0023t0s60qpvqqmr" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/09/锁/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
@@ -205,7 +330,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="ciz83uvdq0016rcs63cw3p353" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cizdxjrqx0011t0s6hl8c8vcp" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -259,118 +384,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="ciz83uve5001srcs6csxuvq2c" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cizdxjrro001xt0s6l5ax45au" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三次握手/">三次握手</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux内核参数优化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/Linux内核参数优化/">Linux内核参数优化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/12/27/Linux内核参数优化/" class="article-date">
-  <time datetime="2016-12-27T09:14:22.000Z" itemprop="datePublished">2016-12-27</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Linux/">Linux</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="内核参数"><a href="#内核参数" class="headerlink" title="内核参数"></a>内核参数</h1><p>/etc/sysctl.conf</p>
-<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><p>net.ipv4.tcp_fin_timeout<br>默认60s，减小fin_timeout，减少TIME_WAIT连接数量。<br>net.ipv4.tcp_tw_reuse = 1<br>表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；<br>net.ipv4.tcp_tw_recycle = 1<br>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。<br>net.ipv4.tcp_syncookies = 1<br>表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；<br>net.ipv4.tcp_keepalive_time = 1200<br>表示当keepalive起用的时候，TCP发送keepalive消息的频度。缺省是2小时，改为20分钟。<br>net.ipv4.ip_local_port_range = 10000 65000<br>表示用于向外连接的端口范围。缺省情况下很小：32768到61000，改为10000到65000。（注意：这里不要将最低值设的太低，否则可能会占用掉正常的端口！）<br>net.ipv4.tcp_max_syn_backlog = 8192<br>表示SYN队列的长度，默认为1024，加大队列长度为8192，可以容纳更多等待连接的网络连接数。<br>net.ipv4.tcp_max_tw_buckets = 5000<br>表示系统同时保持TIME_WAIT的最大数量，如果超过这个数字，TIME_WAIT将立刻被清除并打印警告信息。默 认为180000，改为5000。对于Apache、Nginx等服务器，上几行的参数可以很好地减少TIME_WAIT套接字数量，但是对于 Squid，效果却不大。此项参数可以控制TIME_WAIT的最大数量，避免Squid服务器被大量的TIME_WAIT拖死。</p>
-<h2 id="一些经验"><a href="#一些经验" class="headerlink" title="一些经验"></a>一些经验</h2><p>（1）遇到过一次故障：查看/var/log/messages系统日志发现possible SYN flooding on port 80. Sending cookies （类似syn洪水攻击）后经查询断定是请求过大导致<br>net.ipv4.tcp_syncookies = 1  配置这个参数有一定的效果，但如果量过大，还是会gg的<br>（2）time-wait数量快速回收<br>查看服务器time-wait数量 sudo netstat -antp |grep TIME_WAIT |wc -l<br>net.ipv4.tcp_tw_reuse = 1<br>net.ipv4.tcp_tw_recycle = 1<br>配置这两个参数可以大大减少time_wait数量，不信你就试试</p>
-<h2 id="生效"><a href="#生效" class="headerlink" title="生效"></a>生效</h2><p>sysctl -p</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="ciz83uvde000orcs6d8lfu1hq" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内核/">内核</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Java常用工具类" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/Java常用工具类/">Java常用工具类</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/12/27/Java常用工具类/" class="article-date">
-  <time datetime="2016-12-27T06:12:43.000Z" itemprop="datePublished">2016-12-27</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="utils"><a href="#utils" class="headerlink" title="utils"></a>utils</h1><h2 id="Java-source"><a href="#Java-source" class="headerlink" title="Java source"></a>Java source</h2><h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><ul>
-<li>sort</li>
-<li>mergeSort </li>
-<li>binarySearch</li>
-</ul>
-<h3 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h3><h2 id="guava"><a href="#guava" class="headerlink" title="guava"></a>guava</h2><h3 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h3>
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="ciz83uvd1000arcs62x39vyz0" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/12/27/Java常用工具类/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Java常用工具类/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utils/">utils</a></li></ul>
 
     </footer>
   </div>
@@ -407,7 +427,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/诗词歌赋/">诗词歌赋</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -420,6 +440,14 @@
       <ul>
         
           <li>
+            <a href="/2017/02/20/2017-2-19春游有感/">2017-2-19春游有感</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/20/收藏之路/">收藏之路</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/16/设计模式-行为型/">设计模式-行为型</a>
           </li>
         
@@ -429,14 +457,6 @@
         
           <li>
             <a href="/2017/02/13/Java线程基础/">Java线程基础</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/12/Java异常剖析/">Java异常剖析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/10/SPI/">SPI</a>
           </li>
         
       </ul>
