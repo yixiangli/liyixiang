@@ -14,7 +14,7 @@ CountDownLatchjavadocCountDownLatch: A synchro">
 <meta property="og:description" content="什么是并发Java中的并发Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueueJava 7 引入Fork/Join
 CountDownLatchjavadocCountDownLatch: A synchro">
 <meta property="og:image" content="https://yixiangli.github.io/img/executor.png">
-<meta property="og:updated_time" content="2017-03-01T06:33:19.000Z">
+<meta property="og:updated_time" content="2017-03-01T06:47:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发编程">
 <meta name="twitter:description" content="什么是并发Java中的并发Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueueJava 7 引入Fork/Join
@@ -140,7 +140,7 @@ CountDownLatchjavadocCountDownLatch: A synchro">
 <p>从源码可以看出，执行顺序就是先执行传入的实现Runnable接口的线程类run方法，再检测await的状态，通过count控制是否执行run，继续跟代码能看到，count初始值为parties，也就是构造CyclicBarrier时传入的线程数。<br>那么问题来了。。网上在说CountDownLatch和CyclicBarrier的异同点时，都说CountDownLatch是减计数器，CyclicBarrier是加计数器，但是貌似源代码也是- -count操作，不过咱们要这么理解，CyclicBarrier让一个线程达到屏障时被阻塞，直到最后一个线程达到屏障时，屏障才会开门，所有被屏障拦截的线程才会继续执行，这是一种积累的过程。而CountDownLatch</p>
 <p>。不过对于CyclicBarrier来说，也总结一下<br> （1）CyclicBarrier初始化时规定一个数目，然后计算调用了CyclicBarrier.await()进入等待的线程数。当线程数达到了这个数目时，所有进入等待状态的线程被唤醒并继续。<br> （2）CyclicBarrier就象它名字的意思一样，可看成是个障碍， 所有的线程必须到齐后才能一起通过这个障碍。<br> （3）CyclicBarrier初始时还可带一个Runnable的参数， 此Runnable任务在CyclicBarrier的数目达到后，所有其它线程被唤醒前被执行。<br> （4）最重要一点，CyclicBarrier是可以重复使用的。</p>
 <h3 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h3><p><img src="/img/executor.png" alt="类结构图"></p>
-<p>从图上看好像少了Executors类，深入源码发现Executors类主要用于提供线程池相关的操作，是一个无状态的类，可以理解为一个工具类，所有方法都是static，且构造方法私有，属于无实例的类。</p>
+<p>从图上看好像少了Executors类，深入源码发现Executors类主要用于提供线程池相关的操作，是一个无状态的类，可以理解为一个工具类，所有方法都是static，且构造方法私有，属于无实例的类。<br>ThreadPoolExecutor提供了多种参数配置，Executors对其进行了包装，形成了newSingleThreadExecutor，newFixedThreadPool，newCachedThreadPool等多种线程池，通过源码一读便知。</p>
 <h3 id="什么是Fork-Join"><a href="#什么是Fork-Join" class="headerlink" title="什么是Fork/Join"></a>什么是Fork/Join</h3><p>（1）多核<br>（2）分治&amp;递归</p>
 <p>1.把大任务拆分为多个小的Fork，通过这些Fock去处理任务。<br>2.处理任务完毕后Join起来，合并结果。</p>
 
