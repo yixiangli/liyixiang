@@ -14,7 +14,7 @@
 <meta property="og:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。
 异常分类还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。先发一张图">
 <meta property="og:image" content="https://yixiangli.github.io/img/exception.jpg">
-<meta property="og:updated_time" content="2017-03-06T03:49:26.000Z">
+<meta property="og:updated_time" content="2017-03-06T03:57:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常剖析">
 <meta name="twitter:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。
@@ -136,7 +136,9 @@
 <h3 id="日志分类"><a href="#日志分类" class="headerlink" title="日志分类"></a>日志分类</h3><p>debug : 开发过程中的调试日志，千万不要在线上启用debug，否则gg。<br>并且debug日志在开发过程中加入，防止在线上输出，可以有如下方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1.条件控制</div><div class="line">if(logger.isDebugEnabled())&#123;</div><div class="line">	logger.debug(&quot;xxx&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">2.占位符</div><div class="line">logger.debug(&quot;aaaa:&#123;&#125;&quot;,a);</div></pre></td></tr></table></figure>
 <p>切记不要直接拼字符串。</p>
-<p>warn<br>info<br>error</p>
+<p>warn : 警告，可以看作是一种警示，为了与info/error区别，一般可以用在用户输入等非致命性错误上，方便用户投诉时排查问题。</p>
+<p>info : 普通日志，记录一些流程化，关键性的信息，可以理解为在线上程序打了断点，但千万不要随意打点，就像人表达观点，拣重点的说，不能啰嗦。</p>
+<p>error :错误日志，这类级别只记录系统逻辑出错，异常等重要信息，可以单独输出到一个日志文件中，方便监控使用。</p>
 
       
     </div>
