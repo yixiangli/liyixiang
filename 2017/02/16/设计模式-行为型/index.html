@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="行为型说到行为型，个人理解其实就是在软件设计过程中针对动态过程的一种设计方法，不同于结构型，行为型更侧重于局部特征。
 种类迭代器模式            Iterator中介者模式            Mediator备忘录模式            Memento观察者模式            Observer状态模式                State策略模式">
-<meta property="og:updated_time" content="2017-03-04T13:47:06.000Z">
+<meta property="og:updated_time" content="2017-03-06T02:48:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-行为型">
 <meta name="twitter:description" content="行为型说到行为型，个人理解其实就是在软件设计过程中针对动态过程的一种设计方法，不同于结构型，行为型更侧重于局部特征。
@@ -121,7 +121,8 @@
 <a id="more"></a>
 <h3 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h3><p>不暴露对象的内部表示，将遍历分离</p>
 <h3 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h3><p>复杂对象多对多关系的解耦，抽象出一个中介管理中心，统一管理复杂对象之间的交互</p>
-<h3 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h3><h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>发布与订阅，消费与生产，程序解耦神器</p>
+<h3 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h3><p>需要在对象的外部保存该对象的内部状态（抽取记忆）</p>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>发布与订阅，消费与生产，程序解耦神器</p>
 <h3 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h3><p>由多态引出的一种模式，支持状态相互切换</p>
 <h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p>一个问题的多种解决方式，支持动态替换</p>
 <h3 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h3><p>数据结构与访问行为分离，访问行为支持动态扩展（老板和注会都要查账）</p>
@@ -137,7 +138,8 @@
 <p>那么现在每个处理者可以通过继承抽象类实现解耦</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">	protected boolean compareActionCode(IMessage mqMessage) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return compareRules(MMSMessageActionCode.ALBUM_INSERT.getDbValue(),mqMessage);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 <p>对于actionCode的初始化放在了各个处理者类中，责任链类只需调用compareActionCode方法，即判断决定是否处理消息。具体的compareRules比较规则相同，就可以抽象在抽象类中统一实现，各个处理者只需调用即可完成判断<br>改进后：<br>（1）各个处理者解耦，各自处理各自请求，互不相干。<br>（2）今后增加责任链节点也无需再修改proxy类的代码（开闭原则）</p>
-<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><p>将行为请求者与行为执行者解耦，命令管理，统一指挥执行者（没有产品经理的程序猿们是多么悲惨）</p>
+
       
     </div>
     <footer class="article-footer">
