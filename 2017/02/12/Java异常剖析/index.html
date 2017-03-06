@@ -14,7 +14,7 @@
 <meta property="og:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。
 异常分类还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。先发一张图">
 <meta property="og:image" content="https://yixiangli.github.io/img/exception.jpg">
-<meta property="og:updated_time" content="2017-02-12T15:14:36.000Z">
+<meta property="og:updated_time" content="2017-03-06T03:49:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常剖析">
 <meta name="twitter:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。
@@ -115,7 +115,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#异常"><span class="toc-number">1.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#异常分类"><span class="toc-number">1.1.</span> <span class="toc-text">异常分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常该怎么处理"><span class="toc-number">1.2.</span> <span class="toc-text">异常该怎么处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#try-with-resources"><span class="toc-number">1.2.1.</span> <span class="toc-text">try-with-resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个相对标准的自定义异常"><span class="toc-number">1.2.2.</span> <span class="toc-text">一个相对标准的自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finally的一个知识点"><span class="toc-number">1.2.3.</span> <span class="toc-text">finally的一个知识点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志该怎么记"><span class="toc-number">1.3.</span> <span class="toc-text">日志该怎么记</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#异常"><span class="toc-number">1.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#异常分类"><span class="toc-number">1.1.</span> <span class="toc-text">异常分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常该怎么处理"><span class="toc-number">1.2.</span> <span class="toc-text">异常该怎么处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#try-with-resources"><span class="toc-number">1.2.1.</span> <span class="toc-text">try-with-resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一个相对标准的自定义异常"><span class="toc-number">1.2.2.</span> <span class="toc-text">一个相对标准的自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finally的一个知识点"><span class="toc-number">1.2.3.</span> <span class="toc-text">finally的一个知识点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志该怎么记"><span class="toc-number">1.3.</span> <span class="toc-text">日志该怎么记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志分类"><span class="toc-number">1.3.1.</span> <span class="toc-text">日志分类</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。</p>
@@ -133,6 +133,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class TestFinally &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		System.out.println(functionA());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	//@SuppressWarnings(&quot;finally&quot;)</div><div class="line">	public static int functionA()&#123;</div><div class="line">		try &#123;</div><div class="line">			int b = 0;</div><div class="line">			return b;</div><div class="line">		&#125;catch (Exception e)&#123;</div><div class="line">			System.out.println(e);</div><div class="line">		&#125;finally &#123;</div><div class="line">			return 3;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>程序的结果当然也是3，只是打断点发现先执行了return b,而后执行了return 3;<br>结论，总之绝大部分情况下不要在finally中用return就对了,Eclipse也提示了警告，finally block does not complete normally。</p>
 <h2 id="日志该怎么记"><a href="#日志该怎么记" class="headerlink" title="日志该怎么记"></a>日志该怎么记</h2><p>如果不加栈信息,只是new自定义异常,加入自己的理解的error message,对于调用 端解决问题的帮助不会太多。如果加了栈信息,在频繁调用出错的情况下,数据序列化和传输 的性能损耗也是问题。</p>
+<h3 id="日志分类"><a href="#日志分类" class="headerlink" title="日志分类"></a>日志分类</h3><p>debug : 开发过程中的调试日志，千万不要在线上启用debug，否则gg。<br>并且debug日志在开发过程中加入，防止在线上输出，可以有如下方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1.条件控制</div><div class="line">if(logger.isDebugEnabled())&#123;</div><div class="line">	logger.debug(&quot;xxx&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">2.占位符</div><div class="line">logger.debug(&quot;aaaa:&#123;&#125;&quot;,a);</div></pre></td></tr></table></figure>
+<p>切记不要直接拼字符串。</p>
+<p>warn<br>info<br>error</p>
 
       
     </div>
@@ -226,7 +230,7 @@
           </li>
         
           <li>
-            <a href="/2017/02/16/设计模式-行为型/">设计模式-行为型</a>
+            <a href="/2017/02/16/设计模式－行为型/">设计模式－行为型</a>
           </li>
         
           <li>
