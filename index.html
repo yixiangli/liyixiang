@@ -81,6 +81,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JDK命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/06/JDK命令详解/">JDK命令详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/03/06/JDK命令详解/" class="article-date">
+  <time datetime="2017-03-06T03:02:22.000Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="JDK-bin下的java命令工具"><a href="#JDK-bin下的java命令工具" class="headerlink" title="JDK bin下的java命令工具"></a>JDK bin下的java命令工具</h1><p>jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有很准确的掌握。</p>
+<h2 id="什么是dump"><a href="#什么是dump" class="headerlink" title="什么是dump"></a>什么是dump</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Java Dump</div><div class="line">   Java虚拟机的运行时快照。将Java虚拟机运行时的状态和信息保存到文件。</div><div class="line">   线程Dump,包含所有线程的运行状态。纯文本格式。</div><div class="line">   堆Dump,包含线程Dump,并包含所有堆对象的状态。二进制格式。</div><div class="line">   </div><div class="line">   jstack:打印线程的栈信息,制作线程Dump。</div><div class="line">   jmap:打印内存映射,制作堆Dump。</div><div class="line">   </div><div class="line">   说明1：</div><div class="line">   (1)不同的 JAVA虚机的线程 DUMP的创建方法和文件格式是不一样的，不同的 JVM版本，</div><div class="line">    dump信息也有差别。</div><div class="line">  </div><div class="line">   (2)在实际运行中，往往一次 dump的信息，还不足以确认问题。建议产生三次 dump信息，</div><div class="line">   如果每次 dump都指向同一个问题，我们才确定问题的典型性。</div></pre></td></tr></table></figure>
+<h3 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">jps(Java Virtual Machine Process Status Tool)</div><div class="line">   概述：</div><div class="line">   jps位于jdk的bin目录下，其作用是显示当前系统的java进程情况，及其id号。</div><div class="line">    jps相当于linux进程工具ps。但不像”pgrep java”或”ps -ef grep java”，</div><div class="line">    jps并不使用应用程序名来查找JVM实例。因此，它查找所有的Java应用程序，</div><div class="line">    包括即使没有使用java执行体的那种（例如，定制的启动 器）。另外，</div><div class="line">    jps仅查找当前用户的Java进程，而不是当前系统中的所有进程。</div><div class="line">    </div><div class="line">   原理：</div><div class="line">   java程序在启动以后，会在java.io.tmpdir指定的目录下，就是临时文件夹里，</div><div class="line">   生成一个类似于hsperfdata_User的文件夹，（在Linux中为/tmp/hsperfdata_&#123;userName&#125;/）</div><div class="line">   文件夹下有若干文件，名字就是java进程的pid，因此列出当前运行的java进程，</div><div class="line">   只是把这个目录里的文件名列一下而已。 至于系统的参数什么，就可以解析这几个文件获得。</div><div class="line">   </div><div class="line">   命令：</div><div class="line">   jps -help  帮助</div><div class="line">        jps -q     显示进程号</div><div class="line">        jps -m    显示main 传入的args参数</div><div class="line">        jps -v     显示jvm参数设置</div><div class="line">   </div><div class="line">   用法：</div><div class="line">   jps可以配合jstack等命令，快速查看到java进程的id号，不再需要ps -ef grep java</div><div class="line">   面对一大堆java进程</div><div class="line">   </div><div class="line">   问题：</div><div class="line">   jps可能会失效</div><div class="line">   原因：</div><div class="line">   （1）/tmp文件夹下不存在hsperfdata_&#123;userName&#125;文件夹 文件夹被清理</div><div class="line">   （2）用户权限不足</div><div class="line">   （3）进程存储地址被设置 java启动时提供了参数(-Djava.io.tmpdir)</div><div class="line">    注意：但jps只会从/tmp下读取</div><div class="line">   </div><div class="line">   参考：</div><div class="line">   http://www.hollischuang.com/archives/105</div></pre></td></tr></table></figure>
+<h3 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">概述：</div><div class="line">     jstack用于生成java虚拟机当前时刻的线程快照</div><div class="line">为指定的线程输出 java 的线程堆栈信息，包括了进程里的所有线程。</div><div class="line">每一个线程 frame ，包括类全名，方法名，代码行。</div><div class="line"></div><div class="line">用途：</div><div class="line">（1）java程序崩溃生成core文件(如jvm堆内存设置不当)</div><div class="line">（2）正在运行的java程序中，看到当时运行的java程序的java stack和native stack的信息</div><div class="line">  </div><div class="line">命令：</div><div class="line">jstack -l pid</div><div class="line"></div><div class="line">jvm线程</div><div class="line">JVM内部的后台线程，来执行譬如垃圾回收，或者低内存的检测等等任务，</div><div class="line">这些线程往往在JVM初始化的时候就存在</div><div class="line"></div><div class="line">用户级别的线程</div><div class="line">根据用户请求的不同而发生变化。该类线程的运行情况往往是我们所关注的重点。</div><div class="line">而且这一部分也是最容易产生死锁的地方。</div><div class="line"></div><div class="line">几种线程状态：</div><div class="line">NEW,未启动的。不会出现在Dump中。</div><div class="line">RUNNABLE,在虚拟机内执行的。</div><div class="line">BLOCKED,受阻塞并等待监视器锁。</div><div class="line">WATING,无限期等待另一个线程执行特定操作。</div><div class="line">TIMED_WATING,有时限的等待另一个线程的特定操作。</div><div class="line">TERMINATED,已退出的。</div><div class="line"></div><div class="line">WATING on codition</div><div class="line">情况一：</div><div class="line">如果发现有大量的线程都在处在 Wait on condition，从线程 stack看， </div><div class="line">正等待网络读写，这可能是一个网络瓶颈的征兆.</div><div class="line">因为网络阻塞导致线程无法执行。一种情况是网络非常忙，几乎消耗了所有的带宽，</div><div class="line">仍然有大量数据等待网络读写；另一种情况也可能是网络空闲，但由于路由等问题，</div><div class="line">导致包无法正常的到达。所以要结合系统的一些性能观察工具来综合分析，</div><div class="line">比如 netstat统计单位时间的发送包的数目，如果很明显超过了所在网络带宽的限制 ; </div><div class="line">观察 cpu的利用率，如果系统态的 CPU时间，相对于用户态的 CPU时间比例较高；</div><div class="line">如果程序运行在 Solaris 10平台上，可以用 dtrace工具看系统调用的情况，</div><div class="line">如果观察到 read/write的系统调用的次数或者运行时间遥遥领先；</div><div class="line">这些都指向由于网络带宽所限导致的网络瓶颈。 </div><div class="line">情况二：</div><div class="line">线程在 sleep，等待 sleep的时间到了时候，将被唤醒</div><div class="line"></div><div class="line">waiting for monitor entry 和 in Object.wait() </div><div class="line">waiting for monitor entry:</div><div class="line">synchronized</div><div class="line">in Object.wait() :</div><div class="line">在程序中有多个服务线程，设计成从一个队列里面读取请求数据。</div><div class="line">这个队列就是 lock以及 waiting on的对象。当队列为空的时候，</div><div class="line">这些线程都会在这个队列上等待，直到队列有了数据，这些线程被notify，</div><div class="line">当然只有一个线程获得了 lock，继续执行，而其它线程继续等待。 </div><div class="line">死锁：</div><div class="line">     自行研究</div></pre></td></tr></table></figure>
+<h3 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">   概述：</div><div class="line">   主要用于打印指定Java进程的共享对象内存映射或堆内存细节。</div><div class="line">   可以使用jmap生成Heap Dump。</div><div class="line">   </div><div class="line">   用途：</div><div class="line">    一般，在内存不足、GC异常等情况下，我们就会怀疑有内存泄露。</div><div class="line">   这个时候我们就可以制作堆Dump来查看具体情况。分析原因。</div><div class="line">   </div><div class="line">   命令：查看堆使用情况</div><div class="line">   jmap -heap pid</div><div class="line">   </div><div class="line">   分析：</div><div class="line">   Attaching to process ID 22314, please wait...</div><div class="line">Debugger attached successfully.</div><div class="line">Server compiler detected.</div><div class="line">JVM version is 23.21-b01</div><div class="line"></div><div class="line">using thread-local object allocation.</div><div class="line">Parallel GC with 24 thread(s)   gc方式</div><div class="line"></div><div class="line">Heap Configuration:    //堆内存初始化配置</div><div class="line">   MinHeapFreeRatio = 40 //对应jvm启动参数-XX:MinHeapFreeRatio设置JVM堆最小空闲比率(default 40)</div><div class="line">   MaxHeapFreeRatio = 70     //对应jvm启动参数 -XX:MaxHeapFreeRatio设置JVM堆最大空闲比率(default 70)</div><div class="line">   MaxHeapSize      = 3221225472 (3072.0MB)  //对应jvm启动参数-XX:MaxHeapSize=设置JVM堆的最大大小</div><div class="line">   NewSize          = 805306368 (768.0MB)  //对应jvm启动参数-XX:NewSize=设置JVM堆的‘新生代’的默认大小</div><div class="line">   MaxNewSize       = 805306368 (768.0MB)  //对应jvm启动参数-XX:MaxNewSize=设置JVM堆的‘新生代’的最大大小</div><div class="line">   OldSize          = 5439488 (5.1875MB)    //对应jvm启动参数-XX:OldSize=&lt;value&gt;:设置JVM堆的‘老生代’的大小</div><div class="line">   NewRatio         = 2 //对应jvm启动参数-XX:NewRatio=:‘新生代’和‘老生代’的大小比率</div><div class="line">   SurvivorRatio    = 8 //对应jvm启动参数-XX:SurvivorRatio=设置年轻代中Eden区与Survivor区的大小比值 </div><div class="line">   PermSize         = 134217728 (128.0MB) //对应jvm启动参数-XX:PermSize=&lt;value&gt;:设置JVM堆的‘永生代’的初始大小</div><div class="line">   MaxPermSize      = 536870912 (512.0MB) //对应jvm启动参数-XX:MaxPermSize=&lt;value&gt;:设置JVM堆的‘永生代’的最大大小</div><div class="line">   G1HeapRegionSize = 0 (0.0MB)</div><div class="line"></div><div class="line">Heap Usage: //堆内存使用情况</div><div class="line">PS Young Generation</div><div class="line">Eden Space: //Eden区内存分布</div><div class="line">   capacity = 800587776 (763.5MB) //Eden区总容量</div><div class="line">   used     = 32020768 (30.537384033203125MB) //Eden区已使用</div><div class="line">   free     = 768567008 (732.9626159667969MB) //Eden区剩余容量</div><div class="line">   3.999657371735838% used //Eden区使用比率</div><div class="line">From Space: //其中一个Survivor区的内存分布</div><div class="line">   capacity = 2359296 (2.25MB)</div><div class="line">   used     = 2260992 (2.15625MB)</div><div class="line">   free     = 98304 (0.09375MB)</div><div class="line">   95.83333333333333% used</div><div class="line">To Space: //另一个Survivor区的内存分布</div><div class="line">   capacity = 2359296 (2.25MB)</div><div class="line">   used     = 0 (0.0MB)</div><div class="line">   free     = 2359296 (2.25MB)</div><div class="line">   0.0% used</div><div class="line">PS Old Generation //当前的Old区内存分布</div><div class="line">   capacity = 2415919104 (2304.0MB)</div><div class="line">   used     = 766750048 (731.2298278808594MB)</div><div class="line">   free     = 1649169056 (1572.7701721191406MB)</div><div class="line">   31.737405723995632% used</div><div class="line">PS Perm Generation //当前的 “永生代” 内存分布</div><div class="line">   capacity = 134217728 (128.0MB)</div><div class="line">   used     = 27889792 (26.5977783203125MB)</div><div class="line">   free     = 106327936 (101.4022216796875MB)</div><div class="line">   20.77951431274414% used</div><div class="line"></div><div class="line">9854 interned Strings occupying 880056 bytes.</div><div class="line">   </div><div class="line">   命令 ：查看堆内存中对象数量及大小</div><div class="line">   jmap -histo pid</div><div class="line">   jmap -histo:live 这个命令执行，JVM会先触发gc，然后再统计信息。</div><div class="line">   </div><div class="line">   输出到文件：</div><div class="line">   jmap -dump:format=b,file=heapDump 31604</div><div class="line">   jhat -port 5000 heapDump</div><div class="line">   http://127.0.0.1:5000</div><div class="line">   </div><div class="line">   遇到如下信息：</div><div class="line">   Reading from heapDump...</div><div class="line">   Dump file created Wed Feb 24 10:43:27 CST 2016</div><div class="line">   Snapshot read, resolving...</div><div class="line">   Resolving 36404866 objects...</div><div class="line">   Chasing references, expect 7280 dots</div><div class="line">   </div><div class="line">   有很多......</div><div class="line">   当出现Snapshot resolved.</div><div class="line">   Started HTTP server on port 5000</div><div class="line">   Server is ready.</div><div class="line"> ```  </div><div class="line">   </div><div class="line">### jhat</div><div class="line"> ``` </div><div class="line">   jhat</div><div class="line">   一般查看堆异常情况主要看这个两个部分：</div><div class="line">   Show instance counts for all classes (excluding platform)，平台外的所有对象信息。</div><div class="line">   Show heap histogram 以树状图形式展示堆情况。</div><div class="line">   方法：</div><div class="line">   具体排查时需要结合代码，观察是否大量应该被回收的对象在一直被引用或者是否有</div><div class="line">   占用内存特别大的对象无法被回收。</div></pre></td></tr></table></figure>
+<h3 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a>jinfo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">概述：</div><div class="line">观察进程运行环境参数，包括Java System属性和JVM命令行参数</div><div class="line"></div><div class="line">jinfo &lt;option&gt; pid</div><div class="line">jdk1.8貌似不支持了</div></pre></td></tr></table></figure>
+<h3 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">   概述：</div><div class="line">        jvm管理控制台</div><div class="line">   </div><div class="line">   例子：</div><div class="line">   开启jconsole：      /Library/Java/Home/bin   ./jconsole</div><div class="line">   输入远程连接：     （注意：是jmxremote的端口，不是服务端口）</div><div class="line">```   </div><div class="line">   </div><div class="line">   </div><div class="line">### javap</div></pre></td></tr></table></figure>
+<p>   概述：<br>        反编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 常用性能分析工具</div></pre></td></tr></table></figure></p>
+<p>   HouseMD<br>   BTrace<br>   TProfile<br>```</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cizxjcob40000l06i4osrthhp" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/03/06/JDK命令详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/06/JDK命令详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmap/">Jmap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jstat/">Jstat</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2017-2-19春游有感" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -119,7 +176,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cizxihpnx0001fd6io7rdfu8n" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cizxjcob80001l06igpnw5y6a" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/20/2017-2-19春游有感/">评论</a>
@@ -170,7 +227,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/20/收藏之路/" data-id="cizxihppt0023fd6i7ibadz44" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/20/收藏之路/" data-id="cizxjcocx0028l06ifcno94pz" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/20/收藏之路/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/20/收藏之路/">评论</a>
@@ -222,7 +279,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式-行为型/" data-id="cizxihppw0029fd6i37s08mno" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式-行为型/" data-id="cizxjcod7002el06iluz9v13v" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/16/设计模式-行为型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/16/设计模式-行为型/">评论</a>
@@ -284,75 +341,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="cizxihpof000bfd6ignn2nhmu" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="cizxjcobk0006l06igg9jpicg" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/JavaNIO/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/JavaNIO/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nio/">nio</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Java线程基础" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/13/Java线程基础/">Java线程基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/02/13/Java线程基础/" class="article-date">
-  <time datetime="2017-02-13T03:06:23.000Z" itemprop="datePublished">2017-02-13</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h1><h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p>new, runnable, blocked, waiting, time waiting, 或 terminated</p>
-<h3 id="interrupt-amp-interrupted-amp-isInterrupted"><a href="#interrupt-amp-interrupted-amp-isInterrupted" class="headerlink" title="interrupt&amp;interrupted&amp;isInterrupted"></a>interrupt&amp;interrupted&amp;isInterrupted</h3><p>interrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个状态和java线程基本状态无关）,运行这个例子就很清楚了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月13日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class InterruptThread extends Thread&#123;</div><div class="line"></div><div class="line">	private boolean stop = false;</div><div class="line">	</div><div class="line">	public static void main(String[] args) throws Exception &#123;</div><div class="line">		InterruptThread thread = new InterruptThread();</div><div class="line">        System.out.println( &quot;Starting thread...&quot; );</div><div class="line">        thread.start();</div><div class="line">        Thread.sleep( 3000 );</div><div class="line">        System.out.println( &quot;Interrupting thread...&quot; );</div><div class="line">        thread.interrupt();</div><div class="line">        Thread.sleep( 3000 );</div><div class="line">        System.out.println(&quot;Stopping application...&quot; );</div><div class="line">        //System.exit(0);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		while(!stop)&#123;</div><div class="line">			System.out.println( &quot;Thread is running...&quot; );</div><div class="line">			System.out.println(Thread.currentThread().getState());</div><div class="line">            long time = System.currentTimeMillis();</div><div class="line">            while((System.currentTimeMillis()-time &lt; 1000)) &#123;</div><div class="line">            &#125;</div><div class="line">            System.out.println(&quot;Thread exiting under request...&quot; );</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么有了这个标志，如何获取或者做相关操作呢？这就用到了interrupted方法和isInterrupted方法。<br>interrupted是一个静态方法，作用于当前线程，调用native的isInterrupted方法，参数传true,意为返回线程的状态位后，要清掉原来的状态位（恢复成原来情况（非中断））。<br>isInterrupted是一个普通方法，作用于调用该方法的线程对象所对应的线程，也是调用native的isInterrupted方法，参数传false,只是返回线程的状态位。</p>
-<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>作用：解决多线程场景下，相同变量的访问冲突问题，保证线程安全使用。</p>
-<p>原理：<br>    当使用ThreadLocal维护变量时，ThreadLocal为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的副本，而不会影响其它线程所对应的副本。<br>    ThreadLocal是如何做到为每一个线程维护变量的副本的呢？其实实现的思路很简单：在ThreadLocal类中有一个Map，用于存储每一个线程的变量副本，Map中元素的键为线程对象，而值对应线程的变量副本。</p>
-<p>常用方法：<br>    jdk5.0之后支持泛型，主要方法为void set(T value)、T get()以及T initialValue()。一定要注意initialValue(),本身是一个protected方法，所以就是为子类覆盖所用，如果不实现，默认返回null，且该方法只会执行一次，执行时机在线程第1次调用get()或set(Object)时才执行</p>
-<p>使用：<br>    通过匿名内部类的方式定义ThreadLocal的子类。</p>
-<pre><code> private static ThreadLocal&lt;Date&gt; startDate= new ThreadLocal&lt;Date&gt;() {
-    protected Date initialValue() {
-        // TODO Auto-generated method stub
-        return new Date();
-    }
-};
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="cizxihpol000ifd6i6vq1oquk" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/02/13/Java线程基础/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/Java线程基础/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/run/">run</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
 
     </footer>
   </div>
@@ -389,7 +384,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">29</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/纪念币/">纪念币</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/诗词歌赋/">诗词歌赋</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">30</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/纪念币/">纪念币</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/诗词歌赋/">诗词歌赋</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -400,6 +395,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/06/JDK命令详解/">JDK命令详解</a>
+          </li>
         
           <li>
             <a href="/2017/02/20/2017-2-19春游有感/">2017-2-19春游有感</a>
@@ -415,10 +414,6 @@
         
           <li>
             <a href="/2017/02/13/JavaNIO/">JavaNIO</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/13/Java线程基础/">Java线程基础</a>
           </li>
         
       </ul>
