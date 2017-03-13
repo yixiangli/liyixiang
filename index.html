@@ -89,7 +89,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/10/Restful/">Restful</a>
+      <a class="article-title" href="/2017/03/10/Restful/">RESTful</a>
     </h1>
   
 
@@ -107,40 +107,29 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
-        <h1 id="什么是Rest"><a href="#什么是Rest" class="headerlink" title="什么是Rest"></a>什么是Rest</h1><p>Rest（Representational State Transfer）是由HTTP协议制定者Roy Fielding博士提出的一种架构原则。</p>
+        <h1 id="什么是REST"><a href="#什么是REST" class="headerlink" title="什么是REST"></a>什么是REST</h1><p>REST（Representational State Transfer）是由HTTP协议制定者Roy Fielding博士提出的一种架构原则。</p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
 <li>资源化<br>互联网上所有的信息都可以看作是一种资源</li>
 <li>接口统一<br>对互联网上的CRUD区分通过HTTP协议的请求类型<br>对返回状态有统一的规则约束</li>
 <li>操作分类<br>获取同一个资源对外只有一个uri</li>
 <li>安全性<br>Basic Auth OAuth   </li>
 </ul>
-<h2 id="主要规则"><a href="#主要规则" class="headerlink" title="主要规则"></a>主要规则</h2><h3 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h3><p>GET（SELECT）：从服务器取出资源（一项或多项）<br>POST（CREATE）：在服务器新建一个资源<br>PUT（UPDATE）：在服务器更新资源（客户端提供完整资源数据）<br>PATCH（UPDATE）：在服务器更新资源（客户端提供需要修改的资源数据）<br>DELETE（DELETE）：从服务器删除资源</p>
-<h3 id="分版本控制"><a href="#分版本控制" class="headerlink" title="分版本控制"></a>分版本控制</h3><p>对于版本控制的处理，主要分为两种<br>1.写在uri中：<a href="http://www.example.com/1.0/album" target="_blank" rel="external">http://www.example.com/1.0/album</a><br>2.加在header的Accept中，如Accept：version=1.0</p>
-<p>第一种代表网站 CSDN<br>第二种代表网站 Github</p>
-<p>个人建议第二种，原因是uri上应该都是同一资源，而版本只是对于这个资源操作的不同表现，目的还是操作本资源，因此不应当放在uri上。</p>
-<h3 id="名词代替动词"><a href="#名词代替动词" class="headerlink" title="名词代替动词"></a>名词代替动词</h3><p>Restful和平常接口定义不同的是，不再使用add/delete/update/show等动词，而是纯名词，如果只是对资源的获取，那么就是该资源的名词定义，而如果是一种动态的转换，也使用其名词定义，代表的是提供一种服务（服务即能力）</p>
-<p>Not Use</p>
-<ol>
-<li>/addAlbum POST id=1&amp;name=xxx&amp;title=eee</li>
-<li>/updateAlbum POST id=1<br>3./showAlbums<br>4./accounts/1/transfer/500/to/2</li>
-</ol>
-<p>Can Use<br>1./Album POST id=1&amp;name=xxx&amp;title=eee<br>2./Album/1 PUT<br>3./Albums GET<br>4./transaction POST from=1&amp;to=2&amp;amount=500.00</p>
-<h3 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h3><p>当GET, PUT和PATCH请求成功时，要返回对应的数据，及状态码200，即SUCCESS<br>当POST创建数据成功时，要返回创建的数据，及状态码201，即CREATED<br>当DELETE删除数据成功时，不返回数据，状态码要返回204，即NO CONTENT<br>当GET 不到数据时，状态码要返回404，即NOT FOUND<br>任何时候，如果请求有问题，如校验请求数据时发现错误，要返回状态码 400，即BAD REQUEST<br>当API 请求需要用户认证时，如果request中的认证信息不正确，要返回状态码 401，即NOT AUTHORIZED<br>当API 请求需要验证用户权限时，如果当前用户无相应权限，要返回状态码 403，即FORBIDDEN</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>GET /album                 # 获取album列表<br>GET /albums/12             # 查看某个具体的album<br>POST /albums             # 新建一个album<br>PUT /albums/12             # 更新album 12<br>DELETE /albums/12         # 删除ticekt 12</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/03/10/Restful/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj03et791001rqb6iojjonpne" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj07uoicg001kpa6i3uv5x4yo" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/10/Restful/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/10/Restful/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rest/">rest</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REST/">REST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
 
     </footer>
   </div>
@@ -183,7 +172,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj03et78s001dqb6ijr0wazcp" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj07uoic60016pa6ikgnag01m" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/07/MySQL基础/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/07/MySQL基础/">评论</a>
@@ -236,7 +225,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj03et77d0004qb6inky0qgu9" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj07uoib70005pa6ic60oqwo5" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/06/JDK命令详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/06/JDK命令详解/">评论</a>
@@ -289,7 +278,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cj03et7770001qb6i40of44cr" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cj07uoiay0001pa6id72eg8qn" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/20/2017-2-19春游有感/">评论</a>
@@ -340,7 +329,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/20/收藏之路/" data-id="cj03et79j002dqb6i566bvwkw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/20/收藏之路/" data-id="cj07uoicw002epa6i2c7a2pyg" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/20/收藏之路/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/20/收藏之路/">评论</a>
@@ -396,7 +385,7 @@
       <ul>
         
           <li>
-            <a href="/2017/03/10/Restful/">Restful</a>
+            <a href="/2017/03/10/Restful/">RESTful</a>
           </li>
         
           <li>
