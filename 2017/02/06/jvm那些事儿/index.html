@@ -14,7 +14,7 @@
 <meta property="og:description" content="概述学Java的不懂点jvm那真是说不过去，对于研究jvm来说，不见得要把源码全部记下来，然后完全弄清楚来龙去脉（当然有精力且编程痴迷者忽略），对于jvm，大部分程序猿要做到的就是基本原理了熟于心，能进行基本的jvm调优且出了一些线上故障，要能通过观察当时内存，线程等程序的运行情况来揪出问题的根源。
 内存模型">
 <meta property="og:image" content="https://yixiangli.github.io/img/jvm.jpg">
-<meta property="og:updated_time" content="2017-03-13T12:40:16.000Z">
+<meta property="og:updated_time" content="2017-03-13T12:51:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm那些事儿">
 <meta name="twitter:description" content="概述学Java的不懂点jvm那真是说不过去，对于研究jvm来说，不见得要把源码全部记下来，然后完全弄清楚来龙去脉（当然有精力且编程痴迷者忽略），对于jvm，大部分程序猿要做到的就是基本原理了熟于心，能进行基本的jvm调优且出了一些线上故障，要能通过观察当时内存，线程等程序的运行情况来揪出问题的根源。
@@ -159,6 +159,7 @@
 </ul>
 <p>详细介绍下悲观策略，其实就是它触发的机制是首先会计算从新生代ygc后要晋升到老年代的对象是否大于老年代剩余空间，如果老年代不足，则full gc一次。悲观则是说与其等到下次晋升发现空间不够，不如悲观的认为下次肯定触发full gc，那么先直接执行一次。</p>
 <p><strong> 回收步骤 </strong><br>YoungGC<br>1.将eden区和from中的引用次数为0的对象清除<br>2.将eden区和from中的存活对象复制到to中<br>3.如果to放不下或者存活次数超过Tenuring Threshold,那么将会晋升到old中</p>
+<p>Full GC<br>1.如果配置CollectGen0First,将会先执行YGC<br>2.清空heap中所有的引用为0的对象，以及卸载所有classLoader<br>3.单线程完成，全过程应用暂停</p>
 <h3 id="回收算法"><a href="#回收算法" class="headerlink" title="回收算法"></a>回收算法</h3><ul>
 <li>引用计数</li>
 <li>标记-清除</li>
