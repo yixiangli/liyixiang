@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="JDK bin下的java命令工具jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。
 什么是dump Java Dump    Java虚拟机的运行时快照。将Java虚拟机运行时的状态和信息保存到文件。   线程Dump,包含所有线程的运行状态。纯文本格式。   堆Dump,包含线程Dump,并包含所有堆对象的状态。二进制格式。">
-<meta property="og:updated_time" content="2017-03-21T10:00:13.000Z">
+<meta property="og:updated_time" content="2017-03-21T10:11:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDK命令详解">
 <meta name="twitter:description" content="JDK bin下的java命令工具jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。
@@ -158,8 +158,8 @@
 <h3 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a>jinfo</h3><h4 id="概述：-4"><a href="#概述：-4" class="headerlink" title="概述："></a>概述：</h4><p>   观察进程运行环境参数，包括Java System属性和JVM命令行参数</p>
 <p>   jinfo <option> pid<br>   jdk1.8貌似不支持了</option></p>
 <h3 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h3><h4 id="概述：-5"><a href="#概述：-5" class="headerlink" title="概述："></a>概述：</h4><p>jvm管理控制台</p>
-<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p>   开启jconsole：      /Library/Java/Home/bin   ./jconsole<br>   输入远程连接：     （注意：是jmxremote的端口，不是服务端口）<br>``` </p>
-<h3 id="jvisualvm"><a href="#jvisualvm" class="headerlink" title="jvisualvm"></a>jvisualvm</h3><h4 id="概述：-6"><a href="#概述：-6" class="headerlink" title="概述："></a>概述：</h4><p>   jdk1.8提供的jvm可视化图形控制台，相比jconsole新增了多种功能。</p>
+<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p>   开启jconsole：      /Library/Java/Home/bin   ./jconsole<br>   输入远程连接：     （注意：是jmxremote的端口，不是服务端口）</p>
+<h3 id="jvisualvm"><a href="#jvisualvm" class="headerlink" title="jvisualvm"></a>jvisualvm</h3><h4 id="概述：-6"><a href="#概述：-6" class="headerlink" title="概述："></a>概述：</h4><p>   jdk1.8提供的jvm可视化图形控制台，相比jconsole新增了多种功能。<br>被监控的应用程序必须开启jmx端口</p>
 <h3 id="javap"><a href="#javap" class="headerlink" title="javap"></a>javap</h3><h4 id="概述：-7"><a href="#概述：-7" class="headerlink" title="概述："></a>概述：</h4><p>  反编译</p>
 <h4 id="命令：-2"><a href="#命令：-2" class="headerlink" title="命令："></a>命令：</h4><p>  javap -c xxx.class </p>
 <h3 id="常用性能分析工具"><a href="#常用性能分析工具" class="headerlink" title="常用性能分析工具"></a>常用性能分析工具</h3><p>   HouseMD<br>   BTrace<br>   TProfile</p>
