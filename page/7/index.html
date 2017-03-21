@@ -118,7 +118,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cj0jb2r7e0014y86im2bvmr4l" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cj0jb9vkn0010z76ibjxpnhd3" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/11/10/Maven一探究竟/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/11/10/Maven一探究竟/">评论</a>
@@ -174,7 +174,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj0jb2r6c0001y86iy1zmy374" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj0jb9vjj0004z76i9nv0khsl" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/19/Git使用手册/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/10/19/Git使用手册/">评论</a>
@@ -245,7 +245,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj0jb2r7b000zy86icxvhqgxw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj0jb9vks001az76ik6m61qzu" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/09/MessageQueue大全/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/10/09/MessageQueue大全/">评论</a>
@@ -297,7 +297,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj0jb2r8j002gy86iriaieu4n" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj0jb9vlr002mz76ir7kk9f2o" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/28/美国签证血泪史/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/28/美国签证血泪史/">评论</a>
@@ -341,7 +341,7 @@
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。</p>
 <h2 id="什么是类加载"><a href="#什么是类加载" class="headerlink" title="什么是类加载"></a>什么是类加载</h2><p>对于学习java而言，程序员编写一个个的类是如何被运行起来的是一个很常见的问题，那么jvm就是通过类加载器来完成这一任务，类加载其实指的就是java源文件编译成.class文件后被加载到内存，并提供服务的过程。</p>
 <h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>类的加载分为7个阶段<br>加载Loading —— 验证Verification —— 准备Preparation —— 解析Resolution —— 初始化Initialization —— 使用Using —— 卸载Unloading</p>
-<p>这里需要注意的是，加载－验证－准备－初始化－卸载这五个阶段的顺序是确定的，而解析阶段是不固定的，这是为了支持Java的动态绑定</p>
+<p>这里需要注意的是，加载－验证－准备－初始化－卸载这五个阶段的顺序是确定的，而解析阶段是不固定的，这是为了支持Java的动态绑定。而验证－准备－解析统称为连接Linking过程。</p>
 <h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>加载阶段完成三件事<br>1.通过一个类的全限定名称（其实就是完整的包名加类名）来获取定义此类的二进制字节流，这一步相当于是找到这个.class<br>2.将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构<br>3.在内存中生成一个代表这个类的对象，作为方法区这个类的数据访问入口</p>
 <p>重点说下第1点，随着技术的发展，获取二进制字节流的方式多种多样<br>1.从zip,jar,war等格式的包中读取<br>2.从Applet网络小应用中获取<br>3.运行时计算生成，动态代理技术之基础。生成形如$Proxy的代理类<br>4.其他文件中，如JSP</p>
 <h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><h5 id="动态绑定"><a href="#动态绑定" class="headerlink" title="动态绑定"></a>动态绑定</h5><p>一句话：运行时确定类型<br>在类加载的过程中，规则就是解析可能在初始化之后进行。</p>
@@ -355,7 +355,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/13/Java类加载详解/" data-id="cj0jb2r71000ly86i1775822l" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/13/Java类加载详解/" data-id="cj0jb9vk9000kz76i9jhu3cjb" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/13/Java类加载详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/13/Java类加载详解/">评论</a>
