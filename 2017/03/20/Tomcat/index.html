@@ -5,16 +5,19 @@
   
   <title>Tomcat | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="what is Tomcat配置端口详解8080:基于HTTP协议的对外服务端口，负责建立HTTP连接8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接">
+  <meta name="description" content="what is Tomcat配置端口详解8080:基于HTTP协议的对外服务端口，负责建立HTTP连接8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接
+优化jdk优化Tomcat默认可以使用的内存为128MB，对于部署">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat">
 <meta property="og:url" content="https://yixiangli.github.io/2017/03/20/Tomcat/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="what is Tomcat配置端口详解8080:基于HTTP协议的对外服务端口，负责建立HTTP连接8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接">
-<meta property="og:updated_time" content="2017-03-20T09:20:22.000Z">
+<meta property="og:description" content="what is Tomcat配置端口详解8080:基于HTTP协议的对外服务端口，负责建立HTTP连接8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接
+优化jdk优化Tomcat默认可以使用的内存为128MB，对于部署">
+<meta property="og:updated_time" content="2017-03-21T10:06:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat">
-<meta name="twitter:description" content="what is Tomcat配置端口详解8080:基于HTTP协议的对外服务端口，负责建立HTTP连接8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接">
+<meta name="twitter:description" content="what is Tomcat配置端口详解8080:基于HTTP协议的对外服务端口，负责建立HTTP连接8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接
+优化jdk优化Tomcat默认可以使用的内存为128MB，对于部署">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -110,11 +113,22 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-Tomcat"><span class="toc-number">1.</span> <span class="toc-text">what is Tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.1.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口详解"><span class="toc-number">1.1.1.</span> <span class="toc-text">端口详解</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-Tomcat"><span class="toc-number">1.</span> <span class="toc-text">what is Tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.1.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#端口详解"><span class="toc-number">1.1.1.</span> <span class="toc-text">端口详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化"><span class="toc-number">1.2.</span> <span class="toc-text">优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk优化"><span class="toc-number">1.2.1.</span> <span class="toc-text">jdk优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参数详解"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">参数详解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程优化"><span class="toc-number">1.2.2.</span> <span class="toc-text">线程优化</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="what-is-Tomcat"><a href="#what-is-Tomcat" class="headerlink" title="what is Tomcat"></a>what is Tomcat</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="端口详解"><a href="#端口详解" class="headerlink" title="端口详解"></a>端口详解</h3><p>8080:基于HTTP协议的对外服务端口，负责建立HTTP连接<br>8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程<br>8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接<br>8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接</p>
-
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="jdk优化"><a href="#jdk优化" class="headerlink" title="jdk优化"></a>jdk优化</h3><p>Tomcat默认可以使用的内存为128MB，对于部署大型应用来说肯定是不够的，那么对于linux系统，在文件/bin/catalina.sh的前面，增加如下设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JAVA_OPTS=’-Xms【初始化内存大小】 -Xmx【可以使用的最大内存】 -XX:PermSize=64M -XX:MaxPermSize=128m’ 需要把几个参数值调大。</div><div class="line"></div><div class="line">例如： JAVA_OPTS=’-Xms256m -Xmx512m’ 表示初始化内存为256MB，可以使用的最大内存为512MB。</div></pre></td></tr></table></figure></p>
+<h4 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h4><p>-server  启用jdk 的 server 版；<br>-Xms    java虚拟机初始化时的最小内存；<br>-Xmx    java虚拟机可使用的最大内存；<br>-XX:PermSize    内存永久保留区域<br>-XX:MaxPermSize   内存最大永久保留区域<br>-Xmn    jvm最小内存</p>
+<h3 id="线程优化"><a href="#线程优化" class="headerlink" title="线程优化"></a>线程优化</h3><p>在tomcat配置文件server.xml中的配置中，和连接数相关的参数有：</p>
+<p>maxThreads： Tomcat使用线程来处理接收的每个请求。这个值表示Tomcat可创建的最大的线程数。默认值150。</p>
+<p>acceptCount： 指定当所有可以使用的处理请求的线程数都被使用时，可以放到处理队列中的请求数，超过这个数的请求将不予处理。默认值10。</p>
+<p>minSpareThreads： Tomcat初始化时创建的线程数。默认值25。</p>
+<p>maxSpareThreads： 一旦创建的线程超过这个值，Tomcat就会关闭不再需要的socket线程。默认值75。</p>
+<p>enableLookups： 是否反查域名，默认值为true。为了提高处理能力，应设置为false</p>
+<p>connnectionTimeout： 网络连接超时，默认值60000，单位：毫秒。设置为0表示永不超时，这样设置有隐患的。通常可设置为30000毫秒。</p>
+<p>maxKeepAliveRequests： 保持请求数量，默认值100。 bufferSize： 输入流缓冲大小，默认值2048 bytes。</p>
+<p>compression： 压缩传输，取值on/off/force，默认值off。 其中和最大连接数相关的参数为maxThreads和acceptCount。如果要加大并发连接数，应同时加大这两个参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;</div><div class="line">               connectionTimeout=&quot;20000&quot; maxThreads=&quot;1000&quot; minSpareThreads=&quot;60&quot; maxSpareThreads=&quot;600&quot;  acceptCount=&quot;120&quot; </div><div class="line">               redirectPort=&quot;8443&quot; URIEncoding=&quot;utf-8&quot;/&gt;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
