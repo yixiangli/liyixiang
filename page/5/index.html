@@ -119,7 +119,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="cj0ke0id0001hhd6i11xhvlft" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="cj0kkuzwk001bpe6iwuj958mo" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/11/Nginx配置详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/11/Nginx配置详解/">评论</a>
@@ -172,6 +172,7 @@
 <p>具体实现还是请自行学习上传，本文重点状态码。</p>
 <h5 id="499"><a href="#499" class="headerlink" title="499"></a>499</h5><p>499这个状态码可以理解为是nginx中定义的状态码，因此在nginx日志中尤其是为用户移动设备提供服务的节点常会遇到，博主一开始遇到这个状态码后查了一些资料发现是客户端主动断开连接，不过客户端主动断开原因也有很多，经过调查发现可能存在如下几种情况<br>（1）客户端发出请求后，服务端还没有处理完（服务端正常处理），网络断了，一般这种情况时间比较短<br>（2）客户端发出请求后，服务端还没有处理完（服务端处理时间过长），过了客户端设置的超时时间，客户端主动断开，一般这种情况时间有一定规律，可以从客户端日志看</p>
 <p>那么解决这个问题的办法也众说风云，不过经过博主的实践，在nginx上配置<br>proxy_ignore_client_abort on 表示#不允许代理端主动关闭连接 </p>
+<h5 id="501"><a href="#501" class="headerlink" title="501"></a>501</h5><p>未实现，是指发起的请求，Web服务器不理解或者不支持。<br>如，我给一个只支持HTTP GET请求的Web服务发送Post请求，就会返回501</p>
 <h5 id="502"><a href="#502" class="headerlink" title="502"></a>502</h5><p>服务不可用，一般公司运维团队都会自己做slb(接入负载均衡)，那么slb的策略是后端机器如果一段时间大量504，就会认为后端服务出了问题，slb会进行剔除操作，将有问题的机器剔除，此时返回状态码为502。<br>当然还有一种情况那就是后端就是挂了或者服务正在部署升级，web服务器直接返回502。</p>
 <h5 id="504"><a href="#504" class="headerlink" title="504"></a>504</h5><p>网关超时，一般都是后端响应慢</p>
 <h4 id="长连接和短连接"><a href="#长连接和短连接" class="headerlink" title="长连接和短连接"></a>长连接和短连接</h4><h5 id="面向连接"><a href="#面向连接" class="headerlink" title="面向连接"></a>面向连接</h5><p>Http的长连接与短连接本质上就是tcp的长连接与短连接，tcp作为http传输层使用的协议，解决如何在IP层之上可靠的传递数据包，而在网络层使用ip协议解决网络路由和寻址问题，TCP有可靠，面向连接的特点，因此http是面向连接的协议。</p>
@@ -197,7 +198,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cj0ke0idn002ahd6i7q1veg1c" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cj0kkuzxe002ape6ig80wfh6w" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/10/协议入门/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
@@ -252,7 +253,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cj0ke0ie4002yhd6ii2rcduf0" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cj0kkuzxs0030pe6iqua1zh4n" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/09/锁/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
@@ -336,7 +337,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cj0ke0icx001ehd6iv2fvm95k" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cj0kkuzwr001npe6isxffoc3k" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -390,7 +391,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cj0ke0idt002ihd6ik21edtjr" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cj0kkuzxk002ipe6i7iyncr56" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
