@@ -6,21 +6,18 @@
   <title>Java反射 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="什么是反射反射是一种能够装载JVM中类内部信息的工具，运行时获取字节码文件，发起调用修改等一系列操作
-反射慢？1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。2.使用反射会产生大量的临时对象，对gc产生时间消耗3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT
-JITJIT(Just-In-Time Compiler),即时编译器,当虚">
+反射慢？1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。2.使用反射会产生大量的临时对象，对gc产生时间消耗3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反射">
 <meta property="og:url" content="https://yixiangli.github.io/2017/03/22/Java反射/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是反射反射是一种能够装载JVM中类内部信息的工具，运行时获取字节码文件，发起调用修改等一系列操作
-反射慢？1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。2.使用反射会产生大量的临时对象，对gc产生时间消耗3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT
-JITJIT(Just-In-Time Compiler),即时编译器,当虚">
-<meta property="og:updated_time" content="2017-03-22T03:05:56.000Z">
+反射慢？1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。2.使用反射会产生大量的临时对象，对gc产生时间消耗3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT">
+<meta property="og:updated_time" content="2017-03-22T06:18:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java反射">
 <meta name="twitter:description" content="什么是反射反射是一种能够装载JVM中类内部信息的工具，运行时获取字节码文件，发起调用修改等一系列操作
-反射慢？1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。2.使用反射会产生大量的临时对象，对gc产生时间消耗3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT
-JITJIT(Just-In-Time Compiler),即时编译器,当虚">
+反射慢？1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。2.使用反射会产生大量的临时对象，对gc产生时间消耗3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -120,7 +117,7 @@ JITJIT(Just-In-Time Compiler),即时编译器,当虚">
         </div>
     
         <h1 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h1><p>反射是一种能够装载JVM中类内部信息的工具，运行时获取字节码文件，发起调用修改等一系列操作</p>
-<h2 id="反射慢？"><a href="#反射慢？" class="headerlink" title="反射慢？"></a>反射慢？</h2><p>1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。<br>2.使用反射会产生大量的临时对象，对gc产生时间消耗<br>3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT</p>
+<h2 id="反射慢？"><a href="#反射慢？" class="headerlink" title="反射慢？"></a>反射慢？</h2><p>1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。<br>2.使用反射会产生大量的临时对象，对gc产生时间消耗<br>3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT<br><a id="more"></a></p>
 <h3 id="JIT"><a href="#JIT" class="headerlink" title="JIT"></a>JIT</h3><p>JIT(Just-In-Time Compiler),即时编译器,当虚拟机发现某个方法或代码块运行特别频繁时，就会把这些代码认定为“Hot Spot Code”（热点代码），为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各层次的优化，完成这项任务的正是JIT编译器</p>
 <p>说了这么多理论，也没太明白什么意思，先执行java -version<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_111&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)</div></pre></td></tr></table></figure></p>
 <p>这是博主的java运行环境，重点看mixed mode，代表混合模式，什么意思呢？其实Java虚拟机有三种执行方式，分别是解释执行、混合模式和编译执行，默认情况下处于混合模式中。在混合模式中，部分函数会被解释执行，部分可能被编译执行。虚拟机决定函数是否需要编译执行的依据是判断该函数，是否为热点代码。如果函数的调用频率很高，被反复使用，那么就会被认为是热点，热点代码就会被编译执行。</p>

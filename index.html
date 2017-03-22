@@ -107,24 +107,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h1><p>反射是一种能够装载JVM中类内部信息的工具，运行时获取字节码文件，发起调用修改等一系列操作</p>
-<h2 id="反射慢？"><a href="#反射慢？" class="headerlink" title="反射慢？"></a>反射慢？</h2><p>1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。<br>2.使用反射会产生大量的临时对象，对gc产生时间消耗<br>3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT</p>
-<h3 id="JIT"><a href="#JIT" class="headerlink" title="JIT"></a>JIT</h3><p>JIT(Just-In-Time Compiler),即时编译器,当虚拟机发现某个方法或代码块运行特别频繁时，就会把这些代码认定为“Hot Spot Code”（热点代码），为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各层次的优化，完成这项任务的正是JIT编译器</p>
-<p>说了这么多理论，也没太明白什么意思，先执行java -version<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_111&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)</div></pre></td></tr></table></figure></p>
-<p>这是博主的java运行环境，重点看mixed mode，代表混合模式，什么意思呢？其实Java虚拟机有三种执行方式，分别是解释执行、混合模式和编译执行，默认情况下处于混合模式中。在混合模式中，部分函数会被解释执行，部分可能被编译执行。虚拟机决定函数是否需要编译执行的依据是判断该函数，是否为热点代码。如果函数的调用频率很高，被反复使用，那么就会被认为是热点，热点代码就会被编译执行。</p>
-<p>解释执行模式，表示全部代码均解释执行，不做任何JIT编译，可以使用参数-Xint来开启解释执行模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_111&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14,interpreted mode)</div></pre></td></tr></table></figure></p>
-<p>编译执行模式，对于所有的函数，无论是否是热点代码，都会被编译执行，使用参数-Xcomp可以设置为编译模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_111&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14,compiled mode)</div></pre></td></tr></table></figure></p>
-<p>一个重要结论：编译模式的执行效率会远远高于解释模式！</p>
-<h4 id="什么是热点代码"><a href="#什么是热点代码" class="headerlink" title="什么是热点代码"></a>什么是热点代码</h4><p>被多次调用的方法。<br>被多次调用的循环体。</p>
-<h4 id="如何判断是热点代码－热点探测"><a href="#如何判断是热点代码－热点探测" class="headerlink" title="如何判断是热点代码－热点探测"></a>如何判断是热点代码－热点探测</h4><p><strong>基于采样的热点探测：</strong><br>采用这种方法的虚拟机会周期性地检查各个线程的栈顶，如果发现某些方法经常出现在栈顶，那这段方法代码就是“热点代码”。这种探测方法的好处是实现简单高效，还可以很容易地获取方法调用关系，缺点是很难精确地确认一个方法的热度，容易因为受到线程阻塞或别的外界因素的影响而扰乱热点探测。<br><strong>基于计数器的热点探测：</strong><br>采用这种方法的虚拟机会为每个方法，甚至是代码块建立计数器，统计方法的执行次数，如果执行次数超过一定的阀值，就认为它是“热点方法”。这种统计方法实现复杂一些，需要为每个方法建立并维护计数器，而且不能直接获取到方法的调用关系，但是它的统计结果相对更加精确严谨。</p>
-
+<h2 id="反射慢？"><a href="#反射慢？" class="headerlink" title="反射慢？"></a>反射慢？</h2><p>1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。<br>2.使用反射会产生大量的临时对象，对gc产生时间消耗<br>3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/22/Java反射/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0kkuzvs000ape6ifql5unbb" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0kkwjce000aqo6ilnfxopga" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/22/Java反射/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/22/Java反射/">评论</a>
@@ -165,26 +159,17 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="what-is-Tomcat"><a href="#what-is-Tomcat" class="headerlink" title="what is Tomcat"></a>what is Tomcat</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="端口详解"><a href="#端口详解" class="headerlink" title="端口详解"></a>端口详解</h3><p>8080:基于HTTP协议的对外服务端口，负责建立HTTP连接<br>8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程<br>8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接<br>8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接</p>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="jdk优化"><a href="#jdk优化" class="headerlink" title="jdk优化"></a>jdk优化</h3><p>Tomcat默认可以使用的内存为128MB，对于部署大型应用来说肯定是不够的，那么对于linux系统，在文件/bin/catalina.sh的前面，增加如下设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JAVA_OPTS=’-Xms【初始化内存大小】 -Xmx【可以使用的最大内存】 -XX:PermSize=64M -XX:MaxPermSize=128m’ 需要把几个参数值调大。</div><div class="line"></div><div class="line">例如： JAVA_OPTS=’-Xms256m -Xmx512m’ 表示初始化内存为256MB，可以使用的最大内存为512MB。</div></pre></td></tr></table></figure></p>
-<h4 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h4><p>-server  启用jdk 的 server 版；<br>-Xms    java虚拟机初始化时的最小内存；<br>-Xmx    java虚拟机可使用的最大内存；<br>-XX:PermSize    内存永久保留区域<br>-XX:MaxPermSize   内存最大永久保留区域<br>-Xmn    jvm最小内存</p>
-<h3 id="线程优化"><a href="#线程优化" class="headerlink" title="线程优化"></a>线程优化</h3><p>在tomcat配置文件server.xml中的配置中，和连接数相关的参数有：</p>
-<p>maxThreads： Tomcat使用线程来处理接收的每个请求。这个值表示Tomcat可创建的最大的线程数。默认值150。</p>
-<p>acceptCount： 指定当所有可以使用的处理请求的线程数都被使用时，可以放到处理队列中的请求数，超过这个数的请求将不予处理。默认值10。</p>
-<p>minSpareThreads： Tomcat初始化时创建的线程数。默认值25。</p>
-<p>maxSpareThreads： 一旦创建的线程超过这个值，Tomcat就会关闭不再需要的socket线程。默认值75。</p>
-<p>enableLookups： 是否反查域名，默认值为true。为了提高处理能力，应设置为false</p>
-<p>connnectionTimeout： 网络连接超时，默认值60000，单位：毫秒。设置为0表示永不超时，这样设置有隐患的。通常可设置为30000毫秒。</p>
-<p>maxKeepAliveRequests： 保持请求数量，默认值100。 bufferSize： 输入流缓冲大小，默认值2048 bytes。</p>
-<p>compression： 压缩传输，取值on/off/force，默认值off。 其中和最大连接数相关的参数为maxThreads和acceptCount。如果要加大并发连接数，应同时加大这两个参数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;</div><div class="line">               connectionTimeout=&quot;20000&quot; maxThreads=&quot;1000&quot; minSpareThreads=&quot;60&quot; maxSpareThreads=&quot;600&quot;  acceptCount=&quot;120&quot; </div><div class="line">               redirectPort=&quot;8443&quot; URIEncoding=&quot;utf-8&quot;/&gt;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/20/Tomcat/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0kkuzx1001upe6ixak91wx9" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0kkwjdu001uqo6ispis84pt" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/20/Tomcat/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/20/Tomcat/">评论</a>
@@ -241,7 +226,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj0kkuzwo001hpe6iffb4n0by" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj0kkwjdq001nqo6i82czsvdn" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/10/Restful/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/10/Restful/">评论</a>
@@ -290,7 +275,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj0kkuzwi0018pe6iatb42ul9" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj0kkwjdh0017qo6iokwlj5gy" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/07/MySQL基础/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/07/MySQL基础/">评论</a>
@@ -346,7 +331,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj0kkuzvd0001pe6iy8mcjd58" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj0kkwjc50004qo6iu065vtld" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/06/JDK命令详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/06/JDK命令详解/">评论</a>
