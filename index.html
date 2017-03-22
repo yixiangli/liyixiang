@@ -112,14 +112,19 @@
         <h1 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h1><p>反射是一种能够装载JVM中类内部信息的工具，运行时获取字节码文件，发起调用修改等一系列操作</p>
 <h2 id="反射慢？"><a href="#反射慢？" class="headerlink" title="反射慢？"></a>反射慢？</h2><p>1.验证等防御性代码过于繁琐，这部分耗时反射都需要在计算运行时执行，而不像正常逻辑在link阶段执行。<br>2.使用反射会产生大量的临时对象，对gc产生时间消耗<br>3.由于直接调取，缺少上下文，丢失很多运行时优化，如JIT</p>
 <h3 id="JIT"><a href="#JIT" class="headerlink" title="JIT"></a>JIT</h3><p>JIT(Just-In-Time Compiler),即时编译器,当虚拟机发现某个方法或代码块运行特别频繁时，就会把这些代码认定为“Hot Spot Code”（热点代码），为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成与本地平台相关的机器码，并进行各层次的优化，完成这项任务的正是JIT编译器</p>
-<h4 id="热点代码"><a href="#热点代码" class="headerlink" title="热点代码"></a>热点代码</h4><p>被多次调用的方法。<br>被多次调用的循环体。</p>
-<h4 id="热点探测"><a href="#热点探测" class="headerlink" title="热点探测"></a>热点探测</h4><p><strong>基于采样的热点探测：</strong><br>采用这种方法的虚拟机会周期性地检查各个线程的栈顶，如果发现某些方法经常出现在栈顶，那这段方法代码就是“热点代码”。这种探测方法的好处是实现简单高效，还可以很容易地获取方法调用关系，缺点是很难精确地确认一个方法的热度，容易因为受到线程阻塞或别的外界因素的影响而扰乱热点探测。<br><strong>基于计数器的热点探测：</strong><br>采用这种方法的虚拟机会为每个方法，甚至是代码块建立计数器，统计方法的执行次数，如果执行次数超过一定的阀值，就认为它是“热点方法”。这种统计方法实现复杂一些，需要为每个方法建立并维护计数器，而且不能直接获取到方法的调用关系，但是它的统计结果相对更加精确严谨。</p>
+<p>说了这么多理论，也没太明白什么意思，先执行java -version<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_111&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)</div></pre></td></tr></table></figure></p>
+<p>这是博主的java运行环境，重点看mixed mode，代表混合模式，什么意思呢？其实Java虚拟机有三种执行方式，分别是解释执行、混合模式和编译执行，默认情况下处于混合模式中。在混合模式中，部分函数会被解释执行，部分可能被编译执行。虚拟机决定函数是否需要编译执行的依据是判断该函数，是否为热点代码。如果函数的调用频率很高，被反复使用，那么就会被认为是热点，热点代码就会被编译执行。</p>
+<p>解释执行模式，表示全部代码均解释执行，不做任何JIT编译，可以使用参数-Xint来开启解释执行模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_111&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14,interpreted mode)</div></pre></td></tr></table></figure></p>
+<p>编译执行模式，对于所有的函数，无论是否是热点代码，都会被编译执行，使用参数-Xcomp可以设置为编译模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java version &quot;1.8.0_111&quot;</div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_111-b14)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14,compiled mode)</div></pre></td></tr></table></figure></p>
+<p>一个重要结论：编译模式的执行效率会远远高于解释模式！</p>
+<h4 id="什么是热点代码"><a href="#什么是热点代码" class="headerlink" title="什么是热点代码"></a>什么是热点代码</h4><p>被多次调用的方法。<br>被多次调用的循环体。</p>
+<h4 id="如何判断是热点代码－热点探测"><a href="#如何判断是热点代码－热点探测" class="headerlink" title="如何判断是热点代码－热点探测"></a>如何判断是热点代码－热点探测</h4><p><strong>基于采样的热点探测：</strong><br>采用这种方法的虚拟机会周期性地检查各个线程的栈顶，如果发现某些方法经常出现在栈顶，那这段方法代码就是“热点代码”。这种探测方法的好处是实现简单高效，还可以很容易地获取方法调用关系，缺点是很难精确地确认一个方法的热度，容易因为受到线程阻塞或别的外界因素的影响而扰乱热点探测。<br><strong>基于计数器的热点探测：</strong><br>采用这种方法的虚拟机会为每个方法，甚至是代码块建立计数器，统计方法的执行次数，如果执行次数超过一定的阀值，就认为它是“热点方法”。这种统计方法实现复杂一些，需要为每个方法建立并维护计数器，而且不能直接获取到方法的调用关系，但是它的统计结果相对更加精确严谨。</p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0kdq6aq000afy6i8fi47xcr" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0ke0ibs000ahd6i406wzr4z" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/22/Java反射/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/22/Java反射/">评论</a>
@@ -179,7 +184,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0kdq6c0001ufy6ivnxki7gu" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0ke0ida001uhd6ih3kqcsdv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/20/Tomcat/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/20/Tomcat/">评论</a>
@@ -236,7 +241,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj0kdq6bq001nfy6iw4e3qbdc" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj0ke0id4001nhd6ixhfw6rqj" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/10/Restful/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/10/Restful/">评论</a>
@@ -285,7 +290,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj0kdq6bf0016fy6ipqh768no" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj0ke0ict0017hd6ijkompsbf" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/07/MySQL基础/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/07/MySQL基础/">评论</a>
@@ -341,7 +346,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj0kdq6am0006fy6ijllsn0bi" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj0ke0ibj0004hd6ili0q8vv0" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/06/JDK命令详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/06/JDK命令详解/">评论</a>
