@@ -6,21 +6,24 @@
   <title>SQL规范 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="什么是数据库存储数据的仓库
-SQL规范连接内连接外连接左外连接 语法：select  from A left join B on A.id = B.id* 描述 会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现
-右外连接 语法：select  from A right join B on A.id = B.id* 描述 会显示B表">
+SQL规范连接工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学
+内连接外连接左外连接 语法：select  from A left join B on A.id = B.id* 描述 会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现
+右外连接 语法：select  fr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL规范">
 <meta property="og:url" content="https://yixiangli.github.io/2017/03/27/SQL规范/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是数据库存储数据的仓库
-SQL规范连接内连接外连接左外连接 语法：select  from A left join B on A.id = B.id* 描述 会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现
-右外连接 语法：select  from A right join B on A.id = B.id* 描述 会显示B表">
-<meta property="og:updated_time" content="2017-03-27T03:52:48.000Z">
+SQL规范连接工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学
+内连接外连接左外连接 语法：select  from A left join B on A.id = B.id* 描述 会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现
+右外连接 语法：select  fr">
+<meta property="og:updated_time" content="2017-03-27T06:11:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL规范">
 <meta name="twitter:description" content="什么是数据库存储数据的仓库
-SQL规范连接内连接外连接左外连接 语法：select  from A left join B on A.id = B.id* 描述 会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现
-右外连接 语法：select  from A right join B on A.id = B.id* 描述 会显示B表">
+SQL规范连接工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学
+内连接外连接左外连接 语法：select  from A left join B on A.id = B.id* 描述 会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现
+右外连接 语法：select  fr">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -120,7 +123,8 @@ SQL规范连接内连接外连接左外连接 语法：select  from A left join 
         </div>
     
         <h1 id="什么是数据库"><a href="#什么是数据库" class="headerlink" title="什么是数据库"></a>什么是数据库</h1><p>存储数据的仓库</p>
-<h2 id="SQL规范"><a href="#SQL规范" class="headerlink" title="SQL规范"></a>SQL规范</h2><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><h5 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h5><p><strong> 语法：</strong><br>select <em> from A left join B on A.id = B.id<br><em>* 描述 </em></em><br>会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现</p>
+<h2 id="SQL规范"><a href="#SQL规范" class="headerlink" title="SQL规范"></a>SQL规范</h2><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学</p>
+<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><h5 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h5><p><strong> 语法：</strong><br>select <em> from A left join B on A.id = B.id<br><em>* 描述 </em></em><br>会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现</p>
 <h5 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h5><p><strong> 语法：</strong><br>select <em> from A right join B on A.id = B.id<br><em>* 描述 </em></em><br>会显示B表中存在的全部数据以及A表与B表相同id关联的数据，当B表中存在但A表中不存在的数据，会以NULL的形式展现</p>
 <h5 id="完全连接"><a href="#完全连接" class="headerlink" title="完全连接"></a>完全连接</h5>
       
