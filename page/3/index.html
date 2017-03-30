@@ -118,7 +118,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式－行为型/" data-id="cj0t8crkq002yor6i9cyj2gmz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式－行为型/" data-id="cj0vt2k6p0039fk6ity7sczj9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/16/设计模式－行为型/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/16/设计模式－行为型/">评论</a>
@@ -180,7 +180,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="cj0t8crim000aor6ikaxjsbo8" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="cj0vt2k4m0005fk6il3l1sbur" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/JavaNIO/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/JavaNIO/">评论</a>
@@ -237,12 +237,20 @@
         return new Date();
     }
 };
-</code></pre>
+</code></pre><h2 id="一个JAVA进程究竟能创建多少线程"><a href="#一个JAVA进程究竟能创建多少线程" class="headerlink" title="一个JAVA进程究竟能创建多少线程"></a>一个JAVA进程究竟能创建多少线程</h2><p>这是一个常见的问题，很多面试或者工作中使用线程池都会遇到这个问题，正巧博主看了一篇文章，写的很不错，就吸收借鉴一下，做个总结</p>
+<h3 id="影响线程创建的因素"><a href="#影响线程创建的因素" class="headerlink" title="影响线程创建的因素"></a>影响线程创建的因素</h3><p><strong> JVM：</strong><br>Xmx<br>MaxPermSize<br>MaxDirectMemorySize<br>ReservedCodeCacheSize</p>
+<p>java中创建线程的方式一般是new Thread().start()<br>而真正创建线程并不是new Thread()，而是start时调用native方法start0,而start0方法中会检验当前内存情况，因此如：Xmx MaxPermSize等JVM参数都会影响剩余的内存。</p>
+<p>Xss<br>这个参数本身就是控制线程堆栈的内存大小，因此也会有影响。</p>
+<p><strong> Kernel：</strong><br>max_user_processes<br>创建线程会判断进程数有多少，而在linux中，进程与线程使用的数据结构相同，所以进程数可以理解为轻量级线程数，ulimit -u命令可以查到，所以如果当前用户起的线程数超过了这个限制，那肯定是不会创建线程成功的</p>
+<p>max_map_count<br>在底层分配malloc时会判断，如果进程被分配的内存段超过sysctl_max_map_count就会失败，而这个值在linux下对应/proc/sys/vm/max_map_count，默认值是65530，可以通过修改上面的文件来改变这个阈值。</p>
+<p>max_threads<br>同上分析，/proc/sys/kernel/threads-max控制这个参数</p>
+<p>pid_max<br>同上分析，/proc/sys/kernel/pid_max控制这个参数</p>
+
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="cj0t8crj0000por6itd2f5gw1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="cj0vt2k56000kfk6i4baajzmb" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/Java线程基础/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/Java线程基础/">评论</a>
@@ -294,7 +302,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="cj0t8criv000lor6i50tmdngu" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="cj0vt2k4w000gfk6i11k0jegt" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/12/Java异常剖析/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/Java异常剖析/">评论</a>
@@ -347,7 +355,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="cj0t8crk7001vor6ibtlkm7ge" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="cj0vt2k670025fk6idg20zak9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/10/SPI/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/02/10/SPI/">评论</a>
