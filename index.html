@@ -113,8 +113,10 @@
 <h2 id="SQL规范"><a href="#SQL规范" class="headerlink" title="SQL规范"></a>SQL规范</h2><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学</p>
 <h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><p>就是咱们常用的等值连接，典型符号像‘=’或‘&lt;’ ‘&gt;’之类的比较运算符<br>例子就不举了。主要介绍外连接。</p>
 <h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><p>老司机不多说，一个例子如下：<br>student_info A表<br>teacher_info B表</p>
-<p>student_info结构</p>
-<h2 id="id-tid-name-create-time-update-time"><a href="#id-tid-name-create-time-update-time" class="headerlink" title="id | tid | name | create_time | update_time"></a>id | tid | name | create_time | update_time</h2><p>20111015 |    1001 | 张三    | 2017-03-31 16:07:54 |2017-03-31 16:07:54<br>20111016 |    1001 | 李四    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111017 |    1001 | 王五    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111018 |    1002 | 马六    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111019 |    1003 | 沈七    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111020 |    1003 | 杨八    | 2017-03-31 16:07:54    2017-03-31 16:07:54</p>
+<p>student_info结构<br>id | tid | name | create_time | update_time</p>
+<ul>
+<li>| - | - | - | -<br>20111015 |    1001 | 张三    | 2017-03-31 16:07:54 |2017-03-31 16:07:54<br>20111016 |    1001 | 李四    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111017 |    1001 | 王五    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111018 |    1002 | 马六    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111019 |    1003 | 沈七    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111020 |    1003 | 杨八    | 2017-03-31 16:07:54    2017-03-31 16:07:54</li>
+</ul>
 <h5 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h5><p><strong> 语法：</strong><br>select <em> from A left join B on A.id = B.aid<br><strong> 描述 </strong><br>会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现<br><em>* 例子 </em></em></p>
 <h5 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h5><p><strong> 语法：</strong><br>select <em> from A right join B on A.id = B.aid<br><strong> 描述 </strong><br>会显示B表中存在的全部数据以及A表与B表相同id关联的数据，当B表中存在但A表中不存在的数据，会以NULL的形式展现<br><em>* 例子 </em></em></p>
 <h5 id="完全连接"><a href="#完全连接" class="headerlink" title="完全连接"></a>完全连接</h5><p><strong> 语法：</strong><br>select <em> from A full join B on A.id = B.aid<br><strong> 描述 </strong><br>会将A表与B表的全部行都返回。当某行在另一个表中没有匹配行时，会以NULL的形式展现，且如果有匹配，则结果集行包含基表的数据值。<br><em>* 例子 </em></em></p>
@@ -123,7 +125,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/27/SQL规范/" data-id="cj0xkmo2p001nrx6isfieyrfz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/27/SQL规范/" data-id="cj0xkrnz0001rsl6icoqnumkd" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/27/SQL规范/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/27/SQL规范/">评论</a>
@@ -178,7 +180,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/27/Mac指南/" data-id="cj0xkmo27000zrx6ilei8l8t9" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/27/Mac指南/" data-id="cj0xkrnyp001asl6i1n3q9rxh" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/27/Mac指南/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/27/Mac指南/">评论</a>
@@ -229,7 +231,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/25/贵金属金银币/" data-id="cj0xkmo3d0035rx6iccz2v1tl" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/25/贵金属金银币/" data-id="cj0xkrnzl0034sl6isbpmgjnu" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/25/贵金属金银币/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/25/贵金属金银币/">评论</a>
@@ -281,7 +283,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0xkmo1d000arx6i962kx56x" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0xkrnxp000asl6i0t0r8kdm" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/22/Java反射/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/22/Java反射/">评论</a>
@@ -332,7 +334,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0xkmo2w0022rx6i1rafbkwx" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0xkrnz70028sl6imvohbt13" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/20/Tomcat/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/20/Tomcat/">评论</a>

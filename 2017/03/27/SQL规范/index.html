@@ -9,8 +9,7 @@
 SQL规范连接工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学
 内连接就是咱们常用的等值连接，典型符号像‘=’或‘&amp;lt;’ ‘&amp;gt;’之类的比较运算符例子就不举了。主要介绍外连接。
 外连接老司机不多说，一个例子如下：student_info A表teacher_info B表
-student_info结构
-id | tid | na">
+student_info结构id | tid | nam">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL规范">
 <meta property="og:url" content="https://yixiangli.github.io/2017/03/27/SQL规范/index.html">
@@ -19,17 +18,15 @@ id | tid | na">
 SQL规范连接工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学
 内连接就是咱们常用的等值连接，典型符号像‘=’或‘&amp;lt;’ ‘&amp;gt;’之类的比较运算符例子就不举了。主要介绍外连接。
 外连接老司机不多说，一个例子如下：student_info A表teacher_info B表
-student_info结构
-id | tid | na">
-<meta property="og:updated_time" content="2017-03-31T08:32:07.000Z">
+student_info结构id | tid | nam">
+<meta property="og:updated_time" content="2017-03-31T08:36:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL规范">
 <meta name="twitter:description" content="什么是数据库存储数据的仓库
 SQL规范连接工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学
 内连接就是咱们常用的等值连接，典型符号像‘=’或‘&amp;lt;’ ‘&amp;gt;’之类的比较运算符例子就不举了。主要介绍外连接。
 外连接老司机不多说，一个例子如下：student_info A表teacher_info B表
-student_info结构
-id | tid | na">
+student_info结构id | tid | nam">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -125,15 +122,17 @@ id | tid | na">
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是数据库"><span class="toc-number">1.</span> <span class="toc-text">什么是数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL规范"><span class="toc-number">1.1.</span> <span class="toc-text">SQL规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#连接"><span class="toc-number">1.1.1.</span> <span class="toc-text">连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内连接"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#外连接"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">外连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#id-tid-name-create-time-update-time"><span class="toc-number">1.2.</span> <span class="toc-text">id | tid | name | create_time | update_time</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#左外连接"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">左外连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#右外连接"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">右外连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#完全连接"><span class="toc-number">1.2.0.0.3.</span> <span class="toc-text">完全连接</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是数据库"><span class="toc-number">1.</span> <span class="toc-text">什么是数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL规范"><span class="toc-number">1.1.</span> <span class="toc-text">SQL规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#连接"><span class="toc-number">1.1.1.</span> <span class="toc-text">连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内连接"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">内连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#外连接"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">外连接</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#左外连接"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">左外连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#右外连接"><span class="toc-number">1.1.1.2.2.</span> <span class="toc-text">右外连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#完全连接"><span class="toc-number">1.1.1.2.3.</span> <span class="toc-text">完全连接</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="什么是数据库"><a href="#什么是数据库" class="headerlink" title="什么是数据库"></a>什么是数据库</h1><p>存储数据的仓库</p>
 <h2 id="SQL规范"><a href="#SQL规范" class="headerlink" title="SQL规范"></a>SQL规范</h2><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学</p>
 <h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><p>就是咱们常用的等值连接，典型符号像‘=’或‘&lt;’ ‘&gt;’之类的比较运算符<br>例子就不举了。主要介绍外连接。</p>
 <h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><p>老司机不多说，一个例子如下：<br>student_info A表<br>teacher_info B表</p>
-<p>student_info结构</p>
-<h2 id="id-tid-name-create-time-update-time"><a href="#id-tid-name-create-time-update-time" class="headerlink" title="id | tid | name | create_time | update_time"></a>id | tid | name | create_time | update_time</h2><p>20111015 |    1001 | 张三    | 2017-03-31 16:07:54 |2017-03-31 16:07:54<br>20111016 |    1001 | 李四    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111017 |    1001 | 王五    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111018 |    1002 | 马六    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111019 |    1003 | 沈七    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111020 |    1003 | 杨八    | 2017-03-31 16:07:54    2017-03-31 16:07:54</p>
+<p>student_info结构<br>id | tid | name | create_time | update_time</p>
+<ul>
+<li>| - | - | - | -<br>20111015 |    1001 | 张三    | 2017-03-31 16:07:54 |2017-03-31 16:07:54<br>20111016 |    1001 | 李四    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111017 |    1001 | 王五    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111018 |    1002 | 马六    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111019 |    1003 | 沈七    | 2017-03-31 16:07:54    2017-03-31 16:07:54<br>20111020 |    1003 | 杨八    | 2017-03-31 16:07:54    2017-03-31 16:07:54</li>
+</ul>
 <h5 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h5><p><strong> 语法：</strong><br>select <em> from A left join B on A.id = B.aid<br><strong> 描述 </strong><br>会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现<br><em>* 例子 </em></em></p>
 <h5 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h5><p><strong> 语法：</strong><br>select <em> from A right join B on A.id = B.aid<br><strong> 描述 </strong><br>会显示B表中存在的全部数据以及A表与B表相同id关联的数据，当B表中存在但A表中不存在的数据，会以NULL的形式展现<br><em>* 例子 </em></em></p>
 <h5 id="完全连接"><a href="#完全连接" class="headerlink" title="完全连接"></a>完全连接</h5><p><strong> 语法：</strong><br>select <em> from A full join B on A.id = B.aid<br><strong> 描述 </strong><br>会将A表与B表的全部行都返回。当某行在另一个表中没有匹配行时，会以NULL的形式展现，且如果有匹配，则结果集行包含基表的数据值。<br><em>* 例子 </em></em></p>
