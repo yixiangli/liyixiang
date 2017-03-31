@@ -111,16 +111,10 @@
     
         <h1 id="什么是数据库"><a href="#什么是数据库" class="headerlink" title="什么是数据库"></a>什么是数据库</h1><p>存储数据的仓库</p>
 <h2 id="SQL规范"><a href="#SQL规范" class="headerlink" title="SQL规范"></a>SQL规范</h2><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>工作到目前以来基本接触的都是mongodb等非关系型数据库，SQL语法还停留在大学</p>
-<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><p>就是咱们常用的等值连接，典型符号像‘=’或‘&lt;’ ‘&gt;’之类的比较运算符<br>例子就不举了。主要介绍外连接。</p>
+<h4 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h4><p>就是咱们常用的等值连接，典型符号像’=’或’&lt;’及’&gt;’之类的比较运算符<br>例子就不举了。主要介绍外连接。</p>
 <h4 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h4><p>老司机不多说，一个例子如下：<br>student_info A表<br>teacher_info B表</p>
-<p>student_info结构<br>id | tid | name | create_time | update_time</p>
-<ul>
-<li>| - | - | - | -<br>20111015 |    1001 | 张三    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111016 |    1001 | 李四    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111017 |    1001 | 王五    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111018 |    1002 | 马六    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111019 |    1003 | 沈七    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111020 |    1003 | 杨八    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20120001 |    1008 |    赵一    | 2017-03-31 16:41:50 | 2017-03-31 16:41:50<br>20120002 |  1009 | 朱十    | 2017-03-31 16:41:50 | 2017-03-31 16:41:50</li>
-</ul>
-<p>teacher_info<br>id | name | create_time | update_time</p>
-<ul>
-<li>| - | - | -<br>1001|老师一|2017-03-31 16:09:22    |2017-03-31 16:09:22<br>1002|老师二|2017-03-31 16:09:22    |2017-03-31 16:09:22<br>1003|老师三|2017-03-31 16:09:22    |2017-03-31 16:09:22<br>1004|老师四|2017-03-31 16:42:54    |2017-03-31 16:42:54<br>1005|老师五|2017-03-31 16:42:54    |2017-03-31 16:42:54</li>
-</ul>
+<p><strong> student_info结构 </strong><br>id|tid|name|create_time|update_time<br>-|-|-|-|-<br>20111015 |    1001 | 张三    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111016 |    1001 | 李四    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111017 |    1001 | 王五    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111018 |    1002 | 马六    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111019 |    1003 | 沈七    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20111020 |    1003 | 杨八    | 2017-03-31 16:07:54 | 2017-03-31 16:07:54<br>20120001 |    1008 |    赵一    | 2017-03-31 16:41:50 | 2017-03-31 16:41:50<br>20120002 |  1009 | 朱十    | 2017-03-31 16:41:50 | 2017-03-31 16:41:50</p>
+<p><strong> teacher_info </strong><br>id|name|create_time|update_time<br>-|-|-|-<br>1001|老师一|2017-03-31 16:09:22    |2017-03-31 16:09:22<br>1002|老师二|2017-03-31 16:09:22    |2017-03-31 16:09:22<br>1003|老师三|2017-03-31 16:09:22    |2017-03-31 16:09:22<br>1004|老师四|2017-03-31 16:42:54    |2017-03-31 16:42:54<br>1005|老师五|2017-03-31 16:42:54    |2017-03-31 16:42:54</p>
 <h5 id="左外连接"><a href="#左外连接" class="headerlink" title="左外连接"></a>左外连接</h5><p><strong> 语法：</strong><br>select <em> from A left join B on A.id = B.aid<br><strong> 描述 </strong><br>会显示A表中存在的全部数据以及A表与B表相同id关联的数据，当A表中存在但B表中不存在的数据，会以NULL的形式展现<br><em>* 例子 </em></em></p>
 <h5 id="右外连接"><a href="#右外连接" class="headerlink" title="右外连接"></a>右外连接</h5><p><strong> 语法：</strong><br>select <em> from A right join B on A.id = B.aid<br><strong> 描述 </strong><br>会显示B表中存在的全部数据以及A表与B表相同id关联的数据，当B表中存在但A表中不存在的数据，会以NULL的形式展现<br><em>* 例子 </em></em></p>
 <h5 id="完全连接"><a href="#完全连接" class="headerlink" title="完全连接"></a>完全连接</h5><p><strong> 语法：</strong><br>select <em> from A full join B on A.id = B.aid<br><strong> 描述 </strong><br>会将A表与B表的全部行都返回。当某行在另一个表中没有匹配行时，会以NULL的形式展现，且如果有匹配，则结果集行包含基表的数据值。<br><em>* 例子 </em></em></p>
@@ -129,7 +123,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/27/SQL规范/" data-id="cj0xl985t0024t26ikvzanqv2" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/27/SQL规范/" data-id="cj0xldmh4001ytf6ih2gypalv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/27/SQL规范/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/27/SQL规范/">评论</a>
@@ -184,7 +178,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/27/Mac指南/" data-id="cj0xl98530016t26irew8wwvw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/27/Mac指南/" data-id="cj0xldmga0012tf6i4xsdvshh" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/27/Mac指南/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/27/Mac指南/">评论</a>
@@ -235,7 +229,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/25/贵金属金银币/" data-id="cj0xl986o003at26iu80chvf2" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/25/贵金属金银币/" data-id="cj0xldmhp0035tf6iymqmoz1o" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/25/贵金属金银币/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/25/贵金属金银币/">评论</a>
@@ -287,7 +281,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0xl983z000bt26ipbdlxwqx" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj0xldmfk000atf6iqbfrbksr" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/22/Java反射/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/22/Java反射/">评论</a>
@@ -338,7 +332,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0xl985v0028t26izz46i7hp" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj0xldmh90028tf6i1d4ko26i" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/20/Tomcat/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2017/03/20/Tomcat/">评论</a>
