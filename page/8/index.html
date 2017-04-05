@@ -122,7 +122,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj12apbzn0001clfyavpeoceu" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj14lhgiy0001nl6i70gnjohy" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/19/Git使用手册/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/10/19/Git使用手册/">评论</a>
@@ -193,7 +193,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj12apc0z0011clfym21xtz4g" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj14lhgk90017nl6irfgv29c0" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/09/MessageQueue大全/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/10/09/MessageQueue大全/">评论</a>
@@ -245,7 +245,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj12apc1y002iclfyrhvz28pt" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj14lhgl9002snl6i1c50vno9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/28/美国签证血泪史/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/28/美国签证血泪史/">评论</a>
@@ -299,6 +299,9 @@
 <p>说完了通常情况，接下来说说特殊情况，那就是这个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public static final int value = 123</div></pre></td></tr></table></figure></p>
 <p>这个时候准备阶段的value的值就是123了<br>因为如果类字段的字段属性表中存在ConstantValue，也就是常量时，那么准备阶段变量value就会被初始化为ConstantValue属性所指定的值了。</p>
 <h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><h5 id="动态绑定"><a href="#动态绑定" class="headerlink" title="动态绑定"></a>动态绑定</h5><p>一句话：运行时确定类型<br>在类加载的过程中，规则就是解析可能在初始化之后进行。</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>类加载过程的最后一步，这个阶段才真正开始执行类中定义的Java程序代码。<br>简单的说，初始化阶段就是执行类构造器<cinit>()方法的过程</p>
+<h5 id="什么是-方法"><a href="#什么是-方法" class="headerlink" title="什么是()方法"></a>什么是<cinit>()方法</h5><p>由编译器自动收集类中的所有类变量的赋值动作（咱们在准备阶段提到过）和静态语句块（static{}）中的语句合并产生，且严格按照源文件的顺序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class TestStaticInit &#123;</div><div class="line">	static &#123;</div><div class="line">		i = 0;							//编译可以正常通过</div><div class="line">		System.out.println(i);			//非法向前引用</div><div class="line">	&#125;</div><div class="line">	static int i =1;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="类加载机的分类"><a href="#类加载机的分类" class="headerlink" title="类加载机的分类"></a>类加载机的分类</h3>
         
           <p class="article-more-link">
@@ -309,7 +312,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/13/Java类加载详解/" data-id="cj12apc0d000oclfyf22j326w" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/13/Java类加载详解/" data-id="cj14lhgjj000fnl6i07om7cqm" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/13/Java类加载详解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/13/Java类加载详解/">评论</a>
@@ -361,7 +364,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/" data-id="cj12apc02000aclfyn22bcz2z" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/" data-id="cj14lhgjn000lnl6i16em2aha" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/12/Java开发之常见问题/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="2016/09/12/Java开发之常见问题/">评论</a>
