@@ -13,7 +13,7 @@
 <meta property="og:description" content="what is Tomcat目录结构5.x及以下/bin：存放windows或Linux平台上启动和关闭Tomcat的脚本文件/conf：存放Tomcat服务器的各种全局配置文件，其中最重要的是server.xml和web.xml/doc：存放Tomcat文档/server：包含三个子目录：classes、lib和webapps/server/lib：存放Tomcat服务器所需的各种JAR文件/s">
 <meta property="og:image" content="https://yixiangli.github.io/img/Tomcat5.x.jpeg">
 <meta property="og:image" content="https://yixiangli.github.io/img/Tomcat6.x.jpeg">
-<meta property="og:updated_time" content="2017-04-05T07:31:22.000Z">
+<meta property="og:updated_time" content="2017-04-05T07:41:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat">
 <meta name="twitter:description" content="what is Tomcat目录结构5.x及以下/bin：存放windows或Linux平台上启动和关闭Tomcat的脚本文件/conf：存放Tomcat服务器的各种全局配置文件，其中最重要的是server.xml和web.xml/doc：存放Tomcat文档/server：包含三个子目录：classes、lib和webapps/server/lib：存放Tomcat服务器所需的各种JAR文件/s">
@@ -120,6 +120,8 @@
 <h3 id="6-x"><a href="#6-x" class="headerlink" title="6.x"></a>6.x</h3><p>/bin，/conf，/logs，/webapps，/work：<br>这几个目录没有变化，主要变化的是将<br>/server /common /shared 三个目录合成了/lib一个目录，下面就具体说说这些目录的由来</p>
 <h4 id="Tomcat的类加载器"><a href="#Tomcat的类加载器" class="headerlink" title="Tomcat的类加载器"></a>Tomcat的类加载器</h4><p>我们知道JDK默认提供的类加载器有启动类加载器Bootstrap ClassLoader，其子类Extension ClassLoader以及子类的子类Application ClassLoader。而CommonClassLoader,CatalinaClassLoader,SharedClassLoader和WebappClassLoader则是Tomcat自己定义的类加载器，它们分别加载/server /common /shared 以及/Webapp/WEB-INF/四个目录下的java类库，这样做的目的是为了对多个应用依赖的类库进行共享与隔离，解决应用以及Tomcat本身安全性的同时，节约资源空间。<br>盗用网上两张图做对比<br><strong> 5.x </strong><br><img src="/img/Tomcat5.x.jpeg" alt="Tomcat5.x类加载结构"></p>
 <p><strong> 6.x </strong><br><img src="/img/Tomcat6.x.jpeg" alt="Tomcat6.x类加载结构"></p>
+<p>从图上可以看出，Tomcat也是严格按照经典的双亲委派模型来实现，CommonClassLoader能加载的类都能被SharedClassLoader和CatalinaClassLoader使用，而SharedClassLoader和CatalinaClassLoader自己能加载的类则与对方相互隔离。WebappClassLoader可以使用SharedClassLoader加载的类，且WebappClassLoader各个实例相互隔离。</p>
+<p><strong> 6.x的变化 </strong><br>对于6.x的版本，只有指定了/conf/catalina.properties配置文件的server.loader和share.loader项后才会真正建立CatalinaClassLoader和SharedClassLoader，否则这两个加载器会被CommonClassLoader实例替代，且默认不使用，因此把/server /common /shared 三个目录合成了/lib一个目录，这是Tomcat设计团队为了简化大多数部署场景所做的一项改进，当然也没有完全摈弃5.x的设计，用户可以通过配置启用5.x的加载器结构。</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="端口详解"><a href="#端口详解" class="headerlink" title="端口详解"></a>端口详解</h3><p>8080:基于HTTP协议的对外服务端口，负责建立HTTP连接<br>8005:shutdown进程，用于关闭tomcat，可以理解为一个tomcat的守护进程<br>8009:基于AJP协议的对外服务端口，负责和其他的HTTP服务器建立连接<br>8443:基于HTTPS协议的对外服务端口，负责建立HTTPS连接</p>
 <a id="more"></a>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="jdk优化"><a href="#jdk优化" class="headerlink" title="jdk优化"></a>jdk优化</h3><p>Tomcat默认可以使用的内存为128MB，对于部署大型应用来说肯定是不够的，那么对于linux系统，在文件/bin/catalina.sh的前面，增加如下设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">JAVA_OPTS=’-Xms【初始化内存大小】 -Xmx【可以使用的最大内存】 -XX:PermSize=64M -XX:MaxPermSize=128m’ 需要把几个参数值调大。</div><div class="line"></div><div class="line">例如： JAVA_OPTS=’-Xms256m -Xmx512m’ 表示初始化内存为256MB，可以使用的最大内存为512MB。</div></pre></td></tr></table></figure></p>
