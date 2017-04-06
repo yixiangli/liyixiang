@@ -19,7 +19,7 @@
 
 某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。
 某个用户向 API 服务发送大量请求。">
-<meta property="og:updated_time" content="2017-04-06T04:14:26.000Z">
+<meta property="og:updated_time" content="2017-04-06T04:15:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="限流">
 <meta name="twitter:description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。
@@ -122,7 +122,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是限流"><span class="toc-number">1.</span> <span class="toc-text">什么是限流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的限流措施"><span class="toc-number">1.1.</span> <span class="toc-text">常用的限流措施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#来源请求限流"><span class="toc-number">1.1.1.</span> <span class="toc-text">来源请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发请求限流"><span class="toc-number">1.1.2.</span> <span class="toc-text">并发请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于资源的限流"><span class="toc-number">1.1.3.</span> <span class="toc-text">基于资源的限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于优先级的负载降级"><span class="toc-number">1.1.4.</span> <span class="toc-text">基于优先级的负载降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于work利用率的负载降级"><span class="toc-number">1.1.5.</span> <span class="toc-text">基于work利用率的负载降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些常用的限流工具"><span class="toc-number">1.1.6.</span> <span class="toc-text">一些常用的限流工具</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是限流"><span class="toc-number">1.</span> <span class="toc-text">什么是限流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的限流措施"><span class="toc-number">1.1.</span> <span class="toc-text">常用的限流措施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#来源请求限流"><span class="toc-number">1.1.1.</span> <span class="toc-text">来源请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发请求限流"><span class="toc-number">1.1.2.</span> <span class="toc-text">并发请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于资源的限流"><span class="toc-number">1.1.3.</span> <span class="toc-text">基于资源的限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于优先级的负载降级"><span class="toc-number">1.1.4.</span> <span class="toc-text">基于优先级的负载降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于work利用率的负载降级"><span class="toc-number">1.1.5.</span> <span class="toc-text">基于work利用率的负载降级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些常用的限流工具"><span class="toc-number">1.2.</span> <span class="toc-text">一些常用的限流工具</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="什么是限流"><a href="#什么是限流" class="headerlink" title="什么是限流"></a>什么是限流</h1><p>限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。</p>
@@ -140,7 +140,7 @@
 <p><strong> 总结 </strong><br>以上几种限流器一般NGINX商业版都会提供（至少我司是这样），用户频次控制，粗细管道等，后端业务服务就不太需要刻意多做功能，但是针对下面两种情况，运维同学可能不会做这种个性化的限流，还需要后端自行完成。</p>
 <h3 id="基于优先级的负载降级"><a href="#基于优先级的负载降级" class="headerlink" title="基于优先级的负载降级"></a>基于优先级的负载降级</h3><p>针对于并发请求限流，主要是针对整个集群提供的所有服务做的限流措施，但业务上对于请求也要区分核心业务（如创建视频，订单交易等等）／非核心业务（查询历史记录），那么对于核心业务肯定是要保证请求的完整性与服务的可用性，不能随随便便的就返回个error，而对于非核心业务，可能用户无感（比如push业务设备管理信息的更新），就可以在集群压力大的情况下抛弃一些请求，保证服务可用性，不影响核心业务。那么基于优先级的负载降级限流就是对每个请求做路由，根据不同的限流规则做限流功能。</p>
 <h3 id="基于work利用率的负载降级"><a href="#基于work利用率的负载降级" class="headerlink" title="基于work利用率的负载降级"></a>基于work利用率的负载降级</h3><p>work可以理解为工作进程，比如nginx的work工作者，那么对于服务来说，采用的负载均衡策略不同，可能每个work分摊到的工作（如请求）就不相同，有的work可能会忙，无法再处理新的请求，有的work可能比较闲。那么就可以根据这种情况对繁忙的work做降级，使服务均衡。</p>
-<h3 id="一些常用的限流工具"><a href="#一些常用的限流工具" class="headerlink" title="一些常用的限流工具"></a>一些常用的限流工具</h3><p><strong> Guava RateLimit </strong><br>这个工具我在我的breeze框架中使用，在这就不再多说了。</p>
+<h2 id="一些常用的限流工具"><a href="#一些常用的限流工具" class="headerlink" title="一些常用的限流工具"></a>一些常用的限流工具</h2><p><strong> Guava RateLimit </strong><br>这个工具我在我的breeze框架中使用，在这就不再多说了。</p>
 
       
     </div>
