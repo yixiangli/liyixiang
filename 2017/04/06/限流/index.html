@@ -6,27 +6,27 @@
   <title>限流 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。
-常用的限流措施先分析限流的目的
+常用的限流措施先分析限流的目的，网上截了一段用，不要在意
 
 某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。
-某个用户向 API 服务发送大量请求。 或者更糟的是，某个用户试">
+某个用户向 API 服务发送大量请求。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="限流">
 <meta property="og:url" content="https://yixiangli.github.io/2017/04/06/限流/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。
-常用的限流措施先分析限流的目的
+常用的限流措施先分析限流的目的，网上截了一段用，不要在意
 
 某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。
-某个用户向 API 服务发送大量请求。 或者更糟的是，某个用户试">
-<meta property="og:updated_time" content="2017-04-06T03:59:38.000Z">
+某个用户向 API 服务发送大量请求。">
+<meta property="og:updated_time" content="2017-04-06T04:14:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="限流">
 <meta name="twitter:description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。
-常用的限流措施先分析限流的目的
+常用的限流措施先分析限流的目的，网上截了一段用，不要在意
 
 某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。
-某个用户向 API 服务发送大量请求。 或者更糟的是，某个用户试">
+某个用户向 API 服务发送大量请求。">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -122,22 +122,26 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是限流"><span class="toc-number">1.</span> <span class="toc-text">什么是限流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的限流措施"><span class="toc-number">1.1.</span> <span class="toc-text">常用的限流措施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#来源请求限流"><span class="toc-number">1.1.1.</span> <span class="toc-text">来源请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发请求限流"><span class="toc-number">1.1.2.</span> <span class="toc-text">并发请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于优先级的负载降级"><span class="toc-number">1.1.3.</span> <span class="toc-text">基于优先级的负载降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于server利用率的负载降级"><span class="toc-number">1.1.4.</span> <span class="toc-text">基于server利用率的负载降级</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是限流"><span class="toc-number">1.</span> <span class="toc-text">什么是限流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的限流措施"><span class="toc-number">1.1.</span> <span class="toc-text">常用的限流措施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#来源请求限流"><span class="toc-number">1.1.1.</span> <span class="toc-text">来源请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发请求限流"><span class="toc-number">1.1.2.</span> <span class="toc-text">并发请求限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于资源的限流"><span class="toc-number">1.1.3.</span> <span class="toc-text">基于资源的限流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于优先级的负载降级"><span class="toc-number">1.1.4.</span> <span class="toc-text">基于优先级的负载降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于work利用率的负载降级"><span class="toc-number">1.1.5.</span> <span class="toc-text">基于work利用率的负载降级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些常用的限流工具"><span class="toc-number">1.1.6.</span> <span class="toc-text">一些常用的限流工具</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="什么是限流"><a href="#什么是限流" class="headerlink" title="什么是限流"></a>什么是限流</h1><p>限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。</p>
-<h2 id="常用的限流措施"><a href="#常用的限流措施" class="headerlink" title="常用的限流措施"></a>常用的限流措施</h2><p>先分析限流的目的</p>
+<h2 id="常用的限流措施"><a href="#常用的限流措施" class="headerlink" title="常用的限流措施"></a>常用的限流措施</h2><p>先分析限流的目的，网上截了一段用，不要在意</p>
 <ul>
 <li>某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。</li>
 <li>某个用户向 API 服务发送大量请求。 或者更糟的是，某个用户试图恶意冲垮服务器。</li>
 <li>用户发送了大量低优先级请求，但我们希望确保不会影响其他高优先级请求。 例如，发送大量分析数据请求的用户可能会影响其他用户的关键事务。</li>
-<li>系统内部产生错误，导致无法处理所有请求，不得不丢弃低优先级的请求。</li>
+<li>系统内部产生错误，导致无法处理所有请求，不得不丢弃低优先级的请求。<a id="more"></a>
+</li>
 </ul>
 <h3 id="来源请求限流"><a href="#来源请求限流" class="headerlink" title="来源请求限流"></a>来源请求限流</h3><p>针对请求来源的限流器，如某个用户触发了客户端的bug(如死循环调用接口，别觉得没有可能)，或者点中了服务端的bug(博主就拿nginx+lua干出过一个死循环bug)，又或者就是恶意攻击，强刷接口，一般这类限流器主要就是控制用户访问频次，限制每个用户每秒可发送 N 个请求。常用的场景就是秒杀，抢购，防止恶意刷商品，刷票。</p>
 <h3 id="并发请求限流"><a href="#并发请求限流" class="headerlink" title="并发请求限流"></a>并发请求限流</h3><p>并发请求限流就是最常见的一种限流策略，服务端api上线前一般都会进行压测，预估出当前服务集群可承受的最大请求量（TPS），这个时候并发请求限流器就可以设置最高并发请求数，超过这个值就直接返回，减少服务器压力。</p>
-<p><strong> 总结 </strong><br>以上两种限流器一般NGINX商业版都会提供（至少我司是这样），用户频次控制，粗细管道等，后端业务服务就不太需要刻意多做功能，但是针对下面两种情况，运维同学可能不会做这种个性化的限流，还需要后端自行完成。</p>
-<h3 id="基于优先级的负载降级"><a href="#基于优先级的负载降级" class="headerlink" title="基于优先级的负载降级"></a>基于优先级的负载降级</h3><p>针对于并发请求限流，主要是针对整个集群提供的所有服务做的限流措施，但业务上对于请求也要区分核心业务（如创建视频，订单交易等等）／非核心业务（查询历史记录），那么对于核心业务肯定是要保证请求的完整性与服务的可用性，不能随随便便的就返回个error，而对于非核心业务，可能用户无感（比如push业务设备管理信息的更新），就可以在集群压力大的情况下抛弃一些请求，保证服务可用性，不影响核心业务。那么基于优先级的负载降级限流就是对每个请求做路由检测。</p>
-<h3 id="基于server利用率的负载降级"><a href="#基于server利用率的负载降级" class="headerlink" title="基于server利用率的负载降级"></a>基于server利用率的负载降级</h3>
+<h3 id="基于资源的限流"><a href="#基于资源的限流" class="headerlink" title="基于资源的限流"></a>基于资源的限流</h3><p>这种限流可能要和监控挂钩了，这种限流之前我一直想过，但一直没有代码尝试过，基本原理我理解的是根据当前服务器的CPU使用率，内存使用空间，swap区使用大小等硬件资源来判断当前集群是否处于亚健康，如果是那么就对后端服务进行限流，通过过滤请求等方式减少当前服务负载，待恢复到一定阀值，再关闭限流器。</p>
+<p><strong> 总结 </strong><br>以上几种限流器一般NGINX商业版都会提供（至少我司是这样），用户频次控制，粗细管道等，后端业务服务就不太需要刻意多做功能，但是针对下面两种情况，运维同学可能不会做这种个性化的限流，还需要后端自行完成。</p>
+<h3 id="基于优先级的负载降级"><a href="#基于优先级的负载降级" class="headerlink" title="基于优先级的负载降级"></a>基于优先级的负载降级</h3><p>针对于并发请求限流，主要是针对整个集群提供的所有服务做的限流措施，但业务上对于请求也要区分核心业务（如创建视频，订单交易等等）／非核心业务（查询历史记录），那么对于核心业务肯定是要保证请求的完整性与服务的可用性，不能随随便便的就返回个error，而对于非核心业务，可能用户无感（比如push业务设备管理信息的更新），就可以在集群压力大的情况下抛弃一些请求，保证服务可用性，不影响核心业务。那么基于优先级的负载降级限流就是对每个请求做路由，根据不同的限流规则做限流功能。</p>
+<h3 id="基于work利用率的负载降级"><a href="#基于work利用率的负载降级" class="headerlink" title="基于work利用率的负载降级"></a>基于work利用率的负载降级</h3><p>work可以理解为工作进程，比如nginx的work工作者，那么对于服务来说，采用的负载均衡策略不同，可能每个work分摊到的工作（如请求）就不相同，有的work可能会忙，无法再处理新的请求，有的work可能比较闲。那么就可以根据这种情况对繁忙的work做降级，使服务均衡。</p>
+<h3 id="一些常用的限流工具"><a href="#一些常用的限流工具" class="headerlink" title="一些常用的限流工具"></a>一些常用的限流工具</h3><p><strong> Guava RateLimit </strong><br>这个工具我在我的breeze框架中使用，在这就不再多说了。</p>
+
       
     </div>
     <footer class="article-footer">
