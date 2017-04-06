@@ -120,13 +120,13 @@
 <h3 id="来源请求限流"><a href="#来源请求限流" class="headerlink" title="来源请求限流"></a>来源请求限流</h3><p>针对请求来源的限流器，如某个用户触发了客户端的bug(如死循环调用接口，别觉得没有可能)，或者点中了服务端的bug(博主就拿nginx+lua干出过一个死循环bug)，又或者就是恶意攻击，强刷接口，一般这类限流器主要就是控制用户访问频次，限制每个用户每秒可发送 N 个请求。常用的场景就是秒杀，抢购，防止恶意刷商品，刷票。</p>
 <h3 id="并发请求限流"><a href="#并发请求限流" class="headerlink" title="并发请求限流"></a>并发请求限流</h3><p>并发请求限流就是最常见的一种限流策略，服务端api上线前一般都会进行压测，预估出当前服务集群可承受的最大请求量（TPS），这个时候并发请求限流器就可以设置最高并发请求数，超过这个值就直接返回，减少服务器压力。</p>
 <p><strong> 总结 </strong><br>以上两种限流器一般NGINX商业版都会提供（至少我司是这样），用户频次控制，粗细管道等，后端业务服务就不太需要刻意多做功能，但是针对下面两种情况，运维同学可能不会做这种个性化的限流，还需要后端自行完成。</p>
-<h3 id="基于优先级的负载降级"><a href="#基于优先级的负载降级" class="headerlink" title="基于优先级的负载降级"></a>基于优先级的负载降级</h3><p>优先级</p>
+<h3 id="基于优先级的负载降级"><a href="#基于优先级的负载降级" class="headerlink" title="基于优先级的负载降级"></a>基于优先级的负载降级</h3><p>针对于并发请求限流，主要是针对整个集群提供的所有服务做的限流措施，但业务上对于请求也要区分核心业务（如创建视频，订单交易等等）／非核心业务（查询历史记录），那么对于核心业务肯定是要保证请求的完整性与服务的可用性，不能随随便便的就返回个error，而对于非核心业务，可能用户无感（比如push业务设备管理信息的更新），就可以在集群压力大的情况下抛弃一些请求，保证服务可用性，不影响核心业务。那么基于优先级的负载降级限流就是对每个请求做路由检测。</p>
 <h3 id="基于server利用率的负载降级"><a href="#基于server利用率的负载降级" class="headerlink" title="基于server利用率的负载降级"></a>基于server利用率的负载降级</h3>
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/06/限流/" data-id="cj15vcx9t0037gz6ihqbb14es" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/06/限流/" data-id="cj15vj1i8003hhi6iuc9hjuda" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/06/限流/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/06/限流/">评论</a>
@@ -180,7 +180,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/27/SQL规范/" data-id="cj15vcx9d0028gz6ie2733cw5" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/27/SQL规范/" data-id="cj15vj1hm0024hi6irja5olol" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/27/SQL规范/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/27/SQL规范/">评论</a>
@@ -235,7 +235,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/27/Mac指南/" data-id="cj15vcx8r0017gz6i51baakv5" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/27/Mac指南/" data-id="cj15vj1gy001ahi6iupxf59as" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/27/Mac指南/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/27/Mac指南/">评论</a>
@@ -286,7 +286,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/25/贵金属金银币/" data-id="cj15vcx9u003agz6ixdo403yk" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/25/贵金属金银币/" data-id="cj15vj1i6003ahi6iz1yz7yn0" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/25/贵金属金银币/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/25/贵金属金银币/">评论</a>
@@ -338,7 +338,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj15vcx7r0009gz6ip1n6tfz4" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/22/Java反射/" data-id="cj15vj1g3000ahi6icf02ghkh" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/22/Java反射/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/22/Java反射/">评论</a>
