@@ -118,7 +118,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cj1ak6bk30017m36i5ybxwzu1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cj1akekb10016my6izhbwncvy" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/11/10/Maven一探究竟/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/11/10/Maven一探究竟/">评论</a>
@@ -174,7 +174,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj1ak6bir0001m36iafi8kvg0" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj1akek9l0001my6i60mxag63" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/19/Git使用手册/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/10/19/Git使用手册/">评论</a>
@@ -233,7 +233,8 @@
 <p>具体方案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）请求到达，执行核心逻辑，组织返回状态，返回结果。</div><div class="line">2）操作库／公网调用等等操作异步执行。</div><div class="line">3）如果异步执行的结果请求方也需要知道，回调之。</div></pre></td></tr></table></figure></p>
 <h3 id="何时不该用"><a href="#何时不该用" class="headerlink" title="何时不该用"></a>何时不该用</h3><p>－上游实时关注执行结果</p>
 <h4 id="上游实时关注执行结果"><a href="#上游实时关注执行结果" class="headerlink" title="上游实时关注执行结果"></a>上游实时关注执行结果</h4><p>纯粹的接口实时调用，需要知道下游的执行结果成功与否，并强依赖这个结果。</p>
-<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="消息必达"><a href="#消息必达" class="headerlink" title="消息必达"></a>消息必达</h3><h3 id="幂等性保证"><a href="#幂等性保证" class="headerlink" title="幂等性保证"></a>幂等性保证</h3><p>幂等性其实也就是重复，MQ作为中间过程，势必需要考虑消息重发问题以及重复消息问题的处理，对于重复这个词在开发的角度肯定就自然而然的想到了唯一，那么如何实现幂等性，就取决于如何设置唯一性，保证MQ接收到一条消息后无论出现何种原因都只给下游输出一条消息。</p>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="消息必达"><a href="#消息必达" class="headerlink" title="消息必达"></a>消息必达</h3><p>先申明，个人认为这个命题肯定是个理想命题，至少目前市面上的MQ没有敢吹消息百分百不丢失，不过设计MQ时，消息必达是个必须攻克的难点问题，如何做到呢？主要应该这两个方面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">（1）消息落地</div><div class="line">（2）消息超时、重传、确认</div></pre></td></tr></table></figure></p>
+<h3 id="幂等性保证"><a href="#幂等性保证" class="headerlink" title="幂等性保证"></a>幂等性保证</h3><p>幂等性其实也就是重复，MQ作为中间过程，势必需要考虑消息重发问题以及重复消息问题的处理，对于重复这个词在开发的角度肯定就自然而然的想到了唯一，那么如何实现幂等性，就取决于如何设置唯一性，保证MQ接收到一条消息后无论出现何种原因都只给下游输出一条消息。</p>
 <p>借用比较好的文章分析这个问题<br><img src="/img/mq_idempotency_up.jpg" alt="上半段保证幂等性"><br><img src="/img/mq_idempotency_down.jpg" alt="下半段保证幂等性"></p>
 <p><strong> 上半段 </strong><br>MQ-client生成inner-msg-id，保证上半段幂等。<br>这个ID全局唯一，业务无关，由MQ保证。</p>
 <p><strong> 下半段 </strong><br>业务发送方带入biz-id，业务接收方去重保证段等。<br>这个ID对单业务唯一（如订单ID，设备ID，视频ID），业务相关，对MQ透明。</p>
@@ -265,7 +266,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj1ak6bk10014m36i9f4kbfvi" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj1akekaz0013my6izybuay6h" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/09/MessageQueue大全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/10/09/MessageQueue大全/">评论</a>
@@ -317,7 +318,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj1ak6bkz0032m36ib7mz8wzw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj1akekbx002vmy6i0vb6fh0b" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/28/美国签证血泪史/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/09/28/美国签证血泪史/">评论</a>
@@ -384,7 +385,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/13/Java类加载详解/" data-id="cj1ak6bjg000om36iuj3lt62m" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/13/Java类加载详解/" data-id="cj1akekaj000omy6i195snjug" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/13/Java类加载详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/09/13/Java类加载详解/">评论</a>

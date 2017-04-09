@@ -15,7 +15,7 @@
 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
 <meta property="og:image" content="https://yixiangli.github.io/img/mq_idempotency_up.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/mq_idempotency_down.jpg">
-<meta property="og:updated_time" content="2017-04-09T10:40:20.000Z">
+<meta property="og:updated_time" content="2017-04-09T10:47:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MessageQueue大全">
 <meta name="twitter:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用
@@ -135,7 +135,8 @@
 <p>具体方案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）请求到达，执行核心逻辑，组织返回状态，返回结果。</div><div class="line">2）操作库／公网调用等等操作异步执行。</div><div class="line">3）如果异步执行的结果请求方也需要知道，回调之。</div></pre></td></tr></table></figure></p>
 <h3 id="何时不该用"><a href="#何时不该用" class="headerlink" title="何时不该用"></a>何时不该用</h3><p>－上游实时关注执行结果</p>
 <h4 id="上游实时关注执行结果"><a href="#上游实时关注执行结果" class="headerlink" title="上游实时关注执行结果"></a>上游实时关注执行结果</h4><p>纯粹的接口实时调用，需要知道下游的执行结果成功与否，并强依赖这个结果。</p>
-<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="消息必达"><a href="#消息必达" class="headerlink" title="消息必达"></a>消息必达</h3><h3 id="幂等性保证"><a href="#幂等性保证" class="headerlink" title="幂等性保证"></a>幂等性保证</h3><p>幂等性其实也就是重复，MQ作为中间过程，势必需要考虑消息重发问题以及重复消息问题的处理，对于重复这个词在开发的角度肯定就自然而然的想到了唯一，那么如何实现幂等性，就取决于如何设置唯一性，保证MQ接收到一条消息后无论出现何种原因都只给下游输出一条消息。</p>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="消息必达"><a href="#消息必达" class="headerlink" title="消息必达"></a>消息必达</h3><p>先申明，个人认为这个命题肯定是个理想命题，至少目前市面上的MQ没有敢吹消息百分百不丢失，不过设计MQ时，消息必达是个必须攻克的难点问题，如何做到呢？主要应该这两个方面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">（1）消息落地</div><div class="line">（2）消息超时、重传、确认</div></pre></td></tr></table></figure></p>
+<h3 id="幂等性保证"><a href="#幂等性保证" class="headerlink" title="幂等性保证"></a>幂等性保证</h3><p>幂等性其实也就是重复，MQ作为中间过程，势必需要考虑消息重发问题以及重复消息问题的处理，对于重复这个词在开发的角度肯定就自然而然的想到了唯一，那么如何实现幂等性，就取决于如何设置唯一性，保证MQ接收到一条消息后无论出现何种原因都只给下游输出一条消息。</p>
 <p>借用比较好的文章分析这个问题<br><img src="/img/mq_idempotency_up.jpg" alt="上半段保证幂等性"><br><img src="/img/mq_idempotency_down.jpg" alt="下半段保证幂等性"></p>
 <p><strong> 上半段 </strong><br>MQ-client生成inner-msg-id，保证上半段幂等。<br>这个ID全局唯一，业务无关，由MQ保证。</p>
 <p><strong> 下半段 </strong><br>业务发送方带入biz-id，业务接收方去重保证段等。<br>这个ID对单业务唯一（如订单ID，设备ID，视频ID），业务相关，对MQ透明。</p>
