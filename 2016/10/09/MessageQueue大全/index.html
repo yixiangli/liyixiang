@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用
 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
-<meta property="og:updated_time" content="2017-04-09T09:33:15.000Z">
+<meta property="og:updated_time" content="2017-04-09T10:02:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MessageQueue大全">
 <meta name="twitter:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用
@@ -128,7 +128,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）视频更新信息这个操作的整体执行时间会随着下游数量变得非常长</div><div class="line">2）下游服务出现问题，可能导致上游系统也出现故障</div><div class="line">3）最恶心的一点，新接入了一个下游，上游要修改代码</div></pre></td></tr></table></figure>
 <p>那么如何优化呢，具体方案是，采用MQ解耦：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1）视频信息更新成功后，向MQ发一个消息</div><div class="line">2）哪个下游关注“视频信息更新”这类消息，主动去MQ订阅</div></pre></td></tr></table></figure></p>
 <p>如一部火热的电视剧更新了最新集数，TV端，mobile端都需要同步这个信息，那么就可以去订阅这个消息。因此采用MQ的优点是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）上游执行时间短</div><div class="line">2）上下游逻辑+物理解耦，除了与MQ有物理连接，模块之间都不相互依赖</div><div class="line">3）新增一个下游消息关注方，上游不需要修改任何代码</div></pre></td></tr></table></figure></p>
-<h4 id="执行时间长，走异步处理"><a href="#执行时间长，走异步处理" class="headerlink" title="执行时间长，走异步处理"></a>执行时间长，走异步处理</h4><h3 id="何时不该用"><a href="#何时不该用" class="headerlink" title="何时不该用"></a>何时不该用</h3><p>－上游实时关注执行结果</p>
+<h4 id="执行时间长，走异步处理"><a href="#执行时间长，走异步处理" class="headerlink" title="执行时间长，走异步处理"></a>执行时间长，走异步处理</h4><p>这个场景肯定也要举个栗子，这个可以拿智能互联项目来说，项目背景我在这篇文章不介绍了哈，其中一个主要功能就是设备信息管理服务，手机/TV等客户端会在开启app的时候上报他们的设备信息，服务端会做相应的逻辑处理，返回客户端一个唯一标识，并将数据入库。当客户端量大或者晚高峰的时候，大量用户同时开启app，服务端压力激增，这个时候就需要异步处理，削峰降流。</p>
+<p>具体方案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）请求到达，执行核心逻辑，组织返回状态，返回结果。</div><div class="line">2）操作库／公网调用等等操作异步执行。</div><div class="line">3）如果异步执行的结果请求方也需要知道，回调之。</div></pre></td></tr></table></figure></p>
+<h3 id="何时不该用"><a href="#何时不该用" class="headerlink" title="何时不该用"></a>何时不该用</h3><p>－上游实时关注执行结果</p>
 <h4 id="上游实时关注执行结果"><a href="#上游实时关注执行结果" class="headerlink" title="上游实时关注执行结果"></a>上游实时关注执行结果</h4><p>纯粹的接口实时调用，需要知道下游的执行结果成功与否，并强依赖这个结果。</p>
 <h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="消息必达"><a href="#消息必达" class="headerlink" title="消息必达"></a>消息必达</h3><h3 id="幂等性保证"><a href="#幂等性保证" class="headerlink" title="幂等性保证"></a>幂等性保证</h3><h2 id="几种常见的队列中间件"><a href="#几种常见的队列中间件" class="headerlink" title="几种常见的队列中间件"></a>几种常见的队列中间件</h2><ul>
 <li>jms</li>
