@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: 理论与概念 | 不忘初心</title>
+  <title>Memcache | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人主页">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不忘初心">
-<meta property="og:url" content="https://yixiangli.github.io/categories/技术贴/理论与概念/index.html">
+  <meta name="description" content="Memcache结构HashMap
+读写流程1、外部应用输入需要写缓存的数据2、API将Key输入路由算法模块，路由算法根据Key和MemCache集群服务器列表得到一台服务器编号3、由服务器编号得到MemCache及其的ip地址和端口号4、API调用通信模块和指定编号的服务器通信，将数据写入该服务器，完成一次分布式缓存的写操作
+读缓存和写缓存一样，只要使用相同的路由算法和服务器列表，只要应用程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memcache">
+<meta property="og:url" content="https://yixiangli.github.io/2017/04/11/Memcache/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="个人主页">
+<meta property="og:description" content="Memcache结构HashMap
+读写流程1、外部应用输入需要写缓存的数据2、API将Key输入路由算法模块，路由算法根据Key和MemCache集群服务器列表得到一台服务器编号3、由服务器编号得到MemCache及其的ip地址和端口号4、API调用通信模块和指定编号的服务器通信，将数据写入该服务器，完成一次分布式缓存的写操作
+读缓存和写缓存一样，只要使用相同的路由算法和服务器列表，只要应用程序">
+<meta property="og:updated_time" content="2017-04-11T06:53:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不忘初心">
-<meta name="twitter:description" content="个人主页">
+<meta name="twitter:title" content="Memcache">
+<meta name="twitter:description" content="Memcache结构HashMap
+读写流程1、外部应用输入需要写缓存的数据2、API将Key输入路由算法模块，路由算法根据Key和MemCache集群服务器列表得到一台服务器编号3、由服务器编号得到MemCache及其的ip地址和端口号4、API调用通信模块和指定编号的服务器通信，将数据写入该服务器，完成一次分布式缓存的写操作
+读缓存和写缓存一样，只要使用相同的路由算法和服务器列表，只要应用程序">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -79,97 +86,79 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
+        <section id="main"><article id="post-Memcache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Memcache
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/04/11/Memcache/" class="article-date">
+  <time datetime="2017-04-11T06:44:31.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/中间件/">中间件</a>►<a class="article-category-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a>►<a class="article-category-link" href="/categories/技术贴/中间件/缓存系列/Memcache/">Memcache</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
       
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Memcache"><span class="toc-number">1.</span> <span class="toc-text">Memcache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-number">1.1.</span> <span class="toc-text">结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读写流程"><span class="toc-number">1.2.</span> <span class="toc-text">读写流程</span></a></li></ol></li></ol>
         </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/04/06/限流/" class="archive-article-date">
-  <time datetime="2017-04-06T03:27:02.000Z" itemprop="datePublished">4月 6</time>
-</a>
+        <h1 id="Memcache"><a href="#Memcache" class="headerlink" title="Memcache"></a>Memcache</h1><h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>HashMap</p>
+<h2 id="读写流程"><a href="#读写流程" class="headerlink" title="读写流程"></a>读写流程</h2><p>1、外部应用输入需要写缓存的数据<br>2、API将Key输入路由算法模块，路由算法根据Key和MemCache集群服务器列表得到一台服务器编号<br>3、由服务器编号得到MemCache及其的ip地址和端口号<br>4、API调用通信模块和指定编号的服务器通信，将数据写入该服务器，完成一次分布式缓存的写操作</p>
+<p>读缓存和写缓存一样，只要使用相同的路由算法和服务器列表，只要应用程序查询的是相同的Key，MemCache客户端总是访问相同的客户端去读取数据，只要服务器中还缓存着该数据，就能保证缓存命中。</p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/06/限流/">限流</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/10/Restful/" class="archive-article-date">
-  <time datetime="2017-03-10T03:17:53.000Z" itemprop="datePublished">3月 10</time>
-</a>
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/04/11/Memcache/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/10/Restful/">RESTful</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/02/10/SPI/" class="archive-article-date">
-  <time datetime="2017-02-10T09:06:16.000Z" itemprop="datePublished">2月 10</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/10/SPI/">SPI</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/01/09/锁/" class="archive-article-date">
-  <time datetime="2017-01-09T07:55:06.000Z" itemprop="datePublished">1月 9</time>
-</a>
+        <a href="https://yixiangli.github.io/2017/04/11/Memcache/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/11/Memcache/">评论</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/09/锁/">锁</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/">cache</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/04/11/排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">排序</div>
+    </a>
   
+</nav>
 
+  
+</article>
+
+
+<section id="comments">
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2130025"></script>
+<!-- UY END -->
+</section>
 </section>
         
           <aside id="sidebar">
