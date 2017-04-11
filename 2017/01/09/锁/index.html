@@ -6,21 +6,18 @@
   <title>锁 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="锁锁，顾名思义，就是把一定的资源加上某种限制，提高安全性，绝大部分房间都是有门的，而门内一般都是有锁，对整个空间起到保护作用，在软件工程中也是如此，尤其是数据库，数据就是资源，而加锁是为了保护数据不出现（如：脏读，幻读，更新丢失等）
-乐观锁&amp;amp;悲观锁乐观锁世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。
-实现1.version将表新增一">
+乐观锁&amp;amp;悲观锁乐观锁世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="锁">
 <meta property="og:url" content="https://yixiangli.github.io/2017/01/09/锁/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="锁锁，顾名思义，就是把一定的资源加上某种限制，提高安全性，绝大部分房间都是有门的，而门内一般都是有锁，对整个空间起到保护作用，在软件工程中也是如此，尤其是数据库，数据就是资源，而加锁是为了保护数据不出现（如：脏读，幻读，更新丢失等）
-乐观锁&amp;amp;悲观锁乐观锁世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。
-实现1.version将表新增一">
-<meta property="og:updated_time" content="2017-02-05T11:49:58.000Z">
+乐观锁&amp;amp;悲观锁乐观锁世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。">
+<meta property="og:updated_time" content="2017-04-11T02:57:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="锁">
 <meta name="twitter:description" content="锁锁，顾名思义，就是把一定的资源加上某种限制，提高安全性，绝大部分房间都是有门的，而门内一般都是有锁，对整个空间起到保护作用，在软件工程中也是如此，尤其是数据库，数据就是资源，而加锁是为了保护数据不出现（如：脏读，幻读，更新丢失等）
-乐观锁&amp;amp;悲观锁乐观锁世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。
-实现1.version将表新增一">
+乐观锁&amp;amp;悲观锁乐观锁世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -120,7 +117,7 @@
         </div>
     
         <h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>锁，顾名思义，就是把一定的资源加上某种限制，提高安全性，绝大部分房间都是有门的，而门内一般都是有锁，对整个空间起到保护作用，在软件工程中也是如此，尤其是数据库，数据就是资源，而加锁是为了保护数据不出现（如：脏读，幻读，更新丢失等）</p>
-<h2 id="乐观锁-amp-悲观锁"><a href="#乐观锁-amp-悲观锁" class="headerlink" title="乐观锁&amp;悲观锁"></a>乐观锁&amp;悲观锁</h2><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。</p>
+<h2 id="乐观锁-amp-悲观锁"><a href="#乐观锁-amp-悲观锁" class="headerlink" title="乐观锁&amp;悲观锁"></a>乐观锁&amp;悲观锁</h2><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。<br><a id="more"></a></p>
 <h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>1.version<br>将表新增一列字段，如version,每次读取数据时同时带上version,更新操作时与库中数据进行version校验，相同则更新，不同则失败。</p>
 <h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>悲天悯人，觉得全世界都不公平，所以要实现绝对的公平，每次操作都要上锁，保证了数据的强一致性，同样也会带来性能损耗。</p>
 <h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><p>1.加锁－ －</p>

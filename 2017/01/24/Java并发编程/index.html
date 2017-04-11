@@ -14,7 +14,7 @@
 <meta property="og:description" content="什么是并发Java中的并发Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueueJava 7 引入Fork/Join
 什么是AQSAQS的全称为（AbstractQueuedSynchronizer），这个类也">
 <meta property="og:image" content="https://yixiangli.github.io/img/executor.png">
-<meta property="og:updated_time" content="2017-03-27T12:14:01.000Z">
+<meta property="og:updated_time" content="2017-04-11T02:57:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发编程">
 <meta name="twitter:description" content="什么是并发Java中的并发Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueueJava 7 引入Fork/Join
@@ -120,6 +120,7 @@
     
         <h1 id="什么是并发"><a href="#什么是并发" class="headerlink" title="什么是并发"></a>什么是并发</h1><h2 id="Java中的并发"><a href="#Java中的并发" class="headerlink" title="Java中的并发"></a>Java中的并发</h2><p>Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueue<br>Java 7 引入Fork/Join</p>
 <h3 id="什么是AQS"><a href="#什么是AQS" class="headerlink" title="什么是AQS"></a>什么是AQS</h3><p>AQS的全称为（AbstractQueuedSynchronizer），这个类也是在java.util.concurrent.locks下面，是JDK1.5提供的一个基于FIFO等待队列实现的一个用于实现同步器的基础框架，各种同步工具类内部都有一个如下定义的内部结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abstract static class Sync extends AbstractQueuedSynchronizer</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <h3 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h3><p>javadoc<br>CountDownLatch: A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.</p>
 <p>//调用await()方法的线程会被挂起，它会等待直到count值为0才继续执行<br>public void await() throws InterruptedException { };   </p>
 <p>//和await()类似，只不过等待一定的时间后count值还没变为0的话就会继续执行<br>public boolean await(long timeout, TimeUnit unit) throws InterruptedException { };  </p>

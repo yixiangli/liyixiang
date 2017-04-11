@@ -119,7 +119,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="cj1akekaa000dmy6i5zbbk23v" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Java常用工具类/" data-id="cj1cyl8s8000bi16ijy2yefn9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Java常用工具类/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Java常用工具类/">评论</a>
@@ -170,7 +170,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cj1akekbc001omy6i5ix7qesf" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Redis指南/" data-id="cj1cyl8ti001si16ib0lmz5q6" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Redis指南/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Redis指南/">评论</a>
@@ -222,7 +222,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="cj1akekat000xmy6iu03gxuci" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/25/Java集合详解/" data-id="cj1cyl8sn000si16ipwk7pj3j" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/25/Java集合详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/Java集合详解/">评论</a>
@@ -273,7 +273,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/19/Java关键字/" data-id="cj1akeka6000amy6iyn8th9dr" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/19/Java关键字/" data-id="cj1cyl8sb000ei16id5g6f5ge" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/19/Java关键字/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/19/Java关键字/">评论</a>
@@ -314,21 +314,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><pre><code>Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
-</code></pre><h2 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h2><p>配置管理<br>一致性<br>分布式锁</p>
-<h3 id="集群搭建步骤"><a href="#集群搭建步骤" class="headerlink" title="集群搭建步骤"></a>集群搭建步骤</h3><p>1.根据dataDir的配置路径，在该路径下新建文件夹myid文件， server.X 这个数字就是对应 myid中的数字。</p>
-<p>2.配置文件zoo.cfg</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"># The number of milliseconds of each tick</div><div class="line">tickTime=2000</div><div class="line"># The number of ticks that the initial</div><div class="line"># synchronization phase can take</div><div class="line">initLimit=10</div><div class="line"># The number of ticks that can pass between</div><div class="line"># sending a request and getting an acknowledgement</div><div class="line">syncLimit=5 </div><div class="line"># the directory where the snapshot is stored.</div><div class="line"># do not use /tmp for storage, /tmp here is just</div><div class="line"># example sakes.</div><div class="line">dataDir=/letv/data/zookeeper</div><div class="line"># the port at which the clients will connect clientPort=2181</div><div class="line"># the maximum number of client connections.</div><div class="line"># increase this if you need to handle more clients</div><div class="line">#maxClientCnxns=60</div><div class="line">#</div><div class="line"># Be sure to read the maintenance section of the</div><div class="line"># administrator guide before turning on autopurge.</div><div class="line"># # http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</div><div class="line"># # The number of snapshots to retain in dataDir </div><div class="line">#autopurge.snapRetainCount=3</div><div class="line"># Purge task interval in hours</div><div class="line"># Set to &quot;0&quot; to disable auto purge feature</div><div class="line">#autopurge.purgeInterval=1</div><div class="line">server.1=10.185.28.73:2888:3888</div><div class="line">server.2=10.185.31.189:2888:3888</div><div class="line">server.3=10.185.31.197:2888:3888</div></pre></td></tr></table></figure>
-<p>3.启动<br>./zkServer.sh start</p>
-<p>4.客户端连接<br>./zkCli.sh -server 127.0.0.1:2181</p>
-
+</code></pre><h2 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h2><p>配置管理<br>一致性<br>分布式锁<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/07/zookeeper实战/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/07/zookeeper实战/" data-id="cj1akekbv002nmy6i5dxthgnd" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/07/zookeeper实战/" data-id="cj1cyl8ts002ai16i8bt52myd" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/07/zookeeper实战/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/07/zookeeper实战/">评论</a>

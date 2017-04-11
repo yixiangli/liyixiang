@@ -118,7 +118,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/20/流通纪念币/" data-id="cj1akekbu002kmy6iwm0q4y3f" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/20/流通纪念币/" data-id="cj1cyl8u1002qi16insul779q" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/20/流通纪念币/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/20/流通纪念币/">评论</a>
@@ -170,7 +170,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式－行为型/" data-id="cj1akekc20039my6i63tqi3y2" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式－行为型/" data-id="cj1cyl8u70036i16ikcx4sc0c" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/16/设计模式－行为型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/16/设计模式－行为型/">评论</a>
@@ -232,7 +232,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="cj1akeka40009my6icsgk7mp3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/JavaNIO/" data-id="cj1cyl8s30006i16irfc5w4kk" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/JavaNIO/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/JavaNIO/">评论</a>
@@ -273,36 +273,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h1><h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p>new, runnable, blocked, waiting, time waiting, 或 terminated</p>
-<h3 id="interrupt-amp-interrupted-amp-isInterrupted"><a href="#interrupt-amp-interrupted-amp-isInterrupted" class="headerlink" title="interrupt&amp;interrupted&amp;isInterrupted"></a>interrupt&amp;interrupted&amp;isInterrupted</h3><p>interrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个状态和java线程基本状态无关）,运行这个例子就很清楚了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月13日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class InterruptThread extends Thread&#123;</div><div class="line"></div><div class="line">	private boolean stop = false;</div><div class="line">	</div><div class="line">	public static void main(String[] args) throws Exception &#123;</div><div class="line">		InterruptThread thread = new InterruptThread();</div><div class="line">        System.out.println( &quot;Starting thread...&quot; );</div><div class="line">        thread.start();</div><div class="line">        Thread.sleep( 3000 );</div><div class="line">        System.out.println( &quot;Interrupting thread...&quot; );</div><div class="line">        thread.interrupt();</div><div class="line">        Thread.sleep( 3000 );</div><div class="line">        System.out.println(&quot;Stopping application...&quot; );</div><div class="line">        //System.exit(0);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		while(!stop)&#123;</div><div class="line">			System.out.println( &quot;Thread is running...&quot; );</div><div class="line">			System.out.println(Thread.currentThread().getState());</div><div class="line">            long time = System.currentTimeMillis();</div><div class="line">            while((System.currentTimeMillis()-time &lt; 1000)) &#123;</div><div class="line">            &#125;</div><div class="line">            System.out.println(&quot;Thread exiting under request...&quot; );</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么有了这个标志，如何获取或者做相关操作呢？这就用到了interrupted方法和isInterrupted方法。<br>interrupted是一个静态方法，作用于当前线程，调用native的isInterrupted方法，参数传true,意为返回线程的状态位后，要清掉原来的状态位（恢复成原来情况（非中断））。<br>isInterrupted是一个普通方法，作用于调用该方法的线程对象所对应的线程，也是调用native的isInterrupted方法，参数传false,只是返回线程的状态位。</p>
-<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p>作用：解决多线程场景下，相同变量的访问冲突问题，保证线程安全使用。</p>
-<p>原理：<br>    当使用ThreadLocal维护变量时，ThreadLocal为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的副本，而不会影响其它线程所对应的副本。<br>    ThreadLocal是如何做到为每一个线程维护变量的副本的呢？其实实现的思路很简单：在ThreadLocal类中有一个Map，用于存储每一个线程的变量副本，Map中元素的键为线程对象，而值对应线程的变量副本。</p>
-<p>常用方法：<br>    jdk5.0之后支持泛型，主要方法为void set(T value)、T get()以及T initialValue()。一定要注意initialValue(),本身是一个protected方法，所以就是为子类覆盖所用，如果不实现，默认返回null，且该方法只会执行一次，执行时机在线程第1次调用get()或set(Object)时才执行</p>
-<p>使用：<br>    通过匿名内部类的方式定义ThreadLocal的子类。</p>
-<pre><code> private static ThreadLocal&lt;Date&gt; startDate= new ThreadLocal&lt;Date&gt;() {
-    protected Date initialValue() {
-        // TODO Auto-generated method stub
-        return new Date();
-    }
-};
-</code></pre><h2 id="一个JAVA进程究竟能创建多少线程"><a href="#一个JAVA进程究竟能创建多少线程" class="headerlink" title="一个JAVA进程究竟能创建多少线程"></a>一个JAVA进程究竟能创建多少线程</h2><p>这是一个常见的问题，很多面试或者工作中使用线程池都会遇到这个问题，正巧博主看了一篇文章，写的很不错，就吸收借鉴一下，做个总结</p>
-<h3 id="影响线程创建的因素"><a href="#影响线程创建的因素" class="headerlink" title="影响线程创建的因素"></a>影响线程创建的因素</h3><p><strong> JVM：</strong><br>Xmx<br>MaxPermSize<br>MaxDirectMemorySize<br>ReservedCodeCacheSize</p>
-<p>java中创建线程的方式一般是new Thread().start()<br>而真正创建线程并不是new Thread()，而是start时调用native方法start0,而start0方法中会检验当前内存情况，因此如：Xmx MaxPermSize等JVM参数都会影响剩余的内存。</p>
-<p>Xss<br>这个参数本身就是控制线程堆栈的内存大小，因此也会有影响。</p>
-<p><strong> Kernel：</strong><br>max_user_processes<br>创建线程会判断进程数有多少，而在linux中，进程与线程使用的数据结构相同，所以进程数可以理解为轻量级线程数，ulimit -u命令可以查到，所以如果当前用户起的线程数超过了这个限制，那肯定是不会创建线程成功的</p>
-<p>max_map_count<br>在底层分配malloc时会判断，如果进程被分配的内存段超过sysctl_max_map_count就会失败，而这个值在linux下对应/proc/sys/vm/max_map_count，默认值是65530，可以通过修改上面的文件来改变这个阈值。</p>
-<p>max_threads<br>同上分析，/proc/sys/kernel/threads-max控制这个参数</p>
-<p>pid_max<br>同上分析，/proc/sys/kernel/pid_max控制这个参数</p>
-
+<h3 id="interrupt-amp-interrupted-amp-isInterrupted"><a href="#interrupt-amp-interrupted-amp-isInterrupted" class="headerlink" title="interrupt&amp;interrupted&amp;isInterrupted"></a>interrupt&amp;interrupted&amp;isInterrupted</h3><p>interrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个状态和java线程基本状态无关）,运行这个例子就很清楚了<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/13/Java线程基础/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="cj1akekak000pmy6i0w2b5m0k" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="cj1cyl8se000ii16it92z0jue" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/Java线程基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/Java线程基础/">评论</a>
@@ -354,7 +336,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="cj1akekag000lmy6i8eacbp59" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="cj1cyl8sm000qi16imrjh14x1" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/12/Java异常剖析/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/Java异常剖析/">评论</a>

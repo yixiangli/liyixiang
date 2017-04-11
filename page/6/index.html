@@ -119,7 +119,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cj1akekbq002emy6i4howu8no" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cj1cyl8tt002ci16iyxnqewyk" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/10/协议入门/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
@@ -160,21 +160,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>锁，顾名思义，就是把一定的资源加上某种限制，提高安全性，绝大部分房间都是有门的，而门内一般都是有锁，对整个空间起到保护作用，在软件工程中也是如此，尤其是数据库，数据就是资源，而加锁是为了保护数据不出现（如：脏读，幻读，更新丢失等）</p>
-<h2 id="乐观锁-amp-悲观锁"><a href="#乐观锁-amp-悲观锁" class="headerlink" title="乐观锁&amp;悲观锁"></a>乐观锁&amp;悲观锁</h2><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。</p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>1.version<br>将表新增一列字段，如version,每次读取数据时同时带上version,更新操作时与库中数据进行version校验，相同则更新，不同则失败。</p>
-<h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>悲天悯人，觉得全世界都不公平，所以要实现绝对的公平，每次操作都要上锁，保证了数据的强一致性，同样也会带来性能损耗。</p>
-<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><p>1.加锁－ －</p>
-<h2 id="死锁-amp-活锁"><a href="#死锁-amp-活锁" class="headerlink" title="死锁&amp;活锁"></a>死锁&amp;活锁</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>记得大学操作系统课程中都是重点考试内容，翻出了大学的笔记。。<br>产生死锁的四个必要条件：<br>（1） 互斥条件：一个资源每次只能被一个进程使用。<br>（2） 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。<br>（3） 不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。<br>（4） 循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。</p>
-<h3 id="活锁"><a href="#活锁" class="headerlink" title="活锁"></a>活锁</h3><p>与死锁相对，死锁是两个线程拼命抢夺资源，谁也互不相让，而活锁恰恰相反，是两个线程都让出了自己目前获取到的资源，结果也处于一种阻塞的状态。</p>
-
+<h2 id="乐观锁-amp-悲观锁"><a href="#乐观锁-amp-悲观锁" class="headerlink" title="乐观锁&amp;悲观锁"></a>乐观锁&amp;悲观锁</h2><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/09/锁/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cj1akekc00032my6i0oqswx01" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/09/锁/" data-id="cj1cyl8u9003ai16iag9f0g6o" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/09/锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/锁/">评论</a>
@@ -215,50 +212,20 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>不解释了，还是看我专门介绍Nginx的博客吧。。</p>
 <p>make<br>make upgrade 平滑升级</p>
 <h2 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h2><p>一门小众语言，资料不是很多，用起来也优点费劲</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="Nginx-1"><a href="#Nginx-1" class="headerlink" title="Nginx"></a>Nginx</h4><p>安装Nginx</p>
-<h4 id="安装LuaJIT-2-1"><a href="#安装LuaJIT-2-1" class="headerlink" title="安装LuaJIT 2.1"></a>安装LuaJIT 2.1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http://luajit.org/download/LuaJIT-2.1.0-beta2.tar.gz</div><div class="line">tar zxf LuaJIT-2.1.0-beta2.tar.gz</div><div class="line">cd LuaJIT-2.1.0-beta2</div><div class="line">make PREFIX=/usr/local/luajit</div><div class="line">make install PREFIX=/usr/local/luajit</div></pre></td></tr></table></figure>
-<h4 id="ngx-devel-kit（NDK）模块（无需安装）"><a href="#ngx-devel-kit（NDK）模块（无需安装）" class="headerlink" title="ngx_devel_kit（NDK）模块（无需安装）"></a>ngx_devel_kit（NDK）模块（无需安装）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div><div class="line">wget https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz</div><div class="line">tar -xzvf v0.2.19.tar.gz</div></pre></td></tr></table></figure>
-<h4 id="lua-nginx-module-模块（无需安装）"><a href="#lua-nginx-module-模块（无需安装）" class="headerlink" title="lua-nginx-module 模块（无需安装）"></a>lua-nginx-module 模块（无需安装）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/src</div><div class="line">wget https://github.com/openresty/lua-nginx-module/archive/v0.10.2.tar.gz</div><div class="line">tar -xzvf v0.10.2.tar.gz</div></pre></td></tr></table></figure>
-<h4 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export LUAJIT_LIB=/usr/local/luajit/lib</div><div class="line">export LUAJIT_INC=/usr/local/luajit/include/luajit-2.1</div></pre></td></tr></table></figure>
-<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.进入nginx源码文件 进行编译</div><div class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module  --with-ld-opt=&apos;-ljemalloc&apos; --with-ld-opt=&quot;-Wl,-rpath,/usr/local/luajit/lib&quot; --add-module=/usr/local/src/ngx_devel_kit-0.2.19 --add-module=/usr/local/src/lua-nginx-module-0.10.2 </div><div class="line"></div><div class="line">2.安装</div><div class="line">make&amp;make install</div></pre></td></tr></table></figure>
-<p>3.查看是否编译成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">      default_type &apos;text/plain&apos;; </div><div class="line">      content_by_lua &apos;ngx.say(&quot;hello, lua&quot;)&apos;; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>访问 /hello_lua</p>
-<h3 id="lua坑爹之处"><a href="#lua坑爹之处" class="headerlink" title="lua坑爹之处"></a>lua坑爹之处</h3><p>1.如何设置状态码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">location = /hello &#123;</div><div class="line">    content_by_lua &apos;</div><div class="line">        ngx.say(&quot;hello&quot;)</div><div class="line">        ngx.exit(404)</div><div class="line">    &apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看nginx.error.log 发现 attempt to set status 404 via ngx.exit after sending out the response status 200</p>
-<p>返回码还是200 原因是当调用ngx.say/ngx.print时自动发送响应状态码 因此必须<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location = /hello &#123;</div><div class="line">    content_by_lua &apos;</div><div class="line">        ngx.status(404)</div><div class="line">        ngx.say(&quot;hello&quot;)</div><div class="line">        ngx.exit(404)</div><div class="line">    &apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>且执行顺序靠前的代码中不能存在调用ngx.say/ngx.print的逻辑</p>
-<h3 id="nginx配置编写事项"><a href="#nginx配置编写事项" class="headerlink" title="nginx配置编写事项"></a>nginx配置编写事项</h3><p>1.空格 空格 空格<br>先看一段代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>报错  unknown directive “if($status”</p>
-<ol>
-<li>if else 不是每个语言都支持<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;; </div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            if($status = 302)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;else&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>报错  unknown directive “else”</p>
-<p>原因：<br>（1）nginx if 后必须加空格 否则if 和 ( 缺一个空格 ，如果没有空格他把if($status当成一个指令了，没有这个指令<br>（2）不存在if else这种嵌套写法，如果需要可以曲线救国<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;;</div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            echo $status;</div><div class="line">            if ( $status = 404)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">            if ( $status = 200)&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ol>
-<li>nginx module<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location /hello_lua &#123; </div><div class="line">            default_type &apos;text/html&apos;;</div><div class="line">            content_by_lua_file /usr/local/nginx/conf/test.lua;</div><div class="line">            echo $status;</div><div class="line">            if ( $status = 404)&#123;</div><div class="line">               proxy_pass http://lepush_api;</div><div class="line">            &#125;</div><div class="line">            if ( $status = 200)&#123;</div><div class="line">               return 200;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>报错  unknown directive “echo”<br>原因：<br>这个模块不包含在 Nginx 源码中，安装方法：</p>
-<ol>
-<li>首先下载模块源码：<a href="https://github.com/agentzh/echo-nginx-module/tags" target="_blank" rel="external">https://github.com/agentzh/echo-nginx-module/tags</a></li>
-<li>解压到某个路径，假设为 /path/to/echo-nginx-module</li>
-<li>使用下面命令编译并安装 Nginx</li>
-</ol>
-<h3 id="一些值得练手的功能"><a href="#一些值得练手的功能" class="headerlink" title="一些值得练手的功能"></a>一些值得练手的功能</h3><h4 id="根据post请求的某些参数做相应的服务处理"><a href="#根据post请求的某些参数做相应的服务处理" class="headerlink" title="根据post请求的某些参数做相应的服务处理"></a>根据post请求的某些参数做相应的服务处理</h4><p>功能：vlink参数路由</p>
-<p>nginx.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">    # 设置共享内存routes</div><div class="line">    lua_shared_dict routes 10m;</div><div class="line"></div><div class="line">    # Nginx启动时初始化共享内存</div><div class="line">    init_by_lua_block &#123;</div><div class="line">       routes = ngx.shared.routes</div><div class="line">       routes:set(&quot;1&quot;,391)</div><div class="line">       routes:set(&quot;2&quot;,392)</div><div class="line">       routes:set(&quot;0&quot;,390)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">    server &#123;</div><div class="line">        location /client/androidReg &#123;</div><div class="line">            access_by_lua_file /usr/local/nginx/conf/vlink.lua;</div><div class="line">            error_page 391 = @391;</div><div class="line">            error_page 392 = @392;</div><div class="line">            error_page 390 = @390;</div><div class="line">        &#125;</div><div class="line">       </div><div class="line">        location @391 &#123;</div><div class="line">            proxy_pass http://lepush_api;</div><div class="line">            proxy_redirect    off;</div><div class="line">            proxy_set_header  Host             $host;</div><div class="line">            proxy_set_header  X-Real-IP  $http_x_real_ip;</div><div class="line">        &#125;</div><div class="line">        location @392 &#123;</div><div class="line">            proxy_pass http://lepush_api;</div><div class="line">            proxy_redirect    off;</div><div class="line">            proxy_set_header  Host             $host;</div><div class="line">            proxy_set_header  X-Real-IP  $http_x_real_ip;</div><div class="line">        &#125;</div><div class="line">        location @390 &#123;</div><div class="line">            return 200;</div><div class="line">        &#125;   </div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>vlink.lua<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">local method = ngx.var.request_method</div><div class="line">local vlink = nil</div><div class="line"></div><div class="line">--判断请求方式，获取code值</div><div class="line">if method == &quot;GET&quot; then</div><div class="line">   vlink = ngx.req.get_uri_args()[&quot;vlink&quot;] or 0</div><div class="line">elseif method == &quot;POST&quot; then</div><div class="line">   ngx.req.read_body()</div><div class="line">   vlink = ngx.req.get_post_args()[&quot;vlink&quot;] or 0</div><div class="line">end</div><div class="line"></div><div class="line">-- 通过code寻找route返回码</div><div class="line">local route = routes:get(vlink)</div><div class="line">ngx.exit(route)</div></pre></td></tr></table></figure></p>
-
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/28/Nginx-Lua初探/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cj1akekb7001emy6i991jqpqx" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/" data-id="cj1cyl8tb001fi16ilvqlxcce" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/28/Nginx-Lua初探/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/Nginx-Lua初探/">评论</a>
@@ -299,20 +266,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="三次握手-四次挥手"><a href="#三次握手-四次挥手" class="headerlink" title="三次握手 四次挥手"></a>三次握手 四次挥手</h2><h3 id="手绘图"><a href="#手绘图" class="headerlink" title="手绘图"></a>手绘图</h3><p><img src="/img/tcp.jpg" alt="TCP三次握手"></p>
 <p>一些解释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这里的C端(client) S端(server) 并不要理解为客户端（移动设备）服务端（服务器），而是说连接建立发起方（主动方），连接关闭发起方（主动方）。</div></pre></td></tr></table></figure></p>
-<p>各个状态的意义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">LISTEN - 侦听来自远方TCP端口的连接请求； </div><div class="line">SYN-SENT -在发送连接请求后等待匹配的连接请求； </div><div class="line">SYN-RECEIVED - 在收到和发送一个连接请求后等待对连接请求的确认； </div><div class="line">ESTABLISHED- 代表一个打开的连接，数据可以传送给用户； </div><div class="line">FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认；</div><div class="line">FIN-WAIT-2 - 从远程TCP等待连接中断请求； </div><div class="line">CLOSE-WAIT - 等待从本地用户发来的连接中断请求； </div><div class="line">CLOSING -等待远程TCP对连接中断的确认； </div><div class="line">LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认； </div><div class="line">TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认； </div><div class="line">CLOSED - 没有任何连接状态；</div></pre></td></tr></table></figure></p>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>TCP是主机对主机层的传输控制协议，提供可靠的连接服务，采用三次握手确认建立一个连接，其中位码即tcp标志位,有6种标示:</p>
-<p>SYN(synchronous建立联机)<br>ACK(acknowledgement 确认)<br>PSH(push传送)<br>FIN(finish结束)<br>RST(reset重置)<br>URG(urgent紧急)</p>
-<p>Sequence number(顺序号码)<br>Acknowledge number(确认号码)</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/12/27/网络基础-TCP/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cj1akekbs002gmy6i7kmrx44y" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/网络基础-TCP/" data-id="cj1cyl8ty002ji16ipeaz7wo8" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/网络基础-TCP/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/网络基础-TCP/">评论</a>
@@ -364,7 +329,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cj1akekap000umy6imxiadca6" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/" data-id="cj1cyl8ss000ui16ieuwt0igf" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/27/Linux内核参数优化/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/Linux内核参数优化/">评论</a>

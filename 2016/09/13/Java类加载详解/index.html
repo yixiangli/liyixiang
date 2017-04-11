@@ -16,7 +16,7 @@
 什么是类加载对于学习java而言，程序员编写一个个的类是如何被运行起来的是一个很常见的问题，那么jvm就是通过类加载器来完成这一任务，类加载其实指的就是java源文件编译成.class文件后被加载到内存，并提供服务的过程。
 生命周期类的加载分为7个阶段加载Loading —— 验证Verification —— 准备P">
 <meta property="og:image" content="https://yixiangli.github.io/img/classLoader.png">
-<meta property="og:updated_time" content="2017-04-05T06:28:43.000Z">
+<meta property="og:updated_time" content="2017-04-11T02:59:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java类加载详解">
 <meta name="twitter:description" content="概述最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。
@@ -123,8 +123,7 @@
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>最近准备尝试实现热部署功能，发现对于类加载的知识还是很欠缺的，赶紧补补课。</p>
 <h2 id="什么是类加载"><a href="#什么是类加载" class="headerlink" title="什么是类加载"></a>什么是类加载</h2><p>对于学习java而言，程序员编写一个个的类是如何被运行起来的是一个很常见的问题，那么jvm就是通过类加载器来完成这一任务，类加载其实指的就是java源文件编译成.class文件后被加载到内存，并提供服务的过程。</p>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>类的加载分为7个阶段<br>加载Loading —— 验证Verification —— 准备Preparation —— 解析Resolution —— 初始化Initialization —— 使用Using —— 卸载Unloading</p>
-<p><img src="/img/classLoader.png" alt="类加载过程"></p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>类的加载分为7个阶段<br>加载Loading —— 验证Verification —— 准备Preparation —— 解析Resolution —— 初始化Initialization —— 使用Using —— 卸载Unloading<br><a id="more"></a><br><img src="/img/classLoader.png" alt="类加载过程"></p>
 <p>这里需要注意的是，加载－验证－准备－初始化－卸载这五个阶段的顺序是确定的，而解析阶段是不固定的，这是为了支持Java的动态绑定。而验证－准备－解析统称为连接Linking过程。</p>
 <h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>加载阶段完成三件事<br>1.通过一个类的全限定名称（其实就是完整的包名加类名）来获取定义此类的二进制字节流，这一步相当于是找到这个.class<br>2.将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构<br>3.在内存中生成一个代表这个类的对象，作为方法区这个类的数据访问入口</p>
 <p>重点说下第1点，随着技术的发展，获取二进制字节流的方式多种多样<br>1.从zip,jar,war等格式的包中读取<br>2.从Applet网络小应用中获取<br>3.运行时计算生成，动态代理技术之基础。生成形如$Proxy的代理类<br>4.其他文件中，如JSP</p>
@@ -137,7 +136,7 @@
 <h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>类加载过程的最后一步，这个阶段才真正开始执行类中定义的Java程序代码。<br>简单的说，初始化阶段就是执行类构造器<cinit>()方法的过程</cinit></p>
 <h5 id="什么是-方法"><a href="#什么是-方法" class="headerlink" title="什么是()方法"></a>什么是<cinit>()方法</cinit></h5><p>由编译器自动收集类中的所有类变量的赋值动作（咱们在准备阶段提到过）和静态语句块（static{}）中的语句合并产生，且严格按照源文件的顺序。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class TestStaticInit &#123;</div><div class="line">	static &#123;</div><div class="line">		i = 0;							//编译可以正常通过</div><div class="line">		System.out.println(i);			//非法向前引用</div><div class="line">	&#125;</div><div class="line">	static int i =1;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="类加载机的分类"><a href="#类加载机的分类" class="headerlink" title="类加载机的分类"></a>类加载机的分类</h3><a id="more"></a>
+<h3 id="类加载机的分类"><a href="#类加载机的分类" class="headerlink" title="类加载机的分类"></a>类加载机的分类</h3><!--more-->
 <h4 id="Bootstrap-ClassLoader（引导类加载器）"><a href="#Bootstrap-ClassLoader（引导类加载器）" class="headerlink" title="Bootstrap ClassLoader（引导类加载器）"></a>Bootstrap ClassLoader（引导类加载器）</h4><p>作为JVM的一部分无法在应用程序中直接引用，由C/C++实现。<br>负责范围：</p>
 <ol>
 <li><java>/jre/lib目录下特定的Jar(rt.jar)</java></li>
