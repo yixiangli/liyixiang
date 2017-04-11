@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="结构型软件工程来源于建筑，设计模式来源于生活，设计模式本身是某种特定场景下的一种解决方案，而结构型侧重于处理一些代码层次结构问题的解决方法。
 种类代理模式             Proxy适配器模式               Adapter桥接模式            Bridge装饰器模式               Decorator外观模式            Facade组合模式">
-<meta property="og:updated_time" content="2017-04-11T03:43:58.000Z">
+<meta property="og:updated_time" content="2017-04-11T03:46:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式－结构型">
 <meta name="twitter:description" content="结构型软件工程来源于建筑，设计模式来源于生活，设计模式本身是某种特定场景下的一种解决方案，而结构型侧重于处理一些代码层次结构问题的解决方法。
@@ -144,7 +144,8 @@
 <p>文件系统也可以看作是树形结构，root节点开始，分为文件和文件夹，那么就能抽出相同行为方法。而Folder（文件夹）和File（文件）分别实现自己支持的方法。那么对于客户端来说，就可以使用统一的操作接口去操作文件和文件夹。<br>但是存在的问题就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">对于组合模式来说，复杂性（安全性）／透明性是不可调和的矛盾。</div></pre></td></tr></table></figure></p>
 <p>客户端在使用统一接口时，会存在<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if (movie instanceof Folder) &#123;</div><div class="line">            Folder folder = (Folder) movie;</div><div class="line">            //下面使用folder进行文件夹独有的操作</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
 <p>复杂的逻辑判断，否则可能会出现调用不支持的操作而引起非安全性问题。</p>
-<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>多实例共享，减少内存开销（lol英雄部分属性）</p>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>多实例共享，减少内存开销（lol英雄部分属性）<br>一道经典的面试题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Integer.valueOf(&quot;1&quot;) == Integer.valueOf(&quot;1&quot;) // true还是false</div></pre></td></tr></table></figure></p>
+<p>Integer里面有个内部类IntegerCache，用于缓存一些共用的Integer。这个缓存的范围可以在jvm启动的时候进行设置。</p>
 
       
     </div>
