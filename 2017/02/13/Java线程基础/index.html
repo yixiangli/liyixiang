@@ -13,7 +13,7 @@ interrupt&amp;amp;interrupted&amp;amp;isInterruptedinterrupt是一个用于设�
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是线程线程状态new, runnable, blocked, waiting, time waiting, 或 terminated
 interrupt&amp;amp;interrupted&amp;amp;isInterruptedinterrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个">
-<meta property="og:updated_time" content="2017-04-13T09:14:27.000Z">
+<meta property="og:updated_time" content="2017-04-13T09:16:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程基础">
 <meta name="twitter:description" content="什么是线程线程状态new, runnable, blocked, waiting, time waiting, 或 terminated
@@ -147,8 +147,25 @@ public void run() {
     // TODO Auto-generated method stub
 
 }
-</code></pre><p>}<br>```</p>
-<p>这里就有疑问了，每次线程池execute不都传入一个新的Thread吗？但是仔细观察发现，其实并没有调用start()方法。对于Thread来说，要执行run方法就需要调用start()开启线程，那么简单思考就能明白，线程池帮我们做了start()方法，其实就是控制了对线程的操作，线程池在初始化的时候就根据参数创建了n个线程于池子中，每当客户端调用execute时，实际上是复用现在池子中空闲的线程，调用new Thread（）这个传入对象的run方法来执行。<br>这里一定要知道一个概念，在java的世界里，世间万物皆对象，new Thread（）只是在jvm中创建一个Thread对象，并不是真正的系统内核线程，当start时才会在系统内存中创建线程去执行，因此也要说明一点，Thread对象和真正线程所用的内存空间是不同的。</p>
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这里就有疑问了，每次线程池execute不都传入一个新的Thread吗？但是仔细观察发现，其实并没有调用start()方法。对于Thread来说，要执行run方法就需要调用start()开启线程，那么简单思考就能明白，线程池帮我们做了start()方法，其实就是控制了对线程的操作，线程池在初始化的时候就根据参数创建了n个线程于池子中，每当客户端调用execute时，实际上是复用现在池子中空闲的线程，调用new Thread（）这个传入对象的run方法来执行。</div><div class="line">这里一定要知道一个概念，在java的世界里，世间万物皆对象，new Thread（）只是在jvm中创建一个Thread对象，并不是真正的系统内核线程，当start时才会在系统内存中创建线程去执行，因此也要说明一点，Thread对象和真正线程所用的内存空间是不同的。</div><div class="line"></div><div class="line">以下是jdk的代码</div></pre></td></tr></table></figure></p>
+<p> /** </p>
+<pre><code>     * Main run loop 
+     */ 
+    public void run() { 
+        try { 
+            Runnable task = firstTask; 
+            firstTask = null; 
+            while (task != null || (task = getTask()) != null) { 
+                runTask(task);//这里最终会调用task.run() 
+                task = null; 
+            } 
+        } finally { 
+            workerDone(this); 
+        } 
+    } 
+} 
+</code></pre><p>```</p>
+<p>总结一下：<br>线程重用的核心是，它把Thread.start()给屏蔽起来了（一定不要重复调用），然后它自己有一个Runnable.run()，循环在跑，跑的过程中不断检查我们是否有新加入的子Runnable对象，有就调一下我们的run()，其实就一个大run()把其它小run()#1,run()#2,…给串联起来了，基本原理就这么简单。 </p>
 <h4 id="execute-amp-submit-区别"><a href="#execute-amp-submit-区别" class="headerlink" title="execute &amp; submit 区别"></a>execute &amp; submit 区别</h4><p>1.接收的参数不同<br>2.submit有返回值，而execute没有<br>3.submit方便Exception处理</p>
 
       
