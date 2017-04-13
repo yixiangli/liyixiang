@@ -13,11 +13,13 @@ interrupt&amp;amp;interrupted&amp;amp;isInterruptedinterrupt是一个用于设�
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是线程线程状态new, runnable, blocked, waiting, time waiting, 或 terminated
 interrupt&amp;amp;interrupted&amp;amp;isInterruptedinterrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个">
-<meta property="og:updated_time" content="2017-04-13T09:00:00.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/executor.png">
+<meta property="og:updated_time" content="2017-04-13T09:00:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java线程基础">
 <meta name="twitter:description" content="什么是线程线程状态new, runnable, blocked, waiting, time waiting, 或 terminated
 interrupt&amp;amp;interrupted&amp;amp;isInterruptedinterrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/executor.png">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -113,7 +115,7 @@ interrupt&amp;amp;interrupted&amp;amp;isInterruptedinterrupt是一个用于设�
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是线程"><span class="toc-number">1.</span> <span class="toc-text">什么是线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程状态"><span class="toc-number">1.1.</span> <span class="toc-text">线程状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupt-amp-interrupted-amp-isInterrupted"><span class="toc-number">1.1.1.</span> <span class="toc-text">interrupt&interrupted&isInterrupted</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadLocal"><span class="toc-number">1.1.2.</span> <span class="toc-text">ThreadLocal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#execute-amp-submit-区别"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">execute & submit 区别</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是线程"><span class="toc-number">1.</span> <span class="toc-text">什么是线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线程状态"><span class="toc-number">1.1.</span> <span class="toc-text">线程状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#interrupt-amp-interrupted-amp-isInterrupted"><span class="toc-number">1.1.1.</span> <span class="toc-text">interrupt&interrupted&isInterrupted</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ThreadLocal"><span class="toc-number">1.1.2.</span> <span class="toc-text">ThreadLocal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Executor"><span class="toc-number">1.1.3.</span> <span class="toc-text">Executor</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#execute-amp-submit-区别"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">execute & submit 区别</span></a></li></ol></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h1><h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p>new, runnable, blocked, waiting, time waiting, 或 terminated</p>
@@ -135,6 +137,8 @@ public void uncaughtException(Thread t, Throwable e) {
 </code></pre><p>}</p>
 <p>设置UncaughtExceptionHandler<br>Thread t = new Thread(new ThreadOne());<br>t.setUncaughtExceptionHandler(new CatchExc());<br>t.start();<br>```</p>
 <p><strong> 方案二 </strong><br>ExecutorService submit方法<br>返回一个Future对象，调用该对象的get()方法的时候再次抛出线程中的异常</p>
+<h3 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h3><p><img src="/img/executor.png" alt="类结构图"></p>
+<p>从图上看好像少了Executors类，深入源码发现Executors类主要用于提供线程池相关的操作，是一个无状态的类，可以理解为一个工具类，所有方法都是static，且构造方法私有，属于无实例的类。<br>ThreadPoolExecutor提供了多种参数配置，Executors对其进行了包装，形成了newSingleThreadExecutor，newFixedThreadPool，newCachedThreadPool等多种线程池，通过源码一读便知。</p>
 <h4 id="execute-amp-submit-区别"><a href="#execute-amp-submit-区别" class="headerlink" title="execute &amp; submit 区别"></a>execute &amp; submit 区别</h4><p>1.接收的参数不同<br>2.submit有返回值，而execute没有<br>3.submit方便Exception处理</p>
 
       
