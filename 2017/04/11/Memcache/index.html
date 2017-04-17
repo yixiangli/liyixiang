@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/hash.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache-struct.jpg">
-<meta property="og:updated_time" content="2017-04-17T09:06:58.000Z">
+<meta property="og:updated_time" content="2017-04-17T10:23:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memcache">
 <meta name="twitter:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/
@@ -120,7 +120,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Memcache"><span class="toc-number">1.</span> <span class="toc-text">Memcache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些概念"><span class="toc-number">1.1.</span> <span class="toc-text">一些概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-number">1.2.</span> <span class="toc-text">结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读写流程"><span class="toc-number">1.2.1.</span> <span class="toc-text">读写流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由算法"><span class="toc-number">1.2.2.</span> <span class="toc-text">路由算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#余数Hash"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">余数Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一致性Hash"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">一致性Hash</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存结构模型"><span class="toc-number">1.2.3.</span> <span class="toc-text">内存结构模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#几个概念"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">几个概念</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Memcache"><span class="toc-number">1.</span> <span class="toc-text">Memcache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些概念"><span class="toc-number">1.1.</span> <span class="toc-text">一些概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-number">1.2.</span> <span class="toc-text">结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读写流程"><span class="toc-number">1.2.1.</span> <span class="toc-text">读写流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由算法"><span class="toc-number">1.2.2.</span> <span class="toc-text">路由算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#余数Hash"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">余数Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一致性Hash"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">一致性Hash</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存结构模型"><span class="toc-number">1.2.3.</span> <span class="toc-text">内存结构模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#结构模型"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">结构模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存分配原理"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">内存分配原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数设置"><span class="toc-number">1.2.4.</span> <span class="toc-text">参数设置</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="Memcache"><a href="#Memcache" class="headerlink" title="Memcache"></a>Memcache</h1><p>一种分布式缓存，不啰嗦介绍，官方网站为<a href="http://memcached.org/" target="_blank" rel="external">http://memcached.org/</a></p>
@@ -136,11 +136,13 @@
 <p>如果扩容到20+的台数，只有前三个HashCode对应的Key是命中的，也就是15%，代表着绝大多数的数据都进行了迁移，如果这是个为防止数据库压力过大而设置的缓存层，那么就面临着大量报警吧。由这个case可知，缓存数据命中率随着服务扩容而大大下降，对于一套分布式缓存服务是令人难以接受的，那么有没有缓存数据命中率随着服务扩容而上升的算法呢，还真有，往下看。</p>
 <h4 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h4><p>基本原则：扩容</p>
 <h3 id="内存结构模型"><a href="#内存结构模型" class="headerlink" title="内存结构模型"></a>内存结构模型</h3><p>先看一张图：<br><img src="/img/memcache-struct.jpg" alt="Memcache内存模式"></p>
-<h4 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h4><p>从上图看，主要Memcache内存空间主要涉及slab_class、slab、page、chunk四个概念，并且互为包含的关系，下面具体介绍。</p>
+<h4 id="结构模型"><a href="#结构模型" class="headerlink" title="结构模型"></a>结构模型</h4><p>从上图看，主要Memcache内存空间主要涉及slab_class、slab、page、chunk四个概念，并且互为包含的关系，下面具体介绍。</p>
 <p><strong> slab </strong><br>MemCache将内存空间分为一组slab</p>
 <p><strong> page </strong><br>每个slab分成若干个page,每个page默认是1M,所以如果slab有100M，那么就会有100个page</p>
 <p><strong> chunk </strong><br>每个page分成若干组chunk,chunk是真正存放数据的地方，同一个slab里面的chunk的大小是固定的,也决定了slab_class</p>
 <p><strong> slab_class </strong><br>相同大小chunk的slab被组织在一起，称为slab_class</p>
+<h4 id="内存分配原理"><a href="#内存分配原理" class="headerlink" title="内存分配原理"></a>内存分配原理</h4><p>介绍完了结构模型，接下来就是探究一下内存分配的原理，先总结几个规则<br>1.一个value存放的位置由它本身的大小决定<br>2.value总是会被存放到与chunk大小最接近的一个slab中<br>3.</p>
+<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>相邻slab内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例</p>
 
       
     </div>
