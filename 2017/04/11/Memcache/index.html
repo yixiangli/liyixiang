@@ -17,10 +17,10 @@
 结构HashMap，基于内存的分布式key-value，但是注意，Memcache本身完全不具备分布式功能，首先看一张图，一个网友画的，挺不错，直接贴过来了。">
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/hash.jpg">
-<meta property="og:image" content="https://yixiangli.github.io/img/hash-ring.jpg">
-<meta property="og:image" content="https://yixiangli.github.io/img/hash-ring-addNode.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/hash-ring.png">
+<meta property="og:image" content="https://yixiangli.github.io/img/hash-ring-addNode.png">
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache-struct.jpg">
-<meta property="og:updated_time" content="2017-04-17T13:46:27.000Z">
+<meta property="og:updated_time" content="2017-04-17T13:53:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memcache">
 <meta name="twitter:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/
@@ -137,9 +137,9 @@
 <p><img src="/img/hash.jpg" alt="余数Hash伸缩例子"></p>
 <p>如果扩容到20+的台数，只有前三个HashCode对应的Key是命中的，也就是15%，代表着绝大多数的数据都进行了迁移，如果这是个为防止数据库压力过大而设置的缓存层，那么就面临着大量报警吧。由这个case可知，缓存数据命中率随着服务扩容而大大下降，对于一套分布式缓存服务是令人难以接受的，那么有没有缓存数据命中率随着服务扩容而上升的算法呢，还真有，往下看。</p>
 <h4 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h4><p>数据结构和算法不分家，先介绍下一致性Hash算法采用的数据结构</p>
-<p><img src="/img/hash-ring.jpg" alt="Hash环结构"></p>
+<p><img src="/img/hash-ring.png" alt="Hash环结构"></p>
 <p>加一个节点</p>
-<p><img src="/img/hash-ring-addNode.jpg" alt="Hash环结构加节点"></p>
+<p><img src="/img/hash-ring-addNode.png" alt="Hash环结构加节点"></p>
 <h3 id="内存结构模型"><a href="#内存结构模型" class="headerlink" title="内存结构模型"></a>内存结构模型</h3><p>先看一张图：<br><img src="/img/memcache-struct.jpg" alt="Memcache内存模式"></p>
 <h4 id="结构模型"><a href="#结构模型" class="headerlink" title="结构模型"></a>结构模型</h4><p>从上图看，主要Memcache内存空间主要涉及slab_class、slab、page、chunk四个概念，并且互为包含的关系，下面具体介绍。</p>
 <p><strong> slab </strong><br>MemCache将内存空间分为一组slab</p>
