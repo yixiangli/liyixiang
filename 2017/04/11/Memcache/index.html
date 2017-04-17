@@ -17,7 +17,7 @@
 结构HashMap，基于内存的分布式key-value，但是注意，Memcache本身完全不具备分布式功能，首先看一张图，一个网友画的，挺不错，直接贴过来了。">
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/hash.jpg">
-<meta property="og:updated_time" content="2017-04-17T03:43:25.000Z">
+<meta property="og:updated_time" content="2017-04-17T03:52:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memcache">
 <meta name="twitter:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/
@@ -132,6 +132,7 @@
 <h3 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h3><p>刚才介绍了Memcache的读写流程，提到了客户端根据Key值，通过路由算法找到相应的服务，因此Memcache路由算法重中之重。对于路由算法相信大家并不陌生，在工作中遇到比如分表，大表拆小表，都是需要相应的路由算法，而场景不同，路由算法也不尽相同，当然最常见的肯定还是余数Hash</p>
 <h4 id="余数Hash"><a href="#余数Hash" class="headerlink" title="余数Hash"></a>余数Hash</h4><p>根据对象的hashCode，做求余计算，余数相同的划分为同一区域。由于HashCode随机性比较强，所以使用余数Hash路由算法就可以保证缓存数据在整个MemCache服务器集群中有比较均衡的分布。乍一看这个方案还是很完美的，但是实际上忽略了一个重要的问题，那就是伸缩性。我提一个问题，随着业务的扩张Memcache服务集群不够用了，需要扩容，那么对于缓存数据来说就是一场灾难。文字描述的不够详细，不妨举个例子，原来有HashCode为0~19的20个数据，那么：</p>
 <p><img src="/img/hash.jpg" alt="余数Hash伸缩例子"></p>
+<p>如果扩容到20+的台数，只有前三个HashCode对应的Key是命中的，也就是15%，代表着绝大多数的数据都进行了迁移，如果这是个为防止数据库压力过大而设置的缓存层，那么就面临着大量报警吧。由这个case可知，缓存数据命中率随着服务扩容而大大下降，对于一套分布式缓存服务是令人难以接受的，那么有没有缓存数据命中率随着服务扩容而上升的算法呢，还真有，往下看。</p>
 <h4 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h4><p>基本原则：扩容</p>
 
       
