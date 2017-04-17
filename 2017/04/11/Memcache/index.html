@@ -16,7 +16,7 @@
 一些概念Memcache : 项目名称memcached : 主文件程序名
 结构HashMap，基于内存的分布式key-value，但是注意，Memcache本身完全不具备分布式功能，首先看一张图，一个网友画的，挺不错，直接贴过来了。">
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache.jpg">
-<meta property="og:updated_time" content="2017-04-13T06:30:29.000Z">
+<meta property="og:updated_time" content="2017-04-17T02:20:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memcache">
 <meta name="twitter:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/
@@ -118,7 +118,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Memcache"><span class="toc-number">1.</span> <span class="toc-text">Memcache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些概念"><span class="toc-number">1.1.</span> <span class="toc-text">一些概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-number">1.2.</span> <span class="toc-text">结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读写流程"><span class="toc-number">1.2.1.</span> <span class="toc-text">读写流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一致性Hash算法"><span class="toc-number">1.2.2.</span> <span class="toc-text">一致性Hash算法</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Memcache"><span class="toc-number">1.</span> <span class="toc-text">Memcache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些概念"><span class="toc-number">1.1.</span> <span class="toc-text">一些概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-number">1.2.</span> <span class="toc-text">结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读写流程"><span class="toc-number">1.2.1.</span> <span class="toc-text">读写流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由算法"><span class="toc-number">1.2.2.</span> <span class="toc-text">路由算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#余数Hash"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">余数Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一致性Hash"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">一致性Hash</span></a></li></ol></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="Memcache"><a href="#Memcache" class="headerlink" title="Memcache"></a>Memcache</h1><p>一种分布式缓存，不啰嗦介绍，官方网站为<a href="http://memcached.org/" target="_blank" rel="external">http://memcached.org/</a></p>
@@ -128,7 +128,9 @@
 <p>从图上得知，实现分布式，完全依赖于客户端程序调度，引出Memcache读写流程</p>
 <h3 id="读写流程"><a href="#读写流程" class="headerlink" title="读写流程"></a>读写流程</h3><p>1、外部应用输入需要写缓存的数据<br>2、API将Key输入路由算法模块，路由算法根据Key和MemCache集群服务器列表得到一台服务器编号<br>3、由服务器编号得到MemCache及其的ip地址和端口号<br>4、API调用通信模块和指定编号的服务器通信，将数据写入该服务器，完成一次分布式缓存的写操作</p>
 <p>读缓存和写缓存一样，只要使用相同的路由算法和服务器列表，只要应用程序查询的是相同的Key，MemCache客户端总是访问相同的客户端去读取数据，只要服务器中还缓存着该数据，就能保证缓存命中。</p>
-<h3 id="一致性Hash算法"><a href="#一致性Hash算法" class="headerlink" title="一致性Hash算法"></a>一致性Hash算法</h3>
+<h3 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h3><p>刚才介绍了Memcache的读写流程，提到了客户端根据Key值，通过路由算法找到相应的服务，因此Memcache路由算法重中之重。对于路由算法相信大家并不陌生，在工作中遇到比如分表，大表拆小表，都是需要相应的路由算法，而场景不同，路由算法也不尽相同，当然最常见的肯定还是余数Hash</p>
+<h4 id="余数Hash"><a href="#余数Hash" class="headerlink" title="余数Hash"></a>余数Hash</h4><h4 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h4><p>基本原则：扩容</p>
+
       
     </div>
     <footer class="article-footer">
