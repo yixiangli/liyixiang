@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/hash.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache-struct.jpg">
-<meta property="og:updated_time" content="2017-04-17T10:23:08.000Z">
+<meta property="og:updated_time" content="2017-04-17T13:23:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memcache">
 <meta name="twitter:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/
@@ -141,8 +141,8 @@
 <p><strong> page </strong><br>每个slab分成若干个page,每个page默认是1M,所以如果slab有100M，那么就会有100个page</p>
 <p><strong> chunk </strong><br>每个page分成若干组chunk,chunk是真正存放数据的地方，同一个slab里面的chunk的大小是固定的,也决定了slab_class</p>
 <p><strong> slab_class </strong><br>相同大小chunk的slab被组织在一起，称为slab_class</p>
-<h4 id="内存分配原理"><a href="#内存分配原理" class="headerlink" title="内存分配原理"></a>内存分配原理</h4><p>介绍完了结构模型，接下来就是探究一下内存分配的原理，先总结几个规则<br>1.一个value存放的位置由它本身的大小决定<br>2.value总是会被存放到与chunk大小最接近的一个slab中<br>3.</p>
-<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>相邻slab内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例</p>
+<h4 id="内存分配原理"><a href="#内存分配原理" class="headerlink" title="内存分配原理"></a>内存分配原理</h4><p>介绍完了结构模型，接下来就是探究一下内存分配的原理，先总结几个规则<br>1.一个value存放的位置由它本身的大小决定<br>2.value总是会被存放到与chunk大小最接近的一个slab中<br>3.申请内存是以page为单位的，所以在放入第一个数据的时候，无论大小为多少，都会有1M大小的page被分配给该slab。<br>4.slab内存满后会通过LRU算法进行回收（前提是必须开启-M）,且MemCache的LRU算法不是针对全局的，只是针对slab的<br>5.MemCache存放的value大小是有限制的，最大1M,原因就是page为1M</p>
+<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>-f<br>相邻slab内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例<br>-M<br>如果MemCache启动没有追加-M（禁止LRU，这种情况下slab内存不够会报Out Of Memory错误)</p>
 
       
     </div>
