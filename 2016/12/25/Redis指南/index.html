@@ -27,7 +27,7 @@ list
 hash
 set
 sorted set">
-<meta property="og:updated_time" content="2017-04-22T09:04:38.000Z">
+<meta property="og:updated_time" content="2017-04-22T09:09:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis指南">
 <meta name="twitter:description" content="概述废话不多说，官方文档在此http://doc.redisfans.com
@@ -161,122 +161,15 @@ sorted set">
 <h4 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h4><p>String 存入字符类型<br>        set name yixiangli  设置name = yixiangli 存储<br>        get name                获取设置好的name的值<br>        setnx name yixiangli 设置name键值为yixiangli 如果存在,则返回0 不存在返回1<br>        mset name yixiangli  age 23 salary 100000 设置多个键值对 (全成功,全失败)<br>        msetnx name xiaoyu age 23 hoby sleep 如果设置多个键值对中有存在则返回失败<br>        mget name age salary 获取多个键的值<br>        getset name xiaoyu 获取name的值,并设置新的值为xiaoyu<br>        setrange name 4 zhu 将键name 4个字符后面的进行替换 结果为xiaozhu<br>        getrange name 4 6 获取键name的值 结果为zhu<br>        append name .com 给键name追加.com,结果为xiaozhu.com<br>        incr age 设置每个值自增 返回结果为24<br>        incrby age 6 给age加上6 如果是负数则减<br>        decr 与incr相反<br>        decrby 与decrby相反<br>        strlen 返回键对应的值得字符长度</p>
 <h3 id="hash-Hash类型"><a href="#hash-Hash类型" class="headerlink" title="hash(Hash类型)"></a>hash(Hash类型)</h3><p>Hash 方便存对象,键值对<br>        hset user:001 name yixiangli   设置哈希表名user:001 key:name value:yixiangli<br>        hsetnx user name yixiangli    设置哈希表名字中的name,若已存在,则设置不成功<br>        hget user:001 name 获取hash表名为user001的键值对<br>        hmset user:003 name yixiangli age 23 批量设置<br>        hmget user:003 name age 批量获取user:003的值<br>        hincrby user:003 age 3     给hash表的age值加上3<br>        hexists user:003 name 判断hash表中式否存在name的键<br>        hlen user:003 返回hash表的所有的字段的数目<br>        hkeys user:003 返回hash表的所有字段<br>        hvals user:003 返回hash表中所有的值<br>        hgetall user:003 返回所有的字段和值<br>        hdel user:003 name 对hash的name的值和键删除</p>
 <h3 id="List-双向链表"><a href="#List-双向链表" class="headerlink" title="List(双向链表)"></a>List(双向链表)</h3><p>栈:先进后出 队列:先进先出<br>    lpush 从头压入<br>        lpush list1 “world”<br>        lpush list1 “hello”<br>        lrange list1 0 -1 把链表中的数据从头到尾全部取出<br>        结果： hello world<br>    rpush 从尾部压入<br>        rpush list2 “world”<br>        rpush list2 “hello”<br>        lrange list2 0 -1<br>        结果： world hello<br>    linsert 插入数据<br>        rpush list3 yixiangli<br>        rpush list3 xiaoyu<br>        lrange list3 0 -1<br>        linsert list3 before xiaoyu love<br>        lrange list3 0 -1<br>        linsert list3 after yixiangli love<br>        lrange list3 0 -1<br>    lset 替换<br>        rpush list5 yixiangli<br>        rpush list5 xiaoyu<br>        lset list5 0 “demo”<br>    lrem 删除list表中的数据<br>        rpush list6 yixiang1<br>        rpush list6 yixiang2<br>        rpush list6 yixiang3<br>        rpush list6 yixiang4<br>        rpush list6 yixiang5<br>        lrem list6 1 yixiang1<br>        删除list6 中值为yixiang1的值<br>     ltrim 保留范围<br>        lpush list7 yixiang1<br>        lpush list7 yixiang2<br>        lpush list7 yixiang3<br>        lpush list7 yixiang4<br>        lpush list7 yixiang5<br>        ltrim list7 1 2 (1 2 为保留的范围)<br>        lpush list7 yixiang2<br>        lpush list7 yixiang3<br>     lpop 从链表的头部弹出一个元素<br>        lpush list8 yixiang1<br>        lpush list8 yixiang2<br>        lpush list8 yixiang3<br>        lpop list8<br>        lpush list8 yixiang2<br>        lpush list8 yixiang3<br>     rpop 从链表的尾部弹出一个元素<br>        lpush list8 yixiang1<br>        lpush list8 yixiang2<br>        lpush list8 yixiang3<br>        rpop list8<br>        lpush list8 yixiang1<br>        lpush list8 yixiang2<br>     rpoplpush 从一个链表弹出,在从头部压入到另一个链表<br>        List demo1<br>        Demo1A<br>        Demo1B<br>        Demo1C<br>        List demo2<br>        Demo2A<br>        Demo2B<br>        Demo2C<br>        命令：rpoplpush demo1 demo2<br>        结果:<br>        List demo1<br>        Demo1A<br>        Demo1B<br>        List demo2<br>        Demo1C<br>        Demo2A<br>        Demo2B<br>        Demo2C<br>     lindex 返回一个list小标的索引值<br>        List11<br>        one<br>        two<br>        命令： lindex list11 1(list小标)<br>        two<br>        lindex list11 0<br>        one<br>     llen 返回这个链表的元素的长度</p>
-<h3 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set(集合)"></a>Set(集合)</h3><pre><code>sadd 向集合中插入一条数据
-    sadd myset1 yixiang
-srem 删除集合中的一个元素
-    srem myset1 yixiang
-smembers 查看集合中的元素
-    smembers myset1
-spop 从集合随机弹出一个元素,返回键值
-sdiff 两个集合的差集 返回两个集合不一样的,根据第一个集合为标准
-setdemo1
-one
-two
-setdemo2
-one 
-three    
-sdiff setdemo1 setdemo2
-two(与setdemo2不一样)
-sdiff setdemo2 setdeo1
-three(与setdemo1 不一样)
-sdiffstroe 将两个差集存储到另外一个集合 
-sdiffstore setdemo1 setdemo2 setdemo3
-将setdemo1 setdemo2 的差集放到 setdemo3中
-sinter 将两个集合的交集
-sinterstore 将两个集合的交集存储到另外一个集合中
-sunion 将两个集合并集
-sunionstore 将两个集合并集并存储到另外一个集合中
-smove 将以个集合中的元素移动到另外一个集合中
-eg smove myset1 mysetA two mysetB 集合中的two元素移动到mysetB中
-scard 查看集合中元素的个数
-scard myset1查看myset12元素的个数
-sismember 判断是否是集合中的元素
-sismember myset13 yixiang 判断yixiang是否在myset13中的元素
-srandmember myset14 随机取出myset1 中的元素
-</code></pre><h3 id="Sorted-set-有序集合"><a href="#Sorted-set-有序集合" class="headerlink" title="Sorted set(有序集合)"></a>Sorted set(有序集合)</h3><pre><code>zadd 添加到有序集合中区
-zadd myzsent 1 yixiang1
-zadd myzsent 2 yixiang2
-zadd myzsent 3 yixiang3
-zadd myzsent 4 yixiang4
-zrange myzsent 0 -1 withscores 
-zrem 删除有序集合中的元素
-zrem myzsent yixiang1 删除myzsent集合中的yixiang1   
-zincrby myzsent yixiang1 3将myzsent luown1的序号更改为4
-如果没有,就创建他   
-zrank 找到myzsent 对应值得索引
-zrevrank 反过来去索引
-zrangebyscore 返回集合中指定的元素
-zrangebyscore mysetdeom 2 5 withscores
-返回mysetdemo中2-5中的元素
-zcount 返回指定空间的数量
-zcount myset 2  4 返回2 4中的元素个数
-zcard 返回集合中所有元素的个数
-zremrangbyrank 删除集合中指定区间的元素,并将索引进行排序
-zremrangbyscore 删除集合中指定元素,按循序进行排序
-</code></pre><h3 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h3><pre><code>key-values
-1 keys * 匹配键所有的键. 模糊匹配 keys my* 取出所有以my开头的键
-2 exists 判断是否键 exists name判断是否有name这个键是否存在
-3 del 删除键 del name 删除name的键
-4 expire 设置过期时间 expire key time 
-5 ttl key 查看键的过期时间
-6 select database 选择数据库
-7 move key dababase1 讲key移动dao database1中的数据库中
-8 persist 取消键的过期时间 
-9 randomkey 随机返回一个键的值
-10 rename 重命名一个键
-11 type key 判断key的数据类型
-
-Server
-1 ping ping我们的主机能否链接 链接是否存活
-2 echo 命令 echo demo直接输出
-3 select 选择数据库 select 0-16个数据库
-4 quit exit 退出链接
-5 dbsize 返回数据库的键的个数
-6 info 返回服务器相关信息
-7 config get 返回服务配置信息
-8 flush db 清空数据库
-9 flushall 删除所有数据库中所有的键
-</code></pre><h2 id="高级应用"><a href="#高级应用" class="headerlink" title="高级应用"></a>高级应用</h2><pre><code>1 在配置文件里面设置 requirepass password
-2 进入后 auth 密码 进行授权 方法二: 登入或在后面加上 –a 加上密码
-3 主从复制:
-    One: 一个master服务器可以拥有多个slave
-    Two: 一个salve可以有多个master 并且还可以与其他的salve相连接
-配置salve
-    打开salveof注释 并添加主机的ip以及端口
-    主机加了密码的时候还需要配置masterauth 密码
-4 redis 的事务处理
-    输入:multi 打开一个上下文
-    set age 10
-    set age 144
-
-    上面的全部放入队列最后执行
-    exec 
-    最后age为144
-    回滚
-    discard    
-
-    watch 监视键的命令
-
-5 Redis的持久化
-    方式一:  snapshotting (快照)将内存的数据写入到文件中 save 500 32 500秒内有32个键发生变化则发起快照到文件中
-    方式二: append only file 将没次写修改的命令保存到文件中
-    配置:打开append only
-            Appendfsync yes
-            Appendfsync always 每次都写入
-            Appendfsync everysec    每个一秒写入
-            Appendfsync no    不写入
-6 发布和订阅消息
-    订阅:
-　　 subscribe tv1 tv2 订阅了两个频道
-    发布:
-    publish tv1 yixiangli
-    注:publish tv1的信息 订阅的信息都可以收到
-7 虚拟内存
-    方式一:暂时把不使用的数据放到硬盘里面
-　方式二:可以把数据分割到其他的slave数据服务器中
-　
-　
-</code></pre><h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<h3 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set(集合)"></a>Set(集合)</h3><p>   sadd 向集合中插入一条数据<br>      sadd myset1 yixiang<br>      srem 删除集合中的一个元素<br>   srem myset1 yixiang<br>      smembers 查看集合中的元素<br>      smembers myset1<br>      spop 从集合随机弹出一个元素,返回键值<br>      sdiff 两个集合的差集 返回两个集合不一样的,根据第一个集合为标准<br>   setdemo1<br>      one<br>      two<br>   setdemo2<br>      one<br>      three<br>   sdiff setdemo1 setdemo2<br>      two(与setdemo2不一样)<br>   sdiff setdemo2 setdeo1<br>      three(与setdemo1 不一样)<br>   sdiffstroe 将两个差集存储到另外一个集合<br>   sdiffstore setdemo1 setdemo2 setdemo3<br>   将setdemo1 setdemo2 的差集放到 setdemo3中<br>   sinter 将两个集合的交集<br>   sinterstore 将两个集合的交集存储到另外一个集合中<br>   sunion 将两个集合并集<br>   sunionstore 将两个集合并集并存储到另外一个集合中<br>   smove 将以个集合中的元素移动到另外一个集合中<br>   eg smove myset1 mysetA two mysetB 集合中的two元素移动到mysetB中<br>   scard 查看集合中元素的个数<br>   scard myset1查看myset12元素的个数<br>   sismember 判断是否是集合中的元素<br>   sismember myset13 yixiang 判断yixiang是否在myset13中的元素<br>   srandmember myset14 随机取出myset1 中的元素</p>
+<h3 id="Sorted-set-有序集合"><a href="#Sorted-set-有序集合" class="headerlink" title="Sorted set(有序集合)"></a>Sorted set(有序集合)</h3><p>   zadd 添加到有序集合中区<br>   zadd myzsent 1 yixiang1<br>   zadd myzsent 2 yixiang2<br>   zadd myzsent 3 yixiang3<br>        zadd myzsent 4 yixiang4<br>        zrange myzsent 0 -1 withscores<br>        zrem 删除有序集合中的元素<br>        zrem myzsent yixiang1 删除myzsent集合中的yixiang1<br>        zincrby myzsent yixiang1 3将myzsent luown1的序号更改为4<br>        如果没有,就创建他<br>        zrank 找到myzsent 对应值得索引<br>        zrevrank 反过来去索引<br>        zrangebyscore 返回集合中指定的元素<br>        zrangebyscore mysetdeom 2 5 withscores<br>        返回mysetdemo中2-5中的元素<br>        zcount 返回指定空间的数量<br>        zcount myset 2  4 返回2 4中的元素个数<br>        zcard 返回集合中所有元素的个数<br>        zremrangbyrank 删除集合中指定区间的元素,并将索引进行排序<br>        zremrangbyscore 删除集合中指定元素,按循序进行排序</p>
+<h3 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h3><p>   key-values<br>    1 keys <em> 匹配键所有的键. 模糊匹配 keys my</em> 取出所有以my开头的键<br>    2 exists 判断是否键 exists name判断是否有name这个键是否存在<br>    3 del 删除键 del name 删除name的键<br>    4 expire 设置过期时间 expire key time<br>    5 ttl key 查看键的过期时间<br>    6 select database 选择数据库<br>    7 move key dababase1 讲key移动dao database1中的数据库中<br>    8 persist 取消键的过期时间<br>    9 randomkey 随机返回一个键的值<br>    10 rename 重命名一个键<br>    11 type key 判断key的数据类型</p>
+<p>   Server<br>    1 ping ping我们的主机能否链接 链接是否存活<br>    2 echo 命令 echo demo直接输出<br>    3 select 选择数据库 select 0-16个数据库<br>    4 quit exit 退出链接<br>    5 dbsize 返回数据库的键的个数<br>    6 info 返回服务器相关信息<br>    7 config get 返回服务配置信息<br>    8 flush db 清空数据库<br>    9 flushall 删除所有数据库中所有的键</p>
+<h2 id="高级应用"><a href="#高级应用" class="headerlink" title="高级应用"></a>高级应用</h2><p>1 在配置文件里面设置 requirepass password<br>2 进入后 auth 密码 进行授权 方法二: 登入或在后面加上 –a 加上密码<br>3 主从复制:<br>        One: 一个master服务器可以拥有多个slave<br>        Two: 一个salve可以有多个master 并且还可以与其他的salve相连接<br>    配置salve<br>        打开salveof注释 并添加主机的ip以及端口<br>        主机加了密码的时候还需要配置masterauth 密码<br>4 redis 的事务处理<br>    输入:multi 打开一个上下文<br>        set age 10<br>        set age 144<br>    上面的全部放入队列最后执行<br>        exec<br>    最后age为144<br>    回滚<br>        discard<br>    watch 监视键的命令</p>
+<p>5 Redis的持久化<br>    方式一:  snapshotting (快照)将内存的数据写入到文件中 save 500 32 500秒内有32个键发生变化则发起快照到文件中<br>    方式二: append only file 将没次写修改的命令保存到文件中<br>    配置:打开append only<br>        Appendfsync yes<br>        Appendfsync always 每次都写入<br>        Appendfsync everysec    每个一秒写入<br>        Appendfsync no    不写入<br>6 发布和订阅消息<br>    订阅:<br>    　　 subscribe tv1 tv2 订阅了两个频道<br>    发布:<br>        publish tv1 yixiangli<br>    注:publish tv1的信息 订阅的信息都可以收到<br>7 虚拟内存<br>    方式一:暂时把不使用的数据放到硬盘里面<br>    方式二:可以把数据分割到其他的slave数据服务器中
+    　
+    　</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
 <li>redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool<br>原因：连接不上Redis</li>
 </ol>
 <h3 id="内部结构实现"><a href="#内部结构实现" class="headerlink" title="内部结构实现"></a>内部结构实现</h3><h4 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h4><p>dict是一个用于维护key和value映射关系的数据结构，与很多语言中的Map或dictionary类似。在Redis中，dict是一个基于哈希表的算法，而Redis的dict实现最显著的一个特点，就在于它的重哈希。它采用了一种称为增量式重哈希（incremental rehashing）的方法</p>
