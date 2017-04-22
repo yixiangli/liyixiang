@@ -107,20 +107,20 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="Spring源码分析"><a href="#Spring源码分析" class="headerlink" title="Spring源码分析"></a>Spring源码分析</h1><p>源码分析不啰嗦，直接跟代码</p>
 <h2 id="Bean加载"><a href="#Bean加载" class="headerlink" title="Bean加载"></a>Bean加载</h2><h3 id="ClassPathXmlApplicationContext"><a href="#ClassPathXmlApplicationContext" class="headerlink" title="ClassPathXmlApplicationContext"></a>ClassPathXmlApplicationContext</h3><p><strong>类型：</strong> 类<br><strong>作用：</strong> 加载CLASSPATH下的Spring配置文件<br><strong>使用：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ApplicationContext ac = new ClassPathXmlApplicationContext(&quot;spring-xxx.xml&quot;);</div><div class="line">ac.getBean(XXX.class);</div></pre></td></tr></table></figure>
-<p>一共两行代码，第一行对Bean进行加载，第二行就是获取Bean的实例，因此想要了解Bean加载流程，直接跟进ClassPathXmlApplicationContext</p>
-<p><strong>源码分析过程：</strong><br>1.构造方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent)</div><div class="line">			throws BeansException &#123;</div><div class="line"></div><div class="line">		super(parent);</div><div class="line">		setConfigLocations(configLocations);</div><div class="line">		if (refresh) &#123;</div><div class="line">			refresh();</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ApplicationContext ac = new ClassPathXmlApplicationContext(&quot;classpath*:spring/applicationContext.xml&quot;);</div><div class="line">ac.getBean(XXX.class);</div></pre></td></tr></table></figure>
+<p>一共两行代码，第一行对Bean进行加载，第二行就是获取Bean的实例，因此想要了解Bean加载流程，直接跟进ClassPathXmlApplicationContext<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/04/22/Spring源码分析（一）/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/22/Spring源码分析（一）/" data-id="cj1t2ckt3001ztds6o8epfo9r" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/22/Spring源码分析（一）/" data-id="cj1te4prz0023xrs6lbwq58gb" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/22/Spring源码分析（一）/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/22/Spring源码分析（一）/">评论</a>
@@ -171,7 +171,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/18/处理JSON大文件的几种方案/" data-id="cj1t2ckts002rtds669o8t3d7" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/18/处理JSON大文件的几种方案/" data-id="cj1te4psc002nxrs69tlpeyay" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/18/处理JSON大文件的几种方案/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/18/处理JSON大文件的几种方案/">评论</a>
@@ -224,7 +224,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/17/2017-3-16回乡有感/" data-id="cj1t2ckqm0000tds6ilyzbrob" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/17/2017-3-16回乡有感/" data-id="cj1te4ppl0004xrs6ttfeuyh9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/17/2017-3-16回乡有感/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/17/2017-3-16回乡有感/">评论</a>
@@ -273,7 +273,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/17/缓存概述/" data-id="cj1t2cktq002qtds66qoaj9dm" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/17/缓存概述/" data-id="cj1te4psi002xxrs6gvilhsqc" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/17/缓存概述/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/17/缓存概述/">评论</a>
@@ -326,7 +326,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/11/Memcache/" data-id="cj1t2cksl0018tds6776ghoxc" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/11/Memcache/" data-id="cj1te4prb0019xrs6krox3i0s" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/11/Memcache/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/11/Memcache/">评论</a>
