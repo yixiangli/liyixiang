@@ -15,7 +15,7 @@ Bean加载ClassPathXmlApplicationContext类型： 类作用： 加载CLASSPATH�
 <meta property="og:description" content="Spring源码分析源码分析不啰嗦，直接跟代码
 Bean加载ClassPathXmlApplicationContext类型： 类作用： 加载CLASSPATH下的Spring配置文件使用：
 12ApplicationContext ac = new ClassPathXmlApplicationContext(&amp;quot;classpath*:spring/applicationContext.">
-<meta property="og:updated_time" content="2017-04-23T13:32:21.000Z">
+<meta property="og:updated_time" content="2017-04-23T13:51:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring源码分析（一）">
 <meta name="twitter:description" content="Spring源码分析源码分析不啰嗦，直接跟代码
@@ -116,7 +116,7 @@ Bean加载ClassPathXmlApplicationContext类型： 类作用： 加载CLASSPATH�
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring源码分析"><span class="toc-number">1.</span> <span class="toc-text">Spring源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean加载"><span class="toc-number">1.1.</span> <span class="toc-text">Bean加载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassPathXmlApplicationContext"><span class="toc-number">1.1.1.</span> <span class="toc-text">ClassPathXmlApplicationContext</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prepareRefresh"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">prepareRefresh</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring源码分析"><span class="toc-number">1.</span> <span class="toc-text">Spring源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean加载"><span class="toc-number">1.1.</span> <span class="toc-text">Bean加载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassPathXmlApplicationContext"><span class="toc-number">1.1.1.</span> <span class="toc-text">ClassPathXmlApplicationContext</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prepareRefresh"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">prepareRefresh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#obtainFreshBeanFactory"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">obtainFreshBeanFactory</span></a></li></ol></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="Spring源码分析"><a href="#Spring源码分析" class="headerlink" title="Spring源码分析"></a>Spring源码分析</h1><p>源码分析不啰嗦，直接跟代码</p>
@@ -136,6 +136,8 @@ Bean加载ClassPathXmlApplicationContext类型： 类作用： 加载CLASSPATH�
 <p>在这里不得不提一个spring源码的精妙，在处理线程并发时大量使用了对象锁，而不是synchronized整体，因为使用对象锁可以减小同步的范围，只对不能并发的代码块进行加锁，提高了整体代码运行的效率。<br>特意强调一下initPropertySources()这个方法，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protected void initPropertySources() &#123;</div><div class="line">		// For subclasses: do nothing by default.</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 <p>跟代码会发现其实在本类AbstractApplicationContext中是个空实现，而且据了解initPropertySources()调用这一步也是在spring3.x之后的某个版本加上的，属于方法的扩展，而AbstractApplicationContext类为了做兼容，并不在本类方法中做实现，这样对于之前继承该类的类无影响，如果有些类需要实现initPropertySources()，重写便是。</p>
+<h4 id="obtainFreshBeanFactory"><a href="#obtainFreshBeanFactory" class="headerlink" title="obtainFreshBeanFactory"></a>obtainFreshBeanFactory</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">protected ConfigurableListableBeanFactory obtainFreshBeanFactory() &#123;</div><div class="line">		refreshBeanFactory();</div><div class="line">		ConfigurableListableBeanFactory beanFactory = getBeanFactory();</div><div class="line">		if (logger.isDebugEnabled()) &#123;</div><div class="line">			logger.debug(&quot;Bean factory for &quot; + getDisplayName() + &quot;: &quot; + beanFactory);</div><div class="line">		&#125;</div><div class="line">		return beanFactory;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>看了这段代码，主要点在于以下两个方法<br>refreshBeanFactory()<br>getBeanFactory()</p>
 
       
     </div>
