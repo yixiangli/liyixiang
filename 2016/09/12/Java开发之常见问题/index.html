@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
 常见问题">
-<meta property="og:updated_time" content="2017-04-12T06:45:53.000Z">
+<meta property="og:updated_time" content="2017-04-24T09:53:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java开发之常见问题">
 <meta name="twitter:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
@@ -113,7 +113,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven"><span class="toc-number">1.1.1.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Errors"><span class="toc-number">1.1.2.</span> <span class="toc-text">Java Errors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Exception"><span class="toc-number">1.1.3.</span> <span class="toc-text">Java Exception</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-env"><span class="toc-number">1.1.4.</span> <span class="toc-text">Mac env</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-Eclipse"><span class="toc-number">1.1.5.</span> <span class="toc-text">Mac Eclipse</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven"><span class="toc-number">1.1.1.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Errors"><span class="toc-number">1.1.2.</span> <span class="toc-text">Java Errors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-env"><span class="toc-number">1.1.3.</span> <span class="toc-text">Mac env</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-Eclipse"><span class="toc-number">1.1.4.</span> <span class="toc-text">Mac Eclipse</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案</p>
@@ -133,12 +133,6 @@
 <p>2.There is an error in invoking javac.  A full JDK (not just JRE) is required </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">新建一个工程后，访问index.jsp,时报500</div></pre></td></tr></table></figure>
 <p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">	&lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;</div><div class="line">	&lt;artifactId&gt;jsp-2.1-glassfish&lt;/artifactId&gt;</div><div class="line">	&lt;version&gt;9.1.02.B04.p0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure></p>
-<h3 id="Java-Exception"><a href="#Java-Exception" class="headerlink" title="Java Exception"></a>Java Exception</h3><p>1.解决 - java.lang.OutOfMemoryError： unable to create new native thread</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这个Exception是一次同事在做全量数据同步时，每条消息都需要创建一个线程，并向下游发消息导致，而且在本地Mac上跑的case，因此，一般出现这个问题的本质原因是我们创建了太多的线程，而能创建的线程数是有限制的，导致了异常的发生。</div></pre></td></tr></table></figure>
-<p>解决方案：</p>
-<p>首先我们来看一下一个应用进程能创建的线程数的具体计算公式： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(MaxProcessMemory - JVMMemory - ReservedOsMemory) / (ThreadStackSize) = Number of threads </div><div class="line"></div><div class="line">MaxProcessMemory 	指的是一个进程的最大内存</div><div class="line">JVMMemory         	JVM内存</div><div class="line">ReservedOsMemory  	保留的操作系统内存</div><div class="line">ThreadStackSize     线程栈的大小</div></pre></td></tr></table></figure>
-<p>这里解释下公式：<br>    在java语言里， 当你创建一个线程的时候，虚拟机会在JVM内存创建一个Thread对象同时创建一个操作系统线程，而这个系统线程的内存用的不是JVMMemory，而是系统中剩下的内存(MaxProcessMemory - JVMMemory - ReservedOsMemory)。 </p>
 <h3 id="Mac-env"><a href="#Mac-env" class="headerlink" title="Mac env"></a>Mac env</h3><p>1.cd Internet Plug-Ins — No such file or directory</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Mac下中java目录会被放到一个叫Internet Plug-Ins的目录下，看到了吧，这目录还带空格，怎么(cd)处理呢？</div></pre></td></tr></table></figure>
 <p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd Internet\ Plug-Ins/</div></pre></td></tr></table></figure></p>
