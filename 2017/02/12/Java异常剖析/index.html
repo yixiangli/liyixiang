@@ -14,7 +14,7 @@
 <meta property="og:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。
 异常分类还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。先发一张图">
 <meta property="og:image" content="https://yixiangli.github.io/img/exception.jpg">
-<meta property="og:updated_time" content="2017-04-24T09:55:32.000Z">
+<meta property="og:updated_time" content="2017-04-24T09:56:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java异常剖析">
 <meta name="twitter:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。
@@ -152,7 +152,7 @@
 <p>首先我们来看一下一个应用进程能创建的线程数的具体计算公式： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(MaxProcessMemory - JVMMemory - ReservedOsMemory) / (ThreadStackSize) = Number of threads </div><div class="line"></div><div class="line">MaxProcessMemory 	指的是一个进程的最大内存</div><div class="line">JVMMemory         	JVM内存</div><div class="line">ReservedOsMemory  	保留的操作系统内存</div><div class="line">ThreadStackSize     线程栈的大小</div></pre></td></tr></table></figure>
 <p>这里解释下公式：<br>    在java语言里， 当你创建一个线程的时候，虚拟机会在JVM内存创建一个Thread对象同时创建一个操作系统线程，而这个系统线程的内存用的不是JVMMemory，而是系统中剩下的内存(MaxProcessMemory - JVMMemory - ReservedOsMemory)。 </p>
-<p>另外值得我们深思的是，何时会抛出OutOfMemoryException，其实并不是内存被耗空的时候才抛出<br>1.JVM98%的时间都花费在内存回收<br>2.每次回收的内存小于2%<br>   满足这两个条件将触发OutOfMemoryException，这将会留给系统一个微小的间隙以做一些Down之前的操作，比如手动打印Heap Dump。</p>
+<p>另外值得我们深思的是，何时会抛出OutOfMemoryException，其实并不是内存被耗空的时候才抛出<br>1.JVM98%的时间都花费在内存回收<br>2.每次回收的内存小于2%<br>   满足这两个条件将触发OutOfMemoryException，这将会留给系统一个微小的间隙以做一些Down之前的操作，比如手动打印Heap Dump或者JVM启动参数中加入-Xrunprof:heap=sites参数，但是对JVM性能影响非常大，不建议在线上服务器环境使用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javac -J-agentlib:hprof=heap=dump Hello.java</div></pre></td></tr></table></figure>
       
     </div>
