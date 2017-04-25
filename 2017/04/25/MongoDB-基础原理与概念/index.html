@@ -14,7 +14,7 @@
 <meta property="og:description" content="前言近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。
 主从复制学过DB的同学应该都清楚，主从复制是一个简单的数据库同步备份的集群技术，不仅仅是MongoDB,关系型数据库也是如此。基本原理就是一个Master节点对外提供写服务，多个">
 <meta property="og:image" content="https://yixiangli.github.io/img/ReplicsSet.jpg">
-<meta property="og:updated_time" content="2017-04-25T07:31:27.000Z">
+<meta property="og:updated_time" content="2017-04-25T07:43:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB-基础原理与概念">
 <meta name="twitter:description" content="前言近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。
@@ -123,7 +123,9 @@
 <h2 id="副本集"><a href="#副本集" class="headerlink" title="副本集"></a>副本集</h2><p>与主从复制所能达到的效果类似。主从复制模型中的Master相当于副本集中的“活跃”节点；Slave相当于“备份”节点。借助网上的一张图片</p>
 <p><img src="/img/ReplicsSet.jpg" alt="副本集"></p>
 <p>图中三张图描述了出现故障后MongoDB副本集自动作出的一种容灾机制，看到这个很多人可能就想到了分布式协调中间件Zookeeper，其中主要特性就是leader选举。</p>
-<h3 id="选举机制"><a href="#选举机制" class="headerlink" title="选举机制"></a>选举机制</h3><p>选举前我们先搞清楚哪些人参加选举（想了解Zookeeper选举请看我的相关博客）<br>主节点、副本节点和仲裁者节点。</p>
+<h3 id="选举机制"><a href="#选举机制" class="headerlink" title="选举机制"></a>选举机制</h3><p>选举前我们先搞清楚哪些人参加选举（想了解Zookeeper选举请看我的相关博客）<br><strong>主要参与人员：</strong><br>主节点：负责所有的数据库写操作，默认情况下，主节点也负责处理所有的数据库读操作；<br>副本节点：负责同步主节点的数据操作日志更新本地数据库，从而保证副本节点的数据和主节点上的数据的一致性；副本节点的从某种意义上来讲有点像赛跑，永远在追赶主节点的数据操作；<br>仲裁节点：不负责保存具体的数据，只是在副本集进行主节点选举时提供自己的一个选票而已。</p>
+<p><strong>其他酱油人员：</strong><br>Secondary-Only（只从）：和副本节点一样保存了主节点的数据副本，但是在任何情况下都成为不了Primary主节点；<br>Hidden（隐藏）：这种类型的节点对于客户端程序是不可见的，同样不能成为Primary主节点，但是可以参与投票；<br>Delayed（懒）：这种类型的节点可以通过人为的设置，可以指定一个时间来延迟从主节点同步数据，Delayed成员主要用于从一些误操作中恢复旧数据，并且肯定不能成为主节点而且是Hidden的；</p>
+<p><strong>一些介绍</strong><br>1.节点的真正身份都是通过设置来归属的，有点像狼人杀的法官发牌。<br>2.每个节点都有优先级的概念，默认是1，Secondary-Only是0，因此该成员将永远不能够成为主节点<br>3.Hidden（隐藏）节点使用rs.status()和rs.config()能够被看到，而isMaster()不可见，对调用方来讲，客户端连接到副本集时，首先会调用isMaster()来查看可用成员，因此“隐藏“只是相对，也算是对每一个节点的一种保护措施吧，至少在工作中，我们遇到有些节点同步跟不上都会把它隐藏，先对客户端不可见，减少对客户端的影响。<br>4.Delayed节点主要用于定时备份，保证由于数据变化而可恢复到某一状态的一种手段。</p>
 <h3 id="副本集的设计"><a href="#副本集的设计" class="headerlink" title="副本集的设计"></a>副本集的设计</h3><p>看sunshine同学写的不错，直接拿过来</p>
 <ul>
 <li>将大多数成员放在同一个数据中心。这样的话，你将拥有一个主数据中心，并且主节点总是位于主数据中心。</li>
