@@ -14,7 +14,7 @@
 <meta property="og:description" content="前言近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。
 主从复制学过DB的同学应该都清楚，主从复制是一个简单的数据库同步备份的集群技术，不仅仅是MongoDB,关系型数据库也是如此。基本原理就是一个Master节点对外提供写服务，多个">
 <meta property="og:image" content="https://yixiangli.github.io/img/ReplicsSet.jpg">
-<meta property="og:updated_time" content="2017-04-25T07:43:12.000Z">
+<meta property="og:updated_time" content="2017-04-25T07:46:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB-基础原理与概念">
 <meta name="twitter:description" content="前言近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。
@@ -115,7 +115,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-number">1.1.</span> <span class="toc-text">主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#副本集"><span class="toc-number">1.2.</span> <span class="toc-text">副本集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选举机制"><span class="toc-number">1.2.1.</span> <span class="toc-text">选举机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#副本集的设计"><span class="toc-number">1.2.2.</span> <span class="toc-text">副本集的设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-number">1.1.</span> <span class="toc-text">主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#副本集"><span class="toc-number">1.2.</span> <span class="toc-text">副本集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选举机制"><span class="toc-number">1.2.1.</span> <span class="toc-text">选举机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#副本集的设计"><span class="toc-number">1.2.2.</span> <span class="toc-text">副本集的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同步"><span class="toc-number">1.2.3.</span> <span class="toc-text">同步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。</p>
@@ -131,6 +131,7 @@
 <li>将大多数成员放在同一个数据中心。这样的话，你将拥有一个主数据中心，并且主节点总是位于主数据中心。</li>
 <li>在两个数据中心放置数量相等的成员，在第三个位置放置一个用于天平走向的副本集成员。如果两个数据中心同等重要，这样的配置比较好，因为任意一个数据中心的服务器都可以找到另一台服务器以达到大多数。</li>
 </ul>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>刚才说了这么多MongoDB模型，有个问题，数据是怎么同步的？在MongoDB中，复制功能是使用操作日志oplog实现的。操作日志包含了主节点的每次操作。oplog是位于local数据库中的一个固定集合（具体表现为oplog.rs）。副本节点通过查询这个集合就可以知道需要进行复制的操作。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>目前在Mongodb的官方说法中已经不推荐使用master/slave/模式，推荐使用副本集模式，应为该模式不但实现了主从模式的读写分离，而且有自己的一套选举机制，能通过自己的算法，选举出当前最优的节点作为活跃节点，一旦活跃节点宕机，选举出来的新的节点将成为活跃节点对外提供服务，其他节点则继续作为复制节点，当原先的活跃节点恢复，会自动作为非活跃节点（备份节点）存在。</p>
 
       
