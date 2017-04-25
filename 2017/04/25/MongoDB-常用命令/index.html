@@ -5,22 +5,24 @@
   
   <title>MongoDB-常用命令 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常用命令学习命令，按照我们平时使用的场景与步骤来讲解
-连接mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin
+  <meta name="description" content="常用命令学习命令，按照我们平时使用的场景与步骤来讲解，循序渐进
+系统命令连接mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin
 参数详解：–port ： 端口–host ： 地址-u ： 用户-p ： 密码–authenticationDatabase ： 验证权限的数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB-常用命令">
 <meta property="og:url" content="https://yixiangli.github.io/2017/04/25/MongoDB-常用命令/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="常用命令学习命令，按照我们平时使用的场景与步骤来讲解
-连接mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin
+<meta property="og:description" content="常用命令学习命令，按照我们平时使用的场景与步骤来讲解，循序渐进
+系统命令连接mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin
 参数详解：–port ： 端口–host ： 地址-u ： 用户-p ： 密码–authenticationDatabase ： 验证权限的数据库">
-<meta property="og:updated_time" content="2017-04-25T04:00:12.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/mongostat.jpg">
+<meta property="og:updated_time" content="2017-04-25T04:08:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB-常用命令">
-<meta name="twitter:description" content="常用命令学习命令，按照我们平时使用的场景与步骤来讲解
-连接mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin
+<meta name="twitter:description" content="常用命令学习命令，按照我们平时使用的场景与步骤来讲解，循序渐进
+系统命令连接mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin
 参数详解：–port ： 端口–host ： 地址-u ： 用户-p ： 密码–authenticationDatabase ： 验证权限的数据库">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/mongostat.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -116,12 +118,15 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#连接"><span class="toc-number">1.1.</span> <span class="toc-text">连接</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用命令"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#系统命令"><span class="toc-number">1.1.</span> <span class="toc-text">系统命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#连接"><span class="toc-number">1.1.1.</span> <span class="toc-text">连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行情况"><span class="toc-number">1.1.2.</span> <span class="toc-text">运行情况</span></a></li></ol></li></ol></li></ol>
         </div>
     
-        <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>学习命令，按照我们平时使用的场景与步骤来讲解</p>
-<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin</p>
+        <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>学习命令，按照我们平时使用的场景与步骤来讲解，循序渐进</p>
+<h2 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h2><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin</p>
+<p><strong>参数详解：</strong><br>–port ： 端口<br>–host ： 地址<br>-u ： 用户<br>-p ： 密码<br>–authenticationDatabase ： 验证权限的数据库<br><a id="more"></a></p>
+<h3 id="运行情况"><a href="#运行情况" class="headerlink" title="运行情况"></a>运行情况</h3><p>mongostat –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin</p>
 <p><strong>参数详解：</strong><br>–port ： 端口<br>–host ： 地址<br>-u ： 用户<br>-p ： 密码<br>–authenticationDatabase ： 验证权限的数据库</p>
+<p><strong>运行结果：</strong><br><img src="/img/mongostat.jpg" alt="mongodb运行状况"></p>
 
       
     </div>
