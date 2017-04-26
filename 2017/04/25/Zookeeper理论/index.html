@@ -5,16 +5,22 @@
   
   <title>Zookeeper理论 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Zookeeper选举机制Paxos算法Paxos算法解决的问题是一个分布式系统如何就某个值（决议）达成一致">
+  <meta name="description" content="Zookeeper分布式协调服务，具体就不介绍了，这里不是百度百科。
+先来一张图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zookeeper理论">
 <meta property="og:url" content="https://yixiangli.github.io/2017/04/25/Zookeeper理论/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="Zookeeper选举机制Paxos算法Paxos算法解决的问题是一个分布式系统如何就某个值（决议）达成一致">
-<meta property="og:updated_time" content="2017-04-25T08:11:49.000Z">
+<meta property="og:description" content="Zookeeper分布式协调服务，具体就不介绍了，这里不是百度百科。
+先来一张图">
+<meta property="og:image" content="https://yixiangli.github.io/img/Zookeeper.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/zk-struct.jpg">
+<meta property="og:updated_time" content="2017-04-26T03:55:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zookeeper理论">
-<meta name="twitter:description" content="Zookeeper选举机制Paxos算法Paxos算法解决的问题是一个分布式系统如何就某个值（决议）达成一致">
+<meta name="twitter:description" content="Zookeeper分布式协调服务，具体就不介绍了，这里不是百度百科。
+先来一张图">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/Zookeeper.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -110,10 +116,18 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zookeeper"><span class="toc-number">1.</span> <span class="toc-text">Zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选举机制"><span class="toc-number">1.1.</span> <span class="toc-text">选举机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos算法"><span class="toc-number">1.1.1.</span> <span class="toc-text">Paxos算法</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Zookeeper"><span class="toc-number">1.</span> <span class="toc-text">Zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#工作原理"><span class="toc-number">1.1.</span> <span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据模型"><span class="toc-number">1.2.</span> <span class="toc-text">数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事务提交－ZAB协议"><span class="toc-number">1.2.1.</span> <span class="toc-text">事务提交－ZAB协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选举机制"><span class="toc-number">1.3.</span> <span class="toc-text">选举机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos算法"><span class="toc-number">1.3.1.</span> <span class="toc-text">Paxos算法</span></a></li></ol></li></ol></li></ol>
         </div>
     
-        <h1 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h1><h2 id="选举机制"><a href="#选举机制" class="headerlink" title="选举机制"></a>选举机制</h2><h3 id="Paxos算法"><a href="#Paxos算法" class="headerlink" title="Paxos算法"></a>Paxos算法</h3><p>Paxos算法解决的问题是一个分布式系统如何就某个值（决议）达成一致</p>
+        <h1 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h1><p>分布式协调服务，具体就不介绍了，这里不是百度百科。</p>
+<p>先来一张图<br><img src="/img/Zookeeper.jpg" alt="Zookeeper工作流程图"><br><a id="more"></a></p>
+<p>1.Server对于client透明，client可以连接任意某个Server<br>2.其中一个Server是Leader,其他Server对其进行数据同步<br>先大概了解了Zookeeper的整体结构，接下来分析工作原理</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>刚才提到了其中一个Server是Leader,那么说明Server之间也是有划分的.接下来分别介绍</p>
+<p><strong>三角色：</strong><br>leader,follower,observer<br><strong>四状态：</strong><br>leading,following,observing,looking</p>
+<p>LOOKING：当前Server不知道leader是谁，正在搜寻。<br>LEADING：当前Server即为选举出来的leader。<br>FOLLOWING：leader已经选举出来，当前Server与之同步。<br>OBSERVING：observer的行为在大多数情况下与follower完全一致，但是他们不参加选举和投票，而仅仅接受(observing)选举和投票的结果。</p>
+<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p><img src="/img/zk-struct.jpg" alt="Zookeeper数据模型"></p>
+<h3 id="事务提交－ZAB协议"><a href="#事务提交－ZAB协议" class="headerlink" title="事务提交－ZAB协议"></a>事务提交－ZAB协议</h3><p>Zab协议中Server有两个模式：Broadcast广播模式、Recovery恢复模式</p>
+<h2 id="选举机制"><a href="#选举机制" class="headerlink" title="选举机制"></a>选举机制</h2><h3 id="Paxos算法"><a href="#Paxos算法" class="headerlink" title="Paxos算法"></a>Paxos算法</h3><p>Paxos算法解决的问题是一个分布式系统如何就某个值（决议）达成一致</p>
 
       
     </div>

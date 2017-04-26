@@ -5,19 +5,16 @@
   
   <title>zookeeper实战 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
-亮点配置管理一致性分布式锁">
+  <meta name="description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="zookeeper实战">
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/07/zookeeper实战/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
-亮点配置管理一致性分布式锁">
-<meta property="og:updated_time" content="2017-04-25T08:02:02.000Z">
+<meta property="og:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。">
+<meta property="og:updated_time" content="2017-04-26T03:08:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper实战">
-<meta name="twitter:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。
-亮点配置管理一致性分布式锁">
+<meta name="twitter:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -113,11 +110,11 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#亮点"><span class="toc-number">1.1.</span> <span class="toc-text">亮点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集群搭建步骤"><span class="toc-number">1.1.1.</span> <span class="toc-text">集群搭建步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#恢复"><span class="toc-number">1.2.</span> <span class="toc-text">恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志分析"><span class="toc-number">1.3.</span> <span class="toc-text">日志分析</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集群搭建步骤"><span class="toc-number">1.0.1.</span> <span class="toc-text">集群搭建步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#恢复"><span class="toc-number">1.1.</span> <span class="toc-text">恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志分析"><span class="toc-number">1.2.</span> <span class="toc-text">日志分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用场景"><span class="toc-number">1.3.</span> <span class="toc-text">使用场景</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。</p>
-<h2 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h2><p>配置管理<br>一致性<br>分布式锁<br><a id="more"></a></p>
+<a id="more"></a>
 <h3 id="集群搭建步骤"><a href="#集群搭建步骤" class="headerlink" title="集群搭建步骤"></a>集群搭建步骤</h3><p>1.根据dataDir的配置路径，在该路径下新建文件夹myid文件， server.X 这个数字就是对应 myid中的数字。</p>
 <p>2.配置文件zoo.cfg</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"># The number of milliseconds of each tick</div><div class="line">tickTime=2000</div><div class="line"># The number of ticks that the initial</div><div class="line"># synchronization phase can take</div><div class="line">initLimit=10</div><div class="line"># The number of ticks that can pass between</div><div class="line"># sending a request and getting an acknowledgement</div><div class="line">syncLimit=5 </div><div class="line"># the directory where the snapshot is stored.</div><div class="line"># do not use /tmp for storage, /tmp here is just</div><div class="line"># example sakes.</div><div class="line">dataDir=/letv/data/zookeeper</div><div class="line"># the port at which the clients will connect clientPort=2181</div><div class="line"># the maximum number of client connections.</div><div class="line"># increase this if you need to handle more clients</div><div class="line">#maxClientCnxns=60</div><div class="line">#</div><div class="line"># Be sure to read the maintenance section of the</div><div class="line"># administrator guide before turning on autopurge.</div><div class="line"># # http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</div><div class="line"># # The number of snapshots to retain in dataDir </div><div class="line">#autopurge.snapRetainCount=3</div><div class="line"># Purge task interval in hours</div><div class="line"># Set to &quot;0&quot; to disable auto purge feature</div><div class="line">#autopurge.purgeInterval=1</div><div class="line">server.1=10.185.28.73:2888:3888</div><div class="line">server.2=10.185.31.189:2888:3888</div><div class="line">server.3=10.185.31.197:2888:3888</div></pre></td></tr></table></figure>
@@ -128,6 +125,7 @@
 <h2 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h2><p>1.如何查看zookeeper事务日志文件</p>
 <p>使用LogFormatter工具，在zookeeper安装目录下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -classpath .:lib/slf4j-api-1.7.5.jar:zookeeper-3.5.0-alpha.jar org.apache.zookeeper.server.LogFormatter /tmp/zookeeper/version-2/log.1</div></pre></td></tr></table></figure></p>
 <p>/tmp/zookeeper/version-2/log.1 为zoo.cfg配置文件中dataDir配置的目录</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>配置管理<br>名字服务<br>分布式锁<br>集群管理</p>
 
       
     </div>
