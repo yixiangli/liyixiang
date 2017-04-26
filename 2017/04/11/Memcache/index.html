@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://yixiangli.github.io/img/hash-ring.png">
 <meta property="og:image" content="https://yixiangli.github.io/img/hash-ring-addNode.png">
 <meta property="og:image" content="https://yixiangli.github.io/img/memcache-struct.jpg">
-<meta property="og:updated_time" content="2017-04-17T13:53:12.000Z">
+<meta property="og:updated_time" content="2017-04-26T16:09:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memcache">
 <meta name="twitter:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/
@@ -140,6 +140,9 @@
 <p><img src="/img/hash-ring.png" alt="Hash环结构"></p>
 <p>加一个节点</p>
 <p><img src="/img/hash-ring-addNode.png" alt="Hash环结构加节点"></p>
+<p>具体算法过程：先构造一个长度为2^32的整数环（这个环被称作一致性Hash环）根据节点名称的Hash值（其分布范围为[0,2^32 - 1]）将缓存服务器阶段设置在这个Hash环上。然后根据需要缓存的数据的Key值计算得到Hash值（其分布范围也同样为[0,2^32 - 1]），然后在Hash环上顺时针查找举例这个KEY的hash值最近的缓存服务器节点，完成KEY到服务器的Hash映射查找。</p>
+<p>优化策略：将每台物理服务器虚拟为一组虚拟缓存服务器，将虚拟服务器的Hash值放置在Hash环上，key在换上先找到虚拟服务器节点，再得到物理服务器的信息。</p>
+<p>一台物理服务器设置多少个虚拟服务器节点合适呢？经验值：150。</p>
 <h3 id="内存结构模型"><a href="#内存结构模型" class="headerlink" title="内存结构模型"></a>内存结构模型</h3><p>先看一张图：<br><img src="/img/memcache-struct.jpg" alt="Memcache内存模式"></p>
 <h4 id="结构模型"><a href="#结构模型" class="headerlink" title="结构模型"></a>结构模型</h4><p>从上图看，主要Memcache内存空间主要涉及slab_class、slab、page、chunk四个概念，并且互为包含的关系，下面具体介绍。</p>
 <p><strong> slab </strong><br>MemCache将内存空间分为一组slab</p>
