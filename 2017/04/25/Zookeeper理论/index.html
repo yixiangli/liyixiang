@@ -15,7 +15,7 @@
 先来一张图">
 <meta property="og:image" content="https://yixiangli.github.io/img/Zookeeper.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/zk-struct.jpg">
-<meta property="og:updated_time" content="2017-04-26T08:13:21.000Z">
+<meta property="og:updated_time" content="2017-04-26T08:16:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zookeeper理论">
 <meta name="twitter:description" content="Zookeeper分布式协调服务，具体就不介绍了，这里不是百度百科。一句话zookeeper=文件系统+通知机制。
@@ -123,8 +123,7 @@
 <p>先来一张图<br><img src="/img/Zookeeper.jpg" alt="Zookeeper工作流程图"><br><a id="more"></a></p>
 <p>1.Server对于client透明，client可以连接任意某个Server<br>2.其中一个Server是Leader,其他Server对其进行数据同步<br>先大概了解了Zookeeper的整体结构，接下来分析工作原理</p>
 <h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>刚才提到了其中一个Server是Leader,那么说明Server之间也是有划分的.接下来分别介绍</p>
-<p><strong>三角色：</strong><br>leader,follower,observer<br><strong>四状态：</strong><br>leading,following,observing,looking</p>
-<p>LOOKING：当前Server不知道leader是谁，正在搜寻。<br>LEADING：当前Server即为选举出来的leader。<br>FOLLOWING：leader已经选举出来，当前Server与之同步。<br>OBSERVING：observer的行为在大多数情况下与follower完全一致，但是他们不参加选举和投票，而仅仅接受(observing)选举和投票的结果。</p>
+<p><strong>三角色：</strong><br>leader ：领导者<br>follower ： 跟随者<br>observer ： 观察者<br><strong>四状态：</strong><br>LOOKING：当前Server不知道leader是谁，正在搜寻。<br>LEADING：当前Server即为选举出来的leader。<br>FOLLOWING：leader已经选举出来，当前Server与之同步。<br>OBSERVING：observer的行为在大多数情况下与follower完全一致，但是他们不参加选举和投票，而仅仅接受(observing)选举和投票的结果。</p>
 <h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p><img src="/img/zk-struct.jpg" alt="Zookeeper数据模型"></p>
 <p>根据图片来依次介绍，首先看局部，节点ZNode的特性，Zookeeper有四种类型的ZNode </p>
 <p>1、PERSISTENT-持久化目录节点<br>客户端与Zookeeper断开连接后，该节点依旧存在<br>2、PERSISTENT_SEQUENTIAL-持久化顺序编号目录节点<br>客户端与Zookeeper断开连接后，该节点依旧存在，只是Zookeeper给该节点名称进行顺序编号<br>3、EPHEMERAL-临时目录节点<br>客户端与Zookeeper断开连接后，该节点被删除<br>4、EPHEMERAL_SEQUENTIAL-临时顺序编号目录节点<br>客户端与Zookeeper断开连接后，该节点被删除，只是Zookeeper给该节点名称进行顺序编号</p>
