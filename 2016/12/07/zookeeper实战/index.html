@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/07/zookeeper实战/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。">
-<meta property="og:updated_time" content="2017-04-26T04:04:25.000Z">
+<meta property="og:updated_time" content="2017-04-26T04:14:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zookeeper实战">
 <meta name="twitter:description" content="概述Zookeeper是Hadoop开源的子项目，作为互联网极速发展的今天，很多技术场景都需要进行分布式管理，因此，Zookeeper作为一款分布式协调服务，深受广大开发者喜爱。">
@@ -119,10 +119,8 @@
 <li>启动ZK服务:       sh bin/zkServer.sh start</li>
 <li>查看ZK服务状态:     sh bin/zkServer.sh status</li>
 <li>停止ZK服务:       sh bin/zkServer.sh stop</li>
-<li><p>重启ZK服务:       sh bin/zkServer.sh restart</p>
-</li>
-<li><p>显示根目录下、文件： ls / 使用 ls 命令来查看当前 ZooKeeper 中所包含的内容</p>
-</li>
+<li>重启ZK服务:       sh bin/zkServer.sh restart</li>
+<li>显示根目录下、文件： ls / 使用 ls 命令来查看当前 ZooKeeper 中所包含的内容</li>
 <li>显示根目录下、文件： ls2 / 查看当前节点数据并能看到更新次数等数据</li>
 <li>创建文件，并设置初始内容： create /zk “test” 创建一个新的 znode节点“ zk ”以及与它关联的字符串</li>
 <li>获取文件内容： get /zk 确认 znode 是否包含我们所创建的字符串</li>
