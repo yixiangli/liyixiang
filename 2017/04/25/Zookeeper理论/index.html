@@ -15,7 +15,7 @@
 先来一张图">
 <meta property="og:image" content="https://yixiangli.github.io/img/Zookeeper.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/zk-struct.jpg">
-<meta property="og:updated_time" content="2017-04-26T03:55:09.000Z">
+<meta property="og:updated_time" content="2017-04-26T04:02:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zookeeper理论">
 <meta name="twitter:description" content="Zookeeper分布式协调服务，具体就不介绍了，这里不是百度百科。
@@ -126,6 +126,13 @@
 <p><strong>三角色：</strong><br>leader,follower,observer<br><strong>四状态：</strong><br>leading,following,observing,looking</p>
 <p>LOOKING：当前Server不知道leader是谁，正在搜寻。<br>LEADING：当前Server即为选举出来的leader。<br>FOLLOWING：leader已经选举出来，当前Server与之同步。<br>OBSERVING：observer的行为在大多数情况下与follower完全一致，但是他们不参加选举和投票，而仅仅接受(observing)选举和投票的结果。</p>
 <h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p><img src="/img/zk-struct.jpg" alt="Zookeeper数据模型"></p>
+<p>Zookeeper数据模型特点如下：<br>1）每个子目录项如图中说明，都被称作为ZNode，这个ZNode是被它所在的路径唯一标识，如Server1这个znode的标识为/NameService/Server1。</p>
+<p>2）znode可以有子节点目录，并且每个znode可以存储数据，注意EPHEMERAL（临时的）类型的目录节点不能有子节点目录。</p>
+<p>3）znode是有版本的（version），每个znode中存储的数据可以有多个版本，也就是一个访问路径中可以存储多份数据，version号自动增加。</p>
+<p>4）znode可以是临时节点（EPHEMERAL），可以是持久节点（PERSISTENT）。如果创建的是临时节点，一旦创建这个EPHEMERALznode的客户端与服务器失去联系，这个znode也将自动删除，Zookeeper的客户端和服务器通信采用长连接方式，每个客户端和服务器通过心跳来保持连接，这个连接状态称为session，如果znode是临时节点，这个session失效，znode也就删除了。</p>
+<p>5）znode的目录名可以自动编号，如App1已经存在，再创建的话，将会自动命名为App2。</p>
+<p>6）znode可以被监控，包括这个目录节点中存储的数据的修改，子节点目录的变化等，一旦变化可以通知设置监控的客户端，这个是Zookeeper的核心特性，Zookeeper的很多功能都是基于这个特性实现的。</p>
+<p>7）ZXID：每次对Zookeeper的状态的改变都会产生一个zxid（ZooKeeper Transaction Id），zxid是全局有序的，如果zxid1小于zxid2，则zxid1在zxid2之前发生。</p>
 <h3 id="事务提交－ZAB协议"><a href="#事务提交－ZAB协议" class="headerlink" title="事务提交－ZAB协议"></a>事务提交－ZAB协议</h3><p>Zab协议中Server有两个模式：Broadcast广播模式、Recovery恢复模式</p>
 <h2 id="选举机制"><a href="#选举机制" class="headerlink" title="选举机制"></a>选举机制</h2><h3 id="Paxos算法"><a href="#Paxos算法" class="headerlink" title="Paxos算法"></a>Paxos算法</h3><p>Paxos算法解决的问题是一个分布式系统如何就某个值（决议）达成一致</p>
 
