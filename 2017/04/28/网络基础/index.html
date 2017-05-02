@@ -15,7 +15,7 @@ IP地址就像人的名字一样，标识着每一台网络上的主机，那么
 <meta property="og:description" content="IP地址IP地址由两部分组成，即网络号（Netgwork ID）和主机号（Host ID），格式为4段8位，因此又叫做IPv4(IPv6暂时不再此文介绍)，段中间用句点分隔，如10.100.110.20
 网络号：标识Internet上的一个子网，一般如10代表内网，127代表本机等主机号：该子网下某台主机的标识
 IP地址就像人的名字一样，标识着每一台网络上的主机，那么为什么还要将其划分为网络号和主">
-<meta property="og:updated_time" content="2017-05-02T06:52:26.000Z">
+<meta property="og:updated_time" content="2017-05-02T06:56:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础">
 <meta name="twitter:description" content="IP地址IP地址由两部分组成，即网络号（Netgwork ID）和主机号（Host ID），格式为4段8位，因此又叫做IPv4(IPv6暂时不再此文介绍)，段中间用句点分隔，如10.100.110.20
@@ -122,6 +122,7 @@ IP地址就像人的名字一样，标识着每一台网络上的主机，那么
         <h1 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h1><p>IP地址由两部分组成，即网络号（Netgwork ID）和主机号（Host ID），格式为4段8位，因此又叫做IPv4(IPv6暂时不再此文介绍)，段中间用句点分隔，如10.100.110.20</p>
 <p><strong>网络号：</strong>标识Internet上的一个子网，一般如10代表内网，127代表本机等<br><strong>主机号：</strong>该子网下某台主机的标识</p>
 <p>IP地址就像人的名字一样，标识着每一台网络上的主机，那么为什么还要将其划分为网络号和主机号呢？原因就是因为网络上一个数据包的传递其实就是一个路由规则，而路由表中只存储网络信息而不是主机信息，这样可以大大简化路由表，因此就引出了网段划分概念。</p>
+<a id="more"></a>
 <h2 id="网段划分"><a href="#网段划分" class="headerlink" title="网段划分"></a>网段划分</h2><p>IPv4地址划分为5类，A,B,C,D,E</p>
 <p><strong>A类：</strong>用7位（bit）来标识网络号，24位标识主机号，最前面一位为”0”，即A类地址的第一段取值介于1～126之间，全世界只有126个可能的A类网络，每个A类网络最多可以连接16777214台主机（2的24次方-2）。</p>
 <p><strong>B类：</strong>用14位来标识网络号，16位标识主机号，前面两位是”10”。B类地址的第一段取值介于128～191之间，第一段和第二段合在一起表示网络号，全世界大约有16000个B类网络，每个B类网络最多可以连接65534台主机（2的16次方-2）。</p>
