@@ -19,7 +19,7 @@ int
 从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
 int
 从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字">
-<meta property="og:updated_time" content="2017-03-27T07:32:48.000Z">
+<meta property="og:updated_time" content="2017-05-02T09:07:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL基础">
 <meta name="twitter:description" content="MySQL基本命令查看版本：mysqladmin –version
@@ -122,7 +122,7 @@ int
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL"><span class="toc-number">1.</span> <span class="toc-text">MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本命令"><span class="toc-number">1.1.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字段类型"><span class="toc-number">1.2.</span> <span class="toc-text">字段类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整型"><span class="toc-number">1.2.1.</span> <span class="toc-text">整型</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL"><span class="toc-number">1.</span> <span class="toc-text">MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本命令"><span class="toc-number">1.1.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字段类型"><span class="toc-number">1.2.</span> <span class="toc-text">字段类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整型"><span class="toc-number">1.2.1.</span> <span class="toc-text">整型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空值和NULL"><span class="toc-number">1.2.2.</span> <span class="toc-text">空值和NULL</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><p>查看版本：mysqladmin –version</p>
@@ -134,6 +134,8 @@ int
 <p>从 -2^15 (-32,768) 到 2^15 - 1 (32,767) 的整型数据。存储大小为 2 个字节。</p>
 <p>tinyint</p>
 <p>从 0 到 255 的整型数据。存储大小为 1 字节。</p>
+<h3 id="空值和NULL"><a href="#空值和NULL" class="headerlink" title="空值和NULL"></a>空值和NULL</h3><p>在MySQL中，空值（空字符串）和NULL其实是有区别的，区别主要在以下两个方面：<br>1.NULL操作不一定为空<br>有些数据类型或者字段设置会导致插入的是NULL,但实际上有默认值，如TimesTamp时间数据类型，有可能就默认存储当前时间，以及自增字段，插入NULL也会自增</p>
+<p>2.空值(Null)与空字符(’’)不相同<br>用Select语句进行查询，会明显的发现MySQL显示这两种内容的形式都不同，对于业务场景来说可能也会存在不同的理解，如对于电话号码等字段，可以默认设置为空值(表示根本不知道对方的电话号码)或者设置为空字符(表示后来取消了这个号码)等等，因此设置空值(Null)还是空字符(’’)需要根据实际需求情况。</p>
 
       
     </div>
