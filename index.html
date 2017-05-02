@@ -113,17 +113,20 @@
 <p><strong>网络号：</strong>标识Internet上的一个子网，一般如10代表内网，127代表本机等<br><strong>主机号：</strong>该子网下某台主机的标识</p>
 <p>IP地址就像人的名字一样，标识着每一台网络上的主机，那么为什么还要将其划分为网络号和主机号呢？原因就是因为网络上一个数据包的传递其实就是一个路由规则，而路由表中只存储网络信息而不是主机信息，这样可以大大简化路由表，因此就引出了网段划分概念。</p>
 <h2 id="网段划分"><a href="#网段划分" class="headerlink" title="网段划分"></a>网段划分</h2><p>IPv4地址划分为5类，A,B,C,D,E</p>
-<p><strong>A类：</strong>用7位（bit）来标识网络号，24位标识主机号，最前面一位为”0”，即A类地址的第一段取值介于1～126之间</p>
-<p><strong>B类：</strong></p>
-<p><strong>C类：</strong></p>
-<p><strong>D类：</strong></p>
-<p><strong>E类：</strong></p>
+<p><strong>A类：</strong>用7位（bit）来标识网络号，24位标识主机号，最前面一位为”0”，即A类地址的第一段取值介于1～126之间，全世界只有126个可能的A类网络，每个A类网络最多可以连接16777214台主机（2的24次方-2）。</p>
+<p><strong>B类：</strong>用14位来标识网络号，16位标识主机号，前面两位是”10”。B类地址的第一段取值介于128～191之间，第一段和第二段合在一起表示网络号，全世界大约有16000个B类网络，每个B类网络最多可以连接65534台主机（2的16次方-2）。</p>
+<p><strong>C类：</strong>用21位来标识网络号，8位标识主机号，前面三位是”110”。C类地址的第一段取值介于192～223之间，第一段、第二段、第三段合在一起表示网络号，每个C类网络最多可以有254台主机（2的8次方-2）。</p>
+<p>看到这里，很多人会问，为什么要-2？至于-2，那是因为要预留一个网络标识地址和一个广播地址，一般网络标识指的是主机号全0的IP,而广播地址则是全1的IP,如C类地址指的就是192.0.0.0与223.255.255.255。说清楚-2的问题，还要专门说说A类地址中10.xx.xx.xx和127（未在任何类别中）<br>10.0.0.0到10.255.255.255是私有地址，如内网分配。<br>127.0.0.1代表本机，一般127开头的网段都是做循环测试使用。<br>说到了取值至233，8位地址一共可以分配255，那么后面的是如何分配的呢？</p>
+<p><strong>D类：</strong>D类地址前面四位是”1110”，取值介于224～239，一般用作广播，不分网络地址和主机地址<br><strong>E类：</strong>E类地址前五位固定为11110，取值为240～255，也不分网络地址和主机地址，为保留地址</p>
+<h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>工作中难免会和运维搞网络相关的同事打交代，有的时候遇到某某机房网络割接，运维同学会发出与其相关的服务器地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">138.50.211.0/24</div><div class="line">138.50.211.0/24</div><div class="line">138.50.212.0/24</div><div class="line">138.50.212.0/24</div><div class="line">138.50.213.0/24</div><div class="line">138.50.213.0/24</div></pre></td></tr></table></figure>
+<p>和刚才介绍的ip知识不一样，这是什么呢？这里就引出子网掩码的概念，其实刚才的介绍已经说出了子网掩码的用途，就是将某个IP地址划分成网络地址和主机地址两部分，是用来告诉这个子网的覆盖区间，在IPv4的32位中，前多少位是网络段，余下的就是主机段。</p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/28/网络基础/" data-id="cj27618at003llc6i2teu1cuq" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/28/网络基础/" data-id="cj27785zw003dms6if94tinn6" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/28/网络基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/28/网络基础/">评论</a>
@@ -179,7 +182,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/编码/" data-id="cj27618av003nlc6ikux3r97c" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/编码/" data-id="cj27785zz003jms6iupe2k9s1" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/编码/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/编码/">评论</a>
@@ -228,7 +231,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/加密技术/" data-id="cj27618ab002ulc6ijkydptk8" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/加密技术/" data-id="cj27785zk002vms6izojcicwj" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/加密技术/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/加密技术/">评论</a>
@@ -282,7 +285,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/网络安全/" data-id="cj27618ar003ilc6ik5efpqxn" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/网络安全/" data-id="cj2778603003pms6i9agrye1p" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/网络安全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/网络安全/">评论</a>
@@ -334,7 +337,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/负载均衡/" data-id="cj27618be004elc6ipuen6etd" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/负载均衡/" data-id="cj277860e0044ms6imeirjxoo" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/负载均衡/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/负载均衡/">评论</a>
