@@ -15,7 +15,7 @@
 <meta property="og:description" content="系统权限篇进入root权限模式sudo su
 输入密码登陆root权限su root
 添加root权限vi  /etc/sudoers添加用户useradd liyixiangpasswd liyixiang">
-<meta property="og:updated_time" content="2017-05-03T09:15:51.000Z">
+<meta property="og:updated_time" content="2017-05-03T09:20:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令快查表">
 <meta name="twitter:description" content="系统权限篇进入root权限模式sudo su
@@ -128,10 +128,11 @@
 <p>linux内核优化<br>快速回收time_wait<br>vim /etc/sysctl.conf<br>    net.ipv4.tcp_tw_reuse = 1<br>    net.ipv4.tcp_tw_recycle = 1<br>文件生效<br>    sudo sysctl -p<br>系统控制参数配置<br>    显示系统资源的设置（包含全部）<br>    ulimit -a<br>&lt;程序数目&gt; 程序数目上限，最多可开启的程序<br>    ulimit -u<br>设置系统核心参数<br>    sysctl</p>
 <p>查看cpu数<br>grep “model name” /proc/cpuinfo | cut -f2 -d:<br>查看 CPU 个数<br>sysctl -n machdep.cpu.core_count</p>
 <p>查看TCP连接状态<br>netstat -n | awk ‘/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}’<br>查看服务time_wait的数量<br>sudo netstat -antp |grep TIME_WAIT |wc -l<br>查看estab的数量<br>sudo netstat -antp |grep ES |wc -l<br>查看最大time_wait数<br>cat /proc/sys/net/ipv4/tcp_max_tw_buckets</p>
-<p>查看服务器外网ip<br>curl ifconfig.me<br>查看vip<br>ip a | grep ‘/32’<br>查看网络信息<br>ifconfig<br>查看网卡信息<br>ethtool eth2<br>dns解析过程<br>dig +cmd +trace api.push.abc.com<br>域名相关<br>nslookup<br>交互<br>nslookup</p>
-<blockquote>
-<p>api.push.le.com<br>非交互<br>nslookup api.push.le.com<br>查看当前系统网络状态<br>ss -s<br>查看网卡个数<br>netstat -i<br>查看防火墙<br>/etc/init.d/iptables status<br>查看计算机本地arp表<br>arp -a<br>第一列：表示ip地址列表情况。<br>第二列：表示ip地址对应的mac地址。<br>第三列：表示ip地址类型，是动态ip还是静态ip。<br>/proc/sys/net/ipv4/neigh/default</p>
-</blockquote>
+<p>查看服务器外网ip<br>curl ifconfig.me<br>查看vip<br>ip a | grep ‘/32’<br>查看网络信息<br>ifconfig<br>查看网卡信息<br>ethtool eth2<br>dns解析过程<br>dig +cmd +trace api.push.abc.com<br>域名相关<br>nslookup<br>交互</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nslookup</div><div class="line">&gt; api.push.abc.com</div></pre></td></tr></table></figure>
+<p>非交互</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nslookup api.push.abc.com</div></pre></td></tr></table></figure>
+<p>查看当前系统网络状态<br>ss -s<br>查看网卡个数<br>netstat -i<br>查看防火墙<br>/etc/init.d/iptables status<br>查看计算机本地arp表<br>arp -a<br>第一列：表示ip地址列表情况。<br>第二列：表示ip地址对应的mac地址。<br>第三列：表示ip地址类型，是动态ip还是静态ip。<br>/proc/sys/net/ipv4/neigh/default</p>
 <p>查看内存<br>grep MemTotal /proc/meminfo | cut -f2 -d:<br>查看swap<br>free -m</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">         total       used       free     shared    buffers     cached</div><div class="line">Mem:         1002        769        232          0         62        421</div><div class="line">-/+ buffers/cache:        286        715</div><div class="line">Swap:         1153          0       1153</div></pre></td></tr></table></figure>
 <p>解释说明：<br>第二部分(-/+ buffers/cache):<br>    (-buffers/cache) used内存数：286M (指的第一部分Mem行中的used - buffers - cached)<br>    (+buffers/cache) free内存数: 715M (指的第一部分Mem行中的free + buffers + cached)<br>    可见-buffers/cache反映的是被程序实实在在吃掉的内存，而+buffers/cache反映的是可以挪用的内存总数。<br>    对操作系统来讲是Mem的参数.buffers/cached 都是属于被使用,所以它认为free只有232.<br>    对应用程序来讲是(-/+ buffers/cach).buffers/cached 是等同可用的，因为buffer/cached是为了提高程序执行的性能，当程序使用内存时，buffer/cached会很快地被使用。所以,以应用来看看,以(-/+<br>    buffers/cache)的free和used为主</p>
@@ -165,77 +166,29 @@
 <p>文件copy<br>需要提前配置好白名单以及公钥<br>    scp hadoop-2.6.0.tar.gz root@10.11.144.118:/letv/soft</p>
 <p>查询mongo开头的文件<br>    find / -name “mongo*”</p>
 <h1 id="日志分析篇"><a href="#日志分析篇" class="headerlink" title="日志分析篇"></a>日志分析篇</h1><p>cat lepush-api-9040-2016-10-10.log | grep ‘^20:’ | grep ‘time’ | grep ‘INFO’ | awk ‘{time=substr($NF,0,length($NF)-1);if(time+0&gt;300) print}’</p>
-<pre><code>tail -f api-debug-9040-2016-10-11.log | grep &apos;WARN&apos; | awk &apos;{if($NF&gt;100) print}&apos;
-
-
-统计nginx每秒请求数
-tail -f nginx.access.log | awk &apos;{print $4}&apos; | awk -F: &apos;{print $4}&apos; | uniq -c
-
-统计nginx响应大于1秒
-tail -f nginx.access.log | awk &apos;{if($NF&gt;1) print}&apos;
-
-tail -f access.log | awk &apos;{print $3}&apos; | awk -F: &apos;{print $4}&apos; | uniq -c
-
-滤重
-sort token.txt | uniq -c | sort -rn(降序) &gt; abcd.txt
-cat abcd.txt | awk &apos;{if($1&gt;1) print $1 , $2}&apos;
-
-统计nginx每分钟请求数
-cat nginx.access.log  | awk &apos;{print substr($3,0,18)}&apos; | uniq -c
-
-某时段每秒请求数
-cat nginx.access.log | grep &apos;29/Jul/2016:11:58:&apos;  | awk &apos;{print substr($3,0,21)}&apos; | uniq -c
-
-cat nginx.access.log | awk &apos;{print substr($3,0,21)}&apos; | uniq -c
-
-统计每秒后端请求数
-cat lepush-api-9040-2016-06-25.log  | awk &apos;{print substr($1,0,8)}&apos; | uniq -c
-
-非200请求
-cat nginx.access.log | awk &apos;{if($(NF-1)!=200) print}&apos;
-
-非200非无状态请求
-cat nginx.access.log | awk &apos;{if($(NF-1) ~ /^[0-9]+$/ &amp;&amp; $(NF-1) !=200) print}&apos; 
-
-每小时请求响应大于1秒的总和
-cat nginx.access.log | awk &apos;{if($NF&gt;1) print substr($3,0,15)}&apos; | uniq -c
-
-,分割
-cat android_client.txt | awk &apos;BEGIN{FS=&quot;,&quot;}{print $4}&apos;
-
-滤重统计
-sort -u
-sort android_client.txt | awk &apos;BEGIN{FS=&quot;,&quot;}{print $15}&apos; | uniq -c &gt; sort.txt
-
-大于1统计
-cat sort.txt | awk &apos;{if($1!=1) print}&apos; &gt; dayu1.txt
-
-一列数字做累加
-cat dayu1.txt | awk &apos;{print $1}&apos; | awk &apos;{sum+=$1}END{print sum}&apos;
-
-非空
-cat dayu20160815.txt | awk &apos;{if(length($3)!=0)print $3}&apos;
-
-统计推送总数
-cat lepush-server-2016-08-17.log | grep &quot;16:&quot; | grep &quot;clientids count&quot; | awk &apos;{print $7}&apos; | awk -F &apos;=&apos; &apos;{sum+=$2} END {print sum}&apos;
-
-cat lepush-server-2016-08-17.log | grep &quot;16:&quot; |     grep &quot;error clientids count=&quot; | awk &apos;{print $8}&apos; | awk -F &apos;=&apos; &apos;{sum+=$2} END {print sum}&apos;
-
-获取文件第10行
-cat file.txt | awk &apos;NR==10&apos;
-
-匹配文件中不是0-9 a-z等字符串
-awk &apos;{if($1!~/^[A-Za-z0-9]+$/)print}&apos; device.txt
-
-grep -v 不包含
-grep -w 匹配的是完整单词
-
-交集
-grep -F -f app_sort.txt sdk_sort.txt | sort | uniq
-
-差集
-grep -F -v -f app_sort.txt sdk_sort.txt | sort | uniq
-</code></pre><h1 id="工具篇"><a href="#工具篇" class="headerlink" title="工具篇"></a>工具篇</h1><p><strong>SecureCRT</strong><br>使用sftp<br>command+shift+p </p>
+<p>tail -f api-debug-9040-2016-10-11.log | grep ‘WARN’ | awk ‘{if($NF&gt;100) print}’</p>
+<p>统计nginx每秒请求数<br>tail -f nginx.access.log | awk ‘{print $4}’ | awk -F: ‘{print $4}’ | uniq -c</p>
+<p>统计nginx响应大于1秒<br>tail -f nginx.access.log | awk ‘{if($NF&gt;1) print}’</p>
+<p>tail -f access.log | awk ‘{print $3}’ | awk -F: ‘{print $4}’ | uniq -c</p>
+<p>滤重<br>    sort token.txt | uniq -c | sort -rn(降序) &gt; abcd.txt<br>    cat abcd.txt | awk ‘{if($1&gt;1) print $1 , $2}’</p>
+<p>统计nginx每分钟请求数<br>    cat nginx.access.log  | awk ‘{print substr($3,0,18)}’ | uniq -c</p>
+<p>某时段每秒请求数<br>    cat nginx.access.log | grep ‘29/Jul/2016:11:58:’  | awk ‘{print substr($3,0,21)}’ | uniq -c<br>    cat nginx.access.log | awk ‘{print substr($3,0,21)}’ | uniq -c</p>
+<p>统计每秒后端请求数<br>    cat lepush-api-9040-2016-06-25.log  | awk ‘{print substr($1,0,8)}’ | uniq -c</p>
+<p>非200请求<br>    cat nginx.access.log | awk ‘{if($(NF-1)!=200) print}’</p>
+<p>非200非无状态请求<br>    cat nginx.access.log | awk ‘{if($(NF-1) ~ /^[0-9]+$/ &amp;&amp; $(NF-1) !=200) print}’ </p>
+<p>每小时请求响应大于1秒的总和<br>    cat nginx.access.log | awk ‘{if($NF&gt;1) print substr($3,0,15)}’ | uniq -c</p>
+<p>,分割<br>    cat android_client.txt | awk ‘BEGIN{FS=”,”}{print $4}’</p>
+<p>滤重统计<br>    sort -u<br>    sort android_client.txt | awk ‘BEGIN{FS=”,”}{print $15}’ | uniq -c &gt; sort.txt</p>
+<p>大于1统计<br>    cat sort.txt | awk ‘{if($1!=1) print}’ &gt; dayu1.txt</p>
+<p>一列数字做累加<br>    cat dayu1.txt | awk ‘{print $1}’ | awk ‘{sum+=$1}END{print sum}’</p>
+<p>非空<br>    cat dayu20160815.txt | awk ‘{if(length($3)!=0)print $3}’</p>
+<p>统计推送总数<br>    cat lepush-server-2016-08-17.log | grep “16:” | grep “clientids count” | awk ‘{print $7}’ | awk -F ‘=’ ‘{sum+=$2} END {print sum}’<br>    cat lepush-server-2016-08-17.log | grep “16:” |     grep “error clientids count=” | awk ‘{print $8}’ | awk -F ‘=’ ‘{sum+=$2} END {print sum}’</p>
+<p>获取文件第10行<br>    cat file.txt | awk ‘NR==10’</p>
+<p>匹配文件中不是0-9 a-z等字符串<br>    awk ‘{if($1!~/^[A-Za-z0-9]+$/)print}’ device.txt</p>
+<p>不包含<br>    grep -v<br>匹配的是完整单词<br>    grep -w </p>
+<p>交集<br>    grep -F -f app_sort.txt sdk_sort.txt | sort | uniq</p>
+<p>差集<br>    grep -F -v -f app_sort.txt sdk_sort.txt | sort | uniq</p>
+<h1 id="工具篇"><a href="#工具篇" class="headerlink" title="工具篇"></a>工具篇</h1><p><strong>SecureCRT</strong><br>使用sftp<br>command+shift+p </p>
 
       
     </div>
