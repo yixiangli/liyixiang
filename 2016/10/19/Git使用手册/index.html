@@ -16,7 +16,7 @@
 一张图
 常见问题git add 之后后悔了别担心 git reset一下就好，对了 千万不要- -hard哈">
 <meta property="og:image" content="https://yixiangli.github.io/img/git-command.png">
-<meta property="og:updated_time" content="2017-05-03T06:32:39.000Z">
+<meta property="og:updated_time" content="2017-05-03T09:40:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git使用手册">
 <meta name="twitter:description" content="概述GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，https://github.com/yixiangli
@@ -118,7 +118,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一张图"><span class="toc-number">1.1.</span> <span class="toc-text">一张图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.2.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git-add-之后后悔了"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">git add 之后后悔了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHub-commit之后不显示contributions"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">GitHub commit之后不显示contributions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GIT-绑定两个远程仓库"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">GIT 绑定两个远程仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较merge前后修改的内容"><span class="toc-number">1.2.1.</span> <span class="toc-text">比较merge前后修改的内容</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一张图"><span class="toc-number">1.1.</span> <span class="toc-text">一张图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.2.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#git-add-之后后悔了"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">git add 之后后悔了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GitHub-commit之后不显示contributions"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">GitHub commit之后不显示contributions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GIT-绑定两个远程仓库"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">GIT 绑定两个远程仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较merge前后修改的内容"><span class="toc-number">1.2.1.</span> <span class="toc-text">比较merge前后修改的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置了-gitignore文件后远程文件如何删除"><span class="toc-number">1.2.2.</span> <span class="toc-text">配置了.gitignore文件后远程文件如何删除</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，<a href="https://github.com/yixiangli" target="_blank" rel="external">https://github.com/yixiangli</a></p>
@@ -133,6 +133,7 @@
 <h3 id="比较merge前后修改的内容"><a href="#比较merge前后修改的内容" class="headerlink" title="比较merge前后修改的内容"></a>比较merge前后修改的内容</h3><p>git show <merge-id>,注意不是commit id 而是merge id<br>通过git log查看</merge-id></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">commit abe3857741be76b177e5d7bfe8575f9eb813097f</div><div class="line">Merge: 532967b 0392f0a</div><div class="line">Author: liyixiang &lt;394244674@qq.com&gt;</div><div class="line">Date:   Wed May 3 14:27:18 2017 +0800</div><div class="line"></div><div class="line">    Merge branch &apos;branch&apos; into pre-release</div></pre></td></tr></table></figure>
 <p>这个532967b 0392f0a就是merge id</p>
+<h3 id="配置了-gitignore文件后远程文件如何删除"><a href="#配置了-gitignore文件后远程文件如何删除" class="headerlink" title="配置了.gitignore文件后远程文件如何删除"></a>配置了.gitignore文件后远程文件如何删除</h3><p>git rm -r –cached .settings</p>
 
       
     </div>
