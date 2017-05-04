@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/04/OAuth介绍/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="OAuth是个啥近日，无意中浏览技术文章，看到了一个新鲜玩意（对博主来说），OAuth2.0，起初一看介绍，以为是单点登录，后面仔细了解了下，发现平时咱们上网还经常用到这个技术，总体来说，OAuth就是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的资源，而无需将用户名和密码提供给第三方应用的工具。说的明白点，就是咱们平时登录很多网站需要账号密码，而又觉得注册麻烦，采用qq/微信啥的">
-<meta property="og:updated_time" content="2017-05-04T08:47:15.000Z">
+<meta property="og:updated_time" content="2017-05-04T10:01:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OAuth介绍">
 <meta name="twitter:description" content="OAuth是个啥近日，无意中浏览技术文章，看到了一个新鲜玩意（对博主来说），OAuth2.0，起初一看介绍，以为是单点登录，后面仔细了解了下，发现平时咱们上网还经常用到这个技术，总体来说，OAuth就是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的资源，而无需将用户名和密码提供给第三方应用的工具。说的明白点，就是咱们平时登录很多网站需要账号密码，而又觉得注册麻烦，采用qq/微信啥的">
@@ -110,13 +110,15 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OAuth是个啥"><span class="toc-number">1.</span> <span class="toc-text">OAuth是个啥</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">1.1.</span> <span class="toc-text">概念</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OAuth是个啥"><span class="toc-number">1.</span> <span class="toc-text">OAuth是个啥</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程"><span class="toc-number">1.2.</span> <span class="toc-text">流程</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="OAuth是个啥"><a href="#OAuth是个啥" class="headerlink" title="OAuth是个啥"></a>OAuth是个啥</h1><p>近日，无意中浏览技术文章，看到了一个新鲜玩意（对博主来说），OAuth2.0，起初一看介绍，以为是单点登录，后面仔细了解了下，发现平时咱们上网还经常用到这个技术，总体来说，OAuth就是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的资源，而无需将用户名和密码提供给第三方应用的工具。说的明白点，就是咱们平时登录很多网站需要账号密码，而又觉得注册麻烦，采用qq/微信啥的一键登录这种方式，OAuth就是支持这项技术的一套标准和规范</p>
+<a id="more"></a>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>大家有没有发现，介绍一个成熟的工具或框架，一般都会有角色的概念（如Zookeeper），这也是设计理念之一吧。</p>
 <p><strong>OAuth 2.0 主要有4类角色：</strong></p>
 <p>resource owner：资源所有者，指终端的“用户”（user）<br>resource server：资源服务器，即服务提供商存放受保护资源。访问这些资源，需要获得访问令牌（access token）。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。比如，我们访问新浪博客网站，那么如果使用新浪博客的账号来登录新浪博客网站，那么新浪博客的资源和新浪博客的认证都是同一家，可以认为是同一个服务器。但是我们是新浪博客账号去登录了知乎，那么显然知乎的资源和新浪的认证不是一个服务器。<br>client：客户端，代表向受保护资源进行资源请求的第三方应用程序。<br>authorization server： 授权服务器， 在验证资源所有者并获得授权成功后，将发放访问令牌给客户端。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>借用一张图<br>+——–+                               +—————+<br>|        |–(A)- Authorization Request -&gt;|   Resource    |<br>|        |                               |     Owner     |<br>|        |&lt;-(B)– Authorization Grant —|               |<br>|        |                               +—————+<br>|        |<br>|        |                               +—————+<br>|        |–(C)– Authorization Grant –&gt;| Authorization |<br>| Client |                               |     Server    |<br>|        |&lt;-(D)—– Access Token ——-|               |<br>|        |                               +—————+<br>|        |<br>|        |                               +—————+<br>|        |–(E)—– Access Token ——&gt;|    Resource   |<br>|        |                               |     Server    |<br>|        |&lt;-(F)— Protected Resource —|               |<br>+——–+                               +—————+</p>
 
       
     </div>
