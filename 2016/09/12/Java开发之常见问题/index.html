@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
 常见问题">
-<meta property="og:updated_time" content="2017-04-24T09:53:10.000Z">
+<meta property="og:updated_time" content="2017-05-08T06:22:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java开发之常见问题">
 <meta name="twitter:description" content="概述作为一名开发狗，难免会在coding的过程中遇到各种各样的问题，那就做个整理，记录问题与解决方案
@@ -126,6 +126,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">项目文件夹有个红叉叉，让人看着很恶心</div></pre></td></tr></table></figure>
 <p>原因：项目Web Module配置较低，一般出现在web project中，可点击项目右键——&gt; properties ——&gt;Project Facets 查看Dynamic Web Module是否为新版本，一般默认是2.3 正常版本是3.0</p>
 <p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">直接在Project Facets的Dynamic Web Module中修改并没有用，需要在window——&gt; Show view——&gt; Navigator，进入右侧Navigator界面，找到所在项目，进入.settings文件夹——&gt;org.eclipse.wst.common.project.facet.core.xml文件，修改&lt;installed facet=&quot;jst.web&quot; version=&quot;3.0&quot;/&gt;即可</div></pre></td></tr></table></figure></p>
+<p>3.jdk version<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">项目文件夹有个红叉叉，看了下错误是Type Java compiler level does not match the version of the install</div></pre></td></tr></table></figure></p>
+<p>原因：eclipse与项目本身jdk版本不一致导致</p>
+<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.在项目上右键properties-&gt;project Facets-&gt;修改右侧的version  保持一致</div><div class="line">2.preferences-&gt;java-&gt;Compiler-&gt;设置右侧的Compiler compliance level</div><div class="line">3.项目本身引用的JRE System Library</div></pre></td></tr></table></figure></p>
 <h3 id="Java-Errors"><a href="#Java-Errors" class="headerlink" title="Java Errors"></a>Java Errors</h3><p>1.xxx cannot be resolved to a type 错误解决方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">开发项目的时候，有可能突然Eclipse抽风，一些外部接口类import进来后报错，可能代码都没动过，突然某天出来。</div></pre></td></tr></table></figure>
 <p>原因：据网上描述有可能存在Jar冲突或者jdk版本问题，但是如果确认这两部分没问题的话，那就可能是由于某些特殊原因，eclipse没能自动编译源代码到build/classes（或其他classes目录），导致类型查找不到。</p>
