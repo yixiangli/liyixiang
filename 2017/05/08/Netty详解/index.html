@@ -15,14 +15,14 @@ Cha">
 <meta property="og:description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。
 Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。
 Cha">
-<meta property="og:image" content="https://yixiangli.github.io/img/netty-bound.jpg">
-<meta property="og:updated_time" content="2017-05-08T10:06:20.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/netty_bound.jpg">
+<meta property="og:updated_time" content="2017-05-08T10:09:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty详解">
 <meta name="twitter:description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。
 Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。
 Cha">
-<meta name="twitter:image" content="https://yixiangli.github.io/img/netty-bound.jpg">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/netty_bound.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -127,7 +127,7 @@ Cha">
 <p><strong>ChannelHandler:</strong>对I/O事件进行拦截或处理。线程不安全，需要自己保证线程安全。</p>
 <a id="more"></a>
 <h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><p>在Netty中，ChannelPipeline被分为上行和下行，先来看一张图，从 Netty 官网上拷贝的一个图示:</p>
-<p><img src="/img/netty-bound.jpg" alt="Netty事件处理"></p>
+<p><img src="/img/netty_bound.jpg" alt="Netty事件处理"></p>
 
       
     </div>
