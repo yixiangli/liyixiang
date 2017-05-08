@@ -13,11 +13,13 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="内存管理说起Redis，就会联想到他的兄弟Memcache，而Memcache的内存模型之前的博文中已经介绍，有兴趣的可以与此文进行对比，那么Redis的内存模型是怎样的呢？
 机制在Redis中，并不是所有的数据都一直存储在内存中，这是和Memcache最大的区别。那么当物理内存很紧张的时候，Redis会触发swap的操作，根据算法计算出哪些key对应的value需要swap到磁盘，然后对valu">
-<meta property="og:updated_time" content="2017-05-05T07:01:28.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/Redis-module.jpg">
+<meta property="og:updated_time" content="2017-05-05T07:53:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis内存管理">
 <meta name="twitter:description" content="内存管理说起Redis，就会联想到他的兄弟Memcache，而Memcache的内存模型之前的博文中已经介绍，有兴趣的可以与此文进行对比，那么Redis的内存模型是怎样的呢？
 机制在Redis中，并不是所有的数据都一直存储在内存中，这是和Memcache最大的区别。那么当物理内存很紧张的时候，Redis会触发swap的操作，根据算法计算出哪些key对应的value需要swap到磁盘，然后对valu">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/Redis-module.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -113,12 +115,15 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内存管理"><span class="toc-number">1.</span> <span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#机制"><span class="toc-number">1.1.</span> <span class="toc-text">机制</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#内存管理"><span class="toc-number">1.</span> <span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#机制"><span class="toc-number">1.1.</span> <span class="toc-text">机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存模型"><span class="toc-number">1.2.</span> <span class="toc-text">内存模型</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p>说起Redis，就会联想到他的兄弟Memcache，而Memcache的内存模型之前的博文中已经介绍，有兴趣的可以与此文进行对比，那么Redis的内存模型是怎样的呢？</p>
 <h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><p>在Redis中，并不是所有的数据都一直存储在内存中，这是和Memcache最大的区别。那么当物理内存很紧张的时候，Redis会触发swap的操作，根据算法计算出哪些key对应的value需要swap到磁盘，然后对value进行持久化，再删除内存中的value数据（注意，Redis会缓存所有的key的信息，也不会进行swap），因此机器的内存至少要保证能存放下全部的key。</p>
 <a id="more"></a>
+<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><p>Redis的内存模型相对Memcache要简单得多，首先在分配一块内存之后，会将这块内存的大小存入内存块的头部。</p>
+<p><img src="/img/Redis-module.jpg" alt="Redis内存模型"></p>
+<p>All_use可以看作是redis调用malloc后返回的指针，redis将内存块的大小size存入头部，并返回内存使用的真实长度Real_use。当需要释放内存，通过Real_use，程序可以算出All_use的值，然后统一释放。</p>
 
       
     </div>
