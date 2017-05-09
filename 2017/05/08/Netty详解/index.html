@@ -16,7 +16,7 @@ Cha">
 Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。
 Cha">
 <meta property="og:image" content="https://yixiangli.github.io/img/netty_bound.jpg">
-<meta property="og:updated_time" content="2017-05-09T02:11:08.000Z">
+<meta property="og:updated_time" content="2017-05-09T02:37:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty详解">
 <meta name="twitter:description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。
@@ -118,7 +118,7 @@ Cha">
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Netty"><span class="toc-number">1.</span> <span class="toc-text">Netty</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础组件"><span class="toc-number">1.1.</span> <span class="toc-text">基础组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件机制"><span class="toc-number">1.2.</span> <span class="toc-text">事件机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reactor模型"><span class="toc-number">1.3.</span> <span class="toc-text">Reactor模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐的线程数量公式"><span class="toc-number">1.3.1.</span> <span class="toc-text">推荐的线程数量公式</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Netty"><span class="toc-number">1.</span> <span class="toc-text">Netty</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础组件"><span class="toc-number">1.1.</span> <span class="toc-text">基础组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件机制"><span class="toc-number">1.2.</span> <span class="toc-text">事件机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reactor模型"><span class="toc-number">1.3.</span> <span class="toc-text">Reactor模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐的线程数量公式"><span class="toc-number">1.3.1.</span> <span class="toc-text">推荐的线程数量公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selector空轮询"><span class="toc-number">1.3.2.</span> <span class="toc-text">selector空轮询</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h1><h2 id="基础组件"><a href="#基础组件" class="headerlink" title="基础组件"></a>基础组件</h2><p><strong>Channel:</strong> 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。</p>
@@ -134,6 +134,8 @@ Cha">
 <p>Netty的线程模型是可配置的，根据不同场景配置不同的线程池数来选择最合适的Reactor模型，另外采用局部无锁化设计，I/O线程内部进行串行操作，避免多线程竞争。</p>
 <h3 id="推荐的线程数量公式"><a href="#推荐的线程数量公式" class="headerlink" title="推荐的线程数量公式"></a>推荐的线程数量公式</h3><p>公式一：线程数 ＝ （线程总时间／瓶颈资源时间）＊瓶颈资源线程的并行数<br>公式二：QPS = 1000/线程总时间＊线程数</p>
 <p><strong>解释几个名词：</strong><br>线程总时间:处理一次请求线程需要消耗的总时间<br>瓶颈资源时间:逻辑中最耗时的处理时间（木桶效应）<br>瓶颈资源线程的并行数:程序中开启的如数据库／MQ等中间件的最大连接数（如果该组件是瓶颈，那么最大连接数就是瓶颈资源并行数）</p>
+<h3 id="selector空轮询"><a href="#selector空轮询" class="headerlink" title="selector空轮询"></a>selector空轮询</h3><p>这个bug臭名昭著，实际上是linux epoll的bug，在Nio中具体触发是Selector本次轮询结果为空，也没有wakeup操作或是新的消息需要处理，则说明是个空轮询，就会触发bug,导致I/O线程一直处于100%</p>
+<p>Netty修复策略：<br>（1）对Selector的select操作周期进行统计<br>（2）每完成一次空的select操作进行一次计数<br>（3）在某个周期（如100ms）内如果连续发生N次空轮询，说明触发NIO epoll()死循环bug</p>
 
       
     </div>
