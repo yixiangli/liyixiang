@@ -117,7 +117,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/07/Zookeeper实战/" data-id="cj2hbovub003arz6itlf6052r" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/07/Zookeeper实战/" data-id="cj2he1vw6002xyp6ionpulj31" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/07/Zookeeper实战/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/07/Zookeeper实战/">评论</a>
@@ -160,6 +160,12 @@
       
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Maven 作为一款自动构建工具，深受广大web开发者的喜爱。日常工作中其实经常会出现一些构建相关问题，博主针对一些问题也单独一篇文章来记录遇到的问题，而Maven本身一些新特性还是有必要去研究一下的。 </p>
 <h2 id="Maven生命周期"><a href="#Maven生命周期" class="headerlink" title="Maven生命周期"></a>Maven生命周期</h2><p><img src="/img/maven_lifecycle.jpg" alt="Maven生命周期"></p>
+<p>上图是IDEA工具中的maven生命周期模型，实际上Maven是有三套生命周期的，简单介绍一下：</p>
+<p><strong>clean生命周期</strong><br>主要目的是清理项目<br>pre-clean    ：执行清理前的工作；<br>clean    ：清理上一次构建生成的所有文件；<br>post-clean    ：执行清理后的工作</p>
+<p><strong>default生命周期</strong><br>定义了真正构建时所需要执行的所有步骤，它是生命周期中最核心的部分<br>validate<br>initialize<br>generate-sources<br>process-sources: 处理项目主资源文件。一般来说，是对src/main/resources目录的内容进行变量替换等工作后，复制到项目输出的主classpath目录中<br>generate-resources<br>process-resources<br>compile: 编译项目的主源码。一般来说，是编译src/main/Java目录下的Java文件至项目输出的主classpath目录中<br>process-classes<br>generate-test-sources<br>process-test-sources: 处理项目测试资源文件。一般来说，是对src/test/resources目录的内容进行变量替换等工作后，复制到项目输出的测试classpath目录中<br>generate-test-resources<br>process-test-resources<br>test-compile: 编译项目的测试代码，一般来说，是编译src/test/java目录下的Java文件至项目输出的测试classpath目录中<br>process-test-classes<br>test: 使用单元测试框架运行测试，测试代码不会打包或部署<br>prepare-package<br>package: 接受编译好的代码，打包成可发布的格式，如JAR<br>pre-integration-test<br>integration-test<br>post-integration-test<br>verify<br>install: 将包安装到Maven本地仓库，供本地其他Maven项目使用<br>deploy: 将最终的包复制到远程仓库，供其他开发人员和Maven项目使用</p>
+<p><strong>site生命周期</strong><br>建立和发布项目站点，Maven能够基于POM所包含的信息，自动生成站点<br>pre-site<br>site    ：生成项目的站点文档；<br>post-site<br>site-deploy    ：发布生成的站点文档</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>直接截图</p>
+<p><img src="/img/maven_clean.jpg" alt="Maven-Clean生命周期"><br><img src="/img/maven_default.jpg" alt="Maven-Default生命周期"><br><img src="/img/maven_site.jpg" alt="Maven-Site生命周期"></p>
 <h2 id="怎么用"><a href="#怎么用" class="headerlink" title="怎么用"></a>怎么用</h2>
         
           <p class="article-more-link">
@@ -170,7 +176,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cj2hbovt1001brz6iujkebmj3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/11/10/Maven一探究竟/" data-id="cj2he1vup0014yp6iepvpx6ph" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/11/10/Maven一探究竟/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/11/10/Maven一探究竟/">评论</a>
@@ -223,7 +229,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj2hbovrc0004rz6iic5u4x2y" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/19/Git使用手册/" data-id="cj2he1vtd0004yp6iqwfwpk2c" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/19/Git使用手册/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/10/19/Git使用手册/">评论</a>
@@ -275,7 +281,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj2hbovt5001hrz6iktn3fnl3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/10/09/MessageQueue大全/" data-id="cj2he1vv2001gyp6iki24am96" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/10/09/MessageQueue大全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/10/09/MessageQueue大全/">评论</a>
@@ -327,7 +333,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj2hbovus004drz6irmkk5v2z" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/09/28/美国签证血泪史/" data-id="cj2he1vwy0045yp6ihe12hqgy" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/09/28/美国签证血泪史/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/09/28/美国签证血泪史/">评论</a>

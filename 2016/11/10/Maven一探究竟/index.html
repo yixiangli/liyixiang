@@ -7,21 +7,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="概述Maven 作为一款自动构建工具，深受广大web开发者的喜爱。日常工作中其实经常会出现一些构建相关问题，博主针对一些问题也单独一篇文章来记录遇到的问题，而Maven本身一些新特性还是有必要去研究一下的。 
 Maven生命周期
-怎么用">
+上图是IDEA工具中的maven生命周期模型，实际上Maven是有三套生命周期的，简单介绍一下：
+clean生命周期主要目的是清理项目pre-clean    ：执行清理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Maven一探究竟">
 <meta property="og:url" content="https://yixiangli.github.io/2016/11/10/Maven一探究竟/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="概述Maven 作为一款自动构建工具，深受广大web开发者的喜爱。日常工作中其实经常会出现一些构建相关问题，博主针对一些问题也单独一篇文章来记录遇到的问题，而Maven本身一些新特性还是有必要去研究一下的。 
 Maven生命周期
-怎么用">
+上图是IDEA工具中的maven生命周期模型，实际上Maven是有三套生命周期的，简单介绍一下：
+clean生命周期主要目的是清理项目pre-clean    ：执行清理">
 <meta property="og:image" content="https://yixiangli.github.io/img/maven_lifecycle.jpg">
-<meta property="og:updated_time" content="2017-05-08T08:32:14.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/maven_clean.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/maven_default.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/maven_site.jpg">
+<meta property="og:updated_time" content="2017-05-09T10:02:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven一探究竟">
 <meta name="twitter:description" content="概述Maven 作为一款自动构建工具，深受广大web开发者的喜爱。日常工作中其实经常会出现一些构建相关问题，博主针对一些问题也单独一篇文章来记录遇到的问题，而Maven本身一些新特性还是有必要去研究一下的。 
 Maven生命周期
-怎么用">
+上图是IDEA工具中的maven生命周期模型，实际上Maven是有三套生命周期的，简单介绍一下：
+clean生命周期主要目的是清理项目pre-clean    ：执行清理">
 <meta name="twitter:image" content="https://yixiangli.github.io/img/maven_lifecycle.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
@@ -118,11 +124,17 @@ Maven生命周期
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven生命周期"><span class="toc-number">1.1.</span> <span class="toc-text">Maven生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么用"><span class="toc-number">1.2.</span> <span class="toc-text">怎么用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖"><span class="toc-number">1.2.1.</span> <span class="toc-text">依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#非继承依赖方式管理POM"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">非继承依赖方式管理POM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#禁止传递依赖"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">禁止传递依赖</span></a></li></ol></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven生命周期"><span class="toc-number">1.1.</span> <span class="toc-text">Maven生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件"><span class="toc-number">1.2.</span> <span class="toc-text">插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么用"><span class="toc-number">1.3.</span> <span class="toc-text">怎么用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖"><span class="toc-number">1.3.1.</span> <span class="toc-text">依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#非继承依赖方式管理POM"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">非继承依赖方式管理POM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#禁止传递依赖"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">禁止传递依赖</span></a></li></ol></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Maven 作为一款自动构建工具，深受广大web开发者的喜爱。日常工作中其实经常会出现一些构建相关问题，博主针对一些问题也单独一篇文章来记录遇到的问题，而Maven本身一些新特性还是有必要去研究一下的。 </p>
 <h2 id="Maven生命周期"><a href="#Maven生命周期" class="headerlink" title="Maven生命周期"></a>Maven生命周期</h2><p><img src="/img/maven_lifecycle.jpg" alt="Maven生命周期"></p>
+<p>上图是IDEA工具中的maven生命周期模型，实际上Maven是有三套生命周期的，简单介绍一下：</p>
+<p><strong>clean生命周期</strong><br>主要目的是清理项目<br>pre-clean    ：执行清理前的工作；<br>clean    ：清理上一次构建生成的所有文件；<br>post-clean    ：执行清理后的工作</p>
+<p><strong>default生命周期</strong><br>定义了真正构建时所需要执行的所有步骤，它是生命周期中最核心的部分<br>validate<br>initialize<br>generate-sources<br>process-sources: 处理项目主资源文件。一般来说，是对src/main/resources目录的内容进行变量替换等工作后，复制到项目输出的主classpath目录中<br>generate-resources<br>process-resources<br>compile: 编译项目的主源码。一般来说，是编译src/main/Java目录下的Java文件至项目输出的主classpath目录中<br>process-classes<br>generate-test-sources<br>process-test-sources: 处理项目测试资源文件。一般来说，是对src/test/resources目录的内容进行变量替换等工作后，复制到项目输出的测试classpath目录中<br>generate-test-resources<br>process-test-resources<br>test-compile: 编译项目的测试代码，一般来说，是编译src/test/java目录下的Java文件至项目输出的测试classpath目录中<br>process-test-classes<br>test: 使用单元测试框架运行测试，测试代码不会打包或部署<br>prepare-package<br>package: 接受编译好的代码，打包成可发布的格式，如JAR<br>pre-integration-test<br>integration-test<br>post-integration-test<br>verify<br>install: 将包安装到Maven本地仓库，供本地其他Maven项目使用<br>deploy: 将最终的包复制到远程仓库，供其他开发人员和Maven项目使用</p>
+<p><strong>site生命周期</strong><br>建立和发布项目站点，Maven能够基于POM所包含的信息，自动生成站点<br>pre-site<br>site    ：生成项目的站点文档；<br>post-site<br>site-deploy    ：发布生成的站点文档</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>直接截图</p>
+<p><img src="/img/maven_clean.jpg" alt="Maven-Clean生命周期"><br><img src="/img/maven_default.jpg" alt="Maven-Default生命周期"><br><img src="/img/maven_site.jpg" alt="Maven-Site生命周期"></p>
 <h2 id="怎么用"><a href="#怎么用" class="headerlink" title="怎么用"></a>怎么用</h2><a id="more"></a>
 <p>Maven其实很强大，提供了很高级的特性，一来方便我们自动构建项目，二来可以对整个项目进行一个全局性的管理。但是博主一直觉得Maven没什么好学的，也就没有系统研究过，这阵子正好项目需要做zk配置管理服务，就规整了一下项目中的一些配置，才知道之前的pom配置有多恶心。</p>
 <h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>用Maven最熟悉的要数dependency标签了 普通使用方法就不再详述了，主要介绍以下几种功能,随着项目开发以及功能迭代，之前的小项目演化成了一个多模块的大系统，模块与模块之间以及模块与第三方工具包之前都会存在很多依赖关系，如何梳理清楚这些依赖对于项目日常维护与扩展性都有很大帮助。</p>
