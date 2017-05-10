@@ -17,7 +17,7 @@
 状态码1××    以1字字开头的三位数表示服务器已经接受到请求，并且正在处理中2×× 以2字开头的三位数 表示请求成功3×× 以3字开头的三位数表示请求被重定向(比如跳出服务器去github上请求jquery)4xx    以4字开头的三位书表示客户请求错误(比如客户请求的资源不存在)5xx    以5字开头的三位数表示服务器内部出错">
 <meta property="og:image" content="https://yixiangli.github.io/img/protocol.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/ajp.png">
-<meta property="og:updated_time" content="2017-05-09T13:43:09.000Z">
+<meta property="og:updated_time" content="2017-05-09T13:46:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="协议入门">
 <meta name="twitter:description" content="一张图
@@ -145,7 +145,7 @@
 <h4 id="长连接和短连接"><a href="#长连接和短连接" class="headerlink" title="长连接和短连接"></a>长连接和短连接</h4><h5 id="面向连接"><a href="#面向连接" class="headerlink" title="面向连接"></a>面向连接</h5><p>Http的长连接与短连接本质上就是tcp的长连接与短连接，tcp作为http传输层使用的协议，解决如何在IP层之上可靠的传递数据包，而在网络层使用ip协议解决网络路由和寻址问题，TCP有可靠，面向连接的特点，因此http是面向连接的协议。</p>
 <h5 id="无状态"><a href="#无状态" class="headerlink" title="无状态"></a>无状态</h5><p>无状态很好解释，这次你上网打开一个网页和下一次再打开这个网页之间没有任何联系，服务没有任何关联性与记忆能力，因此http是一种无状态的协议</p>
 <h4 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h4><p>1.半双工协议，无法同一时刻在客户端与服务端做数据传递<br>2.文本方式传输，包括消息头，消息体等等，冗长而繁琐<br>3.长时间轮询，持续占用连接，消耗资源</p>
-<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>以安全为目标的HTTP通道，可以理解为HTTP的安全版，HTTPS与HTTP的主要区别就是在会话层加入了SSL,由SSL对详细内进行加密，保证了安全性。</p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>以安全为目标的HTTP通道，可以理解为HTTP的安全版，HTTPS与HTTP的主要区别就是在会话层加入了SSL,由SSL对详细内容进行加密，保证了安全性。</p>
 <p>缺省端口：443<br>使用TCP协议</p>
 <h3 id="DNS-Domain-Name-System"><a href="#DNS-Domain-Name-System" class="headerlink" title="DNS(Domain Name System)"></a>DNS(Domain Name System)</h3><p>域名系统，作用是将域名和ip对应起来，方便互联网用户使用（贼长的ip想记也记不住几个啊） </p>
 <p>缺省端口：53<br>使用UDP协议</p>
