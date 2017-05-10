@@ -5,29 +5,20 @@
   
   <title>树 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="树B树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；
-B-树：多路搜索树，每个结点存储M/2到M个关键字，非叶子结点存储指向关键字范围的子结点；所有关键字在整颗树中出现，且只出现一次，非叶子结点可以命中；
-B+树：在B-树基础上，为叶子结点增加链表指针，所有关键字都在叶子结点中出现，非叶子结点作为叶子结点的索引；B+树总是到叶子结点才命中；
-B*树：在B+树基础上，为">
+  <meta name="description" content="树B树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树">
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/10/树/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="树B树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；
-B-树：多路搜索树，每个结点存储M/2到M个关键字，非叶子结点存储指向关键字范围的子结点；所有关键字在整颗树中出现，且只出现一次，非叶子结点可以命中；
-B+树：在B-树基础上，为叶子结点增加链表指针，所有关键字都在叶子结点中出现，非叶子结点作为叶子结点的索引；B+树总是到叶子结点才命中；
-B*树：在B+树基础上，为">
+<meta property="og:description" content="树B树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；">
 <meta property="og:image" content="https://yixiangli.github.io/img/b_tree.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/b-tree.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/b+tree.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/b*tree.jpg">
-<meta property="og:updated_time" content="2017-05-10T09:26:48.000Z">
+<meta property="og:updated_time" content="2017-05-10T09:27:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树">
-<meta name="twitter:description" content="树B树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；
-B-树：多路搜索树，每个结点存储M/2到M个关键字，非叶子结点存储指向关键字范围的子结点；所有关键字在整颗树中出现，且只出现一次，非叶子结点可以命中；
-B+树：在B-树基础上，为叶子结点增加链表指针，所有关键字都在叶子结点中出现，非叶子结点作为叶子结点的索引；B+树总是到叶子结点才命中；
-B*树：在B+树基础上，为">
+<meta name="twitter:description" content="树B树：二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；">
 <meta name="twitter:image" content="https://yixiangli.github.io/img/b_tree.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
@@ -128,6 +119,7 @@ B*树：在B+树基础上，为">
         </div>
     
         <h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><p><strong>B树：</strong>二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；<br><img src="/img/b_tree.jpg" alt="B树"></p>
+<a id="more"></a>
 <p><strong>B-树：</strong>多路搜索树，每个结点存储M/2到M个关键字，非叶子结点存储指向关键字范围的子结点；所有关键字在整颗树中出现，且只出现一次，非叶子结点可以命中；<br><img src="/img/b-tree.jpg" alt="B树"></p>
 <p><strong>B+树：</strong>在B-树基础上，为叶子结点增加链表指针，所有关键字都在叶子结点中出现，非叶子结点作为叶子结点的索引；B+树总是到叶子结点才命中；<br><img src="/img/b+tree.jpg" alt="B树"></p>
 <p><strong>B*树：</strong>在B+树基础上，为非叶子结点也增加链表指针，将结点的最低利用率从1/2提高到2/3；<br><img src="/img/b*tree.jpg" alt="B树"></p>
