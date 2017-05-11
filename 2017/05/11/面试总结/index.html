@@ -15,7 +15,7 @@
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的
 网络1.Java Socket编程步骤① 创建ServerSocket和Socket② 打开连接到Socket的输入/输出流③ 按照协议对Socket进行读/写操作④ 关闭输入输出流、关闭Socket
 服务端① 创建ServerSocket对象，绑定监听端口② 通过accept()方法监听">
-<meta property="og:updated_time" content="2017-05-11T10:21:38.000Z">
+<meta property="og:updated_time" content="2017-05-11T10:27:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的
@@ -130,7 +130,8 @@
 <p>2.哪些类可以是根<br>final static</p>
 <p>3.CMS收集器“浮动垃圾”参数过小如何解决<br>浮动垃圾：标记结束后，gc线程正在回收时又产生的新垃圾<br>解决：提前回收策略，或者配合使用其他收集器</p>
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>1.MongoDB为什么说比MySQL性能好<br>因为MongoDB会先申请一大块内存，客户端的读写操作都是在内存中操作，MongoDB再负责落地，因此MongoDB是十分耗内存空间的。</p>
-<p>2.MySQL事务<br>3.MySQL主从复制原理</p>
+<p>2.MySQL事务</p>
+<p>3.MySQL主从复制原理<br>主库开一个log dump 线程用来给从库 i/o线程传binlog<br>从库生成两个线程，一个I/O线程，一个SQL线程；<br>i/o线程去请求主库 的binlog，并将得到的binlog日志写到relay log（中继日志） 文件中；<br>SQL 线程，会读取relay log文件中的日志，并解析成具体操作，来实现主从的操作一致，而最终数据一致；</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1.单线程模型为什么还那么快<br>(1)基于内存操作<br>(2)不考虑并发、锁，也不会增加上下文切换等开销<br>(3)自封装的事件分离器，采用了epoll  + 自己实现的简单的事件框架<br>(4)非阻塞IO</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p>TreeMap是红黑树实现的</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>单进程单线程模型：Redis<br>多进程单线程模型：Nginx<br>单进程多线程模型：Memcached</p>
