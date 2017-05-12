@@ -122,7 +122,7 @@
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>1.MongoDB为什么说比MySQL性能好<br>因为MongoDB会先申请一大块内存，客户端的读写操作都是在内存中操作，MongoDB再负责落地，因此MongoDB是十分耗内存空间的。</p>
 <p>2.MySQL事务</p>
 <p>3.MySQL主从复制原理<br>主库开一个log dump 线程用来给从库 i/o线程传binlog<br>从库生成两个线程，一个I/O线程，一个SQL线程；<br>i/o线程去请求主库 的binlog，并将得到的binlog日志写到relay log（中继日志） 文件中；<br>SQL 线程，会读取relay log文件中的日志，并解析成具体操作，来实现主从的操作一致，而最终数据一致；</p>
-<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1.单线程模型为什么还那么快<br>(1)基于内存操作<br>(2)不考虑并发、锁，也不会增加上下文切换等开销<br>(3)自封装的事件分离器，采用了epoll  + 自己实现的简单的事件框架<br>(4)非阻塞IO</p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1.单线程模型为什么还那么快<br>(1)基于内存操作<br>(2)不考虑并发、锁，也不会增加上下文切换等开销<br>(3)自封装的事件分离器，采用了epoll  + 自己实现的简单的事件框架</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p>1.TreeMap是红黑树实现的<br>2.synchronized的是非公平锁（还好答对了，差点被面试官套路了）<br>3.线程池<br>如果池中的实际线程数小于corePoolSize,无论是否其中有空闲的线程，都会给新的任务产生新的线程<br>如果池中的线程数&gt;corePoolSize and &lt;maximumPoolSize,而又有空闲线程，就给新任务使用空闲线程，如没有空闲线程，则产生新线程<br>如果池中的线程数＝maximumPoolSize，则有空闲线程使用空闲线程，否则新任务放入workQueue。（线程的空闲只有在workQueue中不再有任务时才成立）<br>4.volatile如何保证从主内存取 而不是工作内存取<br>volatile会把工作内存中的值置为无效，利用MESI协议<br>volatile变量生成指令后会加上内存屏障</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>单进程单线程模型：Redis<br>多进程单线程模型：Nginx<br>单进程多线程模型：Memcached</p>
 <h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>1.脑裂<br>顾名思义，脑子裂开了，在Zookeeper这个服务中leader就是脑子，那么脑裂就是指出现多个master。开玩笑，怎么会有多个master,不是有leader选举吗？这里就要介绍一个概念了－假死。<br>假死：master并没有真的挂掉，但是集群中其他节点或者client认为master已经死掉，如何检测是否挂掉，通过心跳。那么出现假死的原因就是由于网络原因导致集群Follow与Master通信中断，Follow就认为Master已死。这种情况会出现两种状态<br>1.集群子节点先发现master连接不上，这个时候剩下的follow会重新选举master,master选举完成后这时网络恢复，就会出现部分client连接在新master上，部分在旧master上，导致紊乱。<br>2.client端先发现master连接不上。</p>
@@ -132,7 +132,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/11/面试总结/" data-id="cj2llybdy004sj06iyo711v7l" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/11/面试总结/" data-id="cj2loxvct0052ny6ip8z207wc" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/11/面试总结/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/11/面试总结/">评论</a>
@@ -182,7 +182,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/10/MongoDB实战/" data-id="cj2llybbv001qj06i7j9crx6c" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/10/MongoDB实战/" data-id="cj2loxvar001rny6ich3l88nr" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/10/MongoDB实战/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/10/MongoDB实战/">评论</a>
@@ -233,7 +233,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/10/树/" data-id="cj2llybda003rj06iiickzzt7" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/10/树/" data-id="cj2loxvbx003kny6i3r07h2u8" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/10/树/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/10/树/">评论</a>
@@ -289,7 +289,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/08/Netty详解/" data-id="cj2llybc1001xj06i8uwlew6w" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/08/Netty详解/" data-id="cj2loxvay001zny6ifa86ymuk" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/08/Netty详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/08/Netty详解/">评论</a>
@@ -341,7 +341,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/05/Redis内存管理/" data-id="cj2llybc60023j06i07r3h2xn" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/05/Redis内存管理/" data-id="cj2loxvb5002cny6i41gc0qdw" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/05/Redis内存管理/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/05/Redis内存管理/">评论</a>
