@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-05-13T11:02:41.000Z">
+<meta property="og:updated_time" content="2017-05-13T11:04:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -133,10 +133,12 @@
 <p>4.日志<br>undo:undo日志文件记录了数据在事务开始之前的值，当事务出现执行失败或者手动回滚时读取undo日志来恢复数据。<br>undo保证事务的ACI特性，但单纯使用undo会在事务提交前将数据写到磁盘，浪费I/O.</p>
 <p>redo:记录数据修改后的值，可以避免事务提交前将数据写到磁盘，减少I/O。<br>undo保证事务的D特性</p>
 <p>举个例子：<br>int a=3,b=5;<br>将a，b都修改成1，且保证a,b都修改成功</p>
-<p><strong>only undo</strong><br>A.事务开始<br>B.write a=3 到 undo_buf<br>C.修改a=1<br>D.write b=5 到 undo_buf<br>E.修改b=1<br>F.将undo_buf写到undo磁盘（记录原始值，用于恢复）<br>G.将data_buf(新修改的数据)写到datafile磁盘<br>H.事务提交</p>
+<p><strong>only undo</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">A.事务开始</div><div class="line">B.write a=3 到 undo_buf</div><div class="line">C.修改a=1</div><div class="line">D.write b=5 到 undo_buf</div><div class="line">E.修改b=1</div><div class="line">F.将undo_buf写到undo磁盘（记录原始值，用于恢复）</div><div class="line">G.将data_buf(新修改的数据)写到datafile磁盘</div><div class="line">H.事务提交</div></pre></td></tr></table></figure>
 <p>如果事务在F之前崩溃则无影响，因为数据还未写入磁盘<br>如果事务在G之前崩溃或者回滚则可以根据undo恢复到初始状态</p>
-<p>方案问题：F需要写磁盘，浪费I/O</p>
-<p><strong>undo+redo</strong><br>A.事务开始<br>B.write a=3 到 undo_buf<br>C.修改a=1 write到redo_buf<br>D.write b=5 到 undo_buf<br>E.修改b=1 write到redo_buf<br>F.将redo_buf写到redo磁盘（记录修改值）<br>G.事务提交</p>
+<p>方案问题：F，G都需要写磁盘，浪费I/O</p>
+<p><strong>undo+redo</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">A.事务开始</div><div class="line">B.write a=3 到 undo_buf</div><div class="line">C.修改a=1 write到redo_buf</div><div class="line">D.write b=5 到 undo_buf</div><div class="line">E.修改b=1 write到redo_buf</div><div class="line">F.将redo_buf写到redo磁盘（记录修改值）</div><div class="line">G.事务提交</div></pre></td></tr></table></figure>
 <p>F之前崩溃由于所有数据都在内存，恢复后重新从磁盘载入就ok<br>FG之间的崩溃可以使用redo恢复<br>G之前的回滚可以使用undo来恢复</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1.单线程模型为什么还那么快<br>(1)基于内存操作<br>(2)不考虑并发、锁，也不会增加上下文切换等开销<br>(3)自封装的事件分离器，采用了epoll  + 自己实现的简单的事件框架</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p>1.TreeMap是红黑树实现的<br>2.synchronized的是非公平锁（还好答对了，差点被面试官套路了）<br>3.线程池<br>如果池中的实际线程数小于corePoolSize,无论是否其中有空闲的线程，都会给新的任务产生新的线程<br>如果池中的线程数&gt;corePoolSize and &lt;maximumPoolSize,而又有空闲线程，就给新任务使用空闲线程，如没有空闲线程，则产生新线程<br>如果池中的线程数＝maximumPoolSize，则有空闲线程使用空闲线程，否则新任务放入workQueue。（线程的空闲只有在workQueue中不再有任务时才成立）<br>4.volatile如何保证从主内存取 而不是工作内存取<br>volatile会把工作内存中的值置为无效，利用MESI协议<br>volatile变量生成指令后会加上内存屏障</p>
