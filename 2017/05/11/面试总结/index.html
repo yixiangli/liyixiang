@@ -5,22 +5,16 @@
   
   <title>面试总结 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的
-网络1.Java Socket编程步骤① 创建ServerSocket和Socket② 打开连接到Socket的输入/输出流③ 按照协议对Socket进行读/写操作④ 关闭输入输出流、关闭Socket
-服务端① 创建ServerSocket对象，绑定监听端口② 通过accept()方法监听">
+  <meta name="description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试总结">
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的
-网络1.Java Socket编程步骤① 创建ServerSocket和Socket② 打开连接到Socket的输入/输出流③ 按照协议对Socket进行读/写操作④ 关闭输入输出流、关闭Socket
-服务端① 创建ServerSocket对象，绑定监听端口② 通过accept()方法监听">
-<meta property="og:updated_time" content="2017-05-12T09:26:52.000Z">
+<meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
+<meta property="og:updated_time" content="2017-05-13T10:46:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
-<meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的
-网络1.Java Socket编程步骤① 创建ServerSocket和Socket② 打开连接到Socket的输入/输出流③ 按照协议对Socket进行读/写操作④ 关闭输入输出流、关闭Socket
-服务端① 创建ServerSocket对象，绑定监听端口② 通过accept()方法监听">
+<meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -120,6 +114,7 @@
         </div>
     
         <h1 id="面试总结"><a href="#面试总结" class="headerlink" title="面试总结"></a>面试总结</h1><p>每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的</p>
+<a id="more"></a>
 <h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>1.Java Socket编程步骤<br>① 创建ServerSocket和Socket<br>② 打开连接到Socket的输入/输出流<br>③ 按照协议对Socket进行读/写操作<br>④ 关闭输入输出流、关闭Socket</p>
 <p>服务端<br>① 创建ServerSocket对象，绑定监听端口<br>② 通过accept()方法监听客户端请求<br>③ 连接建立后，通过输入流读取客户端发送的请求信息<br>④ 通过输出流向客户端发送乡音信息<br>⑤ 关闭相关资源</p>
 <p>bind() - accept() - read() - write() - close()</p>
@@ -130,8 +125,13 @@
 <p>2.哪些类可以是根<br>final static</p>
 <p>3.CMS收集器“浮动垃圾”参数过小如何解决<br>浮动垃圾：标记结束后，gc线程正在回收时又产生的新垃圾<br>解决：提前回收策略，或者配合使用其他收集器</p>
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>1.MongoDB为什么说比MySQL性能好<br>因为MongoDB会先申请一大块内存，客户端的读写操作都是在内存中操作，MongoDB再负责落地，因此MongoDB是十分耗内存空间的。</p>
-<p>2.MySQL事务</p>
+<p>2.MySQL事务<br>事务，一组不可被分割执行的SQL<br><strong>ACID</strong><br>A:原子性：要么全部执行，要么全部不执行<br>C:稳定性：执行前后状态稳定<br>I:隔离性：不与其他事务关联或互相影响<br>D:持久性：执行成功必须全部写入磁盘</p>
+<p>隔离性实现原理：<br>锁机制，MyISAM使用表级别的锁，InnoDB采用行级别锁，提高数据表性能<br>InnoDB的锁通过锁定索引实现，查询条件中有主键则锁定主键，如果有索引先锁索引再锁主键，如果都没有则锁表</p>
+<p>事务会导致脏读，不可重复读，幻读</p>
+<p>InnoDB&amp;Falcon引擎支持事务，MyISAM不支持事务</p>
 <p>3.MySQL主从复制原理<br>主库开一个log dump 线程用来给从库 i/o线程传binlog<br>从库生成两个线程，一个I/O线程，一个SQL线程；<br>i/o线程去请求主库 的binlog，并将得到的binlog日志写到relay log（中继日志） 文件中；<br>SQL 线程，会读取relay log文件中的日志，并解析成具体操作，来实现主从的操作一致，而最终数据一致；</p>
+<p>4.日志<br>undo:undo日志文件记录了数据在事务开始之前的值，当事务出现执行失败或者手动回滚时读取undo日志来恢复数据。<br>undo保证事务的ACI特性，但单纯使用undo会在事务提交前将数据写到磁盘，浪费I/O.</p>
+<p>redo:记录数据修改后的值，可以避免事务提交前将数据写到磁盘，减少I/O。<br>undo保证事务的D特性</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1.单线程模型为什么还那么快<br>(1)基于内存操作<br>(2)不考虑并发、锁，也不会增加上下文切换等开销<br>(3)自封装的事件分离器，采用了epoll  + 自己实现的简单的事件框架</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p>1.TreeMap是红黑树实现的<br>2.synchronized的是非公平锁（还好答对了，差点被面试官套路了）<br>3.线程池<br>如果池中的实际线程数小于corePoolSize,无论是否其中有空闲的线程，都会给新的任务产生新的线程<br>如果池中的线程数&gt;corePoolSize and &lt;maximumPoolSize,而又有空闲线程，就给新任务使用空闲线程，如没有空闲线程，则产生新线程<br>如果池中的线程数＝maximumPoolSize，则有空闲线程使用空闲线程，否则新任务放入workQueue。（线程的空闲只有在workQueue中不再有任务时才成立）<br>4.volatile如何保证从主内存取 而不是工作内存取<br>volatile会把工作内存中的值置为无效，利用MESI协议<br>volatile变量生成指令后会加上内存屏障</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>单进程单线程模型：Redis<br>多进程单线程模型：Nginx<br>单进程多线程模型：Memcached</p>

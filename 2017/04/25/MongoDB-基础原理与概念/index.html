@@ -14,7 +14,7 @@
 <meta property="og:description" content="前言近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。
 主从复制学过DB的同学应该都清楚，主从复制是一个简单的数据库同步备份的集群技术，不仅仅是MongoDB,关系型数据库也是如此。基本原理就是一个Master节点对外提供写服务，多个">
 <meta property="og:image" content="https://yixiangli.github.io/img/ReplicsSet.jpg">
-<meta property="og:updated_time" content="2017-05-10T09:50:51.000Z">
+<meta property="og:updated_time" content="2017-05-13T10:37:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB-基础原理与概念">
 <meta name="twitter:description" content="前言近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。
@@ -115,7 +115,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-number">1.1.</span> <span class="toc-text">主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#副本集"><span class="toc-number">1.2.</span> <span class="toc-text">副本集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#选举机制"><span class="toc-number">1.2.1.</span> <span class="toc-text">选举机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#副本集的设计"><span class="toc-number">1.2.2.</span> <span class="toc-text">副本集的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同步"><span class="toc-number">1.2.3.</span> <span class="toc-text">同步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制"><span class="toc-number">1.1.</span> <span class="toc-text">主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#副本集"><span class="toc-number">1.2.</span> <span class="toc-text">副本集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#主从-amp-副本集"><span class="toc-number">1.2.1.</span> <span class="toc-text">主从&副本集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选举机制"><span class="toc-number">1.2.2.</span> <span class="toc-text">选举机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#副本集的设计"><span class="toc-number">1.2.3.</span> <span class="toc-text">副本集的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同步"><span class="toc-number">1.2.4.</span> <span class="toc-text">同步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近来复习总结mongo知识，由于之前组内sunshine同学调研了mongo相关知识，于是参读了一下sunshine同学的博客，收获很多，有兴趣的可以直接去看看，我就不写那么深层次了，也做个简单概括，记录下以备使用。</p>
@@ -123,6 +123,7 @@
 <h2 id="副本集"><a href="#副本集" class="headerlink" title="副本集"></a>副本集</h2><p>与主从复制所能达到的效果类似。主从复制模型中的Master相当于副本集中的“活跃”节点；Slave相当于“备份”节点。借助网上的一张图片</p>
 <p><img src="/img/ReplicsSet.jpg" alt="副本集"></p>
 <p>图中三张图描述了出现故障后MongoDB副本集自动作出的一种容灾机制，看到这个很多人可能就想到了分布式协调中间件Zookeeper，其中主要特性就是leader选举。</p>
+<h3 id="主从-amp-副本集"><a href="#主从-amp-副本集" class="headerlink" title="主从&amp;副本集"></a>主从&amp;副本集</h3><p>副本集比主从最大的优势就是主机出现故障可以通过选举快速选出新的主来继续提供服务，而主从模型就需要手动切换或者等待主的恢复。</p>
 <h3 id="选举机制"><a href="#选举机制" class="headerlink" title="选举机制"></a>选举机制</h3><p>选举前我们先搞清楚哪些人参加选举（想了解Zookeeper选举请看我的相关博客）<br><strong>主要参与人员：</strong><br>主节点：负责所有的数据库写操作，默认情况下，主节点也负责处理所有的数据库读操作；<br>副本节点：负责同步主节点的数据操作日志更新本地数据库，从而保证副本节点的数据和主节点上的数据的一致性；副本节点的从某种意义上来讲有点像赛跑，永远在追赶主节点的数据操作；<br>仲裁节点：不负责保存具体的数据，只是在副本集进行主节点选举时提供自己的一个选票而已。</p>
 <p><strong>其他酱油人员：</strong><br>Secondary-Only（只从）：和副本节点一样保存了主节点的数据副本，但是在任何情况下都成为不了Primary主节点；<br>Hidden（隐藏）：这种类型的节点对于客户端程序是不可见的，同样不能成为Primary主节点，但是可以参与投票；<br>Delayed（懒）：这种类型的节点可以通过人为的设置，可以指定一个时间来延迟从主节点同步数据，Delayed成员主要用于从一些误操作中恢复旧数据，并且肯定不能成为主节点而且是Hidden的；</p>
 <p><strong>一些介绍</strong><br>1.节点的真正身份都是通过设置来归属的，有点像狼人杀的法官发牌。<br>2.每个节点都有优先级的概念，默认是1，Secondary-Only是0，因此该成员将永远不能够成为主节点<br>3.Hidden（隐藏）节点使用rs.status()和rs.config()能够被看到，而isMaster()不可见，对调用方来讲，客户端连接到副本集时，首先会调用isMaster()来查看可用成员，因此“隐藏“只是相对，也算是对每一个节点的一种保护措施吧，至少在工作中，我们遇到有些节点同步跟不上都会把它隐藏，先对客户端不可见，减少对客户端的影响。<br>4.Delayed节点主要用于定时备份，保证由于数据变化而可恢复到某一状态的一种手段。</p>
