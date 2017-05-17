@@ -81,6 +81,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Netty实战" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/24/Netty实战/">Netty实战</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/24/Netty实战/" class="article-date">
+  <time datetime="2017-01-24T02:21:07.000Z" itemprop="datePublished">2017-01-24</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/Java/">Java</a>►<a class="article-category-link" href="/categories/技术贴/Java/框架/">框架</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是Netty"><a href="#什么是Netty" class="headerlink" title="什么是Netty"></a>什么是Netty</h1><h2 id="动态Handler"><a href="#动态Handler" class="headerlink" title="动态Handler"></a>动态Handler</h2><p>ChannelPipeline作为ChannelHandler容器，支持运行时动态添加或者删除ChannelHandler，而ChannelHandler主要负责对事件进行拦截或者处理，因此如当业务高峰期（很多业务一般是晚上）时，可以通过系统时间来控制动态添加一个ChannelHandler对系统进行用塞保护，高峰期过去后可以删除达到服务恢复。</p>
+<h3 id="5-0被废弃了"><a href="#5-0被废弃了" class="headerlink" title="5.0被废弃了"></a>5.0被废弃了</h3><p>听到这个消息，博主感到很震惊，之前做breeze框架（<a href="http://www.fishfly.cn/2016/09/08/breeze官方文档/）">http://www.fishfly.cn/2016/09/08/breeze官方文档/）</a> 中主要使用的就是Netty框架天生异步高性能优势，当时Netty5.0才出不久，所以博主选择的是4.0的版本，不过很多5.0的口子都已经开了，如<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/24/Netty实战/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/01/24/Netty实战/" data-id="cj2sgbi2q001ut36ichlu86on" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/01/24/Netty实战/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/24/Netty实战/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netty/">netty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/">socket</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux命令详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -118,7 +170,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/19/Linux命令详解/" data-id="cj2sf3kwb0013qw6i20s577ir" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/19/Linux命令详解/" data-id="cj2sgbi240013t36ikxav8aw6" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/19/Linux命令详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/19/Linux命令详解/">评论</a>
@@ -170,7 +222,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－结构型/" data-id="cj2sf3kyv004fqw6i5dhh2mvs" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－结构型/" data-id="cj2sgbi4l004nt36id5x16ovw" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/18/设计模式－结构型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/设计模式－结构型/">评论</a>
@@ -223,7 +275,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－创建型/" data-id="cj2sf3kyx004iqw6il8smfzzl" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/18/设计模式－创建型/" data-id="cj2sgbi4j004lt36i21j4wv2n" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/18/设计模式－创建型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/设计模式－创建型/">评论</a>
@@ -276,66 +328,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="cj2sf3kx70025qw6ibt9f309p" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/11/Nginx配置详解/" data-id="cj2sgbi2x0023t36ist0nax9w" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/11/Nginx配置详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/11/Nginx配置详解/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-协议入门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/10/协议入门/">协议入门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/01/10/协议入门/" class="article-date">
-  <time datetime="2017-01-10T02:30:59.000Z" itemprop="datePublished">2017-01-10</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/网络/">网络</a>►<a class="article-category-link" href="/categories/技术贴/网络/协议/">协议</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一张图"><a href="#一张图" class="headerlink" title="一张图"></a>一张图</h1><p><img src="/img/protocol.jpg" alt="协议大全"></p>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><h3 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h3><p>缺省端口：80<br>使用TCP协议</p>
-<h4 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h4><p>1××    以1字字开头的三位数表示服务器已经接受到请求，并且正在处理中<br>2×× 以2字开头的三位数 表示请求成功<br>3×× 以3字开头的三位数表示请求被重定向(比如跳出服务器去github上请求jquery)<br>4xx    以4字开头的三位书表示客户请求错误(比如客户请求的资源不存在)<br>5xx    以5字开头的三位数表示服务器内部出错</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/10/协议入门/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/01/10/协议入门/" data-id="cj2sf3ky8003fqw6ivdw31h1h" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/01/10/协议入门/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/10/协议入门/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协议-http-smtp-tcp/">协议 http  smtp tcp</a></li></ul>
 
     </footer>
   </div>
@@ -372,7 +371,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/工具贴/">工具贴</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具贴/Mac相关/">Mac相关</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/基础/">基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Tomcat/">Tomcat</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/理论知识/">理论知识</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据结构/">数据结构</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据结构/树/">树</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/源码解读/">源码解读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/算法/">算法</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/算法/排序/">排序</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/原理/">原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/安全/">安全</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/解决方案/">解决方案</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/解决方案/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/面试总结/">面试总结</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/流通纪念币/">流通纪念币</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/贵金属金银币/">贵金属金银币</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/天局/">天局</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/诗词歌赋/">诗词歌赋</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/工具贴/">工具贴</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/工具贴/Mac相关/">Mac相关</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/">Java</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/JVM/">JVM</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/基础/">基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Java/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/Maven/">Maven</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/">web中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/web中间件/Tomcat/">Tomcat</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/">MQ系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/MQ系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/">分布式系列</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/分布式系列/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据库/理论知识/">理论知识</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据结构/">数据结构</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/数据结构/树/">树</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/源码解读/">源码解读</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/理论与概念/">理论与概念</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/算法/">算法</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/算法/排序/">排序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/算法/查找/">查找</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/">网络</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/TCP/">TCP</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/协议/">协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/原理/">原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/网络/安全/">安全</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/解决方案/">解决方案</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/解决方案/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/文档/breeze/">breeze</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/面试总结/">面试总结</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/流通纪念币/">流通纪念币</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/贵金属金银币/">贵金属金银币</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/签证/">签证</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/天局/">天局</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/诗词歌赋/">诗词歌赋</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -383,6 +382,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/17/查找/">查找</a>
+          </li>
         
           <li>
             <a href="/2017/05/11/面试总结/">面试总结</a>
@@ -398,10 +401,6 @@
         
           <li>
             <a href="/2017/05/08/Netty详解/">Netty详解</a>
-          </li>
-        
-          <li>
-            <a href="/2017/05/05/Redis内存管理/">Redis内存管理</a>
           </li>
         
       </ul>
