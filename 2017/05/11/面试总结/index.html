@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-05-17T03:18:06.000Z">
+<meta property="og:updated_time" content="2017-05-19T01:50:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -126,9 +126,7 @@
 <p>3.CMS收集器“浮动垃圾”参数过小如何解决<br>浮动垃圾：标记结束后，gc线程正在回收时又产生的新垃圾<br>解决：提前回收策略，或者配合使用其他收集器</p>
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>1.MongoDB为什么说比MySQL性能好<br>因为MongoDB会先申请一大块内存，客户端的读写操作都是在内存中操作，MongoDB再负责落地，因此MongoDB是十分耗内存空间的。</p>
 <p>2.MySQL事务<br>事务，一组不可被分割执行的SQL<br><strong>ACID</strong><br>A:原子性：要么全部执行，要么全部不执行<br>C:稳定性：执行前后状态稳定<br>I:隔离性：不与其他事务关联或互相影响<br>D:持久性：执行成功必须全部写入磁盘</p>
-<p>隔离性实现原理：<br>锁机制，MyISAM使用表级别的锁，InnoDB采用行级别锁，提高数据表性能<br>InnoDB的锁通过锁定索引实现，查询条件中有主键则锁定主键，如果有索引先锁索引再锁主键，如果都没有则锁表</p>
-<p>事务会导致脏读，不可重复读，幻读</p>
-<p>InnoDB&amp;Falcon引擎支持事务，MyISAM不支持事务</p>
+<p>隔离性实现原理：<br>锁机制，MyISAM使用表级别的锁，InnoDB采用行级别锁，提高数据表性能<br>InnoDB的锁通过锁定索引实现，查询条件中有主键则锁定主键，如果有索引先锁索引再锁主键，如果都没有则锁表<br>事务会导致脏读，不可重复读，幻读<br>InnoDB&amp;Falcon引擎支持事务，MyISAM不支持事务</p>
 <p>3.MySQL主从复制原理<br>主库开一个log dump 线程用来给从库 i/o线程传binlog<br>从库生成两个线程，一个I/O线程，一个SQL线程；<br>i/o线程去请求主库 的binlog，并将得到的binlog日志写到relay log（中继日志） 文件中；<br>SQL 线程，会读取relay log文件中的日志，并解析成具体操作，来实现主从的操作一致，而最终数据一致；</p>
 <p>4.日志<br>undo:undo日志文件记录了数据在事务开始之前的值，当事务出现执行失败或者手动回滚时读取undo日志来恢复数据。<br>undo保证事务的ACI特性，但单纯使用undo会在事务提交前将数据写到磁盘，浪费I/O.</p>
 <p>redo:记录数据修改后的值，可以避免事务提交前将数据写到磁盘，减少I/O。<br>undo保证事务的D特性</p>
@@ -140,6 +138,7 @@
 <p><strong>undo+redo</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">A.事务开始</div><div class="line">B.write a=3 到 undo_buf</div><div class="line">C.修改a=1 write到redo_buf</div><div class="line">D.write b=5 到 undo_buf</div><div class="line">E.修改b=1 write到redo_buf</div><div class="line">F.将redo_buf写到redo磁盘（记录修改值）</div><div class="line">G.事务提交</div></pre></td></tr></table></figure>
 <p>F之前崩溃由于所有数据都在内存，恢复后重新从磁盘载入就ok<br>FG之间的崩溃可以使用redo恢复<br>G之前的回滚可以使用undo来恢复</p>
+<p>5.SQL优化<br>1）应尽量避免在 where 子句中使用!=或&lt;&gt;操作符，否则将引擎放弃使用索引而进行全表扫描。<br>2）应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：<br>select id from t where num is null<br>可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：<br>select id from t where num=0<br>3）很多时候用 exists 代替 in 是一个好的选择<br>4）用Where子句替换HAVING 子句 因为HAVING 只会在检索出所有记录之后才对结果集进行过滤</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1.单线程模型为什么还那么快<br>(1)基于内存操作<br>(2)不考虑并发、锁，也不会增加上下文切换等开销<br>(3)自封装的事件分离器，采用了epoll  + 自己实现的简单的事件框架</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p>1.TreeMap是红黑树实现的<br>2.synchronized的是非公平锁（还好答对了，差点被面试官套路了）<br>3.线程池<br>ThreadPoolExecutor 的内部工作原理，整个思路总结起来就是 5 句话：<br>(1) 如果当前池大小 poolSize 小于 corePoolSize ，则创建新线程执行任务。<br>(2) 如果当前池大小 poolSize 大于 corePoolSize ，且等待队列未满，则进入等待队列<br>(3) 如果当前池大小 poolSize 大于 corePoolSize 且小于 maximumPoolSize ，且等待队列已满，则创建新线程执行任务。<br>(4) 如果当前池大小 poolSize 大于 corePoolSize 且大于 maximumPoolSize ，且等待队列已满，则调用拒绝策略来处理该任务。<br>(5) 线程池里的每个线程执行完任务后不会立刻退出，而是会去检查下等待队列里是否还有线程任务需要执行，如果在 keepAliveTime 里等不到新的任务了，那么线程就会退出。</p>
 <p>排队有三种通用策略：</p>
@@ -154,6 +153,9 @@
 <p>Thread类：多个线程分别完成自己的任务<br>Runnable接口：多个线程共同完成一个任务</p>
 <p>大多数情况下，如果只想重写 run() 方法，而不重写其他 Thread 方法，那么应使用 Runnable 接口。这很重要，因为除非程序员打算修改或增强类的基本行为，否则不应为该类（Thread）创建子类</p>
 <p>7.解决高并发环境下数据插入重复问题<br>(1)synchronized锁整个方法  性能差<br>(2)synchronized块 锁可能重复的查询条件，如（索引id,联合索引id）<br>(3)负载均衡场景下以上都失效，必须在数据库层的唯一记录加select锁<br>(4)数据库添加行锁，不靠谱，因为行锁需要针对某条记录，但第一次insert时，数据还未持久化，因此无行锁。<br>(5)联合唯一索引，会导致过多索引空间占用大</p>
+<p>8.serialVersionUID的作用<br>序列化时为了保持版本的兼容性，即在版本升级时反序列化仍保持对象的唯一性。<br>有两种生成方式：<br>（1）一个是默认的1L，比如：private static final long serialVersionUID = 1L;<br>（2）一个是根据类名、接口名、成员方法及属性等来生成一个64位的哈希字段，比如：<br>private static final long serialVersionUID = xxxxL;</p>
+<p>如果你的类Serialized存到硬盘上面后，可是后来你却更改了类别的field(增加或减少或改名)，当你Deserialize时，就会出现Exception的，这样就会造成不兼容性的问题。 </p>
+<p>9.Class文件结构<br>常量池放什么数据？<br>常量池主要存放两大类常量：字面量（Literal）和符号引用（Symbolic References），字面量主要就如文本字符串，声明为final的常量值等，符号引用一般指（1）类的接口和全限定名（2）字段的名称和描述符（3）方法的名称和描述符</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>单进程单线程模型：Redis<br>多进程单线程模型：Nginx<br>单进程多线程模型：Memcached</p>
 <h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>1.脑裂<br>顾名思义，脑子裂开了，在Zookeeper这个服务中leader就是脑子，那么脑裂就是指出现多个master。开玩笑，怎么会有多个master,不是有leader选举吗？这里就要介绍一个概念了－假死。<br>假死：master并没有真的挂掉，但是集群中其他节点或者client认为master已经死掉，如何检测是否挂掉，通过心跳。那么出现假死的原因就是由于网络原因导致集群Follow与Master通信中断，Follow就认为Master已死。这种情况会出现两种状态<br>1.集群子节点先发现master连接不上，这个时候剩下的follow会重新选举master,master选举完成后这时网络恢复，就会出现部分client连接在新master上，部分在旧master上，导致紊乱。<br>2.client端先发现master连接不上。</p>
 <p>如何避免？<br>在slaver切换的时候不再检查老的master出现问题后马上切换，而是在休眠一段足够的时间，确保老的master已经获知变更并且做了相关的shutdown清理工作了然后再注册成为master就能避免这类问题了，这个休眠时间一般定义为与Zookeeper定义的超时时间就够了，但是这段时间内系统不可用了。</p>
