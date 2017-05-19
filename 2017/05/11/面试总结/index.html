@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-05-19T01:50:23.000Z">
+<meta property="og:updated_time" content="2017-05-19T09:18:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -157,8 +157,9 @@
 <p>如果你的类Serialized存到硬盘上面后，可是后来你却更改了类别的field(增加或减少或改名)，当你Deserialize时，就会出现Exception的，这样就会造成不兼容性的问题。 </p>
 <p>9.Class文件结构<br>常量池放什么数据？<br>常量池主要存放两大类常量：字面量（Literal）和符号引用（Symbolic References），字面量主要就如文本字符串，声明为final的常量值等，符号引用一般指（1）类的接口和全限定名（2）字段的名称和描述符（3）方法的名称和描述符</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>单进程单线程模型：Redis<br>多进程单线程模型：Nginx<br>单进程多线程模型：Memcached</p>
-<h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>1.脑裂<br>顾名思义，脑子裂开了，在Zookeeper这个服务中leader就是脑子，那么脑裂就是指出现多个master。开玩笑，怎么会有多个master,不是有leader选举吗？这里就要介绍一个概念了－假死。<br>假死：master并没有真的挂掉，但是集群中其他节点或者client认为master已经死掉，如何检测是否挂掉，通过心跳。那么出现假死的原因就是由于网络原因导致集群Follow与Master通信中断，Follow就认为Master已死。这种情况会出现两种状态<br>1.集群子节点先发现master连接不上，这个时候剩下的follow会重新选举master,master选举完成后这时网络恢复，就会出现部分client连接在新master上，部分在旧master上，导致紊乱。<br>2.client端先发现master连接不上。</p>
+<h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>1.脑裂<br>顾名思义，脑子裂开了，在Zookeeper这个服务中leader就是脑子，那么脑裂就是指出现多个master。开玩笑，怎么会有多个master,不是有leader选举吗？这里就要介绍一个概念了－假死。<br>假死：master并没有真的挂掉，但是集群中其他节点或者client认为master已经死掉，如何检测是否挂掉，通过心跳。那么出现假死的原因就是由于网络原因导致集群Follow与Master通信中断，Follow就认为Master已死。这种情况会出现两种状态<br>(1)集群子节点先发现master连接不上，这个时候剩下的follow会重新选举master,master选举完成后这时网络恢复，就会出现部分client连接在新master上，部分在旧master上，导致紊乱。<br>(2)client端先发现master连接不上。</p>
 <p>如何避免？<br>在slaver切换的时候不再检查老的master出现问题后马上切换，而是在休眠一段足够的时间，确保老的master已经获知变更并且做了相关的shutdown清理工作了然后再注册成为master就能避免这类问题了，这个休眠时间一般定义为与Zookeeper定义的超时时间就够了，但是这段时间内系统不可用了。</p>
+<p>2.client端与server端由于网络原因连接断开，那么server节点变更client还能同步到吗？<br>首先对于client来说，会在连接的时候注册watch监听事件到server上，server会维护watch列表，在服务端节点更新触发后，会主动通知client<br>（1）这种触发是一次性的，当数据改变的时候，那么一个Watch事件会产生并且被发送到客户端中。但是客户端只会收到一次这样的通知，如果以后这个数据再次发生改变的时候，之前设置Watch的客户端将不会再次收到改变的通知（2）Watch的通知事件是从服务器发送给客户端的，而且是异步的，但是Zookeeper保证这种顺序性，也就是保证客户端一定先收到Watch事件的通知，再看到节点数据变更。<br>那么如果存在网络原因导致socket中断，在网络恢复后，如果需要的话，所有先前注册过的watch，都会被重新注册。通常这是完全透明的。只有在一个特殊情况下，watch可能会丢失：对于一个未创建的znode的exist watch，如果在客户端断开连接期间被创建了，并且随后在客户端连接上之前又删除了，这种情况下，这个watch事件可能会被丢失。</p>
 <h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h2><p>1.线上环境出现大量缓存穿透现象（伪造key请求），最简单的解决办法是什么？<br>对key进行监控，同一个key连续n次没有从缓存以及库中查询到结果，说明存在恶意请求，则对该key做特殊处理。</p>
 
       
