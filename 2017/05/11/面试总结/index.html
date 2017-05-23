@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-05-19T09:37:57.000Z">
+<meta property="og:updated_time" content="2017-05-23T03:08:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -122,7 +122,7 @@
 <p>connect() - write() - read() - close()</p>
 <p>2.epoll模型</p>
 <h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><p>1.引用计数的循环引用问题如何解决？<br>根搜索回溯，判断循环引用的对象是否还存活</p>
-<p>2.哪些类可以是根<br>final static</p>
+<p>2.哪些类可以是根<br>final static 虚拟机栈存在引用 native栈存在引用</p>
 <p>3.CMS收集器“浮动垃圾”参数过小如何解决<br>浮动垃圾：标记结束后，gc线程正在回收时又产生的新垃圾<br>解决：提前回收策略，或者配合使用其他收集器</p>
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>1.MongoDB为什么说比MySQL性能好<br>因为MongoDB会先申请一大块内存，客户端的读写操作都是在内存中操作，MongoDB再负责落地，因此MongoDB是十分耗内存空间的。</p>
 <p>2.MySQL事务<br>事务，一组不可被分割执行的SQL<br><strong>ACID</strong><br>A:原子性：要么全部执行，要么全部不执行<br>C:稳定性：执行前后状态稳定<br>I:隔离性：不与其他事务关联或互相影响<br>D:持久性：执行成功必须全部写入磁盘</p>
