@@ -15,7 +15,7 @@
 内存模型">
 <meta property="og:image" content="https://yixiangli.github.io/img/jvm.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/jvm_02.jpg">
-<meta property="og:updated_time" content="2017-05-09T07:36:33.000Z">
+<meta property="og:updated_time" content="2017-05-23T02:30:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm那些事儿">
 <meta name="twitter:description" content="概述学Java的不懂点jvm那真是说不过去，对于研究jvm来说，不见得要把源码全部记下来，然后完全弄清楚来龙去脉（当然有精力且编程痴迷者忽略），对于jvm，大部分程序猿要做到的就是基本原理了熟于心，能进行基本的jvm调优且出了一些线上故障，要能通过观察当时内存，线程等程序的运行情况来揪出问题的根源。
@@ -131,7 +131,7 @@
 <li>堆外内存</li>
 </ul>
 <h3 id="寄存器-程序计数器"><a href="#寄存器-程序计数器" class="headerlink" title="寄存器(程序计数器)"></a>寄存器(程序计数器)</h3><p>作用：<br>    取下一条待执行的指令<br>特点：<br>    线程独立，非共享，不存在OutOfMemoryError</p>
-<h3 id="栈-虚拟机栈"><a href="#栈-虚拟机栈" class="headerlink" title="栈(虚拟机栈)"></a>栈(虚拟机栈)</h3><p>作用：<br>    生命周期与每个方法（字节码）对应一个栈帧，存储局部变量/操作数/方法出口，方法的调用－执行－返回对应虚拟机栈的入栈和出栈<br>说明：<br>    局部变量编译期空间分配完成 4类8种中除long double占用两个局部变量空间，其他占一个空间。<br>异常：<br>    （1）线程请求的栈深度大于虚拟机所允许的深度 StackOverflowError<br>    （2）虚拟机扩展无法申请到足够的内存 OutOfMemoryError</p>
+<h3 id="栈-虚拟机栈"><a href="#栈-虚拟机栈" class="headerlink" title="栈(虚拟机栈)"></a>栈(虚拟机栈)</h3><p>作用：<br>    生命周期与每个方法（字节码）对应一个栈帧，存储局部变量/对象引用/操作数/方法出口，方法的调用－执行－返回对应虚拟机栈的入栈和出栈<br>说明：<br>    局部变量编译期空间分配完成 4类8种中除long double占用两个局部变量空间，其他占一个空间。<br>异常：<br>    （1）线程请求的栈深度大于虚拟机所允许的深度 StackOverflowError<br>    （2）虚拟机扩展无法申请到足够的内存 OutOfMemoryError</p>
 <h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><p>作用：<br>    Native方法服务栈<br>特点：<br>    与虚拟机栈相似，如：Sun HotSpot虚拟机直接把本地方法栈和虚拟机栈合二为一</p>
 <h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>作用：<br>    存放对象实例/数组<br>时机：<br>    虚拟机启动时创建<br>特点：<br>    线程共享 垃圾收集器管理的主要区域<br>实现：<br>    逻辑连续，可扩展，通过-Xmx -Xms控制<br>异常：<br>    如果在堆上没有内存完成实例分配，且无法扩展 OutOfMemoryError    </p>
 <h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>作用：<br>    存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据<br>特点：<br>    线程共享 Sun HotSpot虚拟机称为“永久代”，可垃圾回收   JDK1.7之后字符串常量池不存放在永久代<br>异常：<br>     永久代上限 -XX:MaxPermSize 无法满足内存分配需求 OutOfMemoryError</p>
