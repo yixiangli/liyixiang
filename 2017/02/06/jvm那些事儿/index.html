@@ -15,7 +15,7 @@
 内存模型">
 <meta property="og:image" content="https://yixiangli.github.io/img/jvm.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/jvm_02.jpg">
-<meta property="og:updated_time" content="2017-05-23T02:30:11.000Z">
+<meta property="og:updated_time" content="2017-05-23T02:48:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm那些事儿">
 <meta name="twitter:description" content="概述学Java的不懂点jvm那真是说不过去，对于研究jvm来说，不见得要把源码全部记下来，然后完全弄清楚来龙去脉（当然有精力且编程痴迷者忽略），对于jvm，大部分程序猿要做到的就是基本原理了熟于心，能进行基本的jvm调优且出了一些线上故障，要能通过观察当时内存，线程等程序的运行情况来揪出问题的根源。
@@ -138,11 +138,11 @@
 <h4 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h4><p>作用：<br>    方法区一部分 存放编译期生成的各种字面量和符号引用<br>特点：<br>    String的intern()方法 在运行期间将新的常量放入常量池<br>异常：<br>    无法申请内存 OutOfMemoryError</p>
 <h3 id="堆外内存"><a href="#堆外内存" class="headerlink" title="堆外内存"></a>堆外内存</h3><p>说明：<br>    不属于java虚拟机内存，但由于jdk1.4后NIO的引入 可以使用Native函数直接分配堆外内存<br>好处：<br>    1.可以扩展至更大的内存空间。比如超过1TB甚至比主存还大的空间。<br>    2.理论上能减少GC暂停时间。<br>    3.可以在进程间共享，减少JVM间的对象复制，使得JVM的分割部署更容易实现。<br>    4.它的持久化存储可以支持快速重启，同时还能够在测试环境中重现生产数据。<br>异常：<br>    受系统物理内存影响，无法申请内存 OutOfMemoryError </p>
 <p>申请：<br>直接操作本地内存的方式有2种：使用未公开的Unsafe和NIO包下的ByteBuffer。</p>
-<h4 id="堆外内存的优缺点"><a href="#堆外内存的优缺点" class="headerlink" title="堆外内存的优缺点"></a>堆外内存的优缺点</h4><p>优点：<br>    1 由于堆外内存不受jvm控制，减少了垃圾回收的工作，因为垃圾回收会暂停其他的工作<br>　　2 加快了复制的速度。这一点博主也是在整理博客时查阅资料才明白的。因为堆内在flush到远程时，会先复制到直接内存（非堆内存），然后在发送；而堆外内存相当于省略掉了这个工作。<br>　　3 既然是不在虚拟机内部的内存，那么多进程下应用程序之间共享内存就有了可能，当然个人认为很少情况下会用，如果真有这种场景，为何不用（Redis,memcache)分布式缓存呢。<br>　　<br>缺点：<br>       1 堆外内存难以控制，如果内存泄漏，那么很难排查，虽然说调用System.gc()可能也能回收，但是要知道垃圾回收是jvm的活，程序员就算调gc()方法也只是给jvm个建议，万一jvm一矫情，也不会执行回收操作。<br>       2 堆外内存相对来说，不适合存储很复杂的对象。一般简单的对象或者扁平化的比较适合。</p>
+<h4 id="堆外内存的优缺点"><a href="#堆外内存的优缺点" class="headerlink" title="堆外内存的优缺点"></a>堆外内存的优缺点</h4><p>优点：<br>1.由于堆外内存不受jvm控制，减少了垃圾回收的工作，因为垃圾回收会暂停其他的工作<br>2.加快了复制的速度。这一点博主也是在整理博客时查阅资料才明白的。因为堆内在flush到远程时，会先复制到直接内存（非堆内存），然后在发送；而堆外内存相当于省略掉了这个工作。<br>3.既然是不在虚拟机内部的内存，那么多进程下应用程序之间共享内存就有了可能，当然个人认为很少情况下会用，如果真有这种场景，为何不用（Redis,memcache)分布式缓存呢。<br>　　<br>缺点：<br>1.堆外内存难以控制，如果内存泄漏，那么很难排查，虽然说调用System.gc()可能也能回收，但是要知道垃圾回收是jvm的活，程序员就算调gc()方法也只是给jvm个建议，万一jvm一矫情，也不会执行回收操作。<br>2.堆外内存相对来说，不适合存储很复杂的对象。一般简单的对象或者扁平化的比较适合。</p>
 <h4 id="何时释放，如何释放"><a href="#何时释放，如何释放" class="headerlink" title="何时释放，如何释放"></a>何时释放，如何释放</h4><ul>
 <li><p>何时释放<br>由于堆外内存并不直接控制于JVM，因此只能等到full GC的时候才能垃圾回收。<br>也就是说一般发生在年老代垃圾回收以及调用System.gc的时候。</p>
 </li>
-<li><p>如何释放<br>使用sun.misc.Cleaner或者PhantomReference实现堆外内存的自动释放，而不是覆盖finalize方法或者System.gc手动释放，这两种都对性能存在很大影响。</p>
+<li><p>如何释放<br>使用sun.misc.Cleaner或者PhantomReference实现堆外内存的自动释放，而不是覆盖finalize方法或者System.gc手动释放，因为这两种都对性能存在很大影响。</p>
 </li>
 </ul>
 <h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><p>俗称垃圾回收，是java中一个相当重要的环节，不同于C/C++之处，Java的堆内存由jvm管理，所以回收也完全由jvm控制，不需要手动释放无用对象。</p>
