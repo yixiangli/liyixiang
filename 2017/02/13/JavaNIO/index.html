@@ -14,7 +14,7 @@ BIO会引入多个线程，每个连接都会有一个单独的线程NIO只需�
 <meta property="og:description" content="NIO概念对比BIO/NIO/AIO：BIO是同步阻塞的NIO是同步非阻塞的AIO是异步非阻塞的
 BIO会引入多个线程，每个连接都会有一个单独的线程NIO只需要少量线程，或者单线程，多个连接公用线程">
 <meta property="og:image" content="https://yixiangli.github.io/img/bio与nio.jpg">
-<meta property="og:updated_time" content="2017-05-08T07:50:55.000Z">
+<meta property="og:updated_time" content="2017-05-24T03:24:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaNIO">
 <meta name="twitter:description" content="NIO概念对比BIO/NIO/AIO：BIO是同步阻塞的NIO是同步非阻塞的AIO是异步非阻塞的
@@ -123,6 +123,7 @@ BIO会引入多个线程，每个连接都会有一个单独的线程NIO只需�
 <a id="more"></a>
 <p>连接层面上的区别如图：<br><img src="/img/bio与nio.jpg" alt="BIO与NIO区别"></p>
 <p>如图所示，nio的处理流程是当一个连接创建后，不像bio那样需要对应一个线程，而是将这个连接注册到多路复用器Selector上面，所以是多个连接公用线程，而多路复用器Selector进行轮询的时候，发现连接上有请求的话，才开启一个线程进行处理，也就是一个请求一个线程模式，针对于这种模式，在博主自己开发的breeze框架中深刻体会到其中的问题，那就是当并发请求量大时，如果处理请求的后端线程在等待一系列资源（如博主遇到的数据库瓶颈），那么还是会和BIO一样的问题，导致线程资源过多或者不够用（线程池）</p>
+<p><strong>总结一下：</strong><br>面向流 vs. 面向缓冲<br>阻塞 vs. 非阻塞<br>选择器（Selector）<br>零拷贝<br>    这点解释下，就是可直接把FileChannel中的数据拷贝到另外一个Channel，或者直接把另外一个Channel中的数据拷贝到FileChannel，并不需要将源数据从内核态拷贝到用户态，再从用户态拷贝到目标通道的内核态，同时也避免了两次用户态和内核态间的上下文切换</p>
 <p>AIO:<br>首先从NIO模型可以看出，NIO的整个流程并不是异步的，客户端在请求发出后还是会等待响应，因此如果要实现异步非阻塞（AIO），在NIO的基础上加一个队列或者资源池，负责连接的线程将请求接受，并将请求数据传送到后端队列或者资源池中，而后端线程组只负责从队列或者资源池中取数据处理，处理完回调（连接与请求一一匹配，也就是从哪来的回哪去），这就是真正的异步非阻塞了。</p>
 <p>BIO是一个连接一个线程。<br>NIO是一个请求一个线程。<br>AIO是一个有效请求一个线程。</p>
 <p><strong>同步&amp;异步</strong><br>消息通信机制</p>
