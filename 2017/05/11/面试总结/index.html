@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-05-25T08:49:15.000Z">
+<meta property="og:updated_time" content="2017-05-26T06:00:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -116,7 +116,7 @@
         <h1 id="面试总结"><a href="#面试总结" class="headerlink" title="面试总结"></a>面试总结</h1><p>每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的</p>
 <a id="more"></a>
 <h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>1.Java Socket编程步骤<br>① 创建ServerSocket和Socket<br>② 打开连接到Socket的输入/输出流<br>③ 按照协议对Socket进行读/写操作<br>④ 关闭输入输出流、关闭Socket</p>
-<p>服务端<br>① 创建ServerSocket对象，绑定监听端口<br>② 通过accept()方法监听客户端请求<br>③ 连接建立后，通过输入流读取客户端发送的请求信息<br>④ 通过输出流向客户端发送乡音信息<br>⑤ 关闭相关资源</p>
+<p>服务端<br>① 创建ServerSocket对象，绑定监听端口<br>② 通过accept()方法监听客户端请求<br>③ 连接建立后，通过输入流读取客户端发送的请求信息<br>④ 通过输出流向客户端发送相应信息<br>⑤ 关闭相关资源</p>
 <p>bind() - accept() - read() - write() - close()</p>
 <p>客户端<br>① 创建Socket对象，指明需要连接的服务器的地址和端口号<br>② 连接建立后，通过输出流想服务器端发送请求信息<br>③ 通过输入流获取服务器响应的信息<br>④ 关闭响应资源 </p>
 <p>connect() - write() - read() - close()</p>
