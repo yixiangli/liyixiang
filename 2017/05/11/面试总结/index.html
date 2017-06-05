@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-05-26T06:00:27.000Z">
+<meta property="og:updated_time" content="2017-06-05T13:48:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -159,6 +159,8 @@
 <p>10.Callable 和 Future接口<br>Callable是类似于Runnable的接口，实现Callable接口的类和实现Runnable的类都是可被其它线程执行的任务。</p>
 <p>Callable和Runnable有几点不同：<br>1.Callable规定的方法是call()，而Runnable规定的方法是run().2.Callable的任务执行后可返回值，而Runnable的任务是不能返回值的。3.call()方法可抛出异常，而run()方法是不能抛出异常的。<br>4.运行Callable任务可拿到一个Future对象，</p>
 <p>Future 表示异步计算的结果。它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果。<br>通过Future对象可了解任务执行情况，可取消任务的执行，还可获取任务执行的结果。</p>
+<p>11.hashCode()与equals()<br>equals相等，hashCode一定相等<br>equals不相等，hashCode不一定不相等<br>hashCode相等，equals不一定相等（想想HashMap原理）<br>hashCode不相等，equals一定不相等</p>
+<p>因此hashCode一般用于集合的比较，是为了提高在散列结构存储中查找的效率，在线性表中没有作用<br>重写了equals方法，也有必要重写hashCode方法</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>单进程单线程模型：Redis<br>多进程单线程模型：Nginx<br>单进程多线程模型：Memcached</p>
 <h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>1.脑裂<br>顾名思义，脑子裂开了，在Zookeeper这个服务中leader就是脑子，那么脑裂就是指出现多个master。开玩笑，怎么会有多个master,不是有leader选举吗？这里就要介绍一个概念了－假死。<br>假死：master并没有真的挂掉，但是集群中其他节点或者client认为master已经死掉，如何检测是否挂掉，通过心跳。那么出现假死的原因就是由于网络原因导致集群Follow与Master通信中断，Follow就认为Master已死。这种情况会出现两种状态<br>(1)集群子节点先发现master连接不上，这个时候剩下的follow会重新选举master,master选举完成后这时网络恢复，就会出现部分client连接在新master上，部分在旧master上，导致紊乱。<br>(2)client端先发现master连接不上。</p>
 <p>如何避免？<br>在slaver切换的时候不再检查老的master出现问题后马上切换，而是在休眠一段足够的时间，确保老的master已经获知变更并且做了相关的shutdown清理工作了然后再注册成为master就能避免这类问题了，这个休眠时间一般定义为与Zookeeper定义的超时时间就够了，但是这段时间内系统不可用了。</p>
