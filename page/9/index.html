@@ -109,6 +109,9 @@
       
         <h1 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h1><h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p>new, runnable, blocked, waiting, time waiting, 或 terminated</p>
 <p><img src="/img/thread_state.jpg" alt="线程状态转换图"></p>
+<p><strong>Blocked</strong><br>一般只有synchronized这种monitor锁才会出现这种状态</p>
+<p><strong>Waiting</strong><br>无超时的等待，无法自动恢复，必须notify或者Interrupt信号<br>ReentrantLock.lock()的无参方法调用也会Waiting</p>
+<p><strong>Time_waiting</strong><br>有超时的等待，sleep wait join等指定超时值。</p>
 <h3 id="interrupt-amp-interrupted-amp-isInterrupted"><a href="#interrupt-amp-interrupted-amp-isInterrupted" class="headerlink" title="interrupt&amp;interrupted&amp;isInterrupted"></a>interrupt&amp;interrupted&amp;isInterrupted</h3><p>interrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个状态和java线程基本状态无关）,运行这个例子就很清楚了<br>
         
           <p class="article-more-link">
@@ -119,7 +122,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="cj3k6zpae000uc86izpncyvv3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/Java线程基础/" data-id="cj3k7psz6000vdl6i2vujaun2" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/Java线程基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/Java线程基础/">评论</a>
@@ -174,7 +177,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="cj3k6zpaa000pc86i6mpaidba" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/12/Java异常剖析/" data-id="cj3k7psz4000tdl6i1q1wstc9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/12/Java异常剖析/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/Java异常剖析/">评论</a>
@@ -230,7 +233,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="cj3k6zpbw002lc86iidiq66b9" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/10/SPI/" data-id="cj3k7pt0a002jdl6i8reizisz" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/10/SPI/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/10/SPI/">评论</a>
@@ -307,7 +310,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/08/JavaIO/" data-id="cj3k6zp9t0009c86il0j3wdin" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/08/JavaIO/" data-id="cj3k7psyo0009dl6it3jyzrrs" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/08/JavaIO/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/JavaIO/">评论</a>
@@ -362,7 +365,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/06/jvm那些事儿/" data-id="cj3k6zpci003jc86ihyakag2b" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/06/jvm那些事儿/" data-id="cj3k7pt0n003bdl6i9rp8rfm9" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/06/jvm那些事儿/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/06/jvm那些事儿/">评论</a>
