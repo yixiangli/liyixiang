@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-06-05T13:48:32.000Z">
+<meta property="og:updated_time" content="2017-06-05T14:15:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -139,6 +139,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">A.事务开始</div><div class="line">B.write a=3 到 undo_buf</div><div class="line">C.修改a=1 write到redo_buf</div><div class="line">D.write b=5 到 undo_buf</div><div class="line">E.修改b=1 write到redo_buf</div><div class="line">F.将redo_buf写到redo磁盘（记录修改值）</div><div class="line">G.事务提交</div></pre></td></tr></table></figure>
 <p>F之前崩溃由于所有数据都在内存，恢复后重新从磁盘载入就ok<br>FG之间的崩溃可以使用redo恢复<br>G之前的回滚可以使用undo来恢复</p>
 <p>5.SQL优化<br>1）应尽量避免在 where 子句中使用!=或&lt;&gt;操作符，否则将引擎放弃使用索引而进行全表扫描。<br>2）应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：<br>select id from t where num is null<br>可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：<br>select id from t where num=0<br>3）很多时候用 exists 代替 in 是一个好的选择<br>4）用Where子句替换HAVING 子句 因为HAVING 只会在检索出所有记录之后才对结果集进行过滤</p>
+<p>6.索引<br>复合索引(A,B,C)</p>
+<p><strong>以下查询语句都会走索引</strong><br>where A=x<br>where A=x and B=x<br>where A=x and B=x and C=x<br>where B=x and A=x and C=x</p>
+<p><strong>以下查询语句不会走索引</strong><br>where B=x<br>where B=x and C=x</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>1.单线程模型为什么还那么快<br>(1)基于内存操作<br>(2)不考虑并发、锁，也不会增加上下文切换等开销<br>(3)自封装的事件分离器，采用了epoll  + 自己实现的简单的事件框架</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p>1.TreeMap是红黑树实现的<br>2.synchronized的是非公平锁（还好答对了，差点被面试官套路了）<br>3.线程池<br>ThreadPoolExecutor 的内部工作原理，整个思路总结起来就是 5 句话：<br>(1) 如果当前池大小 poolSize 小于 corePoolSize ，则创建新线程执行任务。<br>(2) 如果当前池大小 poolSize 大于 corePoolSize ，且等待队列未满，则进入等待队列<br>(3) 如果当前池大小 poolSize 大于 corePoolSize 且小于 maximumPoolSize ，且等待队列已满，则创建新线程执行任务。<br>(4) 如果当前池大小 poolSize 大于 corePoolSize 且大于 maximumPoolSize ，且等待队列已满，则调用拒绝策略来处理该任务。<br>(5) 线程池里的每个线程执行完任务后不会立刻退出，而是会去检查下等待队列里是否还有线程任务需要执行，如果在 keepAliveTime 里等不到新的任务了，那么线程就会退出。</p>
 <p>排队有三种通用策略：</p>
