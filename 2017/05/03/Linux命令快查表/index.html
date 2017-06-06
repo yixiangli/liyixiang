@@ -15,7 +15,7 @@
 <meta property="og:description" content="系统权限篇进入root权限模式sudo su
 输入密码登陆root权限su root
 添加root权限vi  /etc/sudoers添加用户useradd liyixiangpasswd liyixiang">
-<meta property="og:updated_time" content="2017-05-03T09:20:07.000Z">
+<meta property="og:updated_time" content="2017-06-06T02:32:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令快查表">
 <meta name="twitter:description" content="系统权限篇进入root权限模式sudo su
@@ -125,6 +125,8 @@
 <a id="more"></a>
 <h1 id="系统内核篇"><a href="#系统内核篇" class="headerlink" title="系统内核篇"></a>系统内核篇</h1><p>重新生成密钥<br>ssh-keygen -t rsa</p>
 <p>查看系统日志<br>cat /var/log/messages<br>本地绑host(利用dns缓存)<br>vim /etc/hosts<br>配置hosts<br>    /etc/hosts 中配置ip pushxxx<br>    pushxxx为别名 在ssh等命令下就可直接使用别名而无需输入ip,简化命令<br>服务自启动配置<br>在/etc/rc.local下添加各种shell启动脚本</p>
+<p>查询DNS Server<br>cat /etc/resolv.conf</p>
+<p>清除DNS缓存<br>/etc/init.d/nscd restart</p>
 <p>linux内核优化<br>快速回收time_wait<br>vim /etc/sysctl.conf<br>    net.ipv4.tcp_tw_reuse = 1<br>    net.ipv4.tcp_tw_recycle = 1<br>文件生效<br>    sudo sysctl -p<br>系统控制参数配置<br>    显示系统资源的设置（包含全部）<br>    ulimit -a<br>&lt;程序数目&gt; 程序数目上限，最多可开启的程序<br>    ulimit -u<br>设置系统核心参数<br>    sysctl</p>
 <p>查看cpu数<br>grep “model name” /proc/cpuinfo | cut -f2 -d:<br>查看 CPU 个数<br>sysctl -n machdep.cpu.core_count</p>
 <p>查看TCP连接状态<br>netstat -n | awk ‘/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}’<br>查看服务time_wait的数量<br>sudo netstat -antp |grep TIME_WAIT |wc -l<br>查看estab的数量<br>sudo netstat -antp |grep ES |wc -l<br>查看最大time_wait数<br>cat /proc/sys/net/ipv4/tcp_max_tw_buckets</p>

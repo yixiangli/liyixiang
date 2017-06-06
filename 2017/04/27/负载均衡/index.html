@@ -6,18 +6,33 @@
   <title>负载均衡 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="#负载均衡
-常见算法轮询 Round Robin加强轮询 Weight Round Robin随机 Random加强随机 Weight Random最少连接 Least Connections加强最少连接源地址散列 Hash">
+负载均衡链路负载均衡DNS解析
+集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍
+硬件负载均衡硬件负载均衡，如价格昂贵的F5
+软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡
+操作系统负载均衡操作系统级别的软中断或者硬件中断
+常见算法轮">
 <meta property="og:type" content="article">
 <meta property="og:title" content="负载均衡">
 <meta property="og:url" content="https://yixiangli.github.io/2017/04/27/负载均衡/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="#负载均衡
-常见算法轮询 Round Robin加强轮询 Weight Round Robin随机 Random加强随机 Weight Random最少连接 Least Connections加强最少连接源地址散列 Hash">
-<meta property="og:updated_time" content="2017-04-26T16:23:28.000Z">
+负载均衡链路负载均衡DNS解析
+集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍
+硬件负载均衡硬件负载均衡，如价格昂贵的F5
+软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡
+操作系统负载均衡操作系统级别的软中断或者硬件中断
+常见算法轮">
+<meta property="og:updated_time" content="2017-06-06T02:41:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="负载均衡">
 <meta name="twitter:description" content="#负载均衡
-常见算法轮询 Round Robin加强轮询 Weight Round Robin随机 Random加强随机 Weight Random最少连接 Least Connections加强最少连接源地址散列 Hash">
+负载均衡链路负载均衡DNS解析
+集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍
+硬件负载均衡硬件负载均衡，如价格昂贵的F5
+软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡
+操作系统负载均衡操作系统级别的软中断或者硬件中断
+常见算法轮">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -113,10 +128,15 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见算法"><span class="toc-number">1.</span> <span class="toc-text">常见算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他算法"><span class="toc-number">2.</span> <span class="toc-text">其他算法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡"><span class="toc-number">1.</span> <span class="toc-text">负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链路负载均衡"><span class="toc-number">1.1.</span> <span class="toc-text">链路负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群负载均衡"><span class="toc-number">1.2.</span> <span class="toc-text">集群负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作系统负载均衡"><span class="toc-number">1.3.</span> <span class="toc-text">操作系统负载均衡</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见算法"><span class="toc-number">2.</span> <span class="toc-text">常见算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他算法"><span class="toc-number">3.</span> <span class="toc-text">其他算法</span></a></li></ol>
         </div>
     
         <p>#负载均衡</p>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><h3 id="链路负载均衡"><a href="#链路负载均衡" class="headerlink" title="链路负载均衡"></a>链路负载均衡</h3><p>DNS解析</p>
+<h3 id="集群负载均衡"><a href="#集群负载均衡" class="headerlink" title="集群负载均衡"></a>集群负载均衡</h3><p>分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍</p>
+<p><strong>硬件负载均衡</strong><br>硬件负载均衡，如价格昂贵的F5</p>
+<p><strong>软负载均衡</strong><br>软件负载均衡，如常见的LVS HAProxy Nginx<br>LVS，四层（IP层）负载均衡<br>HAProxy，七层（HTTP）负载均衡<br>Nginx，七层（HTTP）负载均衡</p>
+<h3 id="操作系统负载均衡"><a href="#操作系统负载均衡" class="headerlink" title="操作系统负载均衡"></a>操作系统负载均衡</h3><p>操作系统级别的软中断或者硬件中断</p>
 <h2 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h2><p>轮询 Round Robin<br>加强轮询 Weight Round Robin<br>随机 Random<br>加强随机 Weight Random<br>最少连接 Least Connections<br>加强最少连接<br>源地址散列 Hash</p>
 <a id="more"></a>
 <h2 id="其他算法"><a href="#其他算法" class="headerlink" title="其他算法"></a>其他算法</h2><p>最快算法(Fastest)：传递连接给那些响应最快的服务器。当其中某个服务器发生第二到第7 层的故障，BIG-IP 就把其从服务器队列中拿出，不参加下一次的用户请求的分配，直到其恢复正常。<br>观察算法(Observed)：连接数目和响应时间以这两项的最佳平衡为依据为新的请求选择服务器。当其中某个服务器发生第二到第7 层的故障，BIG-IP就把其从服务器队列中拿出，不参加下一次的用户请求的分配，直到其恢复正常。<br>预测算法(Predictive)：BIG-IP利用收集到的服务器当前的性能指标，进行预测分析，选择一台服务器在下一个时间片内，其性能将达到最佳的服务器相应用户的请求。(被BIG-IP 进行检测)<br>动态性能分配算法(Dynamic Ratio-APM):BIG-IP 收集到的应用程序和应用服务器的各项性能参数，动态调整流量分配。<br>动态服务器补充算法(Dynamic Server Act.):当主服务器群中因故障导致数量减少时，动态地将备份服务器补充至主服务器群。<br>服务质量算法(QoS):按不同的优先级对数据流进行分配。<br>服务类型算法(ToS): 按不同的服务类型(在Type of Field中标识)负载均衡对数据流进行分配。<br>规则模式算法：针对不同的数据流设置导向规则，用户可自行</p>
