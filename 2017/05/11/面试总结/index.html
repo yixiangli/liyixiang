@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/11/面试总结/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
-<meta property="og:updated_time" content="2017-06-14T06:06:04.000Z">
+<meta property="og:updated_time" content="2017-06-14T06:09:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="面试总结每一次面试都是对自己的技术知识的积累和提升，详细记录下那些面试中没有答出来或者没有答好的问题是必须的">
@@ -167,12 +167,8 @@
 <p>因此hashCode一般用于集合的比较，是为了提高在散列结构存储中查找的效率，在线性表中没有作用<br>重写了equals方法，也有必要重写hashCode方法</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>单进程单线程模型：Redis<br>多进程单线程模型：Nginx<br>单进程多线程模型：Memcached</p>
 <h2 id="编解码"><a href="#编解码" class="headerlink" title="编解码"></a>编解码</h2><p>Base64<br>一种编码技术，用于在HTTP环境下传递较长的标识信息。常见场景：迅雷下载的专用地址，qq旋风</p>
-<p>Base64编码说明<br>    Base64编码要求把3个8位字节（3<em>8=24）转化为4个6位的字节（4</em>6=24），之后在6位的前面补两个0，形成8位一个字节的形式。<br>　　<br>举个例子</p>
-<p><code>转换前 11111111, 11111111, 11111111 （二进制）
-转换后 00111111, 00111111, 00111111, 00111111 （二进制）</code>　　<br>　　<br>如果剩下的字符不足3个字节，则用0填充，输出字符使用’=’，因此编码后输出的文本末尾可能会出现1或2个’=’。</p>
-<p>为了保证所输出的编码位可读字符，Base64制定了一个编码表，以便进行统一转换。编码表的大小为2^6=64，这也是Base64名称的由来。</p>
-<p>Base64编码表</p>
-<p>码值    字符         码值    字符         码值    字符         码值    字符<br>0    A    16    Q    32    g    48    w<br>1    B    17    R    33    h    49    x<br>2    C    18    S    34    i    50    y<br>3    D    19    T    35    j    51    z<br>4    E    20    U    36    k    52    0<br>5    F    21    V    37    l    53    1<br>6    G    22    W    38    m    54    2<br>7    H    23    X    39    n    55    3<br>8    I    24    Y    40    o    56    4<br>9    J    25    Z    41    p    57    5<br>10    K    26    a    42    q    58    6<br>11    L    27    b    43    r    59    7<br>12    M    28    c    44    s    60    8<br>13    N    29    d    45    t    61    9<br>14    O    30    e    46    u    62    +<br>15    P    31    f    47    v    63    /</p>
+<p>编码说明：<br>    Base64编码要求把3个8位字节（3<em>8=24）转化为4个6位的字节（4</em>6=24），之后在6位的前面补两个0，形成8位一个字节的形式。 　　<br>举个例子<br><code>转换前 11111111, 11111111, 11111111 （二进制）
+转换后 00111111, 00111111, 00111111, 00111111 （二进制）</code>　<br>当然如果剩下的字符不足3个字节，则用0填充，输出字符使用’=’，因此编码后输出的文本末尾可能会出现1或2个’=’。另外，为了保证所输出的编码位可读字符，Base64制定了一个编码表，以便进行统一转换。编码表的大小为2^6=64，这也是Base64名称的由来，编码表可以去百度搜索一下，这里不再贴出。</p>
 <h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>1.脑裂<br>顾名思义，脑子裂开了，在Zookeeper这个服务中leader就是脑子，那么脑裂就是指出现多个master。开玩笑，怎么会有多个master,不是有leader选举吗？这里就要介绍一个概念了－假死。<br>假死：master并没有真的挂掉，但是集群中其他节点或者client认为master已经死掉，如何检测是否挂掉，通过心跳。那么出现假死的原因就是由于网络原因导致集群Follow与Master通信中断，Follow就认为Master已死。这种情况会出现两种状态<br>(1)集群子节点先发现master连接不上，这个时候剩下的follow会重新选举master,master选举完成后这时网络恢复，就会出现部分client连接在新master上，部分在旧master上，导致紊乱。<br>(2)client端先发现master连接不上。</p>
 <p>如何避免？<br>在slaver切换的时候不再检查老的master出现问题后马上切换，而是在休眠一段足够的时间，确保老的master已经获知变更并且做了相关的shutdown清理工作了然后再注册成为master就能避免这类问题了，这个休眠时间一般定义为与Zookeeper定义的超时时间就够了，但是这段时间内系统不可用了。</p>
 <p>2.client端与server端由于网络原因连接断开，那么server节点变更client还能同步到吗？<br>首先对于client来说，会在连接的时候注册watch监听事件到server上，server会维护watch列表，在服务端节点更新触发后，会主动通知client<br>（1）这种触发是一次性的，当数据改变的时候，那么一个Watch事件会产生并且被发送到客户端中。但是客户端只会收到一次这样的通知，如果以后这个数据再次发生改变的时候，之前设置Watch的客户端将不会再次收到改变的通知<br>（2）Watch的通知事件是从服务器发送给客户端的，而且是异步的，但是Zookeeper保证这种顺序性，也就是保证客户端一定先收到Watch事件的通知，再看到节点数据变更。<br>那么如果存在网络原因导致socket中断，在网络恢复后，如果需要的话，所有先前注册过的watch，都会被重新注册。通常这是完全透明的。只有在一个特殊情况下，watch可能会丢失：对于一个未创建的znode的exist watch，如果在客户端断开连接期间被创建了，并且随后在客户端连接上之前又删除了，这种情况下，这个watch事件可能会被丢失。</p>
