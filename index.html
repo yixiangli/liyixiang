@@ -107,20 +107,18 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="Thrift介绍"><a href="#Thrift介绍" class="headerlink" title="Thrift介绍"></a>Thrift介绍</h1><p>说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。</p>
 <h2 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h2><p>Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.<br>Protocol 协议层 定义数据传输格式，可以为二进制或者XML等<br>Processor 处理层 这部分由定义的idl来生成, 封装了协议输入输出流, 并委托给用户实现的handler进行处理.<br>Transport 传输层 定义数据传输方式，可以为TCP/IP传输，内存共享或者文件共享等</p>
-<h3 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h3><p>先说0.8.0,博主本人遇到的第一个坑就是编译器bug,这个bug主要针对0.8.0版本thrift文件中的多行注释，如果这么写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/**这是一行注释**/</div></pre></td></tr></table></figure>
-<p>IDEA就会报 “Assertion `docstring.length() &lt;= strlen(doctext)’ failed” , 那么正确的方式就是文字前后空行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/** 这是一行注释 **/</div></pre></td></tr></table></figure>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/07/08/thrift初探/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/07/08/thrift初探/" data-id="cj4vh57mz0036oj6i7vayiecd" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/07/08/thrift初探/" data-id="cj4vh7xzq003fpb6i83oodwzy" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/07/08/thrift初探/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/07/08/thrift初探/">评论</a>
@@ -174,7 +172,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/31/UML/" data-id="cj4vh57ms002woj6i8phb12kl" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/31/UML/" data-id="cj4vh7xzf002ypb6ijmcf1s9n" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/31/UML/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/31/UML/">评论</a>
@@ -228,7 +226,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/23/二叉树/" data-id="cj4vh57nd003ooj6idlbthhls" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/23/二叉树/" data-id="cj4vh7xzt003ipb6iyp8ltc85" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/23/二叉树/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/23/二叉树/">评论</a>
@@ -282,7 +280,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/17/查找/" data-id="cj4vh57nj0041oj6imwqekk1l" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/17/查找/" data-id="cj4vh7y060042pb6i80vs4hvk" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/17/查找/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/17/查找/">评论</a>
@@ -336,7 +334,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/11/面试总结/" data-id="cj4vh57ob0058oj6ioyhuhynw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/11/面试总结/" data-id="cj4vh7y0y005ipb6ikdfpa651" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/11/面试总结/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/11/面试总结/">评论</a>
