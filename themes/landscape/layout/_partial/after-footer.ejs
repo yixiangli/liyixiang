@@ -1,0 +1,25 @@
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+<% if (theme.fancybox){ %>
+  <%- css('fancybox/jquery.fancybox') %>
+  <%- js('fancybox/jquery.fancybox.pack') %>
+<% } %>
+<%- partial('bottom-btn') %>
+<%- js('js/script') %>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->

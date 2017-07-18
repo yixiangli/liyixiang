@@ -1,0 +1,9 @@
+<div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="<%= theme.about_me.avatar %>" /></li>
+    <% theme.about_me.texts.forEach(function(item){ %>
+    <li><%- item %></li>
+    <% }); %>
+  </ul>
+</div>

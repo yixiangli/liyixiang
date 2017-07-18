@@ -1,0 +1,69 @@
+# Header
+#配置页头显示哪些菜单
+menu:
+  主页: /
+  目录: /archives
+  GitHub: https://github.com/yixiangli
+  网站地图: /sitemap.xml
+rss: /atom.xml
+
+# Content
+excerpt_link: 阅读全文
+fancybox: true
+
+# Sidebar
+sidebar: right
+
+widgets:
+- about_me
+- category
+# - tag
+# - tagcloud
+# - archive
+- recent_posts
+- links
+- weibo
+
+# display widgets at the bottom of index pages (pagination == 2)
+index_widgets:
+- category
+# - tagcloud
+# - archive
+
+# widget behavior
+# archive_type: 'monthly'
+show_count: true
+
+favicon: /css/images/xiang.jpg
+twitter:
+google_plus:
+fb_admins:
+fb_app_id:
+
+# about me
+about_me:
+  avatar: /css/images/me.png
+  texts:
+  - <a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a>
+  - 程序猿 / 前行者 
+  - 微信公众号：平凡程序猿
+
+# Scroll to top
+go_top: true
+# blogroll
+links:
+- name: James的主页－生态首席架构师
+  link: http://blog.ziwenzou.com/
+- name: 熊格拉的主页
+  link: http://iloveudan.com/
+- name: 博主的－开源中国博客
+  link: http://my.oschina.net/liyixiangBlog/blog
+- name: Sunshine全栈特级工程师
+  link: http://www.mysunshinedreams.com/
+
+# Miscellaneous
+google_analytics:
+cnzz_tongji:
+  enable: true
+  siteid: 1260342233   ## e.g. 1260342233 your cnzz tongji site id
+  

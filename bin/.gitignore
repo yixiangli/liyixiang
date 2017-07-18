@@ -1,0 +1,11 @@
+/node_modules
+/.deploy_git
+/.npmignore
+/.project
+/.settings
+/_config.yml
+/db.json
+/.DS_Store
+/public
+/source
+/themes

@@ -1,0 +1,41 @@
+<footer id="footer">
+  <% if (theme.sidebar === 'bottom'){ %>
+    <%- partial('_partial/sidebar') %>
+  <% } %>
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><br>
+      <%= __('powered_by') %> <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-<%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>

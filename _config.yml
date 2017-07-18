@@ -1,0 +1,118 @@
+# Hexo Configuration
+## Docs: https://yixiangli.github.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site 站点配置
+#网站标题
+title: 不忘初心 
+#网站副标题
+subtitle: 逆风前行
+#网站描述
+description: 个人主页
+#你的名字
+author: Liyixiang
+#网站使用的语言
+language: zh-CN
+#网站时区
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+#网址，搜索时会在搜索引擎中显示
+url: https://yixiangli.github.io   
+#网站根目录
+root: /
+#永久链接格式
+permalink: :year/:month/:day/:title/
+#永久链接中各部分的默认值
+permalink_defaults:
+
+# Directory 目录配置
+#资源文件夹，这个文件夹用来存放内容
+source_dir: source
+#公共文件夹，这个文件夹用于存放生成的站点文件
+public_dir: public
+#标签文件夹
+tag_dir: tags
+#归档文件夹
+archive_dir: archives
+#分类文件夹
+category_dir: categories
+#Include code 文件夹
+code_dir: downloads/code
+#国际化文件夹
+i18n_dir: :lang
+#跳过指定文件的渲染，您可使用 glob 来配置路径
+skip_render:
+
+# Writing 写作配置
+# 新文章的文件名称
+new_post_name: :title.md # File name of new posts
+#默认布局
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+#把文件名称转换为 (1) 小写或 (2) 大写
+filename_case: 0
+#显示草稿
+render_drafts: false
+#是否启动资源文件夹
+post_asset_folder: false
+#把链接改为与根目录的相对位址
+relative_link: false
+future: true
+#代码块的设置
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace:
+
+# Category & Tag 分类 & 标签
+#默认分类
+default_category: uncategorized
+#分类别名
+category_map:
+#标签别名
+tag_map:
+
+# Date / Time format 时间和日期
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination 分页
+## Set per_page to 0 to disable pagination
+#每页显示的文章量 (0 = 关闭分页功能)
+per_page: 5
+#分页目录
+pagination_dir: page
+
+# Extensions 扩展
+# 插件
+## Plugins: https://yixiangli.github.io/plugins/
+Plugins:
+  hexo-generator-feed
+  hexo-generator-sitemap
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+#sitemap
+sitemap:
+  path: sitemap.xml
+# 主题
+Themes: https://yixiangli.github.io/themes/
+# 当前主题名称
+theme: landscape
+
+# Deployment 部署到github
+## Docs: https://yixiangli.github.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/yixiangli/liyixiang
+  branch: master
