@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>thrift初探 | 不忘初心</title>
+  <title>进击的Java | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JavaJDK 7try-with-resources123456789101112131415161718192021/** * @developer liyixiang * @date 2017年2月12日 * @since JDK 1.8 * @function * 		一个try-with-resources的例子 */public class TwrTest &amp;#123;	public">
+  <meta name="description" content="Java发展史JDK 7try-with-resources123456789101112131415161718192021/** * @developer liyixiang * @date 2017年2月12日 * @since JDK 1.8 * @function * 		一个try-with-resources的例子 */public class TwrTest &amp;#123;	publ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="thrift初探">
+<meta property="og:title" content="进击的Java">
 <meta property="og:url" content="https://yixiangli.github.io/2017/07/08/JDK特性/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="JavaJDK 7try-with-resources123456789101112131415161718192021/** * @developer liyixiang * @date 2017年2月12日 * @since JDK 1.8 * @function * 		一个try-with-resources的例子 */public class TwrTest &amp;#123;	public">
-<meta property="og:updated_time" content="2017-07-20T14:03:42.000Z">
+<meta property="og:description" content="Java发展史JDK 7try-with-resources123456789101112131415161718192021/** * @developer liyixiang * @date 2017年2月12日 * @since JDK 1.8 * @function * 		一个try-with-resources的例子 */public class TwrTest &amp;#123;	publ">
+<meta property="og:updated_time" content="2017-07-20T14:08:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="thrift初探">
-<meta name="twitter:description" content="JavaJDK 7try-with-resources123456789101112131415161718192021/** * @developer liyixiang * @date 2017年2月12日 * @since JDK 1.8 * @function * 		一个try-with-resources的例子 */public class TwrTest &amp;#123;	public">
+<meta name="twitter:title" content="进击的Java">
+<meta name="twitter:description" content="Java发展史JDK 7try-with-resources123456789101112131415161718192021/** * @developer liyixiang * @date 2017年2月12日 * @since JDK 1.8 * @function * 		一个try-with-resources的例子 */public class TwrTest &amp;#123;	publ">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -88,7 +88,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      thrift初探
+      进击的Java
     </h1>
   
 
@@ -96,7 +96,7 @@
     
     <div class="article-meta">
     	<a href="/2017/07/08/JDK特性/" class="article-date">
-  <time datetime="2017-07-08T15:42:25.000Z" itemprop="datePublished">2017-07-08</time>
+  <time datetime="2017-07-08T14:02:25.000Z" itemprop="datePublished">2017-07-08</time>
 </a>
     	
   <div class="article-category">
@@ -110,10 +110,10 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java"><span class="toc-number">1.</span> <span class="toc-text">Java</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK-7"><span class="toc-number">1.1.</span> <span class="toc-text">JDK 7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#try-with-resources"><span class="toc-number">1.1.1.</span> <span class="toc-text">try-with-resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch-中支持字符串"><span class="toc-number">1.1.2.</span> <span class="toc-text">switch 中支持字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字常量的语法糖"><span class="toc-number">1.1.3.</span> <span class="toc-text">数字常量的语法糖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制文本"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">二进制文本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数字支持下划线"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">数字支持下划线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#钻石语法"><span class="toc-number">1.1.4.</span> <span class="toc-text">钻石语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK-8"><span class="toc-number">1.2.</span> <span class="toc-text">JDK 8</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java发展史"><span class="toc-number">1.</span> <span class="toc-text">Java发展史</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK-7"><span class="toc-number">1.1.</span> <span class="toc-text">JDK 7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#try-with-resources"><span class="toc-number">1.1.1.</span> <span class="toc-text">try-with-resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch-中支持字符串"><span class="toc-number">1.1.2.</span> <span class="toc-text">switch 中支持字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数字常量的语法糖"><span class="toc-number">1.1.3.</span> <span class="toc-text">数字常量的语法糖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制文本"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">二进制文本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数字支持下划线"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">数字支持下划线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#钻石语法"><span class="toc-number">1.1.4.</span> <span class="toc-text">钻石语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK-8"><span class="toc-number">1.2.</span> <span class="toc-text">JDK 8</span></a></li></ol></li></ol>
         </div>
     
-        <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="JDK-7"><a href="#JDK-7" class="headerlink" title="JDK 7"></a>JDK 7</h2><h3 id="try-with-resources"><a href="#try-with-resources" class="headerlink" title="try-with-resources"></a>try-with-resources</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		一个try-with-resources的例子</div><div class="line"> */</div><div class="line">public class TwrTest &#123;</div><div class="line"></div><div class="line">	public void test() throws IOException&#123;</div><div class="line">		try(InputStream input = new FileInputStream(&quot;file.txt&quot;);</div><div class="line">			BufferedInputStream bufferedInput = new BufferedInputStream(input))&#123;</div><div class="line">			</div><div class="line">			int data = bufferedInput.read();</div><div class="line">			while(data != -1)&#123;</div><div class="line">				System.out.print((char) data);</div><div class="line">				data = bufferedInput.read();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h1 id="Java发展史"><a href="#Java发展史" class="headerlink" title="Java发展史"></a>Java发展史</h1><h2 id="JDK-7"><a href="#JDK-7" class="headerlink" title="JDK 7"></a>JDK 7</h2><h3 id="try-with-resources"><a href="#try-with-resources" class="headerlink" title="try-with-resources"></a>try-with-resources</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		一个try-with-resources的例子</div><div class="line"> */</div><div class="line">public class TwrTest &#123;</div><div class="line"></div><div class="line">	public void test() throws IOException&#123;</div><div class="line">		try(InputStream input = new FileInputStream(&quot;file.txt&quot;);</div><div class="line">			BufferedInputStream bufferedInput = new BufferedInputStream(input))&#123;</div><div class="line">			</div><div class="line">			int data = bufferedInput.read();</div><div class="line">			while(data != -1)&#123;</div><div class="line">				System.out.print((char) data);</div><div class="line">				data = bufferedInput.read();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>原理就是使用了AutoClosable接口，写一个类实现一下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class AutoClose implements AutoCloseable &#123;</div><div class="line"></div><div class="line">	public void doSomeThing()&#123;</div><div class="line">		System.out.println(&quot;干了一件大事&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void close() throws Exception &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		System.out.println(&quot;关闭流&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>测试一把<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class TryTest &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		try &#123;</div><div class="line">			testClose();</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void testClose() throws Exception&#123;</div><div class="line">		try(AutoClose ac = new AutoClose())&#123;</div><div class="line">			ac.doSomeThing();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -147,17 +147,17 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/07/08/thrift初探/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/07/08/IDEA快捷键/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          thrift初探
+          IDEA快捷键
         
       </div>
     </a>
   
   
-    <a href="/2017/05/31/IDEA快捷键/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/05/31/UML/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">UML</div>
     </a>
@@ -215,11 +215,11 @@
           </li>
         
           <li>
-            <a href="/2017/07/08/JDK特性/">thrift初探</a>
+            <a href="/2017/07/08/IDEA快捷键/">IDEA快捷键</a>
           </li>
         
           <li>
-            <a href="/2017/05/31/IDEA快捷键/">UML</a>
+            <a href="/2017/07/08/JDK特性/">进击的Java</a>
           </li>
         
           <li>
