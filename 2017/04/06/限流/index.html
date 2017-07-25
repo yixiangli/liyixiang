@@ -5,28 +5,18 @@
   
   <title>限流 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。
-常用的限流措施先分析限流的目的，网上截了一段用，不要在意
-
-某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。
-某个用户向 API 服务发送大量请求。">
+  <meta name="description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。 常用的限流措施先分析限流的目的，网上截了一段用，不要在意  某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。 某个用户向 API 服务发送大量请求。">
+<meta name="keywords" content="限流,RateLimit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="限流">
 <meta property="og:url" content="https://yixiangli.github.io/2017/04/06/限流/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。
-常用的限流措施先分析限流的目的，网上截了一段用，不要在意
-
-某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。
-某个用户向 API 服务发送大量请求。">
+<meta property="og:description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。 常用的限流措施先分析限流的目的，网上截了一段用，不要在意  某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。 某个用户向 API 服务发送大量请求。">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-04-06T04:15:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="限流">
-<meta name="twitter:description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。
-常用的限流措施先分析限流的目的，网上截了一段用，不要在意
-
-某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。
-某个用户向 API 服务发送大量请求。">
+<meta name="twitter:description" content="什么是限流限流，意为限制流量，从字面上看就是对于某事物的过载保护，而对于互联网API服务来说，限流的作用至关重要，限流不仅仅对于后端服务可以起到保护作用，也能防止一系列不安全的请求进入后端服务，对于大型WEB应用，限流功能必不可少。 常用的限流措施先分析限流的目的，网上截了一段用，不要在意  某个用户直接或间接造成了流量飙升，我们需要确保对其他用户服务可用。 某个用户向 API 服务发送大量请求。">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -86,7 +76,7 @@
 	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
       </div>
     </div>
   </div>

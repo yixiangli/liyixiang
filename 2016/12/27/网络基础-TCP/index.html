@@ -5,26 +5,19 @@
   
   <title>网络基础-TCP | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。
-为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。
-手绘图
-一些解释：1这里的C端(clien">
+  <meta name="description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。 为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。 手绘图 一些解释：1这里的C端(clien">
+<meta name="keywords" content="tcp,三次握手">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络基础-TCP">
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/27/网络基础-TCP/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。
-为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。
-手绘图
-一些解释：1这里的C端(clien">
+<meta property="og:description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。 为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。 手绘图 一些解释：1这里的C端(clien">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/tcp.jpg">
 <meta property="og:updated_time" content="2017-05-19T03:20:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础-TCP">
-<meta name="twitter:description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。
-为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。
-手绘图
-一些解释：1这里的C端(clien">
+<meta name="twitter:description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。 为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。 手绘图 一些解释：1这里的C端(clien">
 <meta name="twitter:image" content="https://yixiangli.github.io/img/tcp.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
@@ -85,7 +78,7 @@
 	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
       </div>
     </div>
   </div>

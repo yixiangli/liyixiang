@@ -5,23 +5,19 @@
   
   <title>Netty详解 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。
-Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。
-Cha">
+  <meta name="description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。 Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。 Cha">
+<meta name="keywords" content="netty">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netty详解">
 <meta property="og:url" content="https://yixiangli.github.io/2017/05/08/Netty详解/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。
-Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。
-Cha">
+<meta property="og:description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。 Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。 Cha">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/netty_bound.jpg">
 <meta property="og:updated_time" content="2017-05-09T02:54:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Netty详解">
-<meta name="twitter:description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。
-Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。
-Cha">
+<meta name="twitter:description" content="Netty基础组件Channel: 在NIO模型中负责非阻塞I/O操作的网络I/O操作类，但并非原生NIO的Channel，自己重新实现，包含了JDK的SocketChannel与ServerSocketChannel,为使用者提供了统一的视图。 Unsafe:Channel内部辅助类，不对外暴露，实际的I/O读写操作，包括将Channel注册到多路复用器上，并只提供给Channel使用。 Cha">
 <meta name="twitter:image" content="https://yixiangli.github.io/img/netty_bound.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
@@ -82,7 +78,7 @@ Cha">
 	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
       </div>
     </div>
   </div>

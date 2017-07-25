@@ -5,21 +5,20 @@
   
   <title>MessageQueue大全 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用
-场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+  <meta name="description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+<meta name="keywords" content="ActiveMQ,RabbitMQ,ZeroMQ,Redis,Kafka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MessageQueue大全">
 <meta property="og:url" content="https://yixiangli.github.io/2016/10/09/MessageQueue大全/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用
-场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+<meta property="og:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/mq_idempotency_up.jpg">
 <meta property="og:image" content="https://yixiangli.github.io/img/mq_idempotency_down.jpg">
 <meta property="og:updated_time" content="2017-04-26T15:58:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MessageQueue大全">
-<meta name="twitter:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用
-场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+<meta name="twitter:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
 <meta name="twitter:image" content="https://yixiangli.github.io/img/mq_idempotency_up.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
@@ -80,7 +79,7 @@
 	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
       </div>
     </div>
   </div>

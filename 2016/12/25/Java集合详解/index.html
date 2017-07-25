@@ -5,26 +5,19 @@
   
   <title>Java集合详解 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="集合 Or 容器java.util.*
-结构
-泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁
-集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+  <meta name="description" content="集合 Or 容器java.util.* 结构 泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁 集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+<meta name="keywords" content="集合,Map,List,Set">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合详解">
 <meta property="og:url" content="https://yixiangli.github.io/2016/12/25/Java集合详解/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="集合 Or 容器java.util.*
-结构
-泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁
-集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+<meta property="og:description" content="集合 Or 容器java.util.* 结构 泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁 集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/collection.jpg">
 <meta property="og:updated_time" content="2017-06-06T02:23:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合详解">
-<meta name="twitter:description" content="集合 Or 容器java.util.*
-结构
-泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁
-集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+<meta name="twitter:description" content="集合 Or 容器java.util.* 结构 泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁 集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
 <meta name="twitter:image" content="https://yixiangli.github.io/img/collection.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
@@ -85,7 +78,7 @@
 	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
       </div>
     </div>
   </div>

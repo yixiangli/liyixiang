@@ -5,34 +5,18 @@
   
   <title>负载均衡 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#负载均衡
-负载均衡链路负载均衡DNS解析
-集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍
-硬件负载均衡硬件负载均衡，如价格昂贵的F5
-软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡
-操作系统负载均衡操作系统级别的软中断或者硬件中断
-常见算法轮">
+  <meta name="description" content="#负载均衡 负载均衡链路负载均衡DNS解析 集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍 硬件负载均衡硬件负载均衡，如价格昂贵的F5 软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡 操作系统负载均衡操作系统级别的软中断或者硬件中断 常见算法轮">
+<meta name="keywords" content="负载均衡,RANDOM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="负载均衡">
 <meta property="og:url" content="https://yixiangli.github.io/2017/04/27/负载均衡/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="#负载均衡
-负载均衡链路负载均衡DNS解析
-集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍
-硬件负载均衡硬件负载均衡，如价格昂贵的F5
-软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡
-操作系统负载均衡操作系统级别的软中断或者硬件中断
-常见算法轮">
+<meta property="og:description" content="#负载均衡 负载均衡链路负载均衡DNS解析 集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍 硬件负载均衡硬件负载均衡，如价格昂贵的F5 软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡 操作系统负载均衡操作系统级别的软中断或者硬件中断 常见算法轮">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2017-06-06T02:41:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="负载均衡">
-<meta name="twitter:description" content="#负载均衡
-负载均衡链路负载均衡DNS解析
-集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍
-硬件负载均衡硬件负载均衡，如价格昂贵的F5
-软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡
-操作系统负载均衡操作系统级别的软中断或者硬件中断
-常见算法轮">
+<meta name="twitter:description" content="#负载均衡 负载均衡链路负载均衡DNS解析 集群负载均衡分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍 硬件负载均衡硬件负载均衡，如价格昂贵的F5 软负载均衡软件负载均衡，如常见的LVS HAProxy NginxLVS，四层（IP层）负载均衡HAProxy，七层（HTTP）负载均衡Nginx，七层（HTTP）负载均衡 操作系统负载均衡操作系统级别的软中断或者硬件中断 常见算法轮">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -92,7 +76,7 @@
 	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
       </div>
     </div>
   </div>
