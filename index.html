@@ -120,7 +120,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/07/20/IDEA快捷键/" data-id="cj5cky8ro0005io6irf0wmphy" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/07/20/IDEA快捷键/" data-id="cj5jru1h70001fk6iwr6nvhvu" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/07/20/IDEA快捷键/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/07/20/IDEA快捷键/">评论</a>
@@ -164,29 +164,17 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="Java发展史"><a href="#Java发展史" class="headerlink" title="Java发展史"></a>Java发展史</h1><h2 id="JDK-7"><a href="#JDK-7" class="headerlink" title="JDK 7"></a>JDK 7</h2><h3 id="try-with-resources"><a href="#try-with-resources" class="headerlink" title="try-with-resources"></a>try-with-resources</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		一个try-with-resources的例子</div><div class="line"> */</div><div class="line">public class TwrTest &#123;</div><div class="line"></div><div class="line">	public void test() throws IOException&#123;</div><div class="line">		try(InputStream input = new FileInputStream(&quot;file.txt&quot;);</div><div class="line">			BufferedInputStream bufferedInput = new BufferedInputStream(input))&#123;</div><div class="line">			</div><div class="line">			int data = bufferedInput.read();</div><div class="line">			while(data != -1)&#123;</div><div class="line">				System.out.print((char) data);</div><div class="line">				data = bufferedInput.read();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>原理就是使用了AutoClosable接口，写一个类实现一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class AutoClose implements AutoCloseable &#123;</div><div class="line"></div><div class="line">	public void doSomeThing()&#123;</div><div class="line">		System.out.println(&quot;干了一件大事&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void close() throws Exception &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		System.out.println(&quot;关闭流&quot;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>测试一把<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class TryTest &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		try &#123;</div><div class="line">			testClose();</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void testClose() throws Exception&#123;</div><div class="line">		try(AutoClose ac = new AutoClose())&#123;</div><div class="line">			ac.doSomeThing();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">干了一件大事</div><div class="line">关闭流</div></pre></td></tr></table></figure>
-<p>还有一点就是try-with-resources比程序员自己写try catch finally来close流的优势是，如果try-catch以及close时都有异常发生，他可以将try-catch中抛出的异常给addSuppressed到Throwable中，那么Throwable.getSuppressed就能取出try-catch中发生的异常了，而之前通过try catch finally,一旦close时出异常，那么前面的异常会被丢弃。</p>
-<h3 id="switch-中支持字符串"><a href="#switch-中支持字符串" class="headerlink" title="switch 中支持字符串"></a>switch 中支持字符串</h3><p>java7开始支持针对string的switch-case，仔细思考一下，是如何实现的呢？<br>底层是否可以跳过“字符串比较”这一步骤？（这一点对性能很关键）</p>
-<p>switch (str) {<br>      case “ACTIVE”:<br>            System.out.println(“Application is running on Active mode”);<br>            break;<br>      case “PASSIVE”:<br>            System.out.println(“Application is running on Passive mode”);<br>             break;<br>      case “SAFE”:<br>              System.out.println(“Application is running on Safe mode”);<br>}</p>
-<p>实际上还是把string的hashcode取出来做的switch，匹配之后再比较string确认一下（因为hashcode有碰撞的可能）。等价于以下代码：</p>
-<p>switch (str.hashCode()) {<br>      case -74056953:<br>            if (s.equals(“PASSIVE”)) {<br>                        System.out.println(“Application is running on Passive mode”);<br>            }<br>            break;<br>      case 2537357:<br>            if (s.equals(“SAFE”)) {<br>                  System.out.println(“Application is running on Safe mode”);<br>            }<br>            break;<br>      case 1925346054:<br>            if (s.equals(“ACTIVE”)) {<br>                  System.out.println(“Application is running on Active mode”);<br>            }<br>            break;<br>      default:<br>            break;<br>   }<br>}</p>
-<p>所以“基于string的switch-case”，只是一个语法糖。<br>速度肯定比if-else快，但是依然少不了“string.equals()”比较。</p>
-<h3 id="数字常量的语法糖"><a href="#数字常量的语法糖" class="headerlink" title="数字常量的语法糖"></a>数字常量的语法糖</h3><h4 id="二进制文本"><a href="#二进制文本" class="headerlink" title="二进制文本"></a>二进制文本</h4><p>int x = Integer.parseInt(“1100110”,2);<br>int x = 0b1100110;</p>
-<h4 id="数字支持下划线"><a href="#数字支持下划线" class="headerlink" title="数字支持下划线"></a>数字支持下划线</h4><p>long = 2_123_456_789L;<br>int bit = 0b0001_1100_1101_1001;</p>
-<h3 id="钻石语法"><a href="#钻石语法" class="headerlink" title="钻石语法"></a>钻石语法</h3><p>List<supplierarrival> arrivalList = new ArrayList&lt;&gt;();<br>省略右侧的类型信息说明，而且&lt;&gt;像钻石，因此叫做钻石语法</supplierarrival></p>
-<h2 id="JDK-8"><a href="#JDK-8" class="headerlink" title="JDK 8"></a>JDK 8</h2>
+        
+          <p class="article-more-link">
+            <a href="/2017/07/20/JDK特性/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/07/20/JDK特性/" data-id="cj5cky8ru0009io6ixo04r28g" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/07/20/JDK特性/" data-id="cj5jru1hd0004fk6igrd43rkz" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/07/20/JDK特性/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/07/20/JDK特性/">评论</a>
@@ -241,7 +229,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/07/08/thrift初探/" data-id="cj5cky8uq003iio6id67n2rn2" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/07/08/thrift初探/" data-id="cj5jru1k4003ffk6ivv16t6dj" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/07/08/thrift初探/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/07/08/thrift初探/">评论</a>
@@ -295,7 +283,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/31/UML/" data-id="cj5cky8ud0031io6i650ebu9v" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/31/UML/" data-id="cj5jru1jy0036fk6i6loa0qeq" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/31/UML/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/31/UML/">评论</a>
@@ -349,7 +337,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/05/23/二叉树/" data-id="cj5cky8us003lio6i52x8d6ri" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/05/23/二叉树/" data-id="cj5jru1kg003xfk6idn128las" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/05/23/二叉树/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/23/二叉树/">评论</a>

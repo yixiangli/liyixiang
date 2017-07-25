@@ -6,27 +6,29 @@
   <title>MySQL基础 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="MySQL基本命令查看版本：mysqladmin –version
-字段类型整型bigint
-从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
-int
-从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字">
+字段类型整型先看一张官网的图
+由图可知，分为有符号和无符号，那么实际上在使用中都是以有符号为主。
+bigint从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
+int从 -2^31 (-2,147,483,6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL基础">
 <meta property="og:url" content="https://yixiangli.github.io/2017/03/07/MySQL基础/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="MySQL基本命令查看版本：mysqladmin –version
-字段类型整型bigint
-从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
-int
-从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字">
-<meta property="og:updated_time" content="2017-05-02T09:07:35.000Z">
+字段类型整型先看一张官网的图
+由图可知，分为有符号和无符号，那么实际上在使用中都是以有符号为主。
+bigint从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
+int从 -2^31 (-2,147,483,6">
+<meta property="og:image" content="https://yixiangli.github.io/img/mysql_int_type.png">
+<meta property="og:updated_time" content="2017-07-25T16:03:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL基础">
 <meta name="twitter:description" content="MySQL基本命令查看版本：mysqladmin –version
-字段类型整型bigint
-从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
-int
-从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字">
+字段类型整型先看一张官网的图
+由图可知，分为有符号和无符号，那么实际上在使用中都是以有符号为主。
+bigint从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。
+int从 -2^31 (-2,147,483,6">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/mysql_int_type.png">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -122,20 +124,28 @@ int
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL"><span class="toc-number">1.</span> <span class="toc-text">MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本命令"><span class="toc-number">1.1.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字段类型"><span class="toc-number">1.2.</span> <span class="toc-text">字段类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整型"><span class="toc-number">1.2.1.</span> <span class="toc-text">整型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空值和NULL"><span class="toc-number">1.2.2.</span> <span class="toc-text">空值和NULL</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL"><span class="toc-number">1.</span> <span class="toc-text">MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本命令"><span class="toc-number">1.1.</span> <span class="toc-text">基本命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字段类型"><span class="toc-number">1.2.</span> <span class="toc-text">字段类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整型"><span class="toc-number">1.2.1.</span> <span class="toc-text">整型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空值和NULL"><span class="toc-number">1.2.2.</span> <span class="toc-text">空值和NULL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL语言的分类"><span class="toc-number">1.3.</span> <span class="toc-text">SQL语言的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据查询语言DQL"><span class="toc-number">1.3.1.</span> <span class="toc-text">数据查询语言DQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据操纵语言DML"><span class="toc-number">1.3.2.</span> <span class="toc-text">数据操纵语言DML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据定义语言DDL"><span class="toc-number">1.3.3.</span> <span class="toc-text">数据定义语言DDL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据控制语言DCL"><span class="toc-number">1.3.4.</span> <span class="toc-text">数据控制语言DCL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#提交三类型"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">提交三类型</span></a></li></ol></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><p>查看版本：mysqladmin –version</p>
-<h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>bigint</p>
-<p>从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。</p>
-<p>int</p>
-<p>从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字）。存储大小为 4 个字节。int 的 SQL-92 同义字为 integer。</p>
-<p>smallint</p>
-<p>从 -2^15 (-32,768) 到 2^15 - 1 (32,767) 的整型数据。存储大小为 2 个字节。</p>
-<p>tinyint</p>
-<p>从 0 到 255 的整型数据。存储大小为 1 字节。</p>
+<h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>先看一张官网的图<br><img src="/img/mysql_int_type.png" alt="MySQL整数类型"></p>
+<p>由图可知，分为有符号和无符号，那么实际上在使用中都是以有符号为主。</p>
+<p><strong>bigint</strong><br>从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。</p>
+<p><strong>int</strong><br>从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字）。存储大小为 4 个字节。int 的 SQL-92 同义字为 integer。</p>
+<p><strong>smallint</strong><br>从 -2^15 (-32,768) 到 2^15 - 1 (32,767) 的整型数据。存储大小为 2 个字节。</p>
+<p><strong>tinyint</strong><br>从 －127 到 128 的整型数据。存储大小为 1 字节。</p>
 <h3 id="空值和NULL"><a href="#空值和NULL" class="headerlink" title="空值和NULL"></a>空值和NULL</h3><p>在MySQL中，空值（空字符串）和NULL其实是有区别的，区别主要在以下两个方面：<br>1.NULL操作不一定为空<br>有些数据类型或者字段设置会导致插入的是NULL,但实际上有默认值，如TimesTamp时间数据类型，有可能就默认存储当前时间，以及自增字段，插入NULL也会自增</p>
 <p>2.空值(Null)与空字符(’’)不相同<br>用Select语句进行查询，会明显的发现MySQL显示这两种内容的形式都不同，对于业务场景来说可能也会存在不同的理解，如对于电话号码等字段，可以默认设置为空值(表示根本不知道对方的电话号码)或者设置为空字符(表示后来取消了这个号码)等等，因此设置空值(Null)还是空字符(’’)需要根据实际需求情况。</p>
+<h2 id="SQL语言的分类"><a href="#SQL语言的分类" class="headerlink" title="SQL语言的分类"></a>SQL语言的分类</h2><p>SQL语言共分为四大类：数据查询语言DQL，数据操纵语言DML，数据定义语言DDL，数据控制语言DCL。</p>
+<h3 id="数据查询语言DQL"><a href="#数据查询语言DQL" class="headerlink" title="数据查询语言DQL"></a>数据查询语言DQL</h3><p>数据查询语言DQL基本结构是由SELECT子句，FROM子句，WHERE<br>子句组成的查询块：<br>SELECT &lt;字段名表&gt;<br>FROM &lt;表或视图名&gt;<br>WHERE &lt;查询条件&gt;</p>
+<h3 id="数据操纵语言DML"><a href="#数据操纵语言DML" class="headerlink" title="数据操纵语言DML"></a>数据操纵语言DML</h3><p>数据操纵语言DML主要有三种形式：<br>1) 插入：INSERT<br>2) 更新：UPDATE<br>3) 删除：DELETE</p>
+<h3 id="数据定义语言DDL"><a href="#数据定义语言DDL" class="headerlink" title="数据定义语言DDL"></a>数据定义语言DDL</h3><p>数据定义语言DDL用来创建数据库中的各种对象—–表、视图、<br>索引、同义词、聚簇等如：<br>CREATE/TABLE/VIEW/INDEX/SYN/CLUSTER<br>表 视图 索引 同义词 簇</p>
+<h3 id="数据控制语言DCL"><a href="#数据控制语言DCL" class="headerlink" title="数据控制语言DCL"></a>数据控制语言DCL</h3><p>数据控制语言DCL用来授予或回收访问数据库的某种特权，并控制<br>数据库操纵事务发生的时间及效果，对数据库实行监视等</p>
+<p>1) GRANT：授权。<br>2) ROLLBACK [WORK] TO [SAVEPOINT]：回退到某一点。<br>回滚—ROLLBACK<br>回滚命令使数据库状态回到上次最后提交的状态。其格式为：<br>SQL&gt;ROLLBACK;<br>3) COMMIT [WORK]：提交</p>
+<p>而提交又分为三种类型，分别是显式提交、隐式提交及自动提交</p>
+<h4 id="提交三类型"><a href="#提交三类型" class="headerlink" title="提交三类型"></a>提交三类型</h4><p>(1) 显式提交<br>用COMMIT命令直接完成的提交为显式提交。其格式为：<br>SQL&gt;COMMIT；</p>
+<p>(2) 隐式提交<br>用SQL命令间接完成的提交为隐式提交。这些命令是：<br>ALTER，AUDIT，COMMENT，CONNECT，CREATE，DISCONNECT，DROP，<br>EXIT，GRANT，NOAUDIT，QUIT，REVOKE，RENAME。</p>
+<p>(3) 自动提交<br>若把AUTOCOMMIT设置为ON，则在插入、修改、删除语句执行后，<br>系统将自动进行提交，这就是自动提交。其格式为：<br>SQL&gt;SET AUTOCOMMIT ON；</p>
 
       
     </div>

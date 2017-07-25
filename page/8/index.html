@@ -123,7 +123,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj5cky8ub002xio6i0n9xdsq5" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj5jru1js002sfk6i9amr945r" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/20/Tomcat/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/20/Tomcat/">评论</a>
@@ -183,7 +183,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj5cky8u0002gio6inq0e241s" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj5jru1jn002jfk6i0bxh963g" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/10/Restful/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/10/Restful/">评论</a>
@@ -230,22 +230,30 @@
       	<!-- Table of Contents -->
     
         <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><p>查看版本：mysqladmin –version</p>
-<h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>bigint</p>
-<p>从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。</p>
-<p>int</p>
-<p>从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字）。存储大小为 4 个字节。int 的 SQL-92 同义字为 integer。</p>
-<p>smallint</p>
-<p>从 -2^15 (-32,768) 到 2^15 - 1 (32,767) 的整型数据。存储大小为 2 个字节。</p>
-<p>tinyint</p>
-<p>从 0 到 255 的整型数据。存储大小为 1 字节。</p>
+<h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>先看一张官网的图<br><img src="/img/mysql_int_type.png" alt="MySQL整数类型"></p>
+<p>由图可知，分为有符号和无符号，那么实际上在使用中都是以有符号为主。</p>
+<p><strong>bigint</strong><br>从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。</p>
+<p><strong>int</strong><br>从 -2^31 (-2,147,483,648) 到 2^31 - 1 (2,147,483,647) 的整型数据（所有数字）。存储大小为 4 个字节。int 的 SQL-92 同义字为 integer。</p>
+<p><strong>smallint</strong><br>从 -2^15 (-32,768) 到 2^15 - 1 (32,767) 的整型数据。存储大小为 2 个字节。</p>
+<p><strong>tinyint</strong><br>从 －127 到 128 的整型数据。存储大小为 1 字节。</p>
 <h3 id="空值和NULL"><a href="#空值和NULL" class="headerlink" title="空值和NULL"></a>空值和NULL</h3><p>在MySQL中，空值（空字符串）和NULL其实是有区别的，区别主要在以下两个方面：<br>1.NULL操作不一定为空<br>有些数据类型或者字段设置会导致插入的是NULL,但实际上有默认值，如TimesTamp时间数据类型，有可能就默认存储当前时间，以及自增字段，插入NULL也会自增</p>
 <p>2.空值(Null)与空字符(’’)不相同<br>用Select语句进行查询，会明显的发现MySQL显示这两种内容的形式都不同，对于业务场景来说可能也会存在不同的理解，如对于电话号码等字段，可以默认设置为空值(表示根本不知道对方的电话号码)或者设置为空字符(表示后来取消了这个号码)等等，因此设置空值(Null)还是空字符(’’)需要根据实际需求情况。</p>
+<h2 id="SQL语言的分类"><a href="#SQL语言的分类" class="headerlink" title="SQL语言的分类"></a>SQL语言的分类</h2><p>SQL语言共分为四大类：数据查询语言DQL，数据操纵语言DML，数据定义语言DDL，数据控制语言DCL。</p>
+<h3 id="数据查询语言DQL"><a href="#数据查询语言DQL" class="headerlink" title="数据查询语言DQL"></a>数据查询语言DQL</h3><p>数据查询语言DQL基本结构是由SELECT子句，FROM子句，WHERE<br>子句组成的查询块：<br>SELECT &lt;字段名表&gt;<br>FROM &lt;表或视图名&gt;<br>WHERE &lt;查询条件&gt;</p>
+<h3 id="数据操纵语言DML"><a href="#数据操纵语言DML" class="headerlink" title="数据操纵语言DML"></a>数据操纵语言DML</h3><p>数据操纵语言DML主要有三种形式：<br>1) 插入：INSERT<br>2) 更新：UPDATE<br>3) 删除：DELETE</p>
+<h3 id="数据定义语言DDL"><a href="#数据定义语言DDL" class="headerlink" title="数据定义语言DDL"></a>数据定义语言DDL</h3><p>数据定义语言DDL用来创建数据库中的各种对象—–表、视图、<br>索引、同义词、聚簇等如：<br>CREATE/TABLE/VIEW/INDEX/SYN/CLUSTER<br>表 视图 索引 同义词 簇</p>
+<h3 id="数据控制语言DCL"><a href="#数据控制语言DCL" class="headerlink" title="数据控制语言DCL"></a>数据控制语言DCL</h3><p>数据控制语言DCL用来授予或回收访问数据库的某种特权，并控制<br>数据库操纵事务发生的时间及效果，对数据库实行监视等</p>
+<p>1) GRANT：授权。<br>2) ROLLBACK [WORK] TO [SAVEPOINT]：回退到某一点。<br>回滚—ROLLBACK<br>回滚命令使数据库状态回到上次最后提交的状态。其格式为：<br>SQL&gt;ROLLBACK;<br>3) COMMIT [WORK]：提交</p>
+<p>而提交又分为三种类型，分别是显式提交、隐式提交及自动提交</p>
+<h4 id="提交三类型"><a href="#提交三类型" class="headerlink" title="提交三类型"></a>提交三类型</h4><p>(1) 显式提交<br>用COMMIT命令直接完成的提交为显式提交。其格式为：<br>SQL&gt;COMMIT；</p>
+<p>(2) 隐式提交<br>用SQL命令间接完成的提交为隐式提交。这些命令是：<br>ALTER，AUDIT，COMMENT，CONNECT，CREATE，DISCONNECT，DROP，<br>EXIT，GRANT，NOAUDIT，QUIT，REVOKE，RENAME。</p>
+<p>(3) 自动提交<br>若把AUTOCOMMIT设置为ON，则在插入、修改、删除语句执行后，<br>系统将自动进行提交，这就是自动提交。其格式为：<br>SQL&gt;SET AUTOCOMMIT ON；</p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj5cky8tj001wio6it1av55wz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj5jru1j2001sfk6ibod0wxqm" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/07/MySQL基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/07/MySQL基础/">评论</a>
@@ -304,7 +312,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj5cky8rq0006io6iif0iawxl" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj5jru1hm000afk6iugkv94i5" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/06/JDK命令详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/06/JDK命令详解/">评论</a>
@@ -360,7 +368,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cj5cky8rc0000io6ipjs4heqg" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cj5jru1h20000fk6iixmalgpw" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/20/2017-2-19春游有感/">评论</a>
