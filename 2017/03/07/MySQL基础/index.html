@@ -14,7 +14,7 @@
 <meta property="og:description" content="MySQL基本命令查看版本：mysqladmin –version 字段类型整型先看一张官网的图 由图可知，分为有符号和无符号，那么实际上在使用中都是以有符号为主。 bigint从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。 int从 -2^31 (-2,147,483,6">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/mysql_int_type.png">
-<meta property="og:updated_time" content="2017-08-09T10:30:55.000Z">
+<meta property="og:updated_time" content="2017-08-09T15:06:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL基础">
 <meta name="twitter:description" content="MySQL基本命令查看版本：mysqladmin –version 字段类型整型先看一张官网的图 由图可知，分为有符号和无符号，那么实际上在使用中都是以有符号为主。 bigint从 -2^63 (-9223372036854775808) 到 2^63-1 (9223372036854775807) 的整型数据（所有数字）。存储大小为 8 个字节。 int从 -2^31 (-2,147,483,6">
@@ -137,7 +137,7 @@
 <h4 id="提交三类型"><a href="#提交三类型" class="headerlink" title="提交三类型"></a>提交三类型</h4><p>(1) 显式提交<br>用COMMIT命令直接完成的提交为显式提交。其格式为：<br>SQL&gt;COMMIT；</p>
 <p>(2) 隐式提交<br>用SQL命令间接完成的提交为隐式提交。这些命令是：<br>ALTER，AUDIT，COMMENT，CONNECT，CREATE，DISCONNECT，DROP，<br>EXIT，GRANT，NOAUDIT，QUIT，REVOKE，RENAME。</p>
 <p>(3) 自动提交<br>若把AUTOCOMMIT设置为ON，则在插入、修改、删除语句执行后，<br>系统将自动进行提交，这就是自动提交。其格式为：<br>SQL&gt;SET AUTOCOMMIT ON；</p>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>UNIX_TIMESTAMP() 时间戳转换，精确到秒</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>UNIX_TIMESTAMP() 时间戳转换，精确到秒<br>CURRENT_DATE()  NOW() 系统当前日期</p>
 
       
     </div>
