@@ -124,7 +124,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj6egl4zc00346t97f18mk0yw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/20/Tomcat/" data-id="cj6w8nllg002ue197rudjgtwq" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/20/Tomcat/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/20/Tomcat/">评论</a>
@@ -184,7 +184,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj6egl4z6002m6t97qg255wjs" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/10/Restful/" data-id="cj6w8nlla002de197fp1tl2jv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/10/Restful/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/10/Restful/">评论</a>
@@ -241,6 +241,7 @@
 <p>2.空值(Null)与空字符(’’)不相同<br>用Select语句进行查询，会明显的发现MySQL显示这两种内容的形式都不同，对于业务场景来说可能也会存在不同的理解，如对于电话号码等字段，可以默认设置为空值(表示根本不知道对方的电话号码)或者设置为空字符(表示后来取消了这个号码)等等，因此设置空值(Null)还是空字符(’’)需要根据实际需求情况。</p>
 <h2 id="SQL语言的分类"><a href="#SQL语言的分类" class="headerlink" title="SQL语言的分类"></a>SQL语言的分类</h2><p>SQL语言共分为四大类：数据查询语言DQL，数据操纵语言DML，数据定义语言DDL，数据控制语言DCL。</p>
 <h3 id="数据查询语言DQL"><a href="#数据查询语言DQL" class="headerlink" title="数据查询语言DQL"></a>数据查询语言DQL</h3><p>数据查询语言DQL基本结构是由SELECT子句，FROM子句，WHERE<br>子句组成的查询块：<br>SELECT &lt;字段名表&gt;<br>FROM &lt;表或视图名&gt;<br>WHERE &lt;查询条件&gt;</p>
+<h4 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h4><p>join 默认是outer属性 因此join = outer join<br>那么 left join = left outer join(左连接，或者叫左外连接)</p>
 <h3 id="数据操纵语言DML"><a href="#数据操纵语言DML" class="headerlink" title="数据操纵语言DML"></a>数据操纵语言DML</h3><p>数据操纵语言DML主要有三种形式：<br>1) 插入：INSERT<br>2) 更新：UPDATE<br>3) 删除：DELETE</p>
 <h3 id="数据定义语言DDL"><a href="#数据定义语言DDL" class="headerlink" title="数据定义语言DDL"></a>数据定义语言DDL</h3><p>数据定义语言DDL用来创建数据库中的各种对象—–表、视图、<br>索引、同义词、聚簇等如：<br>CREATE/TABLE/VIEW/INDEX/SYN/CLUSTER<br>表 视图 索引 同义词 簇</p>
 <h4 id="更新表结构之After-First"><a href="#更新表结构之After-First" class="headerlink" title="更新表结构之After-First"></a>更新表结构之After-First</h4><p>之前一直没掌握这个小知识点，认为After xxx字段是在这个字段后加一列，那么就会有在这个字段前加一列，上网查有Before关键字，但是发现并不能用，然后从书中看有First关键字，也会报语法错误，事实上语法如下：<br>After : After name,意为在name字段后添加一列<br>First : First,意为将字段加在该表的首列<br>Before : 没有这个关键字</p>
@@ -250,14 +251,15 @@
 <h4 id="提交三类型"><a href="#提交三类型" class="headerlink" title="提交三类型"></a>提交三类型</h4><p>(1) 显式提交<br>用COMMIT命令直接完成的提交为显式提交。其格式为：<br>SQL&gt;COMMIT；</p>
 <p>(2) 隐式提交<br>用SQL命令间接完成的提交为隐式提交。这些命令是：<br>ALTER，AUDIT，COMMENT，CONNECT，CREATE，DISCONNECT，DROP，<br>EXIT，GRANT，NOAUDIT，QUIT，REVOKE，RENAME。</p>
 <p>(3) 自动提交<br>若把AUTOCOMMIT设置为ON，则在插入、修改、删除语句执行后，<br>系统将自动进行提交，这就是自动提交。其格式为：<br>SQL&gt;SET AUTOCOMMIT ON；</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>UNIX_TIMESTAMP() 时间转换成时间戳，精确到秒<br>FROM_UNIXTIME() 时间戳转换成时间，精确到秒<br>CURRENT_DATE() CURDATE() 系统当前日期<br>CURRENT_TIMESTAMP() LOCALTIME() NOW() SYSDATE() 系统当前日期和时间</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="时间相关"><a href="#时间相关" class="headerlink" title="时间相关"></a>时间相关</h3><p>UNIX_TIMESTAMP() 时间转换成时间戳，精确到秒<br>FROM_UNIXTIME() 时间戳转换成时间，精确到秒<br>CURRENT_DATE() CURDATE() 系统当前日期<br>CURRENT_TIMESTAMP() LOCALTIME() NOW() SYSDATE() 系统当前日期和时间</p>
+<h3 id="查询结果优化"><a href="#查询结果优化" class="headerlink" title="查询结果优化"></a>查询结果优化</h3><p>GROUP_CONCAT() 合并多行相同数据到一行</p>
 <h2 id="调优"><a href="#调优" class="headerlink" title="调优"></a>调优</h2><p>1.对于MyISAM引擎，使用固定长度（char）类型存储字符串更好，这样可以使整个表静态化，以空间换时间。<br>2.对于InnoDB引擎，使用可变长度(varchar)类型存储字符串更好，因为InnoDB数据表的存储格式不分固定长度和可变长度，而且(varchar)更节省空间。</p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj6egl4yw00226t97dktan9yj" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/07/MySQL基础/" data-id="cj6w8nlkw001ne197d5gfu2s7" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/07/MySQL基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/07/MySQL基础/">评论</a>
@@ -316,7 +318,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj6egl4xo00066t97zkh0cme4" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/03/06/JDK命令详解/" data-id="cj6w8nljt0006e197o6v7s7gi" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/03/06/JDK命令详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/06/JDK命令详解/">评论</a>
@@ -372,7 +374,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cj6egl4xd00006t97zdevlssg" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/" data-id="cj6w8nljh0000e197t5m45jf2" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/20/2017-2-19春游有感/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/20/2017-2-19春游有感/">评论</a>
