@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="Thrift介绍说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。 层次结构Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.Protocol 协议层 定义数据传输格式，可以">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-28T14:14:40.000Z">
+<meta property="og:updated_time" content="2017-09-13T09:29:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="thrift初探">
 <meta name="twitter:description" content="Thrift介绍说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。 层次结构Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.Protocol 协议层 定义数据传输格式，可以">
@@ -112,20 +112,21 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thrift介绍"><span class="toc-number">1.</span> <span class="toc-text">Thrift介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#层次结构"><span class="toc-number">1.1.</span> <span class="toc-text">层次结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用心得"><span class="toc-number">1.2.</span> <span class="toc-text">使用心得</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thrift文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">thrift文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字段描述符"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">字段描述符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动生成插件"><span class="toc-number">1.2.2.</span> <span class="toc-text">自动生成插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些坑"><span class="toc-number">1.2.3.</span> <span class="toc-text">一些坑</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thrift介绍"><span class="toc-number">1.</span> <span class="toc-text">Thrift介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#层次结构"><span class="toc-number">1.1.</span> <span class="toc-text">层次结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用心得"><span class="toc-number">1.2.</span> <span class="toc-text">使用心得</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thrift文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">thrift文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名空间"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">命名空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件包含"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">文件包含</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#枚举"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异常"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义结构体"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">定义结构体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务"><span class="toc-number">1.2.1.7.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字段描述符"><span class="toc-number">1.2.1.8.</span> <span class="toc-text">字段描述符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本类型"><span class="toc-number">1.2.1.9.</span> <span class="toc-text">基本类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动生成插件"><span class="toc-number">1.2.2.</span> <span class="toc-text">自动生成插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些坑"><span class="toc-number">1.2.3.</span> <span class="toc-text">一些坑</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="Thrift介绍"><a href="#Thrift介绍" class="headerlink" title="Thrift介绍"></a>Thrift介绍</h1><p>说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。</p>
 <h2 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h2><p>Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.<br>Protocol 协议层 定义数据传输格式，可以为二进制或者XML等<br>Processor 处理层 这部分由定义的idl来生成, 封装了协议输入输出流, 并委托给用户实现的handler进行处理.<br>Transport 传输层 定义数据传输方式，可以为TCP/IP传输，内存共享或者文件共享等</p>
 <a id="more"></a>
-<h2 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h2><h3 id="thrift文件"><a href="#thrift文件" class="headerlink" title="thrift文件"></a>thrift文件</h3><p>namespace java xxxx</p>
-<p>include</p>
-<p>enmu</p>
-<p>const</p>
-<p>exception</p>
-<p>struct</p>
-<p>service</p>
-<h4 id="字段描述符"><a href="#字段描述符" class="headerlink" title="字段描述符"></a>字段描述符</h4><p>optional<br>require</p>
+<h2 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h2><h3 id="thrift文件"><a href="#thrift文件" class="headerlink" title="thrift文件"></a>thrift文件</h3><h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><p>namespace java xxxx</p>
+<h4 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h4><p>include</p>
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>enmu {<br>}</p>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>const</p>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4><p>exception {<br>}</p>
+<h4 id="定义结构体"><a href="#定义结构体" class="headerlink" title="定义结构体"></a>定义结构体</h4><p>struct {<br>}</p>
+<h4 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h4><p>service {<br>}</p>
+<h4 id="字段描述符"><a href="#字段描述符" class="headerlink" title="字段描述符"></a>字段描述符</h4><p>optional 选填（不写描述默认选填）<br>require 必填</p>
+<h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><p>bool：布尔类型(true or value)，占一个字节<br>byte：有符号字节<br>i16:16位有符号整型<br>i32:32位有符号整型<br>i64:64位有符号整型<br>double：64位浮点数<br>string：未知编码或者二进制的字符串</p>
 <h3 id="自动生成插件"><a href="#自动生成插件" class="headerlink" title="自动生成插件"></a>自动生成插件</h3><p>附上插件地址，下载下来后直接在IDEA install一下即可，使用方法也特别简单，选中要生成代码的thrift文件右键，Generate java file。<br><a href="http://www.fishfly.cn/download/thrift-gen-plugin.jar" target="_blank" rel="external">下载地址</a></p>
 <p><b>注意：</b><br>    thrift文件编写要注意顺序，如果在一段定义中引用了某个对象，但该对象定义却在这段定义的下方，生成会出现失败，并提示找不到该对象。</p>
 <h3 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h3><p>(1)先说0.8.0,博主本人遇到的第一个坑就是编译器bug,这个bug主要针对0.8.0版本thrift文件中的多行注释，如果这么写</p>
@@ -135,6 +136,7 @@
 <p>(2) 返回结果如果是容器（如map） value不能为空，否则报NullPointerException<br>原因是由于生成的TService处理逻辑为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">if (struct.success != null) &#123;</div><div class="line">  oprot.writeFieldBegin(SUCCESS_FIELD_DESC);</div><div class="line">  &#123;</div><div class="line">    oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I64, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));</div><div class="line">    for (Map.Entry&lt;Long, SonSupplierSkuPrice&gt; _iter12 : struct.success.entrySet())</div><div class="line">    &#123;</div><div class="line">      oprot.writeI64(_iter12.getKey());</div><div class="line">      _iter12.getValue().write(oprot);</div><div class="line">    &#125;</div><div class="line">    oprot.writeMapEnd();</div><div class="line">  &#125;</div><div class="line">  oprot.writeFieldEnd();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>_iter12.getValue()会报空指针。</p>
+<p>(3)其他不支持的特性<br>1.不支持多态 / 重载.<br>2.没有异构容器: 容器中元素的类型必须一样.<br>3.参数 &amp; 返回值不能为 null(强烈建议不要将 null 赋予业务意义).<br>4.容器中元素不能为 null, 在插入容器前需要做检查， 另外建议将 struct 中 string 元素的默认值设置为 “”<br>5.thrift 0.8 接口返回值为基本类型时，无法返回自定义异常。</p>
 
       
     </div>
