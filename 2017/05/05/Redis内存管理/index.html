@@ -14,7 +14,7 @@
 <meta property="og:description" content="内存管理说起Redis，就会联想到他的兄弟Memcache，而Memcache的内存模型之前的博文中已经介绍，有兴趣的可以与此文进行对比，那么Redis的内存模型是怎样的呢？ 机制在Redis中，并不是所有的数据都一直存储在内存中，这是和Memcache最大的区别。那么当物理内存很紧张的时候，Redis会触发swap的操作，根据算法计算出哪些key对应的value需要swap到磁盘，然后对valu">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/Redis-module.jpg">
-<meta property="og:updated_time" content="2017-05-05T07:53:40.000Z">
+<meta property="og:updated_time" content="2017-09-18T06:13:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis内存管理">
 <meta name="twitter:description" content="内存管理说起Redis，就会联想到他的兄弟Memcache，而Memcache的内存模型之前的博文中已经介绍，有兴趣的可以与此文进行对比，那么Redis的内存模型是怎样的呢？ 机制在Redis中，并不是所有的数据都一直存储在内存中，这是和Memcache最大的区别。那么当物理内存很紧张的时候，Redis会触发swap的操作，根据算法计算出哪些key对应的value需要swap到磁盘，然后对valu">
