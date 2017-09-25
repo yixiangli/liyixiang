@@ -14,7 +14,7 @@
 <meta property="og:description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。 为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。 手绘图 一些解释：1这里的C端(clien">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/tcp.jpg">
-<meta property="og:updated_time" content="2017-09-18T06:13:58.000Z">
+<meta property="og:updated_time" content="2017-09-25T03:21:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础-TCP">
 <meta name="twitter:description" content="网络三次握手 四次挥手为什么要三次握手？TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。 为什么要四次挥手？保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。 手绘图 一些解释：1这里的C端(clien">
@@ -114,7 +114,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络"><span class="toc-number">1.</span> <span class="toc-text">网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三次握手-四次挥手"><span class="toc-number">1.1.</span> <span class="toc-text">三次握手 四次挥手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#手绘图"><span class="toc-number">1.1.1.</span> <span class="toc-text">手绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三次握手"><span class="toc-number">1.1.2.</span> <span class="toc-text">三次握手</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络"><span class="toc-number">1.</span> <span class="toc-text">网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三次握手-四次挥手"><span class="toc-number">1.1.</span> <span class="toc-text">三次握手 四次挥手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#手绘图"><span class="toc-number">1.1.1.</span> <span class="toc-text">手绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三次握手"><span class="toc-number">1.1.2.</span> <span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆包、粘包"><span class="toc-number">1.1.3.</span> <span class="toc-text">拆包、粘包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案"><span class="toc-number">1.1.4.</span> <span class="toc-text">解决方案</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="三次握手-四次挥手"><a href="#三次握手-四次挥手" class="headerlink" title="三次握手 四次挥手"></a>三次握手 四次挥手</h2><p><strong>为什么要三次握手？</strong><br>TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。<br>存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。</p>
@@ -126,6 +126,8 @@
 <h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>TCP是主机对主机层的传输控制协议，提供可靠的连接服务，采用三次握手确认建立一个连接，其中位码即tcp标志位,有6种标示:</p>
 <p>SYN(synchronous建立联机)<br>ACK(acknowledgement 确认)<br>PSH(push传送)<br>FIN(finish结束)<br>RST(reset重置)<br>URG(urgent紧急)</p>
 <p>Sequence number(顺序号码)<br>Acknowledge number(确认号码)</p>
+<h3 id="拆包、粘包"><a href="#拆包、粘包" class="headerlink" title="拆包、粘包"></a>拆包、粘包</h3><p>由于TCP只关心字节流，并不知晓上层的数据格式。如果客户端应用层一次要发送的数据过大时，TCP会将该数据进行分解传送，因此在服务端需要进行粘包处理（由TCP来保证数据的有序性）；如果客户端一次要发送的数据量很小时，TCP并不会马上把数据发送出去，而是将其存储在缓冲区，当达到某个阈值的时候再发送出去，因此在服务端需要进行拆包的工作。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>（1）发送端给每个数据包添加包首部，首部中至少包含数据包的长度，这样在接收端接收到数据时，通过读取首部的长度信息得到该数据包有效数据的长度。<br>（2）发送端将每个数据包封装为固定长度（多余用0填充），这样接收端在接收到数据后根据约定好的固定长度读取每个数据包的数据。<br>（3）使用特殊符号将每个数据包区分开来，接收端也是通过该特殊符号的划分数据包的边界。</p>
 
       
     </div>
