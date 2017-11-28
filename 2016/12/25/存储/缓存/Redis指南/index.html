@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis指南 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概述废话不多说，官方文档在此http://doc.redisfans.com  数据结构使用者角度  string list hash set sorted set">
+<meta name="keywords" content="cache">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis指南">
+<meta property="og:url" content="https://yixiangli.github.io/2016/12/25/存储/缓存/Redis指南/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="概述废话不多说，官方文档在此http://doc.redisfans.com  数据结构使用者角度  string list hash set sorted set">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-18T06:13:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis指南">
+<meta name="twitter:description" content="概述废话不多说，官方文档在此http://doc.redisfans.com  数据结构使用者角度  string list hash set sorted set">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-存储/缓存/Redis指南" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/12/25/存储/缓存/Redis指南/" class="article-date">
+  <time datetime="2016-12-25T09:53:23.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术贴/">技术贴</a>►<a class="article-category-link" href="/categories/技术贴/中间件/">中间件</a>►<a class="article-category-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a>►<a class="article-category-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-number">1.1.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-字符串"><span class="toc-number">1.1.1.</span> <span class="toc-text">String(字符串)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#常用操作"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hash-Hash类型"><span class="toc-number">1.1.2.</span> <span class="toc-text">hash(Hash类型)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List-双向链表"><span class="toc-number">1.1.3.</span> <span class="toc-text">List(双向链表)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set-集合"><span class="toc-number">1.1.4.</span> <span class="toc-text">Set(集合)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sorted-set-有序集合"><span class="toc-number">1.1.5.</span> <span class="toc-text">Sorted set(有序集合)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用操作命令"><span class="toc-number">1.1.6.</span> <span class="toc-text">常用操作命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高级应用"><span class="toc-number">1.2.</span> <span class="toc-text">高级应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.3.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内部结构实现"><span class="toc-number">1.3.1.</span> <span class="toc-text">内部结构实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dict"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">dict</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#增量式重哈希"><span class="toc-number">1.3.1.1.1.</span> <span class="toc-text">增量式重哈希</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#incremental-rehashing的实现"><span class="toc-number">1.3.1.1.1.1.</span> <span class="toc-text">incremental rehashing的实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sds"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">sds</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#sds与string的关系"><span class="toc-number">1.3.1.2.1.</span> <span class="toc-text">sds与string的关系</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>废话不多说，官方文档在此<br><a href="http://doc.redisfans.com" target="_blank" rel="external">http://doc.redisfans.com</a></p>
+<hr>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p><strong>使用者角度</strong></p>
+<ul>
+<li>string</li>
+<li>list</li>
+<li>hash</li>
+<li>set</li>
+<li>sorted set</li>
+</ul>
+<a id="more"></a>
+<p><strong>内部实现角度</strong></p>
+<ul>
+<li>dict</li>
+<li>sds</li>
+<li>ziplist</li>
+<li>quicklist</li>
+<li>skiplist</li>
+</ul>
+<p>数据结构的相关文档<br><a href="https://redis.io/topics/data-types-intro" target="_blank" rel="external">https://redis.io/topics/data-types-intro</a></p>
+<h3 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String(字符串)"></a>String(字符串)</h3><p>String作为一种很常用的缓存类型被各种缓存中间件支持，而且作为Redis，不仅支持String,还支持多种数据结构的缓存类型，这也是Redis比memcached强大的地方之一。</p>
+<h4 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h4><p>String 存入字符类型<br>        set name yixiangli  设置name = yixiangli 存储<br>        get name                获取设置好的name的值<br>        setnx name yixiangli 设置name键值为yixiangli 如果存在,则返回0 不存在返回1<br>        mset name yixiangli  age 23 salary 100000 设置多个键值对 (全成功,全失败)<br>        msetnx name xiaoyu age 23 hoby sleep 如果设置多个键值对中有存在则返回失败<br>        mget name age salary 获取多个键的值<br>        getset name xiaoyu 获取name的值,并设置新的值为xiaoyu<br>        setrange name 4 zhu 将键name 4个字符后面的进行替换 结果为xiaozhu<br>        getrange name 4 6 获取键name的值 结果为zhu<br>        append name .com 给键name追加.com,结果为xiaozhu.com<br>        incr age 设置每个值自增 返回结果为24<br>        incrby age 6 给age加上6 如果是负数则减<br>        decr 与incr相反<br>        decrby 与decrby相反<br>        strlen 返回键对应的值得字符长度</p>
+<h3 id="hash-Hash类型"><a href="#hash-Hash类型" class="headerlink" title="hash(Hash类型)"></a>hash(Hash类型)</h3><p>Hash 方便存对象,键值对<br>        hset user:001 name yixiangli   设置哈希表名user:001 key:name value:yixiangli<br>        hsetnx user name yixiangli    设置哈希表名字中的name,若已存在,则设置不成功<br>        hget user:001 name 获取hash表名为user001的键值对<br>        hmset user:003 name yixiangli age 23 批量设置<br>        hmget user:003 name age 批量获取user:003的值<br>        hincrby user:003 age 3     给hash表的age值加上3<br>        hexists user:003 name 判断hash表中式否存在name的键<br>        hlen user:003 返回hash表的所有的字段的数目<br>        hkeys user:003 返回hash表的所有字段<br>        hvals user:003 返回hash表中所有的值<br>        hgetall user:003 返回所有的字段和值<br>        hdel user:003 name 对hash的name的值和键删除</p>
+<h3 id="List-双向链表"><a href="#List-双向链表" class="headerlink" title="List(双向链表)"></a>List(双向链表)</h3><p>栈:先进后出 队列:先进先出<br>    lpush 从头压入<br>        lpush list1 “world”<br>        lpush list1 “hello”<br>        lrange list1 0 -1 把链表中的数据从头到尾全部取出<br>        结果： hello world<br>    rpush 从尾部压入<br>        rpush list2 “world”<br>        rpush list2 “hello”<br>        lrange list2 0 -1<br>        结果： world hello<br>    linsert 插入数据<br>        rpush list3 yixiangli<br>        rpush list3 xiaoyu<br>        lrange list3 0 -1<br>        linsert list3 before xiaoyu love<br>        lrange list3 0 -1<br>        linsert list3 after yixiangli love<br>        lrange list3 0 -1<br>    lset 替换<br>        rpush list5 yixiangli<br>        rpush list5 xiaoyu<br>        lset list5 0 “demo”<br>    lrem 删除list表中的数据<br>        rpush list6 yixiang1<br>        rpush list6 yixiang2<br>        rpush list6 yixiang3<br>        rpush list6 yixiang4<br>        rpush list6 yixiang5<br>        lrem list6 1 yixiang1<br>        删除list6 中值为yixiang1的值<br>     ltrim 保留范围<br>        lpush list7 yixiang1<br>        lpush list7 yixiang2<br>        lpush list7 yixiang3<br>        lpush list7 yixiang4<br>        lpush list7 yixiang5<br>        ltrim list7 1 2 (1 2 为保留的范围)<br>        lpush list7 yixiang2<br>        lpush list7 yixiang3<br>     lpop 从链表的头部弹出一个元素<br>        lpush list8 yixiang1<br>        lpush list8 yixiang2<br>        lpush list8 yixiang3<br>        lpop list8<br>        lpush list8 yixiang2<br>        lpush list8 yixiang3<br>     rpop 从链表的尾部弹出一个元素<br>        lpush list8 yixiang1<br>        lpush list8 yixiang2<br>        lpush list8 yixiang3<br>        rpop list8<br>        lpush list8 yixiang1<br>        lpush list8 yixiang2<br>     rpoplpush 从一个链表弹出,在从头部压入到另一个链表<br>        List demo1<br>        Demo1A<br>        Demo1B<br>        Demo1C<br>        List demo2<br>        Demo2A<br>        Demo2B<br>        Demo2C<br>        命令：rpoplpush demo1 demo2<br>        结果:<br>        List demo1<br>        Demo1A<br>        Demo1B<br>        List demo2<br>        Demo1C<br>        Demo2A<br>        Demo2B<br>        Demo2C<br>     lindex 返回一个list小标的索引值<br>        List11<br>        one<br>        two<br>        命令： lindex list11 1(list小标)<br>        two<br>        lindex list11 0<br>        one<br>     llen 返回这个链表的元素的长度</p>
+<h3 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set(集合)"></a>Set(集合)</h3><p>   sadd 向集合中插入一条数据<br>      sadd myset1 yixiang<br>      srem 删除集合中的一个元素<br>   srem myset1 yixiang<br>      smembers 查看集合中的元素<br>      smembers myset1<br>      spop 从集合随机弹出一个元素,返回键值<br>      sdiff 两个集合的差集 返回两个集合不一样的,根据第一个集合为标准<br>   setdemo1<br>      one<br>      two<br>   setdemo2<br>      one<br>      three<br>   sdiff setdemo1 setdemo2<br>      two(与setdemo2不一样)<br>   sdiff setdemo2 setdeo1<br>      three(与setdemo1 不一样)<br>   sdiffstroe 将两个差集存储到另外一个集合<br>   sdiffstore setdemo1 setdemo2 setdemo3<br>   将setdemo1 setdemo2 的差集放到 setdemo3中<br>   sinter 将两个集合的交集<br>   sinterstore 将两个集合的交集存储到另外一个集合中<br>   sunion 将两个集合并集<br>   sunionstore 将两个集合并集并存储到另外一个集合中<br>   smove 将以个集合中的元素移动到另外一个集合中<br>   eg smove myset1 mysetA two mysetB 集合中的two元素移动到mysetB中<br>   scard 查看集合中元素的个数<br>   scard myset1查看myset12元素的个数<br>   sismember 判断是否是集合中的元素<br>   sismember myset13 yixiang 判断yixiang是否在myset13中的元素<br>   srandmember myset14 随机取出myset1 中的元素</p>
+<h3 id="Sorted-set-有序集合"><a href="#Sorted-set-有序集合" class="headerlink" title="Sorted set(有序集合)"></a>Sorted set(有序集合)</h3><p>   zadd 添加到有序集合中区<br>   zadd myzsent 1 yixiang1<br>   zadd myzsent 2 yixiang2<br>   zadd myzsent 3 yixiang3<br>        zadd myzsent 4 yixiang4<br>        zrange myzsent 0 -1 withscores<br>        zrem 删除有序集合中的元素<br>        zrem myzsent yixiang1 删除myzsent集合中的yixiang1<br>        zincrby myzsent yixiang1 3将myzsent luown1的序号更改为4<br>        如果没有,就创建他<br>        zrank 找到myzsent 对应值得索引<br>        zrevrank 反过来去索引<br>        zrangebyscore 返回集合中指定的元素<br>        zrangebyscore mysetdeom 2 5 withscores<br>        返回mysetdemo中2-5中的元素<br>        zcount 返回指定空间的数量<br>        zcount myset 2  4 返回2 4中的元素个数<br>        zcard 返回集合中所有元素的个数<br>        zremrangbyrank 删除集合中指定区间的元素,并将索引进行排序<br>        zremrangbyscore 删除集合中指定元素,按循序进行排序</p>
+<h3 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h3><p>   key-values<br>    1 keys <em> 匹配键所有的键. 模糊匹配 keys my</em> 取出所有以my开头的键<br>    2 exists 判断是否键 exists name判断是否有name这个键是否存在<br>    3 del 删除键 del name 删除name的键<br>    4 expire 设置过期时间 expire key time<br>    5 ttl key 查看键的过期时间<br>    6 select database 选择数据库<br>    7 move key dababase1 讲key移动dao database1中的数据库中<br>    8 persist 取消键的过期时间<br>    9 randomkey 随机返回一个键的值<br>    10 rename 重命名一个键<br>    11 type key 判断key的数据类型</p>
+<p>   Server<br>    1 ping ping我们的主机能否链接 链接是否存活<br>    2 echo 命令 echo demo直接输出<br>    3 select 选择数据库 select 0-16个数据库<br>    4 quit exit 退出链接<br>    5 dbsize 返回数据库的键的个数<br>    6 info 返回服务器相关信息<br>    7 config get 返回服务配置信息<br>    8 flush db 清空数据库<br>    9 flushall 删除所有数据库中所有的键</p>
+<h2 id="高级应用"><a href="#高级应用" class="headerlink" title="高级应用"></a>高级应用</h2><p>1 在配置文件里面设置 requirepass password<br>2 进入后 auth 密码 进行授权 方法二: 登入或在后面加上 –a 加上密码<br>3 主从复制:<br>        One: 一个master服务器可以拥有多个slave<br>        Two: 一个salve可以有多个master 并且还可以与其他的salve相连接<br>    配置salve<br>        打开salveof注释 并添加主机的ip以及端口<br>        主机加了密码的时候还需要配置masterauth 密码<br>4 redis 的事务处理<br>    输入:multi 打开一个上下文<br>        set age 10<br>        set age 144<br>    上面的全部放入队列最后执行<br>        exec<br>    最后age为144<br>    回滚<br>        discard<br>    watch 监视键的命令</p>
+<p>5 Redis的持久化<br>    方式一:  snapshotting (快照)将内存的数据写入到文件中 save 500 32 500秒内有32个键发生变化则发起快照到文件中<br>    方式二: append only file 将没次写修改的命令保存到文件中<br>    配置:打开append only<br>        Appendfsync yes<br>        Appendfsync always 每次都写入<br>        Appendfsync everysec    每个一秒写入<br>        Appendfsync no    不写入<br>6 发布和订阅消息<br>    订阅:<br>    　　 subscribe tv1 tv2 订阅了两个频道<br>    发布:<br>        publish tv1 yixiangli<br>    注:publish tv1的信息 订阅的信息都可以收到<br>7 虚拟内存<br>    方式一:暂时把不使用的数据放到硬盘里面<br>    方式二:可以把数据分割到其他的slave数据服务器中
+    　
+    　</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li>redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool<br>原因：连接不上Redis</li>
+</ol>
+<h3 id="内部结构实现"><a href="#内部结构实现" class="headerlink" title="内部结构实现"></a>内部结构实现</h3><h4 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h4><p>dict是一个用于维护key和value映射关系的数据结构，与很多语言中的Map或dictionary类似。在Redis中，dict是一个基于哈希表的算法，而Redis的dict实现最显著的一个特点，就在于它的重哈希。它采用了一种称为增量式重哈希（incremental rehashing）的方法</p>
+<h5 id="增量式重哈希"><a href="#增量式重哈希" class="headerlink" title="增量式重哈希"></a>增量式重哈希</h5><p>在需要扩展内存时避免一次性对所有key进行重哈希，而是将重哈希操作分散到对于dict的各个增删改查的操作中去。这种方法能做到每次只对一小部分key进行重哈希，而每次重哈希之间不影响dict的操作。dict之所以这样设计，是为了避免重哈希期间单个请求的响应时间剧烈增加，导致Redis无法快速响应。</p>
+<h6 id="incremental-rehashing的实现"><a href="#incremental-rehashing的实现" class="headerlink" title="incremental rehashing的实现"></a>incremental rehashing的实现</h6><p>实现的基本思路是：dict的数据结构里包含两个哈希表。在重哈希期间，数据从第一个哈希表向第二个哈希表迁移，具体可以参见Redis源码dict.h</p>
+<h4 id="sds"><a href="#sds" class="headerlink" title="sds"></a>sds</h4><p>全称是Simple Dynamic String，特点如下：<br>1.可动态扩展内存。sds表示的字符串其内容可以修改，也可以追加。在很多语言中字符串会分为mutable和immutable两种，显然sds属于mutable类型的。<br>2.二进制安全（Binary Safe）。sds能存储任意二进制数据，而不仅仅是可打印字符。</p>
+<h5 id="sds与string的关系"><a href="#sds与string的关系" class="headerlink" title="sds与string的关系"></a>sds与string的关系</h5><p>当它存储的值是个字符的时候，内部结构为sds，当它存储的值是个数字，并且string类型本身支持incr、decr等操作，内部结构</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/12/25/存储/缓存/Redis指南/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2016/12/25/存储/缓存/Redis指南/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/存储/缓存/Redis指南/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/">cache</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/27/语言/Java/J2SE/Java常用工具类/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java常用工具类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/25/语言/Java/J2SE/Java集合详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java集合详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/">中间件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/UML/">UML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/容器/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/潭拓寺/">潭拓寺</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/坡峰岭/">坡峰岭</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/喇叭沟门/">喇叭沟门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/语言/Java/J2SE/JDK特性/">进击的Java</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2017 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

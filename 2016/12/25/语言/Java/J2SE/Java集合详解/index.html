@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java集合详解 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="集合 Or 容器java.util.* 结构 泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁 集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+<meta name="keywords" content="集合,Map,List,Set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合详解">
+<meta property="og:url" content="https://yixiangli.github.io/2016/12/25/语言/Java/J2SE/Java集合详解/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="集合 Or 容器java.util.* 结构 泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁 集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yixiangli.github.io/img/collection.jpg">
+<meta property="og:updated_time" content="2017-11-28T16:03:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合详解">
+<meta name="twitter:description" content="集合 Or 容器java.util.* 结构 泛型Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型解决了两个问题：（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException（2）不需要使用显式转换和instanceOf操作符，代码更整洁 集合框架类MapHashMap多线程并发可能存在的问题get死循环多线程同">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/collection.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-语言/Java/J2SE/Java集合详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java集合详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/12/25/语言/Java/J2SE/Java集合详解/" class="article-date">
+  <time datetime="2016-12-25T09:47:34.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#集合-Or-容器"><span class="toc-number">1.</span> <span class="toc-text">集合 Or 容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-number">1.1.</span> <span class="toc-text">结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型"><span class="toc-number">1.2.</span> <span class="toc-text">泛型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合框架类"><span class="toc-number">1.3.</span> <span class="toc-text">集合框架类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-number">1.4.</span> <span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap多线程并发可能存在的问题"><span class="toc-number">1.4.1.</span> <span class="toc-text">HashMap多线程并发可能存在的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get死循环"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">get死循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get数据丢失"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">get数据丢失</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#put非null元素后get出来的却是null"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">put非null元素后get出来的却是null</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration和Iterator接口的区别"><span class="toc-number">1.4.2.</span> <span class="toc-text">Enumeration和Iterator接口的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.5.</span> <span class="toc-text">源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Objects"><span class="toc-number">1.5.1.</span> <span class="toc-text">Objects</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CopyOnWrite容器"><span class="toc-number">1.6.</span> <span class="toc-text">CopyOnWrite容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">1.6.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-number">1.6.2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意事项"><span class="toc-number">1.6.3.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">1.6.4.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IdentityHashMap"><span class="toc-number">1.7.</span> <span class="toc-text">IdentityHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#与HashMap的区别"><span class="toc-number">1.7.1.</span> <span class="toc-text">与HashMap的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景-1"><span class="toc-number">1.7.2.</span> <span class="toc-text">使用场景</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="集合-Or-容器"><a href="#集合-Or-容器" class="headerlink" title="集合 Or 容器"></a>集合 Or 容器</h1><p>java.util.*</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><img src="/img/collection.jpg" alt="集合结构图"></p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型<br>解决了两个问题：<br>（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException<br>（2）不需要使用显式转换和instanceOf操作符，代码更整洁</p>
+<h2 id="集合框架类"><a href="#集合框架类" class="headerlink" title="集合框架类"></a>集合框架类</h2><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="HashMap多线程并发可能存在的问题"><a href="#HashMap多线程并发可能存在的问题" class="headerlink" title="HashMap多线程并发可能存在的问题"></a>HashMap多线程并发可能存在的问题</h3><h4 id="get死循环"><a href="#get死循环" class="headerlink" title="get死循环"></a>get死循环</h4><p>多线程同时进行put操作后，都同时rehash操作，导致Entry List出现循环引用，get会出现死循环，导致CPU飙升，多线程都被Hang住</p>
+<h4 id="get数据丢失"><a href="#get数据丢失" class="headerlink" title="get数据丢失"></a>get数据丢失</h4><p>看createEntry方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void createEntry(int hash, K key, V value, int bucketIndex) &#123;</div><div class="line">        Entry&lt;K,V&gt; e = table[bucketIndex];</div><div class="line">        table[bucketIndex] = new Entry&lt;&gt;(hash, key, value, e);</div><div class="line">        size++;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>该方法中请注意new Entry（）构造方法，如果在多线程场景下两个线程同时获取到了e实例，那么在赋值给table时有一个成功有一个丢失。</p>
+<h4 id="put非null元素后get出来的却是null"><a href="#put非null元素后get出来的却是null" class="headerlink" title="put非null元素后get出来的却是null"></a>put非null元素后get出来的却是null</h4><p>源码</p>
+<h3 id="Enumeration和Iterator接口的区别"><a href="#Enumeration和Iterator接口的区别" class="headerlink" title="Enumeration和Iterator接口的区别"></a>Enumeration和Iterator接口的区别</h3><p>Enumeration的速度是Iterator的两倍，也使用更少的内存。Enumeration是非常基础的，也满足了基础的需要。但是，与Enumeration相比，Iterator更加安全，因为当一个集合正在被遍历的时候，它会阻止其它线程去修改集合。迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者从集合中移除元素，而Enumeration不能做到</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>equals AND deepEquals<br>(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。<br>(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。<br><a id="more"></a></p>
+<h2 id="CopyOnWrite容器"><a href="#CopyOnWrite容器" class="headerlink" title="CopyOnWrite容器"></a>CopyOnWrite容器</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>简称COW,是一种用于程序设计中的优化策略,即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>CopyOnWrite并发容器用于读多写少的并发场景。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.减少扩容开销，预估容器大小。<br>2.尽量使用批量添加，减少容器复制次数。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>1.内存占用问题<br>因为CopyOnWrite的写时复制机制，所以在进行写操作的时候，内存里会同时驻扎两个对象的内存，旧的对象和新写入的对象（注意:在复制的时候只是复制容器里的引用，只是在写的时候会创建新对象添加到新容器里，而旧容器的对象还在使用，所以有两份对象内存）。如果这些对象占用的内存比较大，比如说200M左右，那么再写入100M数据进去，内存就会占用300M，那么这个时候很有可能造成频繁的Yong GC和Full GC。<br>针对内存占用问题，可以通过压缩容器中的元素的方法来减少大对象的内存消耗，比如，如果元素全是10进制的数字，可以考虑把它压缩成36进制或64进制，或者不使用CopyOnWrite容器，而使用其他的并发容器，如ConcurrentHashMap。</p>
+<p>2.数据一致性问题<br>数据一致性问题。CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的实时一致性。所以如果你希望写入的的数据，马上能读到，请不要使用CopyOnWrite容器。</p>
+<h2 id="IdentityHashMap"><a href="#IdentityHashMap" class="headerlink" title="IdentityHashMap"></a>IdentityHashMap</h2><h3 id="与HashMap的区别"><a href="#与HashMap的区别" class="headerlink" title="与HashMap的区别"></a>与HashMap的区别</h3><ul>
+<li>等值比较<br>Identity使用 “==” 进行比较，普通map使用”equals”</li>
+<li>hashCode<br>identity使用System.identityHashCode,普通map使用重写的hashCode查找位置</li>
+</ul>
+<p>因此IdentityHashMap可以允许key重复或者为null,这就引出了它的使用场景</p>
+<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><p>IdentityHashMap有其特殊用途，比如序列化或者深度复制。或者记录对象代理。<br>举个例子，jvm中的所有对象都是独一无二的，哪怕两个对象是同一个class的对象，而且两个对象的数据完全相同，对于jvm来说，他们也是完全不同的，如果要用一个map来记录这样jvm中的对象，你就需要用IdentityHashMap，而不能使用其他Map实现。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/12/25/语言/Java/J2SE/Java集合详解/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2016/12/25/语言/Java/J2SE/Java集合详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/语言/Java/J2SE/Java集合详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/List/">List</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Set/">Set</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合/">集合</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/25/存储/缓存/Redis指南/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Redis指南
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/19/语言/Java/J2SE/Java关键字/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java关键字</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/">中间件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/UML/">UML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/容器/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/潭拓寺/">潭拓寺</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/坡峰岭/">坡峰岭</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/喇叭沟门/">喇叭沟门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/语言/Java/J2SE/JDK特性/">进击的Java</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2017 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

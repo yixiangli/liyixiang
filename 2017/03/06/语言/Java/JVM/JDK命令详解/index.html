@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JDK命令详解 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JDK bin下的java命令工具jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。 什么是dump Java Dump    Java虚拟机的运行时快照。将Java虚拟机运行时的状态和信息保存到文件。   线程Dump,包含所有线程的运行状态。纯文本格式。   堆Dump,包含线程Dump,并包含所有堆对象的状态。二进制格式。">
+<meta name="keywords" content="jstat,jmap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK命令详解">
+<meta property="og:url" content="https://yixiangli.github.io/2017/03/06/语言/Java/JVM/JDK命令详解/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="JDK bin下的java命令工具jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。 什么是dump Java Dump    Java虚拟机的运行时快照。将Java虚拟机运行时的状态和信息保存到文件。   线程Dump,包含所有线程的运行状态。纯文本格式。   堆Dump,包含线程Dump,并包含所有堆对象的状态。二进制格式。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-28T15:57:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDK命令详解">
+<meta name="twitter:description" content="JDK bin下的java命令工具jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。 什么是dump Java Dump    Java虚拟机的运行时快照。将Java虚拟机运行时的状态和信息保存到文件。   线程Dump,包含所有线程的运行状态。纯文本格式。   堆Dump,包含线程Dump,并包含所有堆对象的状态。二进制格式。">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-语言/Java/JVM/JDK命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JDK命令详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/03/06/语言/Java/JVM/JDK命令详解/" class="article-date">
+  <time datetime="2017-03-06T03:02:22.000Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/JVM/">JVM</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JDK-bin下的java命令工具"><span class="toc-number">1.</span> <span class="toc-text">JDK bin下的java命令工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是dump"><span class="toc-number">1.1.</span> <span class="toc-text">什么是dump</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jps"><span class="toc-number">1.1.1.</span> <span class="toc-text">jps</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述："><span class="toc-number">1.1.1.1.</span> <span class="toc-text">概述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原理："><span class="toc-number">1.1.1.2.</span> <span class="toc-text">原理：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令："><span class="toc-number">1.1.1.3.</span> <span class="toc-text">命令：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用法："><span class="toc-number">1.1.1.4.</span> <span class="toc-text">用法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题："><span class="toc-number">1.1.1.5.</span> <span class="toc-text">问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原因："><span class="toc-number">1.1.1.6.</span> <span class="toc-text">原因：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jstat"><span class="toc-number">1.1.2.</span> <span class="toc-text">jstat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jstack"><span class="toc-number">1.1.3.</span> <span class="toc-text">jstack</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：-1"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">概述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用途："><span class="toc-number">1.1.3.2.</span> <span class="toc-text">用途：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令：-1"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">命令：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#jvm线程"><span class="toc-number">1.1.3.3.1.</span> <span class="toc-text">jvm线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#用户级别的线程"><span class="toc-number">1.1.3.3.2.</span> <span class="toc-text">用户级别的线程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#几种线程状态："><span class="toc-number">1.1.3.3.3.</span> <span class="toc-text">几种线程状态：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WATING-on-codition"><span class="toc-number">1.1.3.3.4.</span> <span class="toc-text">WATING on codition</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#死锁："><span class="toc-number">1.1.3.3.5.</span> <span class="toc-text">死锁：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jmap"><span class="toc-number">1.1.4.</span> <span class="toc-text">jmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：-2"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">概述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用途：-1"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">用途：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令：查看堆使用情况"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">命令：查看堆使用情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析："><span class="toc-number">1.1.4.4.</span> <span class="toc-text">分析：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令-：查看堆内存中对象数量及大小"><span class="toc-number">1.1.4.5.</span> <span class="toc-text">命令 ：查看堆内存中对象数量及大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出到文件："><span class="toc-number">1.1.4.6.</span> <span class="toc-text">输出到文件：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jhat"><span class="toc-number">1.1.5.</span> <span class="toc-text">jhat</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：-3"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">概述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法："><span class="toc-number">1.1.5.2.</span> <span class="toc-text">方法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jinfo"><span class="toc-number">1.1.6.</span> <span class="toc-text">jinfo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：-4"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">概述：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jconsole"><span class="toc-number">1.1.7.</span> <span class="toc-text">jconsole</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：-5"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">概述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#例子："><span class="toc-number">1.1.7.2.</span> <span class="toc-text">例子：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jvisualvm"><span class="toc-number">1.1.8.</span> <span class="toc-text">jvisualvm</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：-6"><span class="toc-number">1.1.8.1.</span> <span class="toc-text">概述：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javap"><span class="toc-number">1.1.9.</span> <span class="toc-text">javap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：-7"><span class="toc-number">1.1.9.1.</span> <span class="toc-text">概述：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令：-2"><span class="toc-number">1.1.9.2.</span> <span class="toc-text">命令：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用性能分析工具"><span class="toc-number">1.1.10.</span> <span class="toc-text">常用性能分析工具</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="JDK-bin下的java命令工具"><a href="#JDK-bin下的java命令工具" class="headerlink" title="JDK bin下的java命令工具"></a>JDK bin下的java命令工具</h1><p>jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。</p>
+<h2 id="什么是dump"><a href="#什么是dump" class="headerlink" title="什么是dump"></a>什么是dump</h2><p><strong> Java Dump </strong><br>   Java虚拟机的运行时快照。将Java虚拟机运行时的状态和信息保存到文件。<br>   线程Dump,包含所有线程的运行状态。纯文本格式。<br>   堆Dump,包含线程Dump,并包含所有堆对象的状态。二进制格式。</p>
+<p>   jstack:打印线程的栈信息,制作线程Dump。<br>   jmap:打印内存映射,制作堆Dump。</p>
+<p>说明：<br>   (1)不同的 JAVA虚机的线程 DUMP的创建方法和文件格式是不一样的，不同的 JVM版本，<br>    dump信息也有差别。</p>
+<p>   (2)在实际运行中，往往一次 dump的信息，还不足以确认问题。建议产生三次 dump信息，<br>   如果每次 dump都指向同一个问题，我们才确定问题的典型性。 </p>
+<h3 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h3><a id="more"></a>
+<p>jps(Java Virtual Machine Process Status Tool)</p>
+<h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><p>   jps位于jdk的bin目录下，其作用是显示当前系统的java进程情况，及其id号。<br>    jps相当于linux进程工具ps。但不像”pgrep java”或”ps -ef grep java”，<br>    jps并不使用应用程序名来查找JVM实例。因此，它查找所有的Java应用程序，<br>    包括即使没有使用java执行体的那种（例如，定制的启动 器）。另外，<br>    jps仅查找当前用户的Java进程，而不是当前系统中的所有进程。</p>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>   java程序在启动以后，会在java.io.tmpdir指定的目录下，就是临时文件夹里，<br>   生成一个类似于hsperfdata<em>User的文件夹，（在Linux中为/tmp/hsperfdata</em>{userName}/）<br>   文件夹下有若干文件，名字就是java进程的pid，因此列出当前运行的java进程，<br>   只是把这个目录里的文件名列一下而已。 至于系统的参数什么，就可以解析这几个文件获得。</p>
+<h4 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h4><p>   jps -help  帮助<br>   jps -l     输出主类全名或jar路径<br>   jps -q     显示进程号<br>   jps -m     显示main 传入的args参数<br>   jps -v     显示jvm参数设置</p>
+<h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><p>   jps可以配合jstack等命令，快速查看到java进程的id号，不再需要ps -ef grep java<br>   面对一大堆java进程</p>
+<h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>   jps可能会失效</p>
+<h4 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h4><p>   （1）/tmp文件夹下不存在hsperfdata_{userName}文件夹 文件夹被清理<br>   （2）用户权限不足<br>   （3）进程存储地址被设置 java启动时提供了参数(-Djava.io.tmpdir)<br>    注意：但jps只会从/tmp下读取</p>
+<p>   参考：<br>   <a href="http://www.hollischuang.com/archives/105" target="_blank" rel="external">http://www.hollischuang.com/archives/105</a></p>
+<h3 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>jstat(JVM statistics Monitoring)是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。</p>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><p>jstat -gcutil pid 1000</p>
+<h3 id="jstack"><a href="#jstack" class="headerlink" title="jstack"></a>jstack</h3><h4 id="概述：-1"><a href="#概述：-1" class="headerlink" title="概述："></a>概述：</h4><p>jstack用于生成java虚拟机当前时刻的线程快照,为指定的线程输出 java 的线程堆栈信息，包括了进程里的所有线程。每一个线程 frame ，包括类全名，方法名，代码行。</p>
+<h4 id="用途："><a href="#用途：" class="headerlink" title="用途："></a>用途：</h4><p>   （1）java程序崩溃生成core文件(如jvm堆内存设置不当)<br>   （2）正在运行的java程序中，看到当时运行的java程序的java stack和native stack的信息</p>
+<h4 id="命令：-1"><a href="#命令：-1" class="headerlink" title="命令："></a>命令：</h4><p>   jstack -l pid</p>
+<h5 id="jvm线程"><a href="#jvm线程" class="headerlink" title="jvm线程"></a>jvm线程</h5><p>   JVM内部的后台线程，来执行譬如垃圾回收，或者低内存的检测等等任务，<br>   这些线程往往在JVM初始化的时候就存在</p>
+<h5 id="用户级别的线程"><a href="#用户级别的线程" class="headerlink" title="用户级别的线程"></a>用户级别的线程</h5><p>   根据用户请求的不同而发生变化。该类线程的运行情况往往是我们所关注的重点。<br>   而且这一部分也是最容易产生死锁的地方。</p>
+<h5 id="几种线程状态："><a href="#几种线程状态：" class="headerlink" title="几种线程状态："></a>几种线程状态：</h5><p>   NEW,未启动的。不会出现在Dump中。<br>   RUNNABLE,在虚拟机内执行的。<br>   BLOCKED,受阻塞并等待监视器锁。<br>   WATING,无限期等待另一个线程执行特定操作。<br>   TIMED_WATING,有时限的等待另一个线程的特定操作。<br>   TERMINATED,已退出的。</p>
+<h5 id="WATING-on-codition"><a href="#WATING-on-codition" class="headerlink" title="WATING on codition"></a>WATING on codition</h5><p>   情况一：<br>   如果发现有大量的线程都在处在 Wait on condition，从线程 stack看，<br>   正等待网络读写，这可能是一个网络瓶颈的征兆.<br>   因为网络阻塞导致线程无法执行。一种情况是网络非常忙，几乎消耗了所有的带宽，<br>   仍然有大量数据等待网络读写；另一种情况也可能是网络空闲，但由于路由等问题，<br>   导致包无法正常的到达。所以要结合系统的一些性能观察工具来综合分析，<br>   比如 netstat统计单位时间的发送包的数目，如果很明显超过了所在网络带宽的限制 ;<br>   观察 cpu的利用率，如果系统态的 CPU时间，相对于用户态的 CPU时间比例较高；<br>   如果程序运行在 Solaris 10平台上，可以用 dtrace工具看系统调用的情况，<br>   如果观察到 read/write的系统调用的次数或者运行时间遥遥领先；<br>   这些都指向由于网络带宽所限导致的网络瓶颈。<br>   情况二：<br>   线程在 sleep，等待 sleep的时间到了时候，将被唤醒</p>
+<p>   waiting for monitor entry 和 in Object.wait()<br>   waiting for monitor entry:<br>   synchronized<br>   in Object.wait() :<br>   在程序中有多个服务线程，设计成从一个队列里面读取请求数据。<br>   这个队列就是 lock以及 waiting on的对象。当队列为空的时候，<br>   这些线程都会在这个队列上等待，直到队列有了数据，这些线程被notify，<br>   当然只有一个线程获得了 lock，继续执行，而其它线程继续等待。 </p>
+<h5 id="死锁："><a href="#死锁：" class="headerlink" title="死锁："></a>死锁：</h5><p>   自行研究</p>
+<h3 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h3><h4 id="概述：-2"><a href="#概述：-2" class="headerlink" title="概述："></a>概述：</h4><p>   主要用于打印指定Java进程的共享对象内存映射或堆内存细节。<br>   可以使用jmap生成Heap Dump。</p>
+<h4 id="用途：-1"><a href="#用途：-1" class="headerlink" title="用途："></a>用途：</h4><p>   一般，在内存不足、GC异常等情况下，我们就会怀疑有内存泄露。<br>   这个时候我们就可以制作堆Dump来查看具体情况。分析原因。</p>
+<h4 id="命令：查看堆使用情况"><a href="#命令：查看堆使用情况" class="headerlink" title="命令：查看堆使用情况"></a>命令：查看堆使用情况</h4><p>   jmap -heap pid</p>
+<h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p>   Attaching to process ID 22314, please wait…<br>Debugger attached successfully.<br>Server compiler detected.<br>JVM version is 23.21-b01</p>
+<p>using thread-local object allocation.<br>Parallel GC with 24 thread(s)   gc方式</p>
+<p>Heap Configuration:    //堆内存初始化配置<br>   MinHeapFreeRatio = 40 //对应jvm启动参数-XX:MinHeapFreeRatio设置JVM堆最小空闲比率(default 40)<br>   MaxHeapFreeRatio = 70     //对应jvm启动参数 -XX:MaxHeapFreeRatio设置JVM堆最大空闲比率(default 70)<br>   MaxHeapSize      = 3221225472 (3072.0MB)  //对应jvm启动参数-XX:MaxHeapSize=设置JVM堆的最大大小<br>   NewSize          = 805306368 (768.0MB)  //对应jvm启动参数-XX:NewSize=设置JVM堆的‘新生代’的默认大小<br>   MaxNewSize       = 805306368 (768.0MB)  //对应jvm启动参数-XX:MaxNewSize=设置JVM堆的‘新生代’的最大大小<br>   OldSize          = 5439488 (5.1875MB)    //对应jvm启动参数-XX:OldSize=<value>:设置JVM堆的‘老生代’的大小<br>   NewRatio         = 2 //对应jvm启动参数-XX:NewRatio=:‘新生代’和‘老生代’的大小比率<br>   SurvivorRatio    = 8 //对应jvm启动参数-XX:SurvivorRatio=设置年轻代中Eden区与Survivor区的大小比值<br>   PermSize         = 134217728 (128.0MB) //对应jvm启动参数-XX:PermSize=<value>:设置JVM堆的‘永生代’的初始大小<br>   MaxPermSize      = 536870912 (512.0MB) //对应jvm启动参数-XX:MaxPermSize=<value>:设置JVM堆的‘永生代’的最大大小<br>   G1HeapRegionSize = 0 (0.0MB)</value></value></value></p>
+<p>Heap Usage: //堆内存使用情况<br>PS Young Generation<br>Eden Space: //Eden区内存分布<br>   capacity = 800587776 (763.5MB) //Eden区总容量<br>   used     = 32020768 (30.537384033203125MB) //Eden区已使用<br>   free     = 768567008 (732.9626159667969MB) //Eden区剩余容量<br>   3.999657371735838% used //Eden区使用比率<br>From Space: //其中一个Survivor区的内存分布<br>   capacity = 2359296 (2.25MB)<br>   used     = 2260992 (2.15625MB)<br>   free     = 98304 (0.09375MB)<br>   95.83333333333333% used<br>To Space: //另一个Survivor区的内存分布<br>   capacity = 2359296 (2.25MB)<br>   used     = 0 (0.0MB)<br>   free     = 2359296 (2.25MB)<br>   0.0% used<br>PS Old Generation //当前的Old区内存分布<br>   capacity = 2415919104 (2304.0MB)<br>   used     = 766750048 (731.2298278808594MB)<br>   free     = 1649169056 (1572.7701721191406MB)<br>   31.737405723995632% used<br>PS Perm Generation //当前的 “永生代” 内存分布<br>   capacity = 134217728 (128.0MB)<br>   used     = 27889792 (26.5977783203125MB)<br>   free     = 106327936 (101.4022216796875MB)<br>   20.77951431274414% used</p>
+<p>9854 interned Strings occupying 880056 bytes.</p>
+<h4 id="命令-：查看堆内存中对象数量及大小"><a href="#命令-：查看堆内存中对象数量及大小" class="headerlink" title="命令 ：查看堆内存中对象数量及大小"></a>命令 ：查看堆内存中对象数量及大小</h4><p>   jmap -histo pid<br>   jmap -histo:live 这个命令执行，JVM会先触发gc，然后再统计信息。</p>
+<h4 id="输出到文件："><a href="#输出到文件：" class="headerlink" title="输出到文件："></a>输出到文件：</h4><p>   jmap -dump:format=b,file=heapDump 31604<br>   jhat -port 5000 heapDump<br>   <a href="http://127.0.0.1:5000" target="_blank" rel="external">http://127.0.0.1:5000</a></p>
+<p>   遇到如下信息：<br>   Reading from heapDump…<br>   Dump file created Wed Feb 24 10:43:27 CST 2016<br>   Snapshot read, resolving…<br>   Resolving 36404866 objects…<br>   Chasing references, expect 7280 dots</p>
+<p>   有很多……<br>   当出现Snapshot resolved.<br>   Started HTTP server on port 5000<br>   Server is ready.</p>
+<h3 id="jhat"><a href="#jhat" class="headerlink" title="jhat"></a>jhat</h3><h4 id="概述：-3"><a href="#概述：-3" class="headerlink" title="概述："></a>概述：</h4><p>   一般查看堆异常情况主要看这个两个部分：<br>   Show instance counts for all classes (excluding platform)，平台外的所有对象信息。<br>   Show heap histogram 以树状图形式展示堆情况。</p>
+<h4 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h4><p>   具体排查时需要结合代码，观察是否大量应该被回收的对象在一直被引用或者是否有<br>   占用内存特别大的对象无法被回收。</p>
+<h3 id="jinfo"><a href="#jinfo" class="headerlink" title="jinfo"></a>jinfo</h3><h4 id="概述：-4"><a href="#概述：-4" class="headerlink" title="概述："></a>概述：</h4><p>   观察进程运行环境参数，包括Java System属性和JVM命令行参数</p>
+<p>   jinfo <option> pid<br>   jdk1.8貌似不支持了</option></p>
+<h3 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h3><h4 id="概述：-5"><a href="#概述：-5" class="headerlink" title="概述："></a>概述：</h4><p>jvm管理控制台</p>
+<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p>   开启jconsole：      /Library/Java/Home/bin   ./jconsole<br>   输入远程连接：     （注意：是jmxremote的端口，不是服务端口）</p>
+<h3 id="jvisualvm"><a href="#jvisualvm" class="headerlink" title="jvisualvm"></a>jvisualvm</h3><h4 id="概述：-6"><a href="#概述：-6" class="headerlink" title="概述："></a>概述：</h4><p>   jdk1.8提供的jvm可视化图形控制台，相比jconsole新增了多种功能。<br>被监控的应用程序必须开启jmx端口</p>
+<h3 id="javap"><a href="#javap" class="headerlink" title="javap"></a>javap</h3><h4 id="概述：-7"><a href="#概述：-7" class="headerlink" title="概述："></a>概述：</h4><p>  反编译</p>
+<h4 id="命令：-2"><a href="#命令：-2" class="headerlink" title="命令："></a>命令：</h4><p>  javap -c xxx.class </p>
+<h3 id="常用性能分析工具"><a href="#常用性能分析工具" class="headerlink" title="常用性能分析工具"></a>常用性能分析工具</h3><p>   HouseMD<br>   BTrace<br>   TProfile</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/03/06/语言/Java/JVM/JDK命令详解/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/03/06/语言/Java/JVM/JDK命令详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/03/06/语言/Java/JVM/JDK命令详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jmap/">jmap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jstat/">jstat</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/07/存储/数据库/MySQL/MySQL基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/04/语言/Java/JVM/JVM参数大全/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/">中间件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/UML/">UML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/容器/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/潭拓寺/">潭拓寺</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/坡峰岭/">坡峰岭</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/喇叭沟门/">喇叭沟门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/语言/Java/J2SE/JDK特性/">进击的Java</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2017 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

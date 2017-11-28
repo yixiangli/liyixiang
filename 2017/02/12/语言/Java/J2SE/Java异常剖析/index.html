@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java异常剖析 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。 异常分类还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。先发一张图">
+<meta name="keywords" content="异常,Exception">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java异常剖析">
+<meta property="og:url" content="https://yixiangli.github.io/2017/02/12/语言/Java/J2SE/Java异常剖析/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。 异常分类还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。先发一张图">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yixiangli.github.io/img/exception.jpg">
+<meta property="og:updated_time" content="2017-11-28T16:03:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java异常剖析">
+<meta name="twitter:description" content="异常顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。 异常分类还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。先发一张图">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/exception.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-语言/Java/J2SE/Java异常剖析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java异常剖析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/12/语言/Java/J2SE/Java异常剖析/" class="article-date">
+  <time datetime="2017-02-12T09:38:05.000Z" itemprop="datePublished">2017-02-12</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#异常"><span class="toc-number">1.</span> <span class="toc-text">异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#异常分类"><span class="toc-number">1.1.</span> <span class="toc-text">异常分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常该怎么处理"><span class="toc-number">1.2.</span> <span class="toc-text">异常该怎么处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一个相对标准的自定义异常"><span class="toc-number">1.2.1.</span> <span class="toc-text">一个相对标准的自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finally的一个知识点"><span class="toc-number">1.2.2.</span> <span class="toc-text">finally的一个知识点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志该怎么记"><span class="toc-number">1.3.</span> <span class="toc-text">日志该怎么记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志分类"><span class="toc-number">1.3.1.</span> <span class="toc-text">日志分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何正确的记录异常信息"><span class="toc-number">1.3.2.</span> <span class="toc-text">如何正确的记录异常信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见异常分析"><span class="toc-number">1.4.</span> <span class="toc-text">常见异常分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Exception"><span class="toc-number">1.4.1.</span> <span class="toc-text">Java Exception</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆溢出的分析与解决方案"><span class="toc-number">1.4.2.</span> <span class="toc-text">堆溢出的分析与解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#内存泄漏"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">内存泄漏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存溢出"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">内存溢出</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈溢出的分析与解决方案"><span class="toc-number">1.4.3.</span> <span class="toc-text">栈溢出的分析与解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统CPU-100"><span class="toc-number">1.4.4.</span> <span class="toc-text">系统CPU 100%</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类加载相关问题"><span class="toc-number">1.4.5.</span> <span class="toc-text">类加载相关问题</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。</p>
+<h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><p>还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。<br>先发一张图<br><img src="/img/exception.jpg" alt="异常结构图"></p>
+<a id="more"></a>
+<h2 id="异常该怎么处理"><a href="#异常该怎么处理" class="headerlink" title="异常该怎么处理"></a>异常该怎么处理</h2><p>近来在看阿里刚出的Java开发手册，受益匪浅，尤其关于异常部分，博主总结了几点步骤，大家可以参考下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">（1）在编写代码的过程中，一个方法体中应当明确哪段代码是稳定的（也就是不可能抛异常）哪段是不稳定的。</div><div class="line">（2）对于不稳定的代码，如果是Exception类型，也就是编译时异常，一般Eclipse等开发工具就会提示你必须去处理（如IOException等）</div><div class="line">（3）如果是RuntimeException，这类异常得让程序猿同学通过一些基本的校验去避免发生，如if(null != obj)等，而不是catch(NullPointerException)，而且不要由于一句代码可能存在空指针，就把这个方法整个try-catch住，这是极其不负责任的。</div><div class="line">（4）自己try-catch处理还是throws给调用者处理，得看实际情况</div><div class="line">    （3.1）如果是自己开发一个完整项目，一般web层需要定义统一的用户可理解的错误描述，那么下层都可以throws给controller层，统一转换成用户可理解的描述，返回给用户。</div><div class="line">    （3.2）如果是接口类开发，强烈建议定好标准的接口返回码（ResponseCode），统一在api层转换成接口返回码以及返回信息。</div><div class="line">    （3.3）不要臭不要脸的抛出RuntimeException，Exception以及Throwable</div><div class="line">    （3.4）总之，最好在应用中自定义自己的标准异常类，提供多种构造方法，将可能发生的异常进行转换，最终在该处理异常的层去捕获并返回，如业界已定义的DaoException/ServiceException.</div><div class="line">（5）重视finally，老生常谈，涉及到流／网络的关闭，finally非你不可，如果jdk7，可以考虑try-with-resources</div><div class="line">（6）捕获异常与抛异常,必须是完全匹配,或者捕获异常是抛异常的父类，如果你抛了一个NullPointerException，结果别人catch一个IOException，是不是很蛋疼，当然他 catch Exception也是可以的。</div></pre></td></tr></table></figure></p>
+<h3 id="一个相对标准的自定义异常"><a href="#一个相对标准的自定义异常" class="headerlink" title="一个相对标准的自定义异常"></a>一个相对标准的自定义异常</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * </div><div class="line"> * @author liyixiang</div><div class="line"> * @date 2016年3月12日</div><div class="line"> * @since JDK 1.7</div><div class="line"> * @Function 服务异常 封装运行时异常</div><div class="line"> */</div><div class="line">public class BreezeException extends RuntimeException &#123;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * @param </div><div class="line">	 */</div><div class="line">	private static final long serialVersionUID = 1L;</div><div class="line"></div><div class="line">	public BreezeException() &#123;</div><div class="line">        super();</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">	public BreezeException(String message) &#123;</div><div class="line">        super(message);</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">	public BreezeException(String message, Throwable cause) &#123;</div><div class="line">        super(message, cause);</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">	public BreezeException(Throwable cause) &#123;</div><div class="line">        super(cause);</div><div class="line">    &#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="finally的一个知识点"><a href="#finally的一个知识点" class="headerlink" title="finally的一个知识点"></a>finally的一个知识点</h3><p>finally与return语法执行顺序的例子<br>先看一个场景<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class TestFinally &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		System.out.println(functionA());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	//@SuppressWarnings(&quot;finally&quot;)</div><div class="line">	public static int functionA()&#123;</div><div class="line">		try &#123;</div><div class="line">			int b = 5/0;</div><div class="line">			return b;</div><div class="line">		&#125;catch (Exception e)&#123;</div><div class="line">			System.out.println(e);</div><div class="line">		&#125;finally &#123;</div><div class="line">			return 3;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序的结果是3，打断点发现，int b = 5/0;抛出了异常后，就执行到catch中，然后执行finally中的return 3而没有执行try后的return b;<br>那么如果不抛异常呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月12日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class TestFinally &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		System.out.println(functionA());</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	//@SuppressWarnings(&quot;finally&quot;)</div><div class="line">	public static int functionA()&#123;</div><div class="line">		try &#123;</div><div class="line">			int b = 0;</div><div class="line">			return b;</div><div class="line">		&#125;catch (Exception e)&#123;</div><div class="line">			System.out.println(e);</div><div class="line">		&#125;finally &#123;</div><div class="line">			return 3;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>程序的结果当然也是3，只是打断点发现先执行了return b,而后执行了return 3;<br>结论，总之绝大部分情况下不要在finally中用return就对了,Eclipse也提示了警告，finally block does not complete normally。</p>
+<h2 id="日志该怎么记"><a href="#日志该怎么记" class="headerlink" title="日志该怎么记"></a>日志该怎么记</h2><p>如果不加栈信息,只是new自定义异常,加入自己的理解的error message,对于调用 端解决问题的帮助不会太多。如果加了栈信息,在频繁调用出错的情况下,数据序列化和传输 的性能损耗也是问题。</p>
+<h3 id="日志分类"><a href="#日志分类" class="headerlink" title="日志分类"></a>日志分类</h3><p>debug : 开发过程中的调试日志，千万不要在线上启用debug，否则gg。<br>并且debug日志在开发过程中加入，防止在线上输出，可以有如下方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1.条件控制</div><div class="line">if(logger.isDebugEnabled())&#123;</div><div class="line">	logger.debug(&quot;xxx&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">2.占位符</div><div class="line">logger.debug(&quot;aaaa:&#123;&#125;&quot;,a);</div></pre></td></tr></table></figure>
+<p>切记不要直接拼字符串。</p>
+<p>warn : 警告，可以看作是一种警示，为了与info/error区别，一般可以用在用户输入等非致命性错误上，方便用户投诉时排查问题。</p>
+<p>info : 普通日志，记录一些流程化，关键性的信息，可以理解为在线上程序打了断点，但千万不要随意打点，就像人表达观点，拣重点的说，不能啰嗦。</p>
+<p>error :错误日志，这类级别只记录系统逻辑出错，异常等重要信息，可以单独输出到一个日志文件中，方便监控使用。</p>
+<h3 id="如何正确的记录异常信息"><a href="#如何正确的记录异常信息" class="headerlink" title="如何正确的记录异常信息"></a>如何正确的记录异常信息</h3><p>来看一个标准的demo，以logback为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"> &lt;dependencies&gt;</div><div class="line">   &lt;dependency&gt; </div><div class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt; </div><div class="line">    &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt; </div><div class="line">    &lt;version&gt;1.7.12&lt;/version&gt; </div><div class="line">&lt;/dependency&gt; </div><div class="line">&lt;dependency&gt; </div><div class="line">    &lt;groupId&gt;org.slf4j&lt;/groupId&gt; </div><div class="line">    &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt; </div><div class="line">    &lt;version&gt;1.7.12&lt;/version&gt; </div><div class="line">&lt;/dependency&gt; </div><div class="line">&lt;dependency&gt; </div><div class="line">    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt; </div><div class="line">    &lt;artifactId&gt;logback-core&lt;/artifactId&gt; </div><div class="line">    &lt;version&gt;1.1.3&lt;/version&gt; </div><div class="line">&lt;/dependency&gt; </div><div class="line">&lt;dependency&gt; </div><div class="line">    &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt; </div><div class="line">    &lt;artifactId&gt;logback-classic&lt;/artifactId&gt; </div><div class="line">    &lt;version&gt;1.1.3&lt;/version&gt; </div><div class="line">&lt;/dependency&gt;</div><div class="line"> &lt;/dependencies&gt;</div></pre></td></tr></table></figure>
+<p>在开发中使用log必须通过slf4j提供的统一门面接口来构造日志，这样做的好处就是有利于兼容不同日志处理方式，另外在异常记录中一定要注意，采用正确的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">import org.slf4j.Logger;</div><div class="line">import org.slf4j.LoggerFactory;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年3月6日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class LoggerRecord &#123;</div><div class="line"></div><div class="line">	private static final Logger log = LoggerFactory.getLogger(LoggerRecord.class);</div><div class="line">	</div><div class="line">	public static void catchExceptionFunction()&#123;</div><div class="line">		try &#123;  </div><div class="line">		    Integer x = null;  </div><div class="line">		    ++x;  </div><div class="line">		&#125; catch (Exception e) &#123;  </div><div class="line">		    //log.error(e);        //A  </div><div class="line">		    //log.error(e, e);        //B  </div><div class="line">		    log.error(&quot;&quot; + e);        //C  </div><div class="line">		    log.error(e.toString());        //D  </div><div class="line">		    log.error(e.getMessage());        //E  </div><div class="line">		    log.error(null, e);        //F  </div><div class="line">		    log.error(&quot;&quot;, e);        //G  </div><div class="line">		    log.error(&quot;&#123;&#125;&quot;, e);        //H  </div><div class="line">		    log.error(&quot;&#123;&#125;&quot;, e.getMessage());        //I  </div><div class="line">		    log.error(&quot;Error reading configuration file: &quot; + e);        //J  </div><div class="line">		    log.error(&quot;Error reading configuration file: &quot; + e.getMessage());        //K  </div><div class="line">		    log.error(&quot;Error reading configuration file&quot;, e);        //L  </div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		LoggerRecord.catchExceptionFunction();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行一下，结果是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">C:</div><div class="line">14:43:20.861 [main] ERROR com.li.leader.Logger.LoggerRecord - java.lang.NullPointerException</div><div class="line">D:</div><div class="line">14:43:20.864 [main] ERROR com.li.leader.Logger.LoggerRecord - java.lang.NullPointerException</div><div class="line">E:</div><div class="line">14:43:20.864 [main] ERROR com.li.leader.Logger.LoggerRecord - null</div><div class="line">F:</div><div class="line">14:43:20.870 [main] ERROR com.li.leader.Logger.LoggerRecord - null</div><div class="line">java.lang.NullPointerException: null</div><div class="line">	at com.li.leader.Logger.LoggerRecord.catchExceptionFunction(LoggerRecord.java:26) [classes/:na]</div><div class="line">	at com.li.leader.Logger.LoggerRecord.main(LoggerRecord.java:54) [classes/:na]</div><div class="line">G:</div><div class="line">14:43:20.871 [main] ERROR com.li.leader.Logger.LoggerRecord - </div><div class="line">java.lang.NullPointerException: null</div><div class="line">	at com.li.leader.Logger.LoggerRecord.catchExceptionFunction(LoggerRecord.java:26) [classes/:na]</div><div class="line">	at com.li.leader.Logger.LoggerRecord.main(LoggerRecord.java:54) [classes/:na]</div><div class="line">H:</div><div class="line">14:43:20.871 [main] ERROR com.li.leader.Logger.LoggerRecord - &#123;&#125;</div><div class="line">java.lang.NullPointerException: null</div><div class="line">	at com.li.leader.Logger.LoggerRecord.catchExceptionFunction(LoggerRecord.java:26) [classes/:na]</div><div class="line">	at com.li.leader.Logger.LoggerRecord.main(LoggerRecord.java:54) [classes/:na]</div><div class="line">I:</div><div class="line">14:43:20.871 [main] ERROR com.li.leader.Logger.LoggerRecord - null</div><div class="line">J:</div><div class="line">14:43:20.873 [main] ERROR com.li.leader.Logger.LoggerRecord - Error reading configuration file: java.lang.NullPointerException</div><div class="line">K:</div><div class="line">14:43:20.873 [main] ERROR com.li.leader.Logger.LoggerRecord - Error reading configuration file: null</div><div class="line">L:</div><div class="line">14:43:20.873 [main] ERROR com.li.leader.Logger.LoggerRecord - Error reading configuration file</div><div class="line">java.lang.NullPointerException: null</div><div class="line">	at com.li.leader.Logger.LoggerRecord.catchExceptionFunction(LoggerRecord.java:26) [classes/:na]</div><div class="line">	at com.li.leader.Logger.LoggerRecord.main(LoggerRecord.java:54) [classes/:na]</div></pre></td></tr></table></figure></p>
+<p>从结果上看，F/G/H/L可以完整输出异常信息，但是仔细查看会发现，F/L只是把第一个参数输出来，包括null和{}占位符都是原样输出，因此，最标准的还是使用G或者L,也就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">log.error(&quot;&quot;, e);        //G</div><div class="line">log.error(&quot;Error reading configuration file&quot;, e);        //L</div></pre></td></tr></table></figure>
+<h2 id="常见异常分析"><a href="#常见异常分析" class="headerlink" title="常见异常分析"></a>常见异常分析</h2><h3 id="Java-Exception"><a href="#Java-Exception" class="headerlink" title="Java Exception"></a>Java Exception</h3><p>1.解决 - java.lang.OutOfMemoryError： unable to create new native thread</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这个Exception是一次同事在做全量数据同步时，每条消息都需要创建一个线程，并向下游发消息导致，而且在本地Mac上跑的case，因此，一般出现这个问题的本质原因是我们创建了太多的线程，而能创建的线程数是有限制的，导致了异常的发生。</div></pre></td></tr></table></figure>
+<p>解决方案：</p>
+<p>首先我们来看一下一个应用进程能创建的线程数的具体计算公式： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(MaxProcessMemory - JVMMemory - ReservedOsMemory) / (ThreadStackSize) = Number of threads </div><div class="line"></div><div class="line">MaxProcessMemory 	指的是一个进程的最大内存</div><div class="line">JVMMemory         	JVM内存</div><div class="line">ReservedOsMemory  	保留的操作系统内存</div><div class="line">ThreadStackSize     线程栈的大小</div></pre></td></tr></table></figure>
+<p>这里解释下公式：<br>    在java语言里， 当你创建一个线程的时候，虚拟机会在JVM内存创建一个Thread对象同时创建一个操作系统线程，而这个系统线程的内存用的不是JVMMemory，而是系统中剩下的内存(MaxProcessMemory - JVMMemory - ReservedOsMemory)。 </p>
+<p>另外值得我们深思的是，何时会抛出OutOfMemoryException，其实并不是内存被耗空的时候才抛出<br>1.JVM98%的时间都花费在内存回收<br>2.每次回收的内存小于2%<br>   满足这两个条件将触发OutOfMemoryException，这将会留给系统一个微小的间隙以做一些Down之前的操作，比如手动打印Heap Dump或者JVM启动参数中加入-Xrunprof:heap=sites参数，但是对JVM性能影响非常大，不建议在线上服务器环境使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javac -J-agentlib:hprof=heap=dump Hello.java</div></pre></td></tr></table></figure>
+<h3 id="堆溢出的分析与解决方案"><a href="#堆溢出的分析与解决方案" class="headerlink" title="堆溢出的分析与解决方案"></a>堆溢出的分析与解决方案</h3><h4 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h4><p>一般指本不应该存活的对象由于到GC Roots还存在路径而使垃圾收集器无法回收<br>解决方案：使用工具查看泄漏对象到GC Roots的引用链。</p>
+<h4 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h4><p>内存中的对象确实都必须存活<br>解决方案：1.尝试调大堆参数 2.代码上检查是否存在某些对象生命周期过长，持有状态时间过长。</p>
+<h3 id="栈溢出的分析与解决方案"><a href="#栈溢出的分析与解决方案" class="headerlink" title="栈溢出的分析与解决方案"></a>栈溢出的分析与解决方案</h3><p>栈溢出的两种场景：<br>1.线程请求的栈深度大于虚拟机所允许的最大深度，则StackOverflowError<br>2.如果虚拟机在扩展栈时无法申请到足够的内存空间，则OutOfMemoryError</p>
+<p>单线程：<br>(1)－Xss减少栈空间内存容量 StackOverflowError<br>(2)定义大量本地变量 StackOverflowError</p>
+<p>多线程：<br>java.lang.OutOfMemoryError： unable to create new native thread</p>
+<p>内存的总大小 ＝ 堆大小 ＋ 方法区大小 ＋ 栈大小<br>而栈大小由每个栈的内存空间＊线程数决定，因此如果每个线程的栈空间较大，系统创建的线程数就会减少。</p>
+<h3 id="系统CPU-100"><a href="#系统CPU-100" class="headerlink" title="系统CPU 100%"></a>系统CPU 100%</h3><p>1.top  观察cpu使用率 找到100%的pid 如 28857<br>2.top -H -p 28857 根据pid查看相应的线程运行状态信息<br>3.jstack 线程id 查看该线程运行情况</p>
+<h3 id="类加载相关问题"><a href="#类加载相关问题" class="headerlink" title="类加载相关问题"></a>类加载相关问题</h3><p>ClassNotFoundException一般发生在显式类加载；<br>NoClassDefFoundError一般发生在隐式加载；<br>ClassCastException一般发生在jar包冲突，比如某个jar包已经被更上层的加载器加载了，但你却要求他强制转为下层加载器加载的同名类</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/02/12/语言/Java/J2SE/Java异常剖析/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/02/12/语言/Java/J2SE/Java异常剖析/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/语言/Java/J2SE/Java异常剖析/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exception/">Exception</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常/">异常</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/13/语言/Java/J2SE/Java线程基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java线程基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/10/服务化/微服务/SPI/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SPI</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/">中间件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/UML/">UML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/容器/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/潭拓寺/">潭拓寺</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/坡峰岭/">坡峰岭</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/喇叭沟门/">喇叭沟门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/语言/Java/J2SE/JDK特性/">进击的Java</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2017 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

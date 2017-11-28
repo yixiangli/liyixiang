@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>thrift初探 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Thrift介绍说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。 层次结构Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.Protocol 协议层 定义数据传输格式，可以">
+<meta name="keywords" content="通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thrift初探">
+<meta property="og:url" content="https://yixiangli.github.io/2017/07/08/服务化/RPC/thrift初探/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="Thrift介绍说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。 层次结构Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.Protocol 协议层 定义数据传输格式，可以">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-28T16:17:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="thrift初探">
+<meta name="twitter:description" content="Thrift介绍说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。 层次结构Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.Protocol 协议层 定义数据传输格式，可以">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-服务化/RPC/thrift初探" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      thrift初探
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/07/08/服务化/RPC/thrift初探/" class="article-date">
+  <time datetime="2017-07-08T15:42:25.000Z" itemprop="datePublished">2017-07-08</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/服务化/">服务化</a>►<a class="article-category-link" href="/categories/服务化/RPC/">RPC</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Thrift介绍"><span class="toc-number">1.</span> <span class="toc-text">Thrift介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#层次结构"><span class="toc-number">1.1.</span> <span class="toc-text">层次结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用心得"><span class="toc-number">1.2.</span> <span class="toc-text">使用心得</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#thrift文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">thrift文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名空间"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">命名空间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件包含"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">文件包含</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#枚举"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常量"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异常"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义结构体"><span class="toc-number">1.2.1.6.</span> <span class="toc-text">定义结构体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务"><span class="toc-number">1.2.1.7.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字段描述符"><span class="toc-number">1.2.1.8.</span> <span class="toc-text">字段描述符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本类型"><span class="toc-number">1.2.1.9.</span> <span class="toc-text">基本类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动生成插件"><span class="toc-number">1.2.2.</span> <span class="toc-text">自动生成插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些坑"><span class="toc-number">1.2.3.</span> <span class="toc-text">一些坑</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="Thrift介绍"><a href="#Thrift介绍" class="headerlink" title="Thrift介绍"></a>Thrift介绍</h1><p>说起Thrift框架,由于之前工作中一直没约定使用内部rpc方式（都是http）进行交互，因此对Thrift也只是听说并未实现，正巧换工作，新厂对外提供服务除了传统的http接口外也提供了大量的rpc，因此终于踏上学习之路。</p>
+<h2 id="层次结构"><a href="#层次结构" class="headerlink" title="层次结构"></a>层次结构</h2><p>Server 服务层 整合上述组件, 提供网络模型(单线程/多线程/事件驱动), 最终形成真正的服务.<br>Protocol 协议层 定义数据传输格式，可以为二进制或者XML等<br>Processor 处理层 这部分由定义的idl来生成, 封装了协议输入输出流, 并委托给用户实现的handler进行处理.<br>Transport 传输层 定义数据传输方式，可以为TCP/IP传输，内存共享或者文件共享等</p>
+<a id="more"></a>
+<h2 id="使用心得"><a href="#使用心得" class="headerlink" title="使用心得"></a>使用心得</h2><h3 id="thrift文件"><a href="#thrift文件" class="headerlink" title="thrift文件"></a>thrift文件</h3><h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><p>namespace java xxxx</p>
+<h4 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h4><p>include</p>
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>enmu {<br>}</p>
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><p>const</p>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4><p>exception {<br>}</p>
+<h4 id="定义结构体"><a href="#定义结构体" class="headerlink" title="定义结构体"></a>定义结构体</h4><p>struct {<br>}</p>
+<h4 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h4><p>service {<br>}</p>
+<h4 id="字段描述符"><a href="#字段描述符" class="headerlink" title="字段描述符"></a>字段描述符</h4><p>optional 选填（不写描述默认选填）<br>require 必填</p>
+<h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><p>bool：布尔类型(true or value)，占一个字节<br>byte：有符号字节<br>i16:16位有符号整型<br>i32:32位有符号整型<br>i64:64位有符号整型<br>double：64位浮点数<br>string：未知编码或者二进制的字符串</p>
+<h3 id="自动生成插件"><a href="#自动生成插件" class="headerlink" title="自动生成插件"></a>自动生成插件</h3><p>附上插件地址，下载下来后直接在IDEA install一下即可，使用方法也特别简单，选中要生成代码的thrift文件右键，Generate java file。<br><a href="http://www.fishfly.cn/download/thrift-gen-plugin.jar" target="_blank" rel="external">下载地址</a></p>
+<p><b>注意：</b><br>    thrift文件编写要注意顺序，如果在一段定义中引用了某个对象，但该对象定义却在这段定义的下方，生成会出现失败，并提示找不到该对象。</p>
+<h3 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h3><p>(1)先说0.8.0,博主本人遇到的第一个坑就是编译器bug,这个bug主要针对0.8.0版本thrift文件中的多行注释，如果这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/**这是一行注释**/</div></pre></td></tr></table></figure>
+<p>IDEA就会报 “Assertion `docstring.length() &lt;= strlen(doctext)’ failed” , 那么正确的方式就是文字前后空行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/** 这是一行注释 **/</div></pre></td></tr></table></figure>
+<p>(2) 返回结果如果是容器（如map） value不能为空，否则报NullPointerException<br>原因是由于生成的TService处理逻辑为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">if (struct.success != null) &#123;</div><div class="line">  oprot.writeFieldBegin(SUCCESS_FIELD_DESC);</div><div class="line">  &#123;</div><div class="line">    oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I64, org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));</div><div class="line">    for (Map.Entry&lt;Long, SonSupplierSkuPrice&gt; _iter12 : struct.success.entrySet())</div><div class="line">    &#123;</div><div class="line">      oprot.writeI64(_iter12.getKey());</div><div class="line">      _iter12.getValue().write(oprot);</div><div class="line">    &#125;</div><div class="line">    oprot.writeMapEnd();</div><div class="line">  &#125;</div><div class="line">  oprot.writeFieldEnd();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>_iter12.getValue()会报空指针。</p>
+<p>(3)其他不支持的特性<br>1.不支持多态 / 重载.<br>2.没有异构容器: 容器中元素的类型必须一样.<br>3.参数 &amp; 返回值不能为 null(强烈建议不要将 null 赋予业务意义).<br>4.容器中元素不能为 null, 在插入容器前需要做检查， 另外建议将 struct 中 string 元素的默认值设置为 “”<br>5.thrift 0.8 接口返回值为基本类型时，无法返回自定义异常。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/07/08/服务化/RPC/thrift初探/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/07/08/服务化/RPC/thrift初探/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/07/08/服务化/RPC/thrift初探/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/通信/">通信</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/20/语言/Java/J2SE/JDK特性/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          进击的Java
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/31/基础知识集锦/UML/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">UML</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/">中间件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/UML/">UML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/容器/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/潭拓寺/">潭拓寺</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/坡峰岭/">坡峰岭</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/喇叭沟门/">喇叭沟门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/语言/Java/J2SE/JDK特性/">进击的Java</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2017 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

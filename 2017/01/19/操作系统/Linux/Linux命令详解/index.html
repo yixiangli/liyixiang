@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux命令详解 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="命令链接链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理 硬链接&amp;amp;软链接在Linux中链接分为硬链接(hard link)与软链接(symbolic link">
+<meta name="keywords" content="linux,命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux命令详解">
+<meta property="og:url" content="https://yixiangli.github.io/2017/01/19/操作系统/Linux/Linux命令详解/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="命令链接链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理 硬链接&amp;amp;软链接在Linux中链接分为硬链接(hard link)与软链接(symbolic link">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-28T11:50:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux命令详解">
+<meta name="twitter:description" content="命令链接链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理 硬链接&amp;amp;软链接在Linux中链接分为硬链接(hard link)与软链接(symbolic link">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-操作系统/Linux/Linux命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux命令详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/19/操作系统/Linux/Linux命令详解/" class="article-date">
+  <time datetime="2017-01-19T02:59:55.000Z" itemprop="datePublished">2017-01-19</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>►<a class="article-category-link" href="/categories/操作系统/Linux/">Linux</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#命令"><span class="toc-number">1.</span> <span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#链接"><span class="toc-number">1.1.</span> <span class="toc-text">链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬链接-amp-软链接"><span class="toc-number">1.1.1.</span> <span class="toc-text">硬链接&软链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式"><span class="toc-number">1.1.2.</span> <span class="toc-text">格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻址"><span class="toc-number">1.2.</span> <span class="toc-text">寻址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的几个命令"><span class="toc-number">1.2.1.</span> <span class="toc-text">常见的几个命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#which"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">which</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#whereis"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">whereis</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件"><span class="toc-number">1.3.</span> <span class="toc-text">文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统"><span class="toc-number">1.4.</span> <span class="toc-text">系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TOP"><span class="toc-number">1.4.1.</span> <span class="toc-text">TOP</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理</p>
+<h3 id="硬链接-amp-软链接"><a href="#硬链接-amp-软链接" class="headerlink" title="硬链接&amp;软链接"></a>硬链接&amp;软链接</h3><p>在Linux中链接分为硬链接(hard link)与软链接(symbolic link)<br>为了分清区别，博主特别找了台服务器尝试下</p>
+<a id="more"></a>
+<p>源文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 postfile20.txt</div></pre></td></tr></table></figure></p>
+<p>硬链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-rw-r--r--  2 root root  1411 Jul 19  2016 lnying.txt</div></pre></td></tr></table></figure></p>
+<p>软链接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lrwxrwxrwx  1 root root    14 Jan 19 10:57 ruan.txt -&gt; postfile20.txt</div></pre></td></tr></table></figure></p>
+<p>软链接：<br>1.软链接，以路径的形式存在，类似于Windows操作系统中的快捷方式，从结果看 软链接的大小是很小的，就是一个路径左右的存储大小。<br>2.软链接可以 跨文件系统 ，硬链接不可以<br>3.软链接可以对一个不存在的文件名进行链接<br>4.软链接可以对目录进行链接</p>
+<p>硬链接:<br>1.硬链接，以文件副本的形式存在。但不占用实际空间，从结果看，硬链接大小和源文件一模一样，<br>2.不允许给目录创建硬链接<br>3.硬链接只有在同一个文件系统中才能创建</p>
+<p>共同特点：<br>同步性，无论硬链接还是软链接，只要改动一处（源文件｜硬链接出的文件｜软链接出的文件），其他文件都同步修改。</p>
+<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln [参数] [源地址] [目标地址]</div></pre></td></tr></table></figure>
+<p>硬链接：ln<br>软链接：ln -s</p>
+<h2 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h2><p>在操作系统中，每一个文件都有一个固定的地址去存放，外部访问时就需要通过这个地址去访问，那么如何快速知晓某个文件的位置，就需要用到一些寻址命令</p>
+<h3 id="常见的几个命令"><a href="#常见的几个命令" class="headerlink" title="常见的几个命令"></a>常见的几个命令</h3><p>which  查看可执行文件的位置。<br>whereis 查看文件的位置。<br>locate   配合数据库查看文件位置。<br>find   实际搜寻硬盘查询文件名称。</p>
+<h4 id="which"><a href="#which" class="headerlink" title="which"></a>which</h4><p>一般是用来查找系统命令，如java。很多java程序猿一般都需要通过一些jdk自带的命令来检测jvm等运行情况，但是往往有可能不知道命令的具体位置，这个时候只需要<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">which jstat or  which java</div></pre></td></tr></table></figure></p>
+<p>一定要注意，这里的java  jstat一定是系统可执行文件。</p>
+<p>接下来 我们找cd命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">which cd</div><div class="line"></div><div class="line">/usr/bin/which: no cd in (/letv/apps/jdk/bin:/letv/apps/jdk/bin:/letv/apps/jdk/bin:/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin)</div></pre></td></tr></table></figure></p>
+<p>居然没有找到，再一看提示发现，实际上which命令只会在PATH目录下寻找，而cd是bash 内建的命令。</p>
+<h4 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h4><p>一般是用来查找定位可执行文件(whereis -b xxx)、源代码文件(whereis -s xxx)、帮助文件(whereis -m xxx)在文件系统中的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">whereis nginx   |   whereis -b nginx</div><div class="line"></div><div class="line">nginx: /usr/local/nginx</div></pre></td></tr></table></figure>
+<p>找到了nginx可执行文件，由于没有源代码和帮助文件，因此-s -m 没有结果。拿find为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@WebServer-9788C4 aaa]# whereis find</div><div class="line">find: /bin/find /usr/bin/find /usr/share/man/man1/find.1.gz /usr/share/man/man1p/find.1p.gz</div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# whereis -s find</div><div class="line">find:</div><div class="line">[root@WebServer-9788C4 aaa]# whereis -m find</div><div class="line">find: /usr/share/man/man1/find.1.gz /usr/share/man/man1p/find.1p.gz</div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# </div><div class="line">[root@WebServer-9788C4 aaa]# whereis -b find</div><div class="line">find: /bin/find /usr/bin/find</div></pre></td></tr></table></figure></p>
+<p>find命令存在可执行文件以及帮助文件，没有源代码文件。博主之前一直不明白whereis的用法，平时尝试使用whereis找文件总是找不到，其实如果要找普通的文本文件肯定是要使用find命令的，接下来会详细说明，至于whereis与find的区别，除了查找的文件类型区别之外，还有就是速度，whereis的速度是远远小于find的，原因就在于linux系统会将系统内的所有文件都记录在一个数据库文件中，whereis直接从数据库中查找，而find是遍历硬盘来查找。当然，这个数据库也不是实时更新，默认一周更新一次，所以会存在脏读的情况。</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>在工作中有的时候我们会遇到一种情况，/abc目录磁盘空间大于90%,当然如何看磁盘空间，可以使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df -h</div></pre></td></tr></table></figure></p>
+<p>这个时候就会显示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Filesystem            Size  Used Avail Use% Mounted on</div><div class="line">/dev/mapper/VGSYS-lv_root</div><div class="line">                       20G  3.7G   15G  20% /</div><div class="line">tmpfs                  63G     0   63G   0% /dev/shm</div><div class="line">/dev/sda1             190M   33M  148M  19% /boot</div><div class="line">/dev/mapper/VGSYS-lv_abc</div><div class="line">                      513G  448G   65G  85% /abc</div><div class="line">/dev/mapper/VGSYS-lv_var</div><div class="line">                       20G  725M   18G   4% /var</div></pre></td></tr></table></figure></p>
+<p>发现/abc目录超过80%了，就要看下是什么文件占用空间，就需要使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">du -sh *</div></pre></td></tr></table></figure>
+<p>通过这个命令可以一步一步找到占用空间最大的目录与文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">3.1G    apps</div><div class="line">4.0K    bak</div><div class="line">148K    data</div><div class="line">140G    logs</div><div class="line">141M    redis</div><div class="line">12K     shell</div><div class="line">267M    soft</div></pre></td></tr></table></figure></p>
+<p>此时一看logs占用了140g，说明是日志占用了大量的磁盘空间，那么我们下意识的会把之前的日志清理下，这个时候问题就来了，比如我们发现nginx.access.log特别大想清理，就rm -rf一下，但是会出现du -sh *有变化， df -h没有任何减少的情况，这是由于nginx应用程序还在运行，rm -rf这个指令下达后，linux真正内核还会判断当前文件是否被应用程序打开，如果有打开，肯定不会立即执行清理操作，这也是内核为了保护应用程序所做的必要措施，试想我rm -rf一下应用就直接挂了，也未免太不明智了，那么怎么看当前文件是否被应用程序打开呢<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof</div></pre></td></tr></table></figure></p>
+<p>lsof显示系统打开的文件，但是因为lsof需要访问核心内存和各种文件，所以必须以root用户的身份运行它才能够充分地发挥其功能。<br>这个时候我们想删除一下nginx.access.log文件，我们就执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof nginx.access.log</div></pre></td></tr></table></figure>
+<p>但是发现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">COMMAND   PID USER   FD   TYPE DEVICE    SIZE/OFF       NODE NAME</div><div class="line">nginx   19051 root    5w   REG  253,2 18658278646 2148951603 nginx.access.log</div><div class="line">nginx   32154 root    5w   REG  253,2 18658278877 2148951603 nginx.access.log</div><div class="line">nginx   32155 root    5w   REG  253,2 18658278877 2148951603 nginx.access.log</div><div class="line">nginx   32156 root    5w   REG  253,2 18658278877 2148951603 nginx.access.log</div><div class="line">nginx   32157 root    5w   REG  253,2 18658278877 2148951603 nginx.access.log</div><div class="line">nginx   32158 root    4w   REG  253,2 18658278877 2148951603 nginx.access.log</div><div class="line">nginx   32159 root    3w   REG  253,2 18658278877 2148951603 nginx.access.log</div><div class="line">nginx   32160 root    5w   REG  253,2 18658278877 2148951603 nginx.access.log</div><div class="line">nginx   32161 root    4w   REG  253,2 18658279213 2148951603 nginx.access.log</div><div class="line">nginx   32162 root    3w   REG  253,2 18658279213 2148951603 nginx.access.log</div><div class="line">nginx   32163 root    5w   REG  253,2 18658279524 2148951603 nginx.access.log</div><div class="line">nginx   32164 root    5w   REG  253,2 18658279756 2148951603 nginx.access.log</div><div class="line">nginx   32165 root    5w   REG  253,2 18658280271 2148951603 nginx.access.log</div><div class="line">nginx   32166 root    5w   REG  253,2 18658280471 2148951603 nginx.access.log</div><div class="line">nginx   32167 root    5w   REG  253,2 18658280704 2148951603 nginx.access.log</div><div class="line">nginx   32168 root    5w   REG  253,2 18658280991 2148951603 nginx.access.log</div><div class="line">nginx   32169 root    5w   REG  253,2 18658280991 2148951603 nginx.access.log</div><div class="line">nginx   32170 root    5w   REG  253,2 18658281598 2148951603 nginx.access.log</div><div class="line">nginx   32171 root    4w   REG  253,2 18658281598 2148951603 nginx.access.log</div><div class="line">nginx   32172 root    5w   REG  253,2 18658282086 2148951603 nginx.access.log</div><div class="line">nginx   32173 root    5w   REG  253,2 18658282764 2148951603 nginx.access.log</div><div class="line">nginx   32174 root    3w   REG  253,2 18658282764 2148951603 nginx.access.log</div><div class="line">nginx   32175 root    5w   REG  253,2 18658282764 2148951603 nginx.access.log</div><div class="line">nginx   32176 root    5w   REG  253,2 18658282764 2148951603 nginx.access.log</div><div class="line">nginx   32177 root    5w   REG  253,2 18658282764 2148951603 nginx.access.log</div></pre></td></tr></table></figure></p>
+<p>大量nginx进程还在访问这个文件，所以就需要执行rm -rf后重启一下nginx，df -h过一会儿就会显示正常了。</p>
+<h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><h3 id="TOP"><a href="#TOP" class="headerlink" title="TOP"></a>TOP</h3><p>VIRT：virtual memory usage </p>
+<pre><code>1、进程“需要的”虚拟内存大小，包括进程使用的库、代码、数据等 
+2、假如进程申请100m的内存，但实际只使用了10m，那么它会增长100m，而不是实际的使用量 
+</code></pre><p>RES：resident memory usage 常驻内存 </p>
+<pre><code>1、进程当前使用的内存大小，但不包括swap out 
+2、包含其他进程的共享 
+3、如果申请100m的内存，实际使用10m，它只增长10m，与VIRT相反 
+4、关于库占用内存的情况，它只统计加载的库文件所占内存大小 
+</code></pre><p>SHR：shared memory </p>
+<pre><code>1、除了自身进程的共享内存，也包括其他进程的共享内存 
+2、虽然进程只使用了几个共享库的函数，但它包含了整个共享库的大小 
+3、计算某个进程所占的物理内存大小公式：RES – SHR 
+4、swap out后，它将会降下来 
+</code></pre><p>DATA </p>
+<pre><code>1、数据占用的内存。如果top没有显示，按f键可以显示出来。 
+2、真正的该程序要求的数据空间，是真正在运行中要使用的。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/01/19/操作系统/Linux/Linux命令详解/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/01/19/操作系统/Linux/Linux命令详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/19/操作系统/Linux/Linux命令详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/24/语言/Java/J2EE/框架/Netty实战/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Netty实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/18/设计模式/结构型/设计模式－结构型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式－结构型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/">中间件</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/">缓存系列</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/中间件/缓存系列/Memcache/">Memcache</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/">技术贴</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/UML/">UML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/">中间件</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/">缓存系列</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术贴/中间件/缓存系列/总述/">总述</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/容器/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/框架/">框架</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/潭拓寺/">潭拓寺</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/坡峰岭/">坡峰岭</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/28/这就是人生/喇叭沟门/">喇叭沟门</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/语言/Java/J2SE/JDK特性/">进击的Java</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2017 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>
