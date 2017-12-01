@@ -82,6 +82,157 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-语言/Java/JVM/JVM参数大全" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/01/语言/Java/JVM/JVM参数大全/">JVM参数全集</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/12/01/语言/Java/JVM/JVM参数大全/" class="article-date">
+  <time datetime="2017-12-01T04:07:29.000Z" itemprop="datePublished">2017-12-01</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/JVM/">JVM</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><h3 id="基础参数"><a href="#基础参数" class="headerlink" title="基础参数"></a>基础参数</h3><p>-Xms设置堆的最小空间大小。<br>-Xmx设置堆的最大空间大小。<br>-XX:NewSize设置新生代最小空间大小。<br>-XX:MaxNewSize设置新生代最大空间大小。<br>-XX:PermSize设置永久代最小空间大小。<br>-XX:MaxPermSize设置永久代最大空间大小。<br>-Xss设置每个线程的堆栈大小。<br><strong> 老年代是通过堆空间和新生代大小设置来控制的 老年代空间大小=堆空间大小-年轻代大空间大小 </strong></p>
+<h2 id="一张脑图（网上找的哈）"><a href="#一张脑图（网上找的哈）" class="headerlink" title="一张脑图（网上找的哈）"></a>一张脑图（网上找的哈）</h2><p><img src="/img/jvm_02.jpg" alt="jvm脑图"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/12/01/语言/Java/JVM/JVM参数大全/" data-id="cjand3pxj00bkj797p9uylxn5" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/12/01/语言/Java/JVM/JVM参数大全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/01/语言/Java/JVM/JVM参数大全/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-语言/Java/JVM/垃圾回收" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/01/语言/Java/JVM/垃圾回收/">Java神器-垃圾回收</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/12/01/语言/Java/JVM/垃圾回收/" class="article-date">
+  <time datetime="2017-12-01T03:07:29.000Z" itemprop="datePublished">2017-12-01</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/JVM/">JVM</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="GC是什么"><a href="#GC是什么" class="headerlink" title="GC是什么"></a>GC是什么</h1><p>俗称垃圾回收，是java中一个相当重要的环节，不同于C/C++之处，Java的堆内存由jvm管理，所以回收也完全由jvm控制，不需要手动释放无用对象。</p>
+<h3 id="YoungGC-amp-Full-GC"><a href="#YoungGC-amp-Full-GC" class="headerlink" title="YoungGC &amp; Full GC"></a>YoungGC &amp; Full GC</h3><p><strong>回收类型</strong><br>YoungGC：回收的是新生代的可回收对象，一般指Eden区和两个Survivor区<br>Full GC:回收的是老年代的可回收对象，一般指Old区和Perm区。</p>
+<p><strong>回收时机</strong><br>YoungGC：</p>
+<ul>
+<li>Eden区空间不足</li>
+</ul>
+<p>Full GC：</p>
+<ul>
+<li>old区空间不足</li>
+<li>perm区空间不足</li>
+<li>显示调用System.gc()，包括RMI等定时触发</li>
+<li>YoungGC时的悲观策略</li>
+<li>dump内存信息时（jmap）</li>
+</ul>
+<p>详细介绍下悲观策略，其实就是它触发的机制是首先会计算从新生代ygc后要晋升到老年代的对象是否大于老年代剩余空间，如果老年代不足，则full gc一次。悲观则是说与其等到下次晋升发现空间不够，不如悲观的认为下次肯定触发full gc，那么先直接执行一次。</p>
+<p><strong>回收步骤</strong><br>YoungGC<br>1.将eden区和from中的引用次数为0的对象清除<br>2.将eden区和from中的存活对象复制到to中<br>3.如果to放不下或者存活次数超过Tenuring Threshold,那么将会晋升到old中</p>
+<p>Full GC<br>1.如果配置CollectGen0First,将会先执行YGC<br>2.清空heap中所有的引用为0的对象，以及卸载所有classLoader<br>3.单线程完成，全过程应用暂停</p>
+<h4 id="方法区的回收"><a href="#方法区的回收" class="headerlink" title="方法区的回收"></a>方法区的回收</h4><p>方法区也就是常说的永久代，主要回收两部分内容：废弃常量和无用的类<br>废弃常量的判定比较简单，就是看是否有任何地方引用了这个字面量<br>无用的类判定较为复杂，（1）该类所有实例都被回收 （2）加载该类的classLoader都被回收 （3）该类的.class没有被引用，不存在反射等访问</p>
+<h3 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h3><p><strong>强引用：</strong><br>A a = new A();<br>只要引用在，不会进行回收</p>
+<p><strong>软引用：</strong><br>SoftReference<br>在系统将要发生内存溢出异常之前，会进入回收范围中</p>
+<p><strong>弱引用：</strong><br>WeakReference<br>引用只生存到下一次垃圾回收之前</p>
+<p><strong>虚引用：</strong><br>PhantomReference<br>必定会回收，唯一的目的就是回收时收到一个系统通知</p>
+<p><strong>强弱关系：</strong><br>强 》 软 》 弱 》 虚</p>
+<h3 id="回收算法"><a href="#回收算法" class="headerlink" title="回收算法"></a>回收算法</h3><ul>
+<li>引用计数</li>
+<li>标记-清除</li>
+<li>复制</li>
+<li>标记-整理</li>
+<li>增量收集</li>
+<li>分代收集</li>
+</ul>
+<h3 id="收集器"><a href="#收集器" class="headerlink" title="收集器"></a>收集器</h3><ul>
+<li>串行</li>
+<li>并行</li>
+<li>并发</li>
+</ul>
+<p><strong>串行，并行和并发</strong><br>串行：你吃饭吃到一半，电话来了，你一直到吃完了以后才去接<br>并行：你吃饭吃到一半，电话来了，你接电话的同时还继续吃饭<br>并发：你吃饭吃到一半，电话来了，你一边打电话一边吃饭，<br>并发的关键是你有处理多个任务的能力，不一定要同时。<br>并行的关键是你有同时处理多个任务的能力。<br>“并行”概念是“并发”概念的一个子集。也就是说，你可以编写一个拥有多个线程或者进程的并发程序，但如果没有多核处理器来执行这个程序，那么就不能以并行方式来运行代码</p>
+<h4 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h4><p>单线程，串行收集，收集过程会Stop The World（服务暂停）；<br>新生代复制算法｜老年代标记-整理算法；<br>参数控制：-XX:+UseSerialGC</p>
+<h4 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h4><p>Serial收集器的多线程版本，新生代并行，老年代串行；<br>新生代复制算法｜老年代标记-整理算法；<br>参数控制：-XX:+UseParNewGC  -XX:ParallelGCThreads 限制线程数量</p>
+<h4 id="Parallel收集器"><a href="#Parallel收集器" class="headerlink" title="Parallel收集器"></a>Parallel收集器</h4><p>吞吐量优先</p>
+<h4 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h4><p>配合Serial，作为client端老年代收集器</p>
+<h4 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h4><p>配合Parallel，作为server端老年代收集器</p>
+<h4 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h4><p>jdk1.5<br>响应时间优先<br>配合ParNew，作为server端老年代收集器</p>
+<p>初始标记<br>并发标记<br>重新标记<br>并发清除</p>
+<h4 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h4><p>jdk1.7<br>Region<br>Remembered Set<br>最短的时间回收最多的垃圾</p>
+<p>初始标记<br>并发标记<br>重新标记<br>筛选回收</p>
+<p>重新标记通过log合并将浮动垃圾再次回收</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/12/01/语言/Java/JVM/垃圾回收/" data-id="cjand3pxl00brj797omdlyvya" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/12/01/语言/Java/JVM/垃圾回收/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/01/语言/Java/JVM/垃圾回收/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GC/">GC</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-这就是人生/行万里路/天门山+潭拓寺" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -115,7 +266,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/11/28/这就是人生/行万里路/天门山+潭拓寺/" data-id="cjancr5cy004xi397ou2vf95a" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/11/28/这就是人生/行万里路/天门山+潭拓寺/" data-id="cjand3pus0051j797gex5gfjh" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/11/28/这就是人生/行万里路/天门山+潭拓寺/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/11/28/这就是人生/行万里路/天门山+潭拓寺/">评论</a>
@@ -164,7 +315,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/10/28/这就是人生/行万里路/鲜花港/" data-id="cjancr5d10053i397057x7kir" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/10/28/这就是人生/行万里路/鲜花港/" data-id="cjand3puv0055j79738rjuanx" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/10/28/这就是人生/行万里路/鲜花港/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/10/28/这就是人生/行万里路/鲜花港/">评论</a>
@@ -216,118 +367,12 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/10/28/这就是人生/行万里路/坡峰岭/" data-id="cjancr5d00051i397w3icym5g" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/10/28/这就是人生/行万里路/坡峰岭/" data-id="cjand3pur004zj797fepldd1i" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/10/28/这就是人生/行万里路/坡峰岭/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/10/28/这就是人生/行万里路/坡峰岭/">评论</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-这就是人生/行万里路/喇叭沟门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/21/这就是人生/行万里路/喇叭沟门/">喇叭沟门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/10/21/这就是人生/行万里路/喇叭沟门/" class="article-date">
-  <time datetime="2017-10-20T16:10:04.000Z" itemprop="datePublished">2017-10-21</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/这就是人生/">这就是人生</a>►<a class="article-category-link" href="/categories/这就是人生/行万里路/">行万里路</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="游览路线"><a href="#游览路线" class="headerlink" title="游览路线"></a>游览路线</h2><p>映入眼帘的就是大门了，赫然几个大字：喇叭沟门原始森林<br><img src="/img/tourism/大门.jpeg" alt="大门"></p>
-        
-          <p class="article-more-link">
-            <a href="/2017/10/21/这就是人生/行万里路/喇叭沟门/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/10/21/这就是人生/行万里路/喇叭沟门/" data-id="cjancr5cz004zi397xczuekke" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/10/21/这就是人生/行万里路/喇叭沟门/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/10/21/这就是人生/行万里路/喇叭沟门/">评论</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-工具/IDEA快捷键" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/07/20/工具/IDEA快捷键/" class="article-date">
-  <time datetime="2017-07-20T14:12:25.000Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a>IDEA快捷键</h1><p>博主之前一直使用Eclipse作为开发工具，正巧换工作也按要求换环境开发，那么就开始接触强大的IDEA了，本文重在记录IDEA提供的快捷键，快捷键以博主mac为标准，如有不同请自行调整。</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/07/20/工具/IDEA快捷键/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/07/20/工具/IDEA快捷键/" data-id="cjancr590000oi3973lmqs2jj" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/07/20/工具/IDEA快捷键/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/07/20/工具/IDEA快捷键/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/快捷键/">快捷键</a></li></ul>
-
     </footer>
   </div>
   
@@ -366,7 +411,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">3</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -379,6 +424,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/01/语言/Java/JVM/JVM参数大全/">JVM参数全集</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/01/语言/Java/JVM/垃圾回收/">Java神器-垃圾回收</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/28/这就是人生/行万里路/天门山+潭拓寺/">天门山+潭拓寺</a>
           </li>
         
@@ -388,14 +441,6 @@
         
           <li>
             <a href="/2017/10/28/这就是人生/行万里路/坡峰岭/">坡峰岭</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/21/这就是人生/行万里路/喇叭沟门/">喇叭沟门</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/20/工具/IDEA快捷键/">IDEA快捷键</a>
           </li>
         
       </ul>
