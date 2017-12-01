@@ -82,7 +82,7 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-基础知识集锦/锁" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-服务化/微服务/SPI" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -90,42 +90,43 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/09/基础知识集锦/锁/">锁</a>
+      <a class="article-title" href="/2017/02/10/服务化/微服务/SPI/">SPI</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-    	<a href="/2017/01/09/基础知识集锦/锁/" class="article-date">
-  <time datetime="2017-01-09T07:55:06.000Z" itemprop="datePublished">2017-01-09</time>
+    	<a href="/2017/02/10/服务化/微服务/SPI/" class="article-date">
+  <time datetime="2017-02-10T09:06:16.000Z" itemprop="datePublished">2017-02-10</time>
 </a>
     	
   <div class="article-category">
-    <a class="article-category-link" href="/categories/基础知识集锦/">基础知识集锦</a>
+    <a class="article-category-link" href="/categories/服务化/">服务化</a>►<a class="article-category-link" href="/categories/服务化/微服务/">微服务</a>
   </div>
 
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>锁，顾名思义，就是把一定的资源加上某种限制，提高安全性，绝大部分房间都是有门的，而门内一般都是有锁，对整个空间起到保护作用，在软件工程中也是如此，尤其是数据库，数据就是资源，而加锁是为了保护数据不出现（如：脏读，幻读，更新丢失等）</p>
-<h2 id="乐观锁-amp-悲观锁"><a href="#乐观锁-amp-悲观锁" class="headerlink" title="乐观锁&amp;悲观锁"></a>乐观锁&amp;悲观锁</h2><h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>世界很美好，大家都很和平，拿数据时不会去上锁，但是在更新操作时会检查数据时效性，可以理解为一种弱锁机制。<br>
+        <h1 id="一段废话"><a href="#一段废话" class="headerlink" title="一段废话"></a>一段废话</h1><p>博主之前在研究dubbo时，发现dubbo中有关于spi的设计理念，一直没有太明白，最近看类加载时突然看到spi,所以就仔细研究一下</p>
+<h2 id="什么是SPI"><a href="#什么是SPI" class="headerlink" title="什么是SPI"></a>什么是SPI</h2><p>简写：Service Provider Interface，服务提供接口<br>在面向对象编程中，面向接口编程应当成为一种习惯，优秀的接口定义对于系统扩展性有着很大的帮助，提及扩展性，就自然引入了spi的概念。某天，你接到一个开发任务，需要提供一个crud的服务，那么首先就要定义接口，编写实现类，经过时间的推移，现有实现类无法满足需求，那么现在有两种方案，1.将现有接口做逻辑兼容，2.派生出一个新类实现接口，编写新功能，很显然，第二种方案更好，尤其是针对客户端直接调用的web接口，还必须维护老版本的功能。那么客户端在使用新旧接口时就可以利用spi的特性。<br>因此spi的基本定义如下：<br>    为了实现在模块装配的时候能不在程序里动态指明，这就需要一种服务发现机制。Java spi就是提供这样的一个机制：为某个接口寻找服务实现的机制。有点类似IOC的思想，就是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要。</p>
+<h2 id="怎么用"><a href="#怎么用" class="headerlink" title="怎么用"></a>怎么用</h2>
         
           <p class="article-more-link">
-            <a href="/2017/01/09/基础知识集锦/锁/#more">阅读全文</a>
+            <a href="/2017/02/10/服务化/微服务/SPI/#more">阅读全文</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/09/基础知识集锦/锁/" data-id="cjand3prd000jj797njp11inz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/10/服务化/微服务/SPI/" data-id="cjanefyma004ol8978to5x0zp" class="article-share-link">分享</a>
 	  
       
-        <a href="https://yixiangli.github.io/2017/01/09/基础知识集锦/锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/09/基础知识集锦/锁/">评论</a>
+        <a href="https://yixiangli.github.io/2017/02/10/服务化/微服务/SPI/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/10/服务化/微服务/SPI/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁-并发/">锁 并发</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spi-类加载/">spi 类加载</a></li></ul>
 
     </footer>
   </div>
@@ -137,7 +138,7 @@
 
 
   
-    <article id="post-分布式/Nginx/Nginx-Lua初探" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-语言/Java/J2SE/JavaIO" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -145,184 +146,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/28/分布式/Nginx/Nginx-Lua初探/">Nginx+Lua初探</a>
+      <a class="article-title" href="/2017/02/08/语言/Java/J2SE/JavaIO/">JavaIO</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-    	<a href="/2016/12/28/分布式/Nginx/Nginx-Lua初探/" class="article-date">
-  <time datetime="2016-12-28T08:57:36.000Z" itemprop="datePublished">2016-12-28</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/分布式/">分布式</a>►<a class="article-category-link" href="/categories/分布式/Nginx/">Nginx</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><p>不解释了，还是看我专门介绍Nginx的博客吧。。</p>
-<p>make<br>make upgrade 平滑升级</p>
-<h2 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h2><p>一门小众语言，资料不是很多，用起来也优点费劲</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3>
-        
-          <p class="article-more-link">
-            <a href="/2016/12/28/分布式/Nginx/Nginx-Lua初探/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/12/28/分布式/Nginx/Nginx-Lua初探/" data-id="cjand3ptk0038j797skd1n6w0" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/12/28/分布式/Nginx/Nginx-Lua初探/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/28/分布式/Nginx/Nginx-Lua初探/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/">Lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-基础知识集锦/网络基础-TCP" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/基础知识集锦/网络基础-TCP/">网络基础-TCP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/12/27/基础知识集锦/网络基础-TCP/" class="article-date">
-  <time datetime="2016-12-27T09:25:37.000Z" itemprop="datePublished">2016-12-27</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础知识集锦/">基础知识集锦</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="三次握手-四次挥手"><a href="#三次握手-四次挥手" class="headerlink" title="三次握手 四次挥手"></a>三次握手 四次挥手</h2><p><strong>为什么要三次握手？</strong><br>TCP三次握手的目的是为了解决网络中存在延迟而重复分组的问题，防止server端一直等待，浪费资源。保证数据的可靠传输。<br>存在网络延迟导致失效的连接请求报文段发送到server端，然后server误认为要建立长连接。</p>
-<p><strong>为什么要四次挥手？</strong><br>保证双方的一个合约的完整执行,双向通信，一端想断开，但是另一端有可能还在发送数据。</p>
-<h3 id="手绘图"><a href="#手绘图" class="headerlink" title="手绘图"></a>手绘图</h3><p><img src="/img/tcp.jpg" alt="TCP三次握手"></p>
-<p>一些解释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">这里的C端(client) S端(server) 并不要理解为客户端（移动设备）服务端（服务器），而是说连接建立发起方（主动方），连接关闭发起方（主动方）。</div></pre></td></tr></table></figure></p>
-        
-          <p class="article-more-link">
-            <a href="/2016/12/27/基础知识集锦/网络基础-TCP/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/基础知识集锦/网络基础-TCP/" data-id="cjand3pr7000bj797tonp51p5" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/12/27/基础知识集锦/网络基础-TCP/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/基础知识集锦/网络基础-TCP/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tcp/">tcp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三次握手/">三次握手</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-操作系统/Linux/Linux内核参数优化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/操作系统/Linux/Linux内核参数优化/">Linux内核参数优化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/12/27/操作系统/Linux/Linux内核参数优化/" class="article-date">
-  <time datetime="2016-12-27T09:14:22.000Z" itemprop="datePublished">2016-12-27</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>►<a class="article-category-link" href="/categories/操作系统/Linux/">Linux</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="内核参数"><a href="#内核参数" class="headerlink" title="内核参数"></a>内核参数</h1><p>/etc/sysctl.conf</p>
-<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><p>net.ipv4.tcp_fin_timeout<br>默认60s，减小fin_timeout，减少TIME_WAIT连接数量。<br>net.ipv4.tcp_tw_reuse = 1<br>表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；<br>net.ipv4.tcp_tw_recycle = 1<br>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。<br>net.ipv4.tcp_syncookies = 1<br>表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；<br>net.ipv4.tcp_keepalive_time = 1200<br>表示当keepalive起用的时候，TCP发送keepalive消息的频度。缺省是2小时，改为20分钟。<br>net.ipv4.ip_local_port_range = 10000 65000<br>表示用于向外连接的端口范围。缺省情况下很小：32768到61000，改为10000到65000。（注意：这里不要将最低值设的太低，否则可能会占用掉正常的端口！）<br>net.ipv4.tcp_max_syn_backlog = 8192<br>表示SYN队列的长度，默认为1024，加大队列长度为8192，可以容纳更多等待连接的网络连接数。<br>net.ipv4.tcp_max_tw_buckets = 5000<br>表示系统同时保持TIME_WAIT的最大数量，如果超过这个数字，TIME_WAIT将立刻被清除并打印警告信息。默 认为180000，改为5000。对于Apache、Nginx等服务器，上几行的参数可以很好地减少TIME_WAIT套接字数量，但是对于 Squid，效果却不大。此项参数可以控制TIME_WAIT的最大数量，避免Squid服务器被大量的TIME_WAIT拖死。</p>
-<h2 id="一些经验"><a href="#一些经验" class="headerlink" title="一些经验"></a>一些经验</h2><p>（1）遇到过一次故障：查看/var/log/messages系统日志发现possible SYN flooding on port 80. Sending cookies （类似syn洪水攻击）后经查询断定是请求过大导致<br>net.ipv4.tcp_syncookies = 1  配置这个参数有一定的效果，但如果量过大，还是会gg的<br>（2）time-wait数量快速回收<br>查看服务器time-wait数量 sudo netstat -antp |grep TIME_WAIT |wc -l<br>net.ipv4.tcp_tw_reuse = 1<br>net.ipv4.tcp_tw_recycle = 1<br>配置这两个参数可以大大减少time_wait数量，不信你就试试</p>
-<h2 id="生效"><a href="#生效" class="headerlink" title="生效"></a>生效</h2><p>sysctl -p</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/操作系统/Linux/Linux内核参数优化/" data-id="cjand3pu30041j7973n8c1auy" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/12/27/操作系统/Linux/Linux内核参数优化/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/操作系统/Linux/Linux内核参数优化/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内核/">内核</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-语言/Java/J2SE/Java常用工具类" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/语言/Java/J2SE/Java常用工具类/">Java常用工具类</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/12/27/语言/Java/J2SE/Java常用工具类/" class="article-date">
-  <time datetime="2016-12-27T06:12:43.000Z" itemprop="datePublished">2016-12-27</time>
+    	<a href="/2017/02/08/语言/Java/J2SE/JavaIO/" class="article-date">
+  <time datetime="2017-02-08T10:29:41.000Z" itemprop="datePublished">2017-02-08</time>
 </a>
     	
   <div class="article-category">
@@ -332,25 +164,201 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
-        <h1 id="utils"><a href="#utils" class="headerlink" title="utils"></a>utils</h1><h2 id="Java-source"><a href="#Java-source" class="headerlink" title="Java source"></a>Java source</h2><h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><ul>
-<li>sort</li>
-<li>mergeSort </li>
-<li>binarySearch</li>
-</ul>
-<h3 id="Calendar"><a href="#Calendar" class="headerlink" title="Calendar"></a>Calendar</h3><h2 id="guava"><a href="#guava" class="headerlink" title="guava"></a>guava</h2><h3 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h3>
+        <h1 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h1><p>input/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。</p>
+<h2 id="Java中的I-O"><a href="#Java中的I-O" class="headerlink" title="Java中的I/O"></a>Java中的I/O</h2><p>概念一<br>    输入与输出：一定要清楚，要以程序（计算机）为本体，输入就是向程序输入的流，而输出就是程序向外输出，而不是以人（程序员）为主体。</p>
+<h3 id="基础流"><a href="#基础流" class="headerlink" title="基础流"></a>基础流</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>输入流</th>
+<th>输出流</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字节流</td>
+<td>InputStream</td>
+<td>OutputStream</td>
+</tr>
+<tr>
+<td>字符流</td>
+<td>Reader</td>
+<td>Writer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="节点流"><a href="#节点流" class="headerlink" title="节点流"></a>节点流</h3>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/08/语言/Java/J2SE/JavaIO/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/语言/Java/J2SE/Java常用工具类/" data-id="cjand3pxb00b1j797jtv7cvye" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/JavaIO/" data-id="cjanefyou00axl897xzgjx0fn" class="article-share-link">分享</a>
 	  
       
-        <a href="https://yixiangli.github.io/2016/12/27/语言/Java/J2SE/Java常用工具类/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/语言/Java/J2SE/Java常用工具类/">评论</a>
+        <a href="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/JavaIO/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/语言/Java/J2SE/JavaIO/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utils/">utils</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/I-O/">I/O</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-语言/Java/JVM/内存模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/06/语言/Java/JVM/内存模型/">内存模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/06/语言/Java/JVM/内存模型/" class="article-date">
+  <time datetime="2017-02-06T03:07:29.000Z" itemprop="datePublished">2017-02-06</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/JVM/">JVM</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>学Java的不懂点jvm那真是说不过去，对于研究jvm来说，不见得要把源码全部记下来，然后完全弄清楚来龙去脉（当然有精力且编程痴迷者忽略），对于jvm，大部分程序猿要做到的就是基本原理了熟于心，能进行基本的jvm调优且出了一些线上故障，要能通过观察当时内存，线程等程序的运行情况来揪出问题的根源。</p>
+<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/06/语言/Java/JVM/内存模型/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/06/语言/Java/JVM/内存模型/" data-id="cjanefypc00cal897tifeay5l" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/06/语言/Java/JVM/内存模型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/06/语言/Java/JVM/内存模型/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-操作系统/Linux/Linux基本介绍" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/04/操作系统/Linux/Linux基本介绍/">Linux基本介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/04/操作系统/Linux/Linux基本介绍/" class="article-date">
+  <time datetime="2017-02-04T06:47:38.000Z" itemprop="datePublished">2017-02-04</time>
+</a>
+    	
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/04/操作系统/Linux/Linux基本介绍/" data-id="cjanefym3004cl897j4z13eio" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/04/操作系统/Linux/Linux基本介绍/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/04/操作系统/Linux/Linux基本介绍/">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-语言/Java/J2SE/Java并发编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/24/语言/Java/J2SE/Java并发编程/">Java并发编程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/24/语言/Java/J2SE/Java并发编程/" class="article-date">
+  <time datetime="2017-01-24T02:44:49.000Z" itemprop="datePublished">2017-01-24</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是并发"><a href="#什么是并发" class="headerlink" title="什么是并发"></a>什么是并发</h1><h2 id="Java中的并发"><a href="#Java中的并发" class="headerlink" title="Java中的并发"></a>Java中的并发</h2><p>Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueue<br>Java 7 引入Fork/Join</p>
+<h3 id="什么是AQS"><a href="#什么是AQS" class="headerlink" title="什么是AQS"></a>什么是AQS</h3><p>AQS的全称为（AbstractQueuedSynchronizer），这个类也是在java.util.concurrent.locks下面，是JDK1.5提供的一个基于FIFO等待队列实现的一个用于实现同步器的基础框架，各种同步工具类内部都有一个如下定义的内部结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abstract static class Sync extends AbstractQueuedSynchronizer</div></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/2017/01/24/语言/Java/J2SE/Java并发编程/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/01/24/语言/Java/J2SE/Java并发编程/" data-id="cjanefyoz00bcl897a1t42evi" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/01/24/语言/Java/J2SE/Java并发编程/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/24/语言/Java/J2SE/Java并发编程/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/concurrent/">concurrent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
 
     </footer>
   </div>
@@ -365,7 +373,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/13/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/15/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/13/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/15/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -390,7 +398,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -407,7 +415,7 @@
           </li>
         
           <li>
-            <a href="/2017/12/01/语言/Java/JVM/垃圾回收/">Java神器-垃圾回收</a>
+            <a href="/2017/12/01/语言/Java/JVM/Java神器-垃圾回收/">Java神器-垃圾回收</a>
           </li>
         
           <li>
