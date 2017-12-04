@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="JDK bin下的java命令工具jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-01T03:45:36.000Z">
+<meta property="og:updated_time" content="2017-12-04T09:14:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDK命令详解">
 <meta name="twitter:description" content="JDK bin下的java命令工具jdk作为java提供的软件开发包，提供了众多基础工具，这些工具方便我们对java应用的各项指标有更准确的掌握。">
@@ -123,7 +123,7 @@
 <p>   (2)在实际运行中，往往一次 dump的信息，还不足以确认问题。建议产生三次 dump信息，<br>   如果每次 dump都指向同一个问题，我们才确定问题的典型性。 </p>
 <h3 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h3><!--more-->
 <p>jps(Java Virtual Machine Process Status Tool)</p>
-<h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><p>   jps位于jdk的bin目录下，其作用是显示当前系统的java进程情况，及其id号。<br>    jps相当于linux进程工具ps。但不像”pgrep java”或”ps -ef grep java”，<br>    jps并不使用应用程序名来查找JVM实例。因此，它查找所有的Java应用程序，<br>    包括即使没有使用java执行体的那种（例如，定制的启动 器）。另外，<br>    jps仅查找当前用户的Java进程，而不是当前系统中的所有进程。</p>
+<h4 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h4><p>   jps位于jdk的bin目录下，其作用是显示当前系统的java进程情况，及其id号。<br>    jps相当于linux进程工具ps。但不像”pgrep java”或”ps -ef |grep “java”，<br>    jps并不使用应用程序名来查找JVM实例。因此，它查找所有的Java应用程序，<br>    包括即使没有使用java执行体的那种（例如，定制的启动 器）。另外，<br>    jps仅查找当前用户的Java进程，而不是当前系统中的所有进程。</p>
 <h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>   java程序在启动以后，会在java.io.tmpdir指定的目录下，就是临时文件夹里，<br>   生成一个类似于hsperfdata<em>User的文件夹，（在Linux中为/tmp/hsperfdata</em>{userName}/）<br>   文件夹下有若干文件，名字就是java进程的pid，因此列出当前运行的java进程，<br>   只是把这个目录里的文件名列一下而已。 至于系统的参数什么，就可以解析这几个文件获得。</p>
 <h4 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h4><p>   jps -help  帮助<br>   jps -l     输出主类全名或jar路径<br>   jps -q     显示进程号<br>   jps -m     显示main 传入的args参数<br>   jps -v     显示jvm参数设置</p>
 <h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><p>   jps可以配合jstack等命令，快速查看到java进程的id号，不再需要ps -ef grep java<br>   面对一大堆java进程</p>
