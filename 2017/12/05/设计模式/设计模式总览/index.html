@@ -5,17 +5,17 @@
   
   <title>设计模式总览 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="DesginPatternEssence设计模式精华集 设计原则 开闭原则（Open Close Principle） 里氏代换原则（Liskov Substitution Principle） 依赖倒转原则（Dependence Inversion Principle） 接口隔离原则（Interface Segregation Principle） 迪米特法则（最少知道原则）（Demeter P">
+  <meta name="description" content="DesginPatternEssence设计模式精华集 设计模式基本要素 核心要素：【问题】【模式名称】【效果】【解决方案】 其他要素：【实例】【目的】【相关模式】  设计原则 开闭原则（Open Close Principle,OCP）对扩展开放，对修改关闭  里氏代换原则（Liskov Substitution Principle,LSP）子类可以扩展父类功能，但不要修改其原有功能  依赖倒转">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式总览">
 <meta property="og:url" content="https://yixiangli.github.io/2017/12/05/设计模式/设计模式总览/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="DesginPatternEssence设计模式精华集 设计原则 开闭原则（Open Close Principle） 里氏代换原则（Liskov Substitution Principle） 依赖倒转原则（Dependence Inversion Principle） 接口隔离原则（Interface Segregation Principle） 迪米特法则（最少知道原则）（Demeter P">
+<meta property="og:description" content="DesginPatternEssence设计模式精华集 设计模式基本要素 核心要素：【问题】【模式名称】【效果】【解决方案】 其他要素：【实例】【目的】【相关模式】  设计原则 开闭原则（Open Close Principle,OCP）对扩展开放，对修改关闭  里氏代换原则（Liskov Substitution Principle,LSP）子类可以扩展父类功能，但不要修改其原有功能  依赖倒转">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-05T09:01:54.000Z">
+<meta property="og:updated_time" content="2017-12-20T06:13:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式总览">
-<meta name="twitter:description" content="DesginPatternEssence设计模式精华集 设计原则 开闭原则（Open Close Principle） 里氏代换原则（Liskov Substitution Principle） 依赖倒转原则（Dependence Inversion Principle） 接口隔离原则（Interface Segregation Principle） 迪米特法则（最少知道原则）（Demeter P">
+<meta name="twitter:description" content="DesginPatternEssence设计模式精华集 设计模式基本要素 核心要素：【问题】【模式名称】【效果】【解决方案】 其他要素：【实例】【目的】【相关模式】  设计原则 开闭原则（Open Close Principle,OCP）对扩展开放，对修改关闭  里氏代换原则（Liskov Substitution Principle,LSP）子类可以扩展父类功能，但不要修改其原有功能  依赖倒转">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -111,17 +111,27 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DesginPatternEssence"><span class="toc-number">1.</span> <span class="toc-text">DesginPatternEssence</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计原则"><span class="toc-number">1.1.</span> <span class="toc-text">设计原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建型"><span class="toc-number">1.2.</span> <span class="toc-text">创建型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构型"><span class="toc-number">1.3.</span> <span class="toc-text">结构型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行为型"><span class="toc-number">1.4.</span> <span class="toc-text">行为型</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DesginPatternEssence"><span class="toc-number">1.</span> <span class="toc-text">DesginPatternEssence</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设计模式基本要素"><span class="toc-number">1.1.</span> <span class="toc-text">设计模式基本要素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计原则"><span class="toc-number">1.2.</span> <span class="toc-text">设计原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建型"><span class="toc-number">1.3.</span> <span class="toc-text">创建型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构型"><span class="toc-number">1.4.</span> <span class="toc-text">结构型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行为型"><span class="toc-number">1.5.</span> <span class="toc-text">行为型</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="DesginPatternEssence"><a href="#DesginPatternEssence" class="headerlink" title="DesginPatternEssence"></a>DesginPatternEssence</h1><p>设计模式精华集</p>
+<h2 id="设计模式基本要素"><a href="#设计模式基本要素" class="headerlink" title="设计模式基本要素"></a>设计模式基本要素</h2><ul>
+<li>核心要素：【问题】【模式名称】【效果】【解决方案】</li>
+<li>其他要素：【实例】【目的】【相关模式】</li>
+</ul>
 <h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><ul>
-<li>开闭原则（Open Close Principle）</li>
-<li>里氏代换原则（Liskov Substitution Principle）</li>
-<li>依赖倒转原则（Dependence Inversion Principle）</li>
-<li>接口隔离原则（Interface Segregation Principle）</li>
-<li>迪米特法则（最少知道原则）（Demeter Principle）</li>
-<li>单一职责原则(Single Responsibility Principle, SRP)</li>
+<li><p>开闭原则（Open Close Principle,OCP）<br>对扩展开放，对修改关闭</p>
+</li>
+<li><p>里氏代换原则（Liskov Substitution Principle,LSP）<br>子类可以扩展父类功能，但不要修改其原有功能</p>
+</li>
+<li><p>依赖倒转原则（Dependence Inversion Principle,DIP）<br>尽量依赖于抽象还不是具体细节</p>
+</li>
+<li><p>接口隔离原则（Interface Segregation Principle,ISP）<br>尽量拆分接口，使功能最小化</p>
+</li>
+<li><p>迪米特法则（Demeter Principle,DP）<br>高内聚，低耦合</p>
+</li>
+<li><p>单一职责原则(Single Responsibility Principle, SRP)<br>一个类只做一件事</p>
+</li>
 </ul>
 <a id="more"></a>
 <h2 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h2><ul>
