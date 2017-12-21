@@ -5,17 +5,17 @@
   
   <title>重构 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method 提炼函数其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 迁移函数把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
+  <meta name="description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重构">
 <meta property="og:url" content="https://yixiangli.github.io/2017/12/18/设计模式/重构/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method 提炼函数其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 迁移函数把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
+<meta property="og:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-18T11:54:29.000Z">
+<meta property="og:updated_time" content="2017-12-21T11:01:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重构">
-<meta name="twitter:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method 提炼函数其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 迁移函数把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
+<meta name="twitter:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -116,19 +116,29 @@
     
         <h1 id="什么是重构"><a href="#什么是重构" class="headerlink" title="什么是重构"></a>什么是重构</h1><p>重构是一种心得，重构是去除代码“坏味道”的利器</p>
 <h2 id="重构手段"><a href="#重构手段" class="headerlink" title="重构手段"></a>重构手段</h2><ul>
-<li><p>Extract Method 提炼函数<br>其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性</p>
+<li><p>Extract Method【提炼函数】<br>其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性</p>
 </li>
-<li><p>Move Method 迁移函数<br>把行为搬迁到相对应的类中去，一句话，我的行为不该你去做</p>
+<li><p>Move Method 【迁移函数】<br>把行为搬迁到相对应的类中去，一句话，我的行为不该你去做</p>
 </li>
 </ul>
 <a id="more"></a>
 <ul>
 <li><p>Replace Conditional with Polymorphism 以多态取代条件表达式<br>如果可以的话，尽量减少if/else以及switch case,至少在if/else作用域内控制一定的代码行数</p>
 </li>
-<li><p>Self Encapsulate Field 自封装字段<br>这个我暂时还不是很理解，简单地说就是尽可能的将局部变量抽象成方法</p>
+<li><p>Self Encapsulate Field 【自封装字段】<br>这个我暂时还不是很理解，简单地说就是尽可能的将局部变量抽象成方法</p>
 </li>
 <li><p>Replace Type Code with State/Strategy 采用状态/策略模式取代类型码<br>这就要用到设计模式了，状态模式和策略模式都是很棒的多态机制下的产物，不过要区分状态模式和策略模式的区别</p>
 </li>
+<li><p>Preserve Whole Object 【保持对象完整】<br>改为传递整个对象，减少过长的函数参数列表，如果可以的话，传递一个对象过去，后期业务扩展可以不改动方法参数列表</p>
+</li>
+<li><p>Introduce Parameter Object 【引入参数对象】<br>以一个对象取代这些过长的参数，哪怕他们组合在一起的对象没有太多意义，只是一堆数据泥团，这也是Introduce Parameter Object与Preserve Whole Object的区别，那就是某些数据缺乏合理的对象归属，则使用Introduce Parameter Object，而Preserve Whole Object一般指的是来自同一对象的一堆数据集</p>
+</li>
+<li><p>Duplicated Code 【重复代码】<br>最基本的坏味道，一般使用IDEA工具进行开发时都会提示的warning，提高代码复用性</p>
+</li>
+<li><p>Long Method 【过长函数】</p>
+</li>
+<li>Large Class【过大的类】</li>
+<li>Long Parameter List【过长参数列表】<br>这三种重构手法类似，都是针对代码中冗长的代码段做优化处理，浓缩就是精华</li>
 </ul>
 
       
@@ -147,11 +157,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/12/21/设计模式/创建型/单例/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/21/设计模式/行为型/模板方法/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          单例
+          模板方法
         
       </div>
     </a>
@@ -211,11 +221,11 @@
       <ul>
         
           <li>
-            <a href="/2017/12/21/设计模式/行为型/模板方法/">模板方法</a>
+            <a href="/2017/12/21/设计模式/创建型/单例/">单例</a>
           </li>
         
           <li>
-            <a href="/2017/12/21/设计模式/创建型/单例/">单例</a>
+            <a href="/2017/12/21/设计模式/行为型/模板方法/">模板方法</a>
           </li>
         
           <li>
