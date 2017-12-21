@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="前言基本要素 模式名称 问题 解决方案 效果 目的 实例 相关模式  模式名称单例模式（SingleTon）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-21T11:20:40.000Z">
+<meta property="og:updated_time" content="2017-12-21T11:33:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例">
 <meta name="twitter:description" content="前言基本要素 模式名称 问题 解决方案 效果 目的 实例 相关模式  模式名称单例模式（SingleTon）">
@@ -150,7 +150,9 @@
 <p>(2)其次解读最简单也是最有效的单例构造法，那就是枚举法，之前在学习单例的过程中一直认为枚举法比较生僻，不是很常见，所以一直都是采用静态内部类的形式去构造单例，直到发现枚举的最大特点，那就是枚举本身的语法糖也无法被反射突破，因此这种方式不仅可以多线程安全，也能阻止反射突破，再加上重写readResolve方法，基本上可以说这种方式生成的单例类再任何情况下都能保证全局唯一</p>
 <p>(3)最后要介绍的就是双重校验锁，先说结论，同样无法阻止反射突破，且实现起来最复杂，但是双重校验锁写法最有说头，先从双重校验的代码逻辑说起，先分析这段</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">if (null == singleTon) &#123;</div><div class="line">            synchronized (SingleTon4DoubleCheck.class) &#123;    //同步锁</div><div class="line">                if (null == singleTon) &#123;</div><div class="line">                    singleTon = new SingleTon4DoubleCheck();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<p>再说说指令重排序</p>
+<p>抛出第一个问题，为什么需要两次判断对象为空？</p>
+<p>接第二个问题，</p>
+<p>再说说volatile与指令重排序之间的故事</p>
 <h3 id="相关模式"><a href="#相关模式" class="headerlink" title="相关模式"></a>相关模式</h3>
       
     </div>
