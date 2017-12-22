@@ -108,72 +108,6 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="基本要素"><a href="#基本要素" class="headerlink" title="基本要素"></a>基本要素</h2><h3 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h3><p>想了解建造者模式，先看一个例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class Person &#123;</div><div class="line"></div><div class="line">	private int id;</div><div class="line">	private String name;</div><div class="line">	private int age;</div><div class="line">	public int getId() &#123;</div><div class="line">		return id;</div><div class="line">	&#125;</div><div class="line">	public void setId(int id) &#123;</div><div class="line">		this.id = id;</div><div class="line">	&#125;</div><div class="line">	public String getName() &#123;</div><div class="line">		return name;</div><div class="line">	&#125;</div><div class="line">	public void setName(String name) &#123;</div><div class="line">		this.name = name;</div><div class="line">	&#125;</div><div class="line">	public int getAge() &#123;</div><div class="line">		return age;</div><div class="line">	&#125;</div><div class="line">	public void setAge(int age) &#123;</div><div class="line">		this.age = age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这是一个表示”人“的类，那么如何创建这个人呢，通常的做法是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Person p = new Person();</div><div class="line">p.setId()</div><div class="line">p.setName()</div><div class="line">p.setAge()</div></pre></td></tr></table></figure>
-<p>现在，小用一下建造者模式，变形！！！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class Person &#123;</div><div class="line"></div><div class="line">	private int id;</div><div class="line">	private String name;</div><div class="line">	private int age;</div><div class="line"></div><div class="line">	public Person setId(int id) &#123;</div><div class="line">		this.id = id;</div><div class="line">		return this;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public Person setName(String name) &#123;</div><div class="line">		this.name = name;</div><div class="line">		return this;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public Person setAge(int age) &#123;</div><div class="line">		this.age = age;</div><div class="line">		return this;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如何使用？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new Person().setAge(18).setId(12345).setName(&quot;li&quot;);</div></pre></td></tr></table></figure>
-<p>这样的写法对于客户端（需要使用这个类来创建对象的人）来说代码简洁了不少，这也就是比较提倡的流式风格，但是有的人问了，难道建造者模式就这点作用？往下看</p>
-<p>假设现在我们有一个新的类，这个类的属性有部分必填，有一些选填，那么如果用建造者模式，可以这么写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">public class Person &#123;</div><div class="line"></div><div class="line">	private final int id;</div><div class="line">	private final String name;</div><div class="line">	private final int age;</div><div class="line">	private final String level;</div><div class="line"></div><div class="line">	private Person(PersonBuilder builder)&#123;</div><div class="line">		this.id = builder.id;</div><div class="line">		this.name = builder.name;</div><div class="line">		this.age = builder.age;</div><div class="line">		this.level = builder.level;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public int getId() &#123;</div><div class="line">		return id;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getName() &#123;</div><div class="line">		return name;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public int getAge() &#123;</div><div class="line">		return age;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getLevel() &#123;</div><div class="line">		return level;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//人类的建造者</div><div class="line">	public static class PersonBuilder &#123;</div><div class="line">		private final String name;</div><div class="line">		private final int id;</div><div class="line">		private int age;</div><div class="line">		private String level;</div><div class="line">		</div><div class="line">		public PersonBuilder(String name,int id)&#123;</div><div class="line">			this.id = id;</div><div class="line">			this.name = name;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public PersonBuilder age(int age)&#123;</div><div class="line">			this.age = age;</div><div class="line">			return this;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		public PersonBuilder level(String level)&#123;</div><div class="line">			this.level = level;</div><div class="line">			return this;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		//最后一哆嗦</div><div class="line">		public Person build() &#123;</div><div class="line">                    return new Person(this);</div><div class="line">               &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样我们的客户端使用起来只需要</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">             new Person.PersonBuilder(&quot;li&quot;, 12345);</div><div class="line">//如果有可选参数 那么</div><div class="line">new Person.PersonBuilder(&quot;li&quot;, 12345)</div><div class="line">.age(18)</div><div class="line">.level(&quot;一级&quot;)</div><div class="line">.build();</div></pre></td></tr></table></figure>
-<p>既简洁又易懂，而且很灵活，可以创建出很多不同的对象（如18岁，28岁，58岁的人，只需要传递不同的参数），关键是安全性也比普通类调用set方法好，建造者模式生成的是一个完整的对象，不存在个别属性别篡改的情况。另外，对于一些属性的参数性校验，可以统一放在build这一步去处理，例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public Person build() &#123;</div><div class="line">     if(age &gt; 120)&#123;</div><div class="line">         throw new Exception(&quot;&quot;);</div><div class="line">     &#125;</div><div class="line">     return new Person(this);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>慢着，这种写法线程不安全</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public Person build() &#123;</div><div class="line">    Person p = new Person(this);</div><div class="line">    if(age &gt; 120)&#123;</div><div class="line">        throw new Exception(&quot;&quot;);</div><div class="line">    &#125;</div><div class="line">    return p;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/12/22/设计模式/创建型/建造者/" data-id="cjbhu6cdp005f949kx3npxnx4" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/12/22/设计模式/创建型/建造者/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/22/设计模式/创建型/建造者/">评论</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-设计模式/创建型/单例" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/21/设计模式/创建型/单例/">单例</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/12/21/设计模式/创建型/单例/" class="article-date">
-  <time datetime="2017-12-21T02:45:02.000Z" itemprop="datePublished">2017-12-21</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>►<a class="article-category-link" href="/categories/设计模式/创建型/">创建型</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="基本要素"><a href="#基本要素" class="headerlink" title="基本要素"></a>基本要素</h2><ul>
 <li>模式名称</li>
 <li>问题</li>
@@ -183,20 +117,20 @@
 <li>实例</li>
 <li>相关模式</li>
 </ul>
-<h3 id="模式名称"><a href="#模式名称" class="headerlink" title="模式名称"></a>模式名称</h3><p>单例模式（SingleTon）<br>
+<h3 id="模式名称"><a href="#模式名称" class="headerlink" title="模式名称"></a>模式名称</h3><p>建造者模式（Builder）<br>
         
           <p class="article-more-link">
-            <a href="/2017/12/21/设计模式/创建型/单例/#more">阅读全文</a>
+            <a href="/2017/12/22/设计模式/创建型/建造者/#more">阅读全文</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/12/21/设计模式/创建型/单例/" data-id="cjbhu6cdq005h949kgukbmt06" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/12/22/设计模式/创建型/建造者/" data-id="cjbhucinl005f9u9kd49y1l8m" class="article-share-link">分享</a>
 	  
       
-        <a href="https://yixiangli.github.io/2017/12/21/设计模式/创建型/单例/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/21/设计模式/创建型/单例/">评论</a>
+        <a href="https://yixiangli.github.io/2017/12/22/设计模式/创建型/建造者/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/22/设计模式/创建型/建造者/">评论</a>
       
       
     </footer>
@@ -254,10 +188,71 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/12/21/设计模式/行为型/模板方法/" data-id="cjbhu6cdu005p949kjy6p1qet" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/12/21/设计模式/行为型/模板方法/" data-id="cjbhucinn005m9u9k5777li8f" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/12/21/设计模式/行为型/模板方法/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/21/设计模式/行为型/模板方法/">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-设计模式/创建型/单例" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/21/设计模式/创建型/单例/">单例</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/12/21/设计模式/创建型/单例/" class="article-date">
+  <time datetime="2017-12-21T02:45:02.000Z" itemprop="datePublished">2017-12-21</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>►<a class="article-category-link" href="/categories/设计模式/创建型/">创建型</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="基本要素"><a href="#基本要素" class="headerlink" title="基本要素"></a>基本要素</h2><ul>
+<li>模式名称</li>
+<li>问题</li>
+<li>解决方案</li>
+<li>效果</li>
+<li>目的</li>
+<li>实例</li>
+<li>相关模式</li>
+</ul>
+<h3 id="模式名称"><a href="#模式名称" class="headerlink" title="模式名称"></a>模式名称</h3><p>单例模式（SingleTon）<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/12/21/设计模式/创建型/单例/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/12/21/设计模式/创建型/单例/" data-id="cjbhucinj005b9u9kp3if8mhc" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/12/21/设计模式/创建型/单例/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/21/设计模式/创建型/单例/">评论</a>
       
       
     </footer>
@@ -312,7 +307,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/12/18/设计模式/重构/" data-id="cjbhu6cbc001v949k1z8vrwz8" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/12/18/设计模式/重构/" data-id="cjbhucikc001r9u9kjgdrjlkb" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/12/18/设计模式/重构/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/18/设计模式/重构/">评论</a>
@@ -382,7 +377,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/12/05/设计模式/设计模式总览/" data-id="cjbhu6cb9001r949kvv5ur9r1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/12/05/设计模式/设计模式总览/" data-id="cjbhucikd001v9u9ksxvmj8k0" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/12/05/设计模式/设计模式总览/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/05/设计模式/设计模式总览/">评论</a>
@@ -443,11 +438,11 @@
           </li>
         
           <li>
-            <a href="/2017/12/21/设计模式/创建型/单例/">单例</a>
+            <a href="/2017/12/21/设计模式/行为型/模板方法/">模板方法</a>
           </li>
         
           <li>
-            <a href="/2017/12/21/设计模式/行为型/模板方法/">模板方法</a>
+            <a href="/2017/12/21/设计模式/创建型/单例/">单例</a>
           </li>
         
           <li>
