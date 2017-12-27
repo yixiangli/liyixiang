@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-21T11:02:37.000Z">
+<meta property="og:updated_time" content="2017-12-27T11:17:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重构">
 <meta name="twitter:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
@@ -138,7 +138,11 @@
 <li><p>Long Method 【过长函数】</p>
 </li>
 <li>Large Class【过大的类】</li>
-<li>Long Parameter List【过长参数列表】<br>这三种重构手法类似，都是针对代码中冗长的代码段做优化处理，浓缩就是精华</li>
+<li><p>Long Parameter List【过长参数列表】<br>这三种重构手法类似，都是针对代码中冗长的代码段做优化处理，浓缩就是精华</p>
+</li>
+<li><p>Divergent Change 【发散式变化】<br>一个类受多种变化的影响</p>
+</li>
+<li>Shotgun Surgery 【散弹式变化】<br>一种变化引发多个类相应修改<br>针对这两种由于变化而引起的代码修改，都应当对代码进行整理，使“外界变化”与“需要修改的类”一一对应</li>
 </ul>
 
       
