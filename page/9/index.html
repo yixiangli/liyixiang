@@ -120,7 +120,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/28/基础知识集锦/网络基础/" data-id="cjbp0cuj1000h6s9kn7lbanw9" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/28/基础知识集锦/网络基础/" data-id="cjc0ip1c3000idc9khf6mffuv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/28/基础知识集锦/网络基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/28/基础知识集锦/网络基础/">评论</a>
@@ -179,7 +179,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/编码/" data-id="cjbp0cuij000e6s9k97yolggh" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/编码/" data-id="cjc0ip1bw000cdc9kan0dt3g1" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/基础知识集锦/编码/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/基础知识集锦/编码/">评论</a>
@@ -231,7 +231,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/加密技术/" data-id="cjbp0cui900076s9kc7dp81zd" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/加密技术/" data-id="cjc0ip1bx000edc9k7tvn6n0b" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/基础知识集锦/加密技术/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/基础知识集锦/加密技术/">评论</a>
@@ -288,7 +288,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/网络安全/" data-id="cjbp0cuj2000j6s9kht9mft46" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/网络安全/" data-id="cjc0ip1c4000ldc9kr7xfa6u7" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/基础知识集锦/网络安全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/基础知识集锦/网络安全/">评论</a>
@@ -306,7 +306,7 @@
 
 
   
-    <article id="post-分布式/负载均衡" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-分布式/分布式事务理论" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -314,14 +314,14 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/27/分布式/负载均衡/">负载均衡</a>
+      <a class="article-title" href="/2017/04/27/分布式/分布式事务理论/">分布式事务理论</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-    	<a href="/2017/04/27/分布式/负载均衡/" class="article-date">
+    	<a href="/2017/04/27/分布式/分布式事务理论/" class="article-date">
   <time datetime="2017-04-26T16:06:19.000Z" itemprop="datePublished">2017-04-27</time>
 </a>
     	
@@ -332,29 +332,21 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#负载均衡</p>
-<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><h3 id="链路负载均衡"><a href="#链路负载均衡" class="headerlink" title="链路负载均衡"></a>链路负载均衡</h3><p>DNS解析</p>
-<h3 id="集群负载均衡"><a href="#集群负载均衡" class="headerlink" title="集群负载均衡"></a>集群负载均衡</h3><p>分为软负载均衡和硬件负载均衡，这个知识点Dubbo框架中也会介绍</p>
-<p><strong>硬件负载均衡</strong><br>硬件负载均衡，如价格昂贵的F5</p>
-<p><strong>软负载均衡</strong><br>软件负载均衡，如常见的LVS HAProxy Nginx<br>LVS，四层（IP层）负载均衡<br>HAProxy，七层（HTTP）负载均衡<br>Nginx，七层（HTTP）负载均衡</p>
-<h3 id="操作系统负载均衡"><a href="#操作系统负载均衡" class="headerlink" title="操作系统负载均衡"></a>操作系统负载均衡</h3><p>操作系统级别的软中断或者硬件中断</p>
-<h2 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h2><p>轮询 Round Robin<br>加强轮询 Weight Round Robin<br>随机 Random<br>加强随机 Weight Random<br>最少连接 Least Connections<br>加强最少连接<br>源地址散列 Hash</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/04/27/分布式/负载均衡/#more">阅读全文</a>
-          </p>
-        
+      	<!-- Table of Contents -->
+    
+        <p># </p>
+
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/分布式/负载均衡/" data-id="cjbp0cui100046s9k8bnxlwza" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/分布式/分布式事务理论/" data-id="cjc0ip1br0007dc9knay64yfk" class="article-share-link">分享</a>
 	  
       
-        <a href="https://yixiangli.github.io/2017/04/27/分布式/负载均衡/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/分布式/负载均衡/">评论</a>
+        <a href="https://yixiangli.github.io/2017/04/27/分布式/分布式事务理论/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/分布式/分布式事务理论/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RANDOM/">RANDOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/负载均衡/">负载均衡</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2PC/">2PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CAP/">CAP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCC/">TCC</a></li></ul>
 
     </footer>
   </div>
@@ -465,7 +457,7 @@
   <!--
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 Liyixiang<br>
+      &copy; 2018 Liyixiang<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -476,7 +468,7 @@
       <table width="100%" border="0">
         <tr>
           <td style="text-align:left">
-            Copyright &copy; 2016-2017 Liyixiang<br>
+            Copyright &copy; 2016-2018 Liyixiang<br>
             Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
           </td>
           <td style="text-align:right">

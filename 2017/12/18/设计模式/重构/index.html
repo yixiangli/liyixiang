@@ -5,17 +5,17 @@
   
   <title>重构 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
+  <meta name="description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 代码的坏味道 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重构">
 <meta property="og:url" content="https://yixiangli.github.io/2017/12/18/设计模式/重构/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
+<meta property="og:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 代码的坏味道 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-27T11:17:44.000Z">
+<meta property="og:updated_time" content="2018-01-04T13:07:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重构">
-<meta name="twitter:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 重构手段 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
+<meta name="twitter:description" content="什么是重构重构是一种心得，重构是去除代码“坏味道”的利器 代码的坏味道 Extract Method【提炼函数】其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性  Move Method 【迁移函数】把行为搬迁到相对应的类中去，一句话，我的行为不该你去做">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -111,11 +111,11 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是重构"><span class="toc-number">1.</span> <span class="toc-text">什么是重构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#重构手段"><span class="toc-number">1.1.</span> <span class="toc-text">重构手段</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是重构"><span class="toc-number">1.</span> <span class="toc-text">什么是重构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码的坏味道"><span class="toc-number">1.1.</span> <span class="toc-text">代码的坏味道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重构手法"><span class="toc-number">1.2.</span> <span class="toc-text">重构手法</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="什么是重构"><a href="#什么是重构" class="headerlink" title="什么是重构"></a>什么是重构</h1><p>重构是一种心得，重构是去除代码“坏味道”的利器</p>
-<h2 id="重构手段"><a href="#重构手段" class="headerlink" title="重构手段"></a>重构手段</h2><ul>
+<h2 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h2><ul>
 <li><p>Extract Method【提炼函数】<br>其实就是将代码中的内部逻辑抽象成对象的行为，增强可复用性与主逻辑的代码可读性</p>
 </li>
 <li><p>Move Method 【迁移函数】<br>把行为搬迁到相对应的类中去，一句话，我的行为不该你去做</p>
@@ -143,6 +143,16 @@
 <li><p>Divergent Change 【发散式变化】<br>一个类受多种变化的影响</p>
 </li>
 <li>Shotgun Surgery 【散弹式变化】<br>一种变化引发多个类相应修改<br>针对这两种由于变化而引起的代码修改，都应当对代码进行整理，使“外界变化”与“需要修改的类”一一对应</li>
+</ul>
+<h2 id="重构手法"><a href="#重构手法" class="headerlink" title="重构手法"></a>重构手法</h2><ul>
+<li><p>Extract Method(提炼函数)<br>将大函数拆分成多个小函数，函数粒度拆分的越小，复用的可能就越高</p>
+</li>
+<li><p>Inline Method(内联函数)<br>当函数的本体与名称同样清晰，减少这个过于清晰的函数</p>
+</li>
+<li><p>Inline Temp(内联临时变量)<br>如果多余的临时变量阻碍了重构手法，可以将临时变量内联化成函数</p>
+</li>
+<li><p>Replace Temp with Query(以查询取代临时变量)<br>将临时变量替换成一个查询，那么同一个类中的所有函数都将可以获得这份信息</p>
+</li>
 </ul>
 
       
@@ -283,7 +293,7 @@
   <!--
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 Liyixiang<br>
+      &copy; 2018 Liyixiang<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
@@ -294,7 +304,7 @@
       <table width="100%" border="0">
         <tr>
           <td style="text-align:left">
-            Copyright &copy; 2016-2017 Liyixiang<br>
+            Copyright &copy; 2016-2018 Liyixiang<br>
             Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
           </td>
           <td style="text-align:right">
