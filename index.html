@@ -108,63 +108,17 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="什么是RollingFile"><a href="#什么是RollingFile" class="headerlink" title="什么是RollingFile"></a>什么是RollingFile</h1><p>RollingFileAppender是Log4j2中的一种能够实现日志文件滚动更新(rollover)的Appender。rollover的意思是当满足一定条件(如文件达到了指定的大小，达到了指定的时间)后，就重命名原日志文件进行归档，并生成新的日志文件用于log写入。如果还设置了一定时间内允许归档的日志文件的最大数量，将对过旧的日志文件进行删除操作。<br>RollingFile实现日志文件滚动更新，依赖于TriggeringPolicy和RolloverStrategy。其中，TriggeringPolicy为触发策略，其决定了何时触发日志文件的rollover，即When。RolloverStrategy为滚动更新策略，其决定了当触发了日志文件的rollover时，如何进行文件的rollover，即How。<br>Log4j2提供了默认的rollover策略DefaultRolloverStrategy。<br>下面通过一个log4j2.xml文件配置简单了解RollingFile的配置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;Configuration status=&quot;warn&quot;&gt;</div><div class="line">  &lt;Appenders&gt;</div><div class="line">    &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;logs/app.log&quot;</div><div class="line">                 filePattern=&quot;logs/app-%d&#123;yyyy-MM-dd HH&#125;.log&quot;&gt;</div><div class="line">      &lt;PatternLayout&gt;</div><div class="line">        &lt;Pattern&gt;%d %p %c&#123;1.&#125; [%t] %m%n&lt;/Pattern&gt;</div><div class="line">      &lt;/PatternLayout&gt;</div><div class="line">      &lt;Policies&gt;</div><div class="line">        &lt;TimeBasedTriggeringPolicy interval=&quot;1&quot;/&gt;</div><div class="line">        &lt;SizeBasedTriggeringPolicy size=&quot;250MB&quot;/&gt;</div><div class="line">      &lt;/Policies&gt;</div><div class="line">    &lt;/RollingFile&gt;</div><div class="line">  &lt;/Appenders&gt;</div><div class="line">  &lt;Loggers&gt;</div><div class="line">    &lt;Root level=&quot;error&quot;&gt;</div><div class="line">      &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line">    &lt;/Root&gt;</div><div class="line">  &lt;/Loggers&gt;</div><div class="line">&lt;/Configuration&gt;</div></pre></td></tr></table></figure>
-<p>上述配置文件中配置了一个RollingFile，日志写入logs/app.log文件中，每经过1小时或者当文件大小到达250M时，按照app-2017-08-01 12.log的格式对app.log进行重命名并归档，并生成新的文件用于写入log。其中，fileName指定日志文件的位置和文件名称（如果文件或文件所在的目录不存在，会创建文件。）<br>filePattern指定触发rollover时，文件的重命名规则。filePattern中可以指定类似于SimpleDateFormat中的date/time pattern，如yyyy-MM-dd HH，或者%i指定一个整数计数器。<br>TimeBasedTriggeringPolicy指定了基于时间的触发策略。<br>SizeBasedTriggeringPolicy指定了基于文件大小的触发策略。</p>
-<h1 id="TriggeringPolicy"><a href="#TriggeringPolicy" class="headerlink" title="TriggeringPolicy"></a>TriggeringPolicy</h1><p>RollingFile的触发rollover的策略有CronTriggeringPolicy(Cron表达式触发)、OnStartupTriggeringPolicy(JVM启动时触发)、SizeBasedTriggeringPolicy(基于文件大小)、TimeBasedTriggeringPolicy(基于时间)、CompositeTriggeringPolicy(多个触发策略的混合，如同时基于文件大小和时间)。<br>其中，SizeBasedTriggeringPolicy(基于日志文件大小)、TimeBasedTriggeringPolicy(基于时间)或同时基于文件大小和时间的混合触发策略最常用。</p>
-<h2 id="SizeBasedTriggeringPolicy"><a href="#SizeBasedTriggeringPolicy" class="headerlink" title="SizeBasedTriggeringPolicy"></a>SizeBasedTriggeringPolicy</h2><p>SizeBasedTriggeringPolicy规定了当日志文件达到了指定的size时，触发rollover操作。size参数可以用KB、MB、GB等做后缀来指定具体的字节数，如20MB。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;SizeBasedTriggeringPolicy size=&quot;250MB&quot;/&gt;</div></pre></td></tr></table></figure>
-<h3 id="TimeBasedTriggeringPolicy"><a href="#TimeBasedTriggeringPolicy" class="headerlink" title="TimeBasedTriggeringPolicy"></a>TimeBasedTriggeringPolicy</h3><p>TimeBasedTriggeringPolicy规定了当日志文件名中的date/time pattern不再符合filePattern中的date/time pattern时，触发rollover操作。<br>比如，filePattern指定文件重命名规则为app-%d{yyyy-MM-dd HH}.log，文件名为app-2017-08-25 11.log，当时间达到2017年8月25日中午12点（2017-08-25 12），将触发rollover操作。</p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>interval | integer | 此参数需要与filePattern结合使用，规定了触发rollover的频率，默认值为1。假设interval为4，若filePattern的date/time pattern的最小时间粒度为小时(如yyyy-MM-dd HH)，则每4小时触发一次rollover；若filePattern的date/time pattern的最小时间粒度为分钟(如yyyy-MM-dd HH-mm)，则每4分钟触发一次rollover。<br>modulate | boolean | 指明是否对interval进行调节，默认为false。若modulate为true，会以0为开始对interval进行偏移计算。例如，最小时间粒度为小时，当前为3:00，interval为4，则以后触发rollover的时间依次为4:00，8:00，12:00，16:00,…。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;Configuration status=&quot;warn&quot; name=&quot;MyApp&quot; packages=&quot;&quot;&gt;</div><div class="line">  &lt;Appenders&gt;</div><div class="line">    &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;logs/app.log&quot;</div><div class="line">                 filePattern=&quot;logs/app-%d&#123;yyyy-MM-dd HH&#125;-%i.log&quot;&gt;</div><div class="line">      &lt;PatternLayout&gt;</div><div class="line">        &lt;Pattern&gt;%d %p %c&#123;1.&#125; [%t] %m%n&lt;/Pattern&gt;</div><div class="line">      &lt;/PatternLayout&gt;</div><div class="line">      &lt;Policies&gt;</div><div class="line">        &lt;TimeBasedTriggeringPolicy /&gt;</div><div class="line">        &lt;SizeBasedTriggeringPolicy size=&quot;250 MB&quot;/&gt;</div><div class="line">      &lt;/Policies&gt;</div><div class="line">    &lt;/RollingFile&gt;</div><div class="line">  &lt;/Appenders&gt;</div><div class="line">  &lt;Loggers&gt;</div><div class="line">    &lt;Root level=&quot;error&quot;&gt;</div><div class="line">      &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line">    &lt;/Root&gt;</div><div class="line">  &lt;/Loggers&gt;</div><div class="line">&lt;/Configuration&gt;</div></pre></td></tr></table></figure>
-<p>上述配置文件中，filePattern中yyyy-MM-dd HH最小时间粒度为小时，TimeBasedTriggeringPolicy中interval使用默认值1，将每1小时触发一次rollover。<br>若将filePattern改为filePattern=“logs/app-%d{yyyy-MM-dd HH-mm}-%i.log”，yyyy-MM-dd HH-mm最小时间粒度为分钟，将每1分钟触发一次rollover。</p>
-<h3 id="CompositeTriggeringPolicy"><a href="#CompositeTriggeringPolicy" class="headerlink" title="CompositeTriggeringPolicy"></a>CompositeTriggeringPolicy</h3><p>将多个TriggeringPolicy放到Policies中表示使用复合策略<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Policies&gt;</div><div class="line">    &lt;TimeBasedTriggeringPolicy /&gt;</div><div class="line">    &lt;SizeBasedTriggeringPolicy size=&quot;250 MB&quot;/&gt;</div><div class="line">&lt;/Policies&gt;</div></pre></td></tr></table></figure></p>
-<p>如上，同时使用了TimeBasedTriggeringPolicy、SizeBasedTriggeringPolicy，有一个条件满足，就会触发rollover。</p>
-<h1 id="DefaultRolloverStrategy"><a href="#DefaultRolloverStrategy" class="headerlink" title="DefaultRolloverStrategy"></a>DefaultRolloverStrategy</h1><p>DefaultRolloverStrategy指定了当触发rollover时的默认策略。<br>DefaultRolloverStrategy是Log4j2提供的默认的rollover策略，即使在log4j2.xml中没有显式指明，也相当于为RollingFile配置下添加了如下语句。DefaultRolloverStrategy默认的max为7。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;DefaultRolloverStrategy max=&quot;7&quot;/&gt;</div></pre></td></tr></table></figure>
-<p>max参数指定了计数器的最大值。一旦计数器达到了最大值，过旧的文件将被删除。<br>注意：不要认为max参数是需要保留的日志文件的最大数目。</p>
-<p>max参数是与filePattern中的计数器%i配合起作用的，其具体作用方式与filePattern的配置密切相关。<br>1.如果filePattern中仅含有date/time pattern，每次rollover时，将用当前的日期和时间替换文件中的日期格式对文件进行重命名。max参数将不起作用。<br>如，filePattern=”logs/app-%d{yyyy-MM-dd}.log”<br>2.如果filePattern中仅含有整数计数器（即%i），每次rollover时，文件重命名时的计数器将每次加1（初始值为1），若达到max的值，将删除旧的文件。<br>如，filePattern=”logs/app-%i.log”<br>3.如果filePattern中既含有date/time pattern，又含有%i，每次rollover时，计数器将每次加1，若达到max的值，将删除旧的文件，直到data/time pattern不再符合，被替换为当前的日期和时间，计数器再从1开始。<br>如，filePattern=”logs/app-%d{yyyy-MM-dd HH-mm}-%i.log”</p>
-<p>假设fileName为logs/app.log，SizeBasedTriggeringPolicy的size为10KB，DefaultRolloverStrategy的max为3。<br>根据filePattern配置的不同分为以下几种情况：</p>
-<p><strong>情况1：</strong><br>filePattern中仅含有date/time pattern<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;Configuration status=&quot;trace&quot; name=&quot;MyApp&quot; packages=&quot;&quot;&gt;</div><div class="line">    &lt;Appenders&gt;</div><div class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</div><div class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot; /&gt;</div><div class="line">        &lt;/Console&gt;</div><div class="line">        &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;logs/app.log&quot;</div><div class="line">        filePattern=&quot;logs/app-%d&#123;yyyy-MM-dd&#125;.log&quot;&gt;</div><div class="line">            &lt;PatternLayout&gt;</div><div class="line">                &lt;Pattern&gt;%d %p %c&#123;1.&#125; [%t] %m%n&lt;/Pattern&gt;</div><div class="line">            &lt;/PatternLayout&gt;</div><div class="line">            &lt;Policies&gt;</div><div class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;10KB&quot;/&gt;</div><div class="line">            &lt;/Policies&gt;</div><div class="line">            &lt;DefaultRolloverStrategy max=&quot;3&quot;/&gt;</div><div class="line">        &lt;/RollingFile&gt;</div><div class="line">    &lt;/Appenders&gt;</div><div class="line">    &lt;Loggers&gt;</div><div class="line">        &lt;Root level=&quot;trace&quot;&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;Console&quot;/&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line">        &lt;/Root&gt;</div><div class="line">    &lt;/Loggers&gt;</div><div class="line">&lt;/Configuration&gt;</div></pre></td></tr></table></figure></p>
-<p>filePattern=”logs/app-%d{yyyy-MM-dd}.log”，指定当发生rollover时，将按照app-%d{yyyy-MM-dd}.log的格式对文件进行重命名。<br>每次触发rollover时，将按照如下方式对文件进行rollover。</p>
-<table>
-<thead>
-<tr>
-<th>第X次rollover</th>
-<th>当前用于写入log的文件</th>
-<th>归档的文件</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>0 | app.log | - | 所有的log都写进app.log中<br>1 | app.log | app-2017-08-17.log | 当app.log的size达到10KB，触发第1次rollover，app.log被重命名为app-2017-08-17.log。新的app.log被创建出来，用于写入log<br>2 | app.log | app-2017-08-17.log | 当app.log的size达到10KB，触发第2次rollover，原来的app-2017-08-17.log将删除。app.log被重命名为app-2017-08-17.log。新的app.log文件被创建出来，用于写入log</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/" data-id="cjczwjwkt0018119ky1lwu4r7" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/" data-id="cjczwkyjf00141p9knk4bzf6k" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/">评论</a>
@@ -215,7 +169,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/01/25/工具/记一次坑爹的Mac数据迁移/" data-id="cjczwjwkn000x119k1dowddua" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/01/25/工具/记一次坑爹的Mac数据迁移/" data-id="cjczwkyje00101p9kzbvpynri" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/01/25/工具/记一次坑爹的Mac数据迁移/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/01/25/工具/记一次坑爹的Mac数据迁移/">评论</a>
@@ -269,7 +223,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/01/11/工具/IDEA功能介绍/" data-id="cjczwjwkn000u119k22bc53n1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/01/11/工具/IDEA功能介绍/" data-id="cjczwkyjb000x1p9k2i9ojtho" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/01/11/工具/IDEA功能介绍/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/01/11/工具/IDEA功能介绍/">评论</a>
@@ -330,7 +284,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/12/27/设计模式/创建型/原型/" data-id="cjczwjwp1005s119kq1s5ax4b" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/12/27/设计模式/创建型/原型/" data-id="cjczwkymz005s1p9kmme8gezi" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/12/27/设计模式/创建型/原型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/27/设计模式/创建型/原型/">评论</a>
@@ -391,7 +345,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/12/22/设计模式/创建型/建造者/" data-id="cjczwjwp2005u119krs35xyz4" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/12/22/设计模式/创建型/建造者/" data-id="cjczwkyn0005u1p9kogrv58f6" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/12/22/设计模式/创建型/建造者/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/22/设计模式/创建型/建造者/">评论</a>
