@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是RollingFileRollingFileAppender是Log4j2中的一种能够实现日志文件滚动更新(rollover)的Appender。rollover的意思是当满足一定条件(如文件达到了指定的大小，达到了指定的时间)后，就重命名原日志文件进行归档，并生成新的日志文件用于log写入。如果还设置了一定时间内允许归档的日志文件的最大数量，将对过旧的日志文件进行删除操作。RollingF">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-29T07:41:36.000Z">
+<meta property="og:updated_time" content="2018-01-29T09:37:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Log4j2中RollingFile的文件滚动更新机制">
 <meta name="twitter:description" content="什么是RollingFileRollingFileAppender是Log4j2中的一种能够实现日志文件滚动更新(rollover)的Appender。rollover的意思是当满足一定条件(如文件达到了指定的大小，达到了指定的时间)后，就重命名原日志文件进行归档，并生成新的日志文件用于log写入。如果还设置了一定时间内允许归档的日志文件的最大数量，将对过旧的日志文件进行删除操作。RollingF">
@@ -153,7 +153,8 @@
 <p>max参数指定了计数器的最大值。一旦计数器达到了最大值，过旧的文件将被删除。<br>注意：不要认为max参数是需要保留的日志文件的最大数目。</p>
 <p>max参数是与filePattern中的计数器%i配合起作用的，其具体作用方式与filePattern的配置密切相关。<br>1.如果filePattern中仅含有date/time pattern，每次rollover时，将用当前的日期和时间替换文件中的日期格式对文件进行重命名。max参数将不起作用。<br>如，filePattern=”logs/app-%d{yyyy-MM-dd}.log”<br>2.如果filePattern中仅含有整数计数器（即%i），每次rollover时，文件重命名时的计数器将每次加1（初始值为1），若达到max的值，将删除旧的文件。<br>如，filePattern=”logs/app-%i.log”<br>3.如果filePattern中既含有date/time pattern，又含有%i，每次rollover时，计数器将每次加1，若达到max的值，将删除旧的文件，直到data/time pattern不再符合，被替换为当前的日期和时间，计数器再从1开始。<br>如，filePattern=”logs/app-%d{yyyy-MM-dd HH-mm}-%i.log”</p>
 <p>假设fileName为logs/app.log，SizeBasedTriggeringPolicy的size为10KB，DefaultRolloverStrategy的max为3。<br>根据filePattern配置的不同分为以下几种情况：</p>
-<p><strong>情况1：</strong><br>filePattern中仅含有date/time pattern<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;Configuration status=&quot;trace&quot; name=&quot;MyApp&quot; packages=&quot;&quot;&gt;</div><div class="line">    &lt;Appenders&gt;</div><div class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</div><div class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot; /&gt;</div><div class="line">        &lt;/Console&gt;</div><div class="line">        &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;logs/app.log&quot;</div><div class="line">        filePattern=&quot;logs/app-%d&#123;yyyy-MM-dd&#125;.log&quot;&gt;</div><div class="line">            &lt;PatternLayout&gt;</div><div class="line">                &lt;Pattern&gt;%d %p %c&#123;1.&#125; [%t] %m%n&lt;/Pattern&gt;</div><div class="line">            &lt;/PatternLayout&gt;</div><div class="line">            &lt;Policies&gt;</div><div class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;10KB&quot;/&gt;</div><div class="line">            &lt;/Policies&gt;</div><div class="line">            &lt;DefaultRolloverStrategy max=&quot;3&quot;/&gt;</div><div class="line">        &lt;/RollingFile&gt;</div><div class="line">    &lt;/Appenders&gt;</div><div class="line">    &lt;Loggers&gt;</div><div class="line">        &lt;Root level=&quot;trace&quot;&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;Console&quot;/&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line">        &lt;/Root&gt;</div><div class="line">    &lt;/Loggers&gt;</div><div class="line">&lt;/Configuration&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>情况1：filePattern中仅含有date/time pattern </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;Configuration status=&quot;trace&quot; name=&quot;MyApp&quot; packages=&quot;&quot;&gt;</div><div class="line">    &lt;Appenders&gt;</div><div class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</div><div class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot; /&gt;</div><div class="line">        &lt;/Console&gt;</div><div class="line">        &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;logs/app.log&quot;</div><div class="line">        filePattern=&quot;logs/app-%d&#123;yyyy-MM-dd&#125;.log&quot;&gt;</div><div class="line">            &lt;PatternLayout&gt;</div><div class="line">                &lt;Pattern&gt;%d %p %c&#123;1.&#125; [%t] %m%n&lt;/Pattern&gt;</div><div class="line">            &lt;/PatternLayout&gt;</div><div class="line">            &lt;Policies&gt;</div><div class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;10KB&quot;/&gt;</div><div class="line">            &lt;/Policies&gt;</div><div class="line">            &lt;DefaultRolloverStrategy max=&quot;3&quot;/&gt;</div><div class="line">        &lt;/RollingFile&gt;</div><div class="line">    &lt;/Appenders&gt;</div><div class="line">    &lt;Loggers&gt;</div><div class="line">        &lt;Root level=&quot;trace&quot;&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;Console&quot;/&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line">        &lt;/Root&gt;</div><div class="line">    &lt;/Loggers&gt;</div><div class="line">&lt;/Configuration&gt;</div></pre></td></tr></table></figure>
 <p>filePattern=”logs/app-%d{yyyy-MM-dd}.log”，指定当发生rollover时，将按照app-%d{yyyy-MM-dd}.log的格式对文件进行重命名。<br>每次触发rollover时，将按照如下方式对文件进行rollover。</p>
 <table>
 <thead>
@@ -185,6 +186,54 @@
 </tr>
 </tbody>
 </table>
+<p><strong>情况2：filePattern中仅含有整数计数器（%i）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;Configuration status=&quot;trace&quot; name=&quot;MyApp&quot; packages=&quot;&quot;&gt;</div><div class="line">    &lt;Appenders&gt;</div><div class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</div><div class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot; /&gt;</div><div class="line">        &lt;/Console&gt;</div><div class="line">        &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;logs/app.log&quot;</div><div class="line">        filePattern=&quot;logs/app-%i.log&quot;&gt;</div><div class="line">            &lt;PatternLayout&gt;</div><div class="line">                &lt;Pattern&gt;%d %p %c&#123;1.&#125; [%t] %m%n&lt;/Pattern&gt;</div><div class="line">            &lt;/PatternLayout&gt;</div><div class="line">            &lt;Policies&gt;</div><div class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;10KB&quot;/&gt;</div><div class="line">            &lt;/Policies&gt;</div><div class="line">            &lt;DefaultRolloverStrategy max=&quot;3&quot;/&gt;</div><div class="line">        &lt;/RollingFile&gt;</div><div class="line">    &lt;/Appenders&gt;</div><div class="line">    &lt;Loggers&gt;</div><div class="line">        &lt;Root level=&quot;trace&quot;&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;Console&quot;/&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line">        &lt;/Root&gt;</div><div class="line">    &lt;/Loggers&gt;</div><div class="line">&lt;/Configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>filePattern=”logs/app-%i.log”，其余配置同上。<br>每次触发rollover时，将按照如下方式对文件进行rollover。</p>
+<table>
+<thead>
+<tr>
+<th>第X次rollover</th>
+<th>当前用于写入log的文件</th>
+<th>归档的文件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>app.log</td>
+<td>-</td>
+<td>所有的log都写进app.log中</td>
+</tr>
+<tr>
+<td>1</td>
+<td>app.log</td>
+<td>app-1.log</td>
+<td>当app.log的size达到10KB，触发第1次rollover，app.log被重命名为app-1.log。新的app.log被创建出来，用于写入log</td>
+<td>当app.log的size达到10KB，触发第2次rollover，app.log被重命名为app-2.log。新的app.log被创建出来，用于写入log</td>
+</tr>
+<tr>
+<td>2</td>
+<td>app.log</td>
+<td>app-1.log<br>app-2.log</td>
+<td>当app.log的size达到10KB，触发第2次rollover，app.log被重命名为app-2.log。新的app.log被创建出来，用于写入log</td>
+</tr>
+<tr>
+<td>3</td>
+<td>app.log</td>
+<td>app-1.log<br>app-2.log<br>app-3.log</td>
+<td>当app.log的size达到10KB，触发第3次rollover，app.log被重命名为app-3.log。新的app.log被创建出来，用于写入log</td>
+</tr>
+<tr>
+<td>4</td>
+<td>app.log</td>
+<td>app-1.log<br>app-2.log<br>app-3.log</td>
+<td>当app.log的size达到10KB，触发第4次rollover，app-1.log被删除(即最初的、最旧的app.log)。app-2.log被重命名为app-1.log，app-3.log被重命名为app-2.log，app.log被重命名为app-3.log。新的app.log被创建出来，用于写入log</td>
+</tr>
+</tbody>
+</table>
+<p><strong>情况3：如果filePattern中既含有date/time pattern，又含有%i计数器 </strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;Configuration status=&quot;trace&quot; name=&quot;MyApp&quot; packages=&quot;&quot;&gt;</div><div class="line">    &lt;Appenders&gt;</div><div class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</div><div class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot; /&gt;</div><div class="line">        &lt;/Console&gt;</div><div class="line">        &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;logs/app.log&quot;</div><div class="line">        filePattern=&quot;logs/app-%d&#123;yyyy-MM-dd HH-mm&#125;-%i.log&quot;&gt;</div><div class="line">            &lt;PatternLayout&gt;</div><div class="line">                &lt;Pattern&gt;%d %p %c&#123;1.&#125; [%t] %m%n&lt;/Pattern&gt;</div><div class="line">            &lt;/PatternLayout&gt;</div><div class="line">            &lt;Policies&gt;</div><div class="line">                &lt;TimeBasedTriggeringPolicy /&gt;</div><div class="line">                &lt;SizeBasedTriggeringPolicy size=&quot;10KB&quot;/&gt;</div><div class="line">            &lt;/Policies&gt;</div><div class="line">            &lt;DefaultRolloverStrategy max=&quot;3&quot;/&gt;</div><div class="line">        &lt;/RollingFile&gt;</div><div class="line">    &lt;/Appenders&gt;</div><div class="line">    &lt;Loggers&gt;</div><div class="line">        &lt;Root level=&quot;trace&quot;&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;Console&quot;/&gt;</div><div class="line">            &lt;AppenderRef ref=&quot;RollingFile&quot;/&gt;</div><div class="line">        &lt;/Root&gt;</div><div class="line">    &lt;/Loggers&gt;</div><div class="line">&lt;/Configuration&gt;</div></pre></td></tr></table></figure></p>
+<p>filePattern=”logs/app-%d{yyyy-MM-dd HH-mm}-%i.log”,同时指定了TimeBasedTriggeringPolicy和SizeBasedTriggeringPolicy的触发策略，每1分钟或者文件大小达到10KB，将触发rollover。<br>每次触发rollover时，将按照如下方式对文件进行rollover。</p>
+<p>| 第X次rollover | 当前用于写入log的文件 | 归档的文件 | 描述 |<br>| — | — | — | — |</p>
 
       
     </div>
