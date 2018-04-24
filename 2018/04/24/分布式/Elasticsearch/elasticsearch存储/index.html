@@ -5,18 +5,18 @@
   
   <title>elasticsearch存储 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="elasticsearch存储模块简单文件系统存储index.store.type = simplefs 新I/O文件系统存储index.store.type = niofs MMap文件系统存储index.store.type = mmapfs 内存存储index.store.type = memory">
+  <meta name="description" content="elasticsearch存储模块持久化存储简单文件系统存储index.store.type = simplefs 新I/O文件系统存储index.store.type = niofs MMap文件系统存储index.store.type = mmapfs 内存存储index.store.type = memory 缓存过滤器缓存负责缓存查询中使用的过滤器的执行结果 字段数据缓存将这个字段的所有数">
 <meta name="keywords" content="搜索,准实时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="elasticsearch存储">
 <meta property="og:url" content="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="elasticsearch存储模块简单文件系统存储index.store.type = simplefs 新I/O文件系统存储index.store.type = niofs MMap文件系统存储index.store.type = mmapfs 内存存储index.store.type = memory">
+<meta property="og:description" content="elasticsearch存储模块持久化存储简单文件系统存储index.store.type = simplefs 新I/O文件系统存储index.store.type = niofs MMap文件系统存储index.store.type = mmapfs 内存存储index.store.type = memory 缓存过滤器缓存负责缓存查询中使用的过滤器的执行结果 字段数据缓存将这个字段的所有数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-24T03:46:09.000Z">
+<meta property="og:updated_time" content="2018-04-24T07:06:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch存储">
-<meta name="twitter:description" content="elasticsearch存储模块简单文件系统存储index.store.type = simplefs 新I/O文件系统存储index.store.type = niofs MMap文件系统存储index.store.type = mmapfs 内存存储index.store.type = memory">
+<meta name="twitter:description" content="elasticsearch存储模块持久化存储简单文件系统存储index.store.type = simplefs 新I/O文件系统存储index.store.type = niofs MMap文件系统存储index.store.type = mmapfs 内存存储index.store.type = memory 缓存过滤器缓存负责缓存查询中使用的过滤器的执行结果 字段数据缓存将这个字段的所有数">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -112,13 +112,15 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#elasticsearch存储模块"><span class="toc-number">1.</span> <span class="toc-text">elasticsearch存储模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单文件系统存储"><span class="toc-number">1.1.</span> <span class="toc-text">简单文件系统存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新I-O文件系统存储"><span class="toc-number">1.2.</span> <span class="toc-text">新I/O文件系统存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MMap文件系统存储"><span class="toc-number">1.3.</span> <span class="toc-text">MMap文件系统存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存存储"><span class="toc-number">1.4.</span> <span class="toc-text">内存存储</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#elasticsearch存储模块"><span class="toc-number">1.</span> <span class="toc-text">elasticsearch存储模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#持久化存储"><span class="toc-number">1.1.</span> <span class="toc-text">持久化存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单文件系统存储"><span class="toc-number">1.1.1.</span> <span class="toc-text">简单文件系统存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新I-O文件系统存储"><span class="toc-number">1.1.2.</span> <span class="toc-text">新I/O文件系统存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MMap文件系统存储"><span class="toc-number">1.1.3.</span> <span class="toc-text">MMap文件系统存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存存储"><span class="toc-number">1.1.4.</span> <span class="toc-text">内存存储</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存"><span class="toc-number">1.2.</span> <span class="toc-text">缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤器缓存"><span class="toc-number">1.2.1.</span> <span class="toc-text">过滤器缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字段数据缓存"><span class="toc-number">1.2.2.</span> <span class="toc-text">字段数据缓存</span></a></li></ol></li></ol></li></ol>
         </div>
     
-        <h1 id="elasticsearch存储模块"><a href="#elasticsearch存储模块" class="headerlink" title="elasticsearch存储模块"></a>elasticsearch存储模块</h1><h2 id="简单文件系统存储"><a href="#简单文件系统存储" class="headerlink" title="简单文件系统存储"></a>简单文件系统存储</h2><p>index.store.type = simplefs</p>
-<h2 id="新I-O文件系统存储"><a href="#新I-O文件系统存储" class="headerlink" title="新I/O文件系统存储"></a>新I/O文件系统存储</h2><p>index.store.type = niofs</p>
-<h2 id="MMap文件系统存储"><a href="#MMap文件系统存储" class="headerlink" title="MMap文件系统存储"></a>MMap文件系统存储</h2><p>index.store.type = mmapfs</p>
-<h2 id="内存存储"><a href="#内存存储" class="headerlink" title="内存存储"></a>内存存储</h2><p>index.store.type = memory</p>
+        <h1 id="elasticsearch存储模块"><a href="#elasticsearch存储模块" class="headerlink" title="elasticsearch存储模块"></a>elasticsearch存储模块</h1><h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><h3 id="简单文件系统存储"><a href="#简单文件系统存储" class="headerlink" title="简单文件系统存储"></a>简单文件系统存储</h3><p>index.store.type = simplefs</p>
+<h3 id="新I-O文件系统存储"><a href="#新I-O文件系统存储" class="headerlink" title="新I/O文件系统存储"></a>新I/O文件系统存储</h3><p>index.store.type = niofs</p>
+<h3 id="MMap文件系统存储"><a href="#MMap文件系统存储" class="headerlink" title="MMap文件系统存储"></a>MMap文件系统存储</h3><p>index.store.type = mmapfs</p>
+<h3 id="内存存储"><a href="#内存存储" class="headerlink" title="内存存储"></a>内存存储</h3><p>index.store.type = memory</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h3 id="过滤器缓存"><a href="#过滤器缓存" class="headerlink" title="过滤器缓存"></a>过滤器缓存</h3><p>负责缓存查询中使用的过滤器的执行结果</p>
+<h3 id="字段数据缓存"><a href="#字段数据缓存" class="headerlink" title="字段数据缓存"></a>字段数据缓存</h3><p>将这个字段的所有数据都缓存起来，代价很高</p>
 
       
     </div>
