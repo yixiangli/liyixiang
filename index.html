@@ -82,6 +82,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-语言/Java/J2EE/编码规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/06/语言/Java/J2EE/编码规范/">编码规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/05/06/语言/Java/J2EE/编码规范/" class="article-date">
+  <time datetime="2018-05-06T12:21:07.000Z" itemprop="datePublished">2018-05-06</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/J2EE/">J2EE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="一些编码规范"><a href="#一些编码规范" class="headerlink" title="一些编码规范"></a>一些编码规范</h1><h2 id="XXO的概念"><a href="#XXO的概念" class="headerlink" title="XXO的概念"></a>XXO的概念</h2><h3 id="DAO"><a href="#DAO" class="headerlink" title="DAO"></a>DAO</h3><p>　　DAO（Data Access Object）数据访问对象，它是一个面向对象的数据库接口，负责持久层的操作，为业务层提供接口，主要用来封装对数据库的访问，常见操作无外乎 CURD。我们也可以认为一个 DAO 对应一个 POJO 的对象，它位于业务逻辑与数据库资源中间，可以结合 PO 对数据库进行相关的操作。</p>
+<h3 id="PO"><a href="#PO" class="headerlink" title="PO"></a>PO</h3><p>　　PO（Persistent Object）持久层对象，它是由一组属性和属性的get和set方法组成，最简单的 PO 就是对应数据库中某个表中的一条记录（也就是说，我们可以将数据库表中的一条记录理解为一个持久层对象），多个记录可以用 PO 的集合，PO 中应该不包含任何对数据库的操作。PO 的属性是跟数据库表的字段一一对应的，此外 PO 对象需要实现序列化接口。</p>
+<h3 id="BO"><a href="#BO" class="headerlink" title="BO"></a>BO</h3><p>　　BO（Business Object）业务层对象，是简单的真实世界的软件抽象，通常位于中间层。BO 的主要作用是把业务逻辑封装为一个对象，这个对象可以包括一个或多个其它的对象。举一个求职简历的例子，每份简历都包括教育经历、项目经历等，我们可以让教育经历和项目经历分别对应一个 PO，这样在我们建立对应求职简历的 BO 对象处理简历的时候，让每个 BO 都包含这些 PO 即可。</p>
+<h3 id="VO"><a href="#VO" class="headerlink" title="VO"></a>VO</h3><p>　　VO（Value Object）值对象，通常用于业务层之间的数据传递，和 PO 一样也是仅仅包含数据而已，但 VO 应该是抽象出的业务对象，可以和表对应，也可以不对应，这根据业务的需要。 如果锅碗瓢盆分别为对应的业务对象的话，那么整个碗柜就是一个值对象。此外，VO 也可以称为页面对象，如果称为页面对象的话，那么它所代表的将是整个页面展示层的对象，也可以由需要的业务对象进行组装而来。</p>
+<h3 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h3><p>　　DTO（Data Transfer Object）数据传输对象，主要用于远程调用等需要大量传输对象的地方，比如我们有一个交易订单表，含有 25 个字段，那么其对应的 PO 就有 25 个属性，但我们的页面上只需要显示 5 个字段，因此没有必要把整个 PO 对象传递给客户端，这时我们只需把仅有 5 个属性的 DTO 把结果传递给客户端即可，而且如果用这个对象来对应界面的显示对象，那此时它的身份就转为 VO。使用 DTO 的好处有两个，一是能避免传递过多的无用数据，提高数据的传输速度；二是能隐藏后端的表结构。常见的用法是：将请求的数据或属性组装成一个 RequestDTO，再将响应的数据或属性组装成一个 ResponseDTO.</p>
+<h3 id="POJO"><a href="#POJO" class="headerlink" title="POJO"></a>POJO</h3><p>　　POJO（Plain Ordinary Java Object）简单的 Java 对象，实际就是普通的 JavaBeans，是为了避免和 EJB（Enterprise JavaBean）混淆所创造的简称。POJO 实质上可以理解为简单的实体类，其中有一些属性及其getter和setter方法的类，没有业务逻辑，也不允许有业务方法，也不能携带有connection之类的方法。POJO 是 JavaEE 世界里面最灵活的对象，在简单系统中，如果从数据库到页面展示都是 POJO 的话，它可以是 DTO；如果从数据库中到业务处理中都是 POJO 的话，它可以是 BO；如果从数据库到整个页面的展示的话，它也可以是 VO. 
+　　</p>
+<h3 id="一张图总结"><a href="#一张图总结" class="headerlink" title="一张图总结"></a>一张图总结</h3><p><img src="/img/code_standard.png" alt="编码规范"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/" data-id="cjguseso600d1ubca9qbqzjce" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/05/06/语言/Java/J2EE/编码规范/">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-分布式/Elasticsearch/elasticsearch基础知识" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -121,7 +178,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjgdwfuxx004g9ucatu6tuxf3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjgusesks004jubca2r3jy2o8" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/">评论</a>
@@ -179,7 +236,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjgdwfuy2004l9ucazdof37iy" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjguseskq004gubcaokywb95l" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/">评论</a>
@@ -238,7 +295,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" data-id="cjgdwfuxy004h9ucar6txl2ud" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" data-id="cjguseskr004hubcaq5afu1vc" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch存储/">评论</a>
@@ -294,67 +351,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/" data-id="cjgdwfuxz004j9ucawktmfulc" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/" data-id="cjgusesku004lubcaynb9lm52" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/准实时/">准实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-开源组件/Log4j2中RollingFile的文件滚动更新机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/">Log4j2中RollingFile的文件滚动更新机制</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/" class="article-date">
-  <time datetime="2018-01-29T07:12:25.000Z" itemprop="datePublished">2018-01-29</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/开源组件/">开源组件</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="什么是RollingFile"><a href="#什么是RollingFile" class="headerlink" title="什么是RollingFile"></a>什么是RollingFile</h1><p>RollingFileAppender是Log4j2中的一种能够实现日志文件滚动更新(rollover)的Appender。rollover的意思是当满足一定条件(如文件达到了指定的大小，达到了指定的时间)后，就重命名原日志文件进行归档，并生成新的日志文件用于log写入。如果还设置了一定时间内允许归档的日志文件的最大数量，将对过旧的日志文件进行删除操作。<br>RollingFile实现日志文件滚动更新，依赖于TriggeringPolicy和RolloverStrategy。其中，TriggeringPolicy为触发策略，其决定了何时触发日志文件的rollover，即When。RolloverStrategy为滚动更新策略，其决定了当触发了日志文件的rollover时，如何进行文件的rollover，即How。<br>Log4j2提供了默认的rollover策略DefaultRolloverStrategy。<br>下面通过一个log4j2.xml文件配置简单了解RollingFile的配置。</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/" data-id="cjgdwfuvk00149ucaordzik9u" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Log4j/">Log4j</a></li></ul>
 
     </footer>
   </div>
@@ -394,7 +397,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源组件/">开源组件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源组件/">开源组件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -405,6 +408,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/05/06/语言/Java/J2EE/编码规范/">编码规范</a>
+          </li>
         
           <li>
             <a href="/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/">elasticsearch基础知识</a>
@@ -420,10 +427,6 @@
         
           <li>
             <a href="/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/">elasticsearch安装与集群搭建</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/">Log4j2中RollingFile的文件滚动更新机制</a>
           </li>
         
       </ul>
