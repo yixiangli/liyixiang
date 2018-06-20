@@ -5,18 +5,20 @@
   
   <title>分布式事务理论 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#">
+  <meta name="description" content="2PC-传统的分布式事务协议说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结">
 <meta name="keywords" content="2PC,CAP,TCC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式事务理论">
 <meta property="og:url" content="https://yixiangli.github.io/2017/04/27/分布式/分布式事务理论/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="#">
+<meta property="og:description" content="2PC-传统的分布式事务协议说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-08T08:07:08.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/2pc.png">
+<meta property="og:updated_time" content="2018-06-20T06:20:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式事务理论">
-<meta name="twitter:description" content="#">
+<meta name="twitter:description" content="2PC-传统的分布式事务协议说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/2pc.png">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -112,10 +114,31 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2PC-传统的分布式事务协议"><span class="toc-number">1.</span> <span class="toc-text">2PC-传统的分布式事务协议</span></a></li></ol>
         </div>
     
-        <p># </p>
+        <h1 id="2PC-传统的分布式事务协议"><a href="#2PC-传统的分布式事务协议" class="headerlink" title="2PC-传统的分布式事务协议"></a>2PC-传统的分布式事务协议</h1><pre><code>说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结果，并最终指示这些节点是否要把操作结果进行真正的提交。
+</code></pre><p>如下图所示，整个过程可有协调者（事务管理器）和若干事务参与者两种角色，这里的事务参与者可理解为各节点的数据库。<br><a id="more"></a><br><img src="/img/2pc.png" alt="代理"></p>
+<p>第一阶段：准备阶段</p>
+<ol>
+<li>协调者向所有的参与者发送事务执行请求，并等待参与者反馈事务执行结果。</li>
+<li>事务参与者收到请求之后，执行事务，但不提交，并记录事务日志。</li>
+<li>参与者将自己事务执行情况反馈给协调者，同时阻塞等待协调者的后续指令。</li>
+</ol>
+<p>第二阶段：事务提交阶段<br> 在第一阶段协调者的询问之后，各个参与者会回复自己事务的执行情况，这时候存在三种可能：</p>
+<ol>
+<li>所有的参与者回复能够正常执行事务。</li>
+<li>一个或多个参与者回复事务执行失败。</li>
+<li>协调者等待超时。</li>
+</ol>
+<p>对于第一种情况，协调者将向所有的参与者发出提交事务的通知，皆大欢喜。对于第二、三种情况，协调者均认为参与者无法正常成功执行事务，为了整个集群数据的一致性，所以要向各个参与者发送事务回滚通知。</p>
+<p>两阶段提交协议解决的是分布式数据库数据强一致性问题，其原理简单，但是缺点也是显而易见的，主要缺点如下：</p>
+<p><strong>单点问题：</strong>协调者在整个两阶段提交过程中扮演着举足轻重的作用，一旦协调者所在服务器宕机，那么就会影响整个数据库集群的正常运行，比如在第二阶段中，如果协调者因为故障不能正常发送事务提交或回滚通知，那么参与者们将一直处于阻塞状态，整个数据库集群将无法提供服务。</p>
+<p><strong>同步阻塞：</strong>两阶段提交执行过程中，所有的参与者都需要听从协调者的统一调度，期间处于阻塞状态而不能从事其他操作，这样效率及其低下。</p>
+<p><strong>数据不一致性：</strong>两阶段提交协议虽然为分布式数据强一致性所设计，但仍然存在数据不一致性的可能，比如在第二阶段中，假设协调者发出了事务commit的通知，但是因为网络问题该通知仅被一部分参与者所收到并执行了commit操作，其余的参与者将会因为没有收到通知一直处于阻塞状态，这就会导致数据不一致。</p>
+<p>总体来说，基于XA（分布式事务规范）协议的两阶段提交原理还是比较简单，诸如Oracle等主流商用数据库也普遍支持XA协议，mysql 虽然也支持，但并不太理想，此外许多nosql也没有支持XA。</p>
+<p>早期单点应用中如果有跨库业务场景，那对java分布式事务开源组件 atomikos 一定会有所了解的。它比较适合传统的单体应用，在同一个方法中存在跨库操作的情况。但分布式事务对性能的影响会比较大，不适合高并发和高性能要求的场景。</p>
+<p>Atomikos 是一个为Java平台提供增值服务的并且开源的事务管理器，为XA提供内置的JDBC适配器。</p>
 
       
     </div>
@@ -135,19 +158,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/27/分布式/负载均衡/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/27/基础知识集锦/网络安全/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          负载均衡
+          网络安全
         
       </div>
     </a>
   
   
-    <a href="/2017/04/25/分布式/Zookeeper/Zookeeper理论/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/04/27/分布式/负载均衡/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zookeeper理论</div>
+      <div class="article-nav-title">负载均衡</div>
     </a>
   
 </nav>
