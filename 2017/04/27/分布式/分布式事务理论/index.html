@@ -14,7 +14,8 @@
 <meta property="og:description" content="2PC-传统的分布式事务协议说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/2pc.png">
-<meta property="og:updated_time" content="2018-06-20T06:20:17.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/cap.png">
+<meta property="og:updated_time" content="2018-06-20T06:49:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式事务理论">
 <meta name="twitter:description" content="2PC-传统的分布式事务协议说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结">
@@ -114,32 +115,53 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2PC-传统的分布式事务协议"><span class="toc-number">1.</span> <span class="toc-text">2PC-传统的分布式事务协议</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2PC-传统的分布式事务协议"><span class="toc-number">1.</span> <span class="toc-text">2PC-传统的分布式事务协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CAP理论"><span class="toc-number">2.</span> <span class="toc-text">CAP理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一致性模型"><span class="toc-number">2.1.</span> <span class="toc-text">一致性模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BASE理论"><span class="toc-number">3.</span> <span class="toc-text">BASE理论</span></a></li></ol>
         </div>
     
-        <h1 id="2PC-传统的分布式事务协议"><a href="#2PC-传统的分布式事务协议" class="headerlink" title="2PC-传统的分布式事务协议"></a>2PC-传统的分布式事务协议</h1><pre><code>说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结果，并最终指示这些节点是否要把操作结果进行真正的提交。
-</code></pre><p>如下图所示，整个过程可有协调者（事务管理器）和若干事务参与者两种角色，这里的事务参与者可理解为各节点的数据库。<br><a id="more"></a><br><img src="/img/2pc.png" alt="代理"></p>
-<p>第一阶段：准备阶段</p>
+        <h1 id="2PC-传统的分布式事务协议"><a href="#2PC-传统的分布式事务协议" class="headerlink" title="2PC-传统的分布式事务协议"></a>2PC-传统的分布式事务协议</h1><p>说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结果，并最终指示这些节点是否要把操作结果进行真正的提交。</p>
+<p>如下图所示，整个过程可有协调者（事务管理器）和若干事务参与者两种角色，这里的事务参与者可理解为各节点的数据库。<br><a id="more"></a><br><img src="/img/2pc.png" alt="两阶段提交"></p>
+<p><strong>第一阶段：准备阶段</strong></p>
 <ol>
 <li>协调者向所有的参与者发送事务执行请求，并等待参与者反馈事务执行结果。</li>
 <li>事务参与者收到请求之后，执行事务，但不提交，并记录事务日志。</li>
 <li>参与者将自己事务执行情况反馈给协调者，同时阻塞等待协调者的后续指令。</li>
 </ol>
-<p>第二阶段：事务提交阶段<br> 在第一阶段协调者的询问之后，各个参与者会回复自己事务的执行情况，这时候存在三种可能：</p>
+<p><strong>第二阶段：事务提交阶段</strong><br> 在第一阶段协调者的询问之后，各个参与者会回复自己事务的执行情况，这时候存在三种可能：</p>
 <ol>
 <li>所有的参与者回复能够正常执行事务。</li>
 <li>一个或多个参与者回复事务执行失败。</li>
 <li>协调者等待超时。</li>
 </ol>
-<p>对于第一种情况，协调者将向所有的参与者发出提交事务的通知，皆大欢喜。对于第二、三种情况，协调者均认为参与者无法正常成功执行事务，为了整个集群数据的一致性，所以要向各个参与者发送事务回滚通知。</p>
-<p>两阶段提交协议解决的是分布式数据库数据强一致性问题，其原理简单，但是缺点也是显而易见的，主要缺点如下：</p>
+<p>对于第一种情况，协调者将向所有的参与者发出提交事务的通知，皆大欢喜。对于第二、三种情况，协调者均认为参与者无法正常成功执行事务，为了整个集群数据的一致性，所以要向各个参与者发送事务回滚通知。两阶段提交协议解决的是分布式数据库数据强一致性问题，其原理简单，但是缺点也是显而易见的，主要缺点如下：</p>
 <p><strong>单点问题：</strong>协调者在整个两阶段提交过程中扮演着举足轻重的作用，一旦协调者所在服务器宕机，那么就会影响整个数据库集群的正常运行，比如在第二阶段中，如果协调者因为故障不能正常发送事务提交或回滚通知，那么参与者们将一直处于阻塞状态，整个数据库集群将无法提供服务。</p>
 <p><strong>同步阻塞：</strong>两阶段提交执行过程中，所有的参与者都需要听从协调者的统一调度，期间处于阻塞状态而不能从事其他操作，这样效率及其低下。</p>
 <p><strong>数据不一致性：</strong>两阶段提交协议虽然为分布式数据强一致性所设计，但仍然存在数据不一致性的可能，比如在第二阶段中，假设协调者发出了事务commit的通知，但是因为网络问题该通知仅被一部分参与者所收到并执行了commit操作，其余的参与者将会因为没有收到通知一直处于阻塞状态，这就会导致数据不一致。</p>
-<p>总体来说，基于XA（分布式事务规范）协议的两阶段提交原理还是比较简单，诸如Oracle等主流商用数据库也普遍支持XA协议，mysql 虽然也支持，但并不太理想，此外许多nosql也没有支持XA。</p>
-<p>早期单点应用中如果有跨库业务场景，那对java分布式事务开源组件 atomikos 一定会有所了解的。它比较适合传统的单体应用，在同一个方法中存在跨库操作的情况。但分布式事务对性能的影响会比较大，不适合高并发和高性能要求的场景。</p>
-<p>Atomikos 是一个为Java平台提供增值服务的并且开源的事务管理器，为XA提供内置的JDBC适配器。</p>
-
+<p>总体来说，基于XA（分布式事务规范）协议的两阶段提交原理还是比较简单，诸如Oracle等主流商用数据库也普遍支持XA协议，mysql 虽然也支持，但并不太理想，此外许多nosql也没有支持XA。早期单点应用中如果有跨库业务场景，那对java分布式事务开源组件 atomikos 一定会有所了解的。它比较适合传统的单体应用，在同一个方法中存在跨库操作的情况。但分布式事务对性能的影响会比较大，不适合高并发和高性能要求的场景。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Atomikos 是一个为Java平台提供增值服务的并且开源的事务管理器，为XA提供内置的JDBC适配器。</div></pre></td></tr></table></figure>
+<h1 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h1><p>CAP由 Eric Brewer 在2000年 ACM 会议上提出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">It is impossible for a web service to provide the three following guarantees : Consistency, Availability and Partition-tolerance.</div></pre></td></tr></table></figure></p>
+<p>—— 在分布式系统的设计中，没有一种设计可以同时满足一致性，可用性，分区容错性 3个特性。<br>该猜想在提出两年后被证明成立，成为我们熟知的CAP定理：</p>
+<ul>
+<li><p>Consistency </p>
+<p>all nodes see the same data at the same time</p>
+</li>
+<li><p>Availability </p>
+<p>Reads and writes always succeed                   </p>
+</li>
+<li><p>Partition tolerance </p>
+<p>the system continues to operate despite arbitrary message loss or failure of part of the system          </p>
+</li>
+</ul>
+<p><img src="/img/cap.png" alt="CAP"></p>
+<p>需要明确的一点是，对于一个分布式系统而言，分区容错性是一个最基本的要求。因为既然是一个分布式系统，那么分布式系统中的组件必然需要被部署到不同的节点，否则也就无所谓分布式系统了。现实情况下我们面对的是一个不可靠的网络、有一定概率宕机的设备。尤其是网络问题，可以说是一个必定会出现的异常情况，因此分区容错性也就成为了一个分布式系统必然需要面对和解决的问题。所以对于分布式系统而言，P（分区容错）是一个必须项，而不是可选项。因而，对于分布式系统实践而言，CAP理论更合适的描述应该是：在满足分区容错的前提下，分布式系统永远不能同时满足数据一致性和服务可用性。因此在考虑系统架构时，往往需要把精力花在如何根据业务特点在C（一致性）和A（可用性）之间寻求平衡。如何能既保证数据一致性，又保证系统的性能，是每一个分布式系统都需要重点考虑和权衡的。</p>
+<hr>
+<p>为了更好的说明CAP理论，举个例子：<br>假设一个DB服务，搭建在北京、上海两个机房，两个DB实例同时提供读写服务</p>
+<p><strong>1、选择高可用</strong><br>DB的更新操作是只写主库，成功就返回，通过binlog/oplog回放方式同步至侧边机房<br>主库宕机自动切换从库，系统正常提供读写服务。这样意味着系统最大程度的满足了可用性，但不得不放弃C强一致性。因为更新操作返回成功后，双边机房的DB看到的数据会存在短暂不一致，且在网络故障时，不一致的时间差会很大（仅能保证最终一致性）</p>
+<p><strong>2、选择强一致</strong><br>DB的更新操作同时写入北京、上海两侧机房，同时成功才算成功。故障时降级，停止写入，只提供读取功能。通过这样的设计我们可以保证系统的强一致性，但同时也放弃了了系统的可用性。<br>依据CAP理论，分布式系统必须在可用性（availability）和一致性（consistency）之间做出选择。如果选择提供一致性需要付出在满足一致性之前阻塞其他并发访问的代价，而且这可能要持续一个不确定的时间，这显然是无法接受的。<br>依据目前的成功经验，可用性一般是更好的选择，而在互联网领域的绝大多数的场景，业内通常的做法都是牺牲强一致性来换取系统的高可用性。</p>
+<hr>
+<h2 id="一致性模型"><a href="#一致性模型" class="headerlink" title="一致性模型"></a>一致性模型</h2><p><strong>强一致性</strong><br>当更新操作完成之后，任何多个后续进程或者线程的访问都会返回最新的更新过的值。这种是对用户最友好的，就是用户上一次写什么，下一次就保证能读到什么。但是这种实现对性能影响较大。</p>
+<p><strong>弱一致性</strong><br>系统并不保证续进程或者线程的访问都会返回最新的更新后的值。系统在数据写入成功之后，不承诺立即可以读到最新写入的值，也不会具体的承诺多久之后可以读到。但会尽可能保证在某个时间级别（比如秒级别）之后，可以让数据达到一致性状态。</p>
+<p><strong>最终一致性</strong><br>弱一致性的特定形式。系统保证在没有后续更新的前提下，系统最终返回上一次更新操作的值。在没有故障发生的前提下，不一致窗口的时间主要受通信延迟，系统负载和副本复制情况等因素影响。</p>
+<h1 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h1>
       
     </div>
     <footer class="article-footer">
@@ -158,19 +180,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/27/基础知识集锦/网络安全/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/27/分布式/负载均衡/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          网络安全
+          负载均衡
         
       </div>
     </a>
   
   
-    <a href="/2017/04/27/分布式/负载均衡/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/04/25/分布式/Zookeeper/Zookeeper理论/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">负载均衡</div>
+      <div class="article-nav-title">Zookeeper理论</div>
     </a>
   
 </nav>
