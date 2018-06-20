@@ -82,6 +82,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-解决方案专题/分布式锁" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/20/解决方案专题/分布式锁/">处理JSON大文件的几种方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/06/20/解决方案专题/分布式锁/" class="article-date">
+  <time datetime="2018-06-20T07:00:23.000Z" itemprop="datePublished">2018-06-20</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/解决方案专题/">解决方案专题</a>►<a class="article-category-link" href="/categories/解决方案专题/分布式/">分布式</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>分布式锁，是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作。如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。 【by 维基百科】</p>
+<hr>
+<p>结合目前我做的业务场景，举三个例子</p>
+<p><strong>场景一：</strong> 从前端界面发起一笔创建单据请求，如果前端没有做防重处理，那么可能在某一个时刻会有两笔一样的单据请求同时到达系统后台。</p>
+<p><strong>场景二：</strong> 在App中下订单的时候，点击确认之后，没反应（可能由于接口响应慢），就又点击了几次。在这种情况下，如果无法保证该接口的幂等性，那么将会出现重复下单问题。</p>
+<p><strong>场景三：</strong> 在物流调拨系统中，根据需求计划量允许多次发运，但积累发运量不允许大于需求计划量，那么在分布式系统中可能就会存在同一时刻多条发运请求需要累加实发量，导致最终实发超出计划量</p>
+<hr>
+<p>总结一下，目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论<a href="http://www.fishfly.cn/2017/04/27/分布式/分布式事务理论/" target="_blank" rel="external">分布式事务理论</a>告诉我们“任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。”所以，很多系统在设计之初就要对这三者做出取舍。在互联网领域的绝大多数的场景中，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证“最终一致性”，只要这个最终时间是在用户可以接受的范围内即可。在很多场景中，我们为了保证数据的最终一致性，需要很多的技术方案来支持，比如分布式事务、分布式锁等。有的时候，我们需要保证一个方法在同一时间内只能被同一个线程执行。在单机环境中，Java中其实提供了很多并发处理相关的API，但是这些API在分布式场景中就无能为力了。也就是说单纯的Java Api并不能提供分布式锁的能力。所以针对分布式锁的实现目前有多种方案。</p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ol>
+<li>基于数据库锁或数据库排它锁</li>
+<li>zookeeper分布式锁，基于自增节点</li>
+<li>redis分布式锁，基于setnx命令</li>
+<li>memcache分布式锁，基于add函数</li>
+</ol>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/" data-id="cjimtczfw0020wccamcbxkx5d" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/06/20/解决方案专题/分布式锁/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lock/">lock</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-操作系统/Linux/开发者必备Linux命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -119,7 +185,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/" data-id="cjimrfyv2005stpcade1hudz5" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/" data-id="cjimtczim005wwccabv4jlmh7" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/06/13/操作系统/Linux/开发者必备Linux命令/">评论</a>
@@ -178,7 +244,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/" data-id="cjimrfyxx00d4tpcawd7chihn" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/" data-id="cjimtczl800d8wcca3osg89ho" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/05/06/语言/Java/J2EE/编码规范/">评论</a>
@@ -233,7 +299,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjimrfyu7004itpcaempgfzfp" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjimtczhv004owccaxoxfcxf5" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/">评论</a>
@@ -291,7 +357,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjimrfyu6004htpcapbzk33dr" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjimtczhr004lwccaz90vitf4" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/">评论</a>
@@ -309,69 +375,10 @@
 
 
   
-    <article id="post-分布式/Elasticsearch/elasticsearch存储" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/分布式/Elasticsearch/elasticsearch存储/">elasticsearch存储</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" class="article-date">
-  <time datetime="2018-04-24T03:33:19.000Z" itemprop="datePublished">2018-04-24</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/分布式/">分布式</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="elasticsearch存储模块"><a href="#elasticsearch存储模块" class="headerlink" title="elasticsearch存储模块"></a>elasticsearch存储模块</h1><h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><h3 id="简单文件系统存储"><a href="#简单文件系统存储" class="headerlink" title="简单文件系统存储"></a>简单文件系统存储</h3><p>index.store.type = simplefs</p>
-<h3 id="新I-O文件系统存储"><a href="#新I-O文件系统存储" class="headerlink" title="新I/O文件系统存储"></a>新I/O文件系统存储</h3><p>index.store.type = niofs</p>
-<h3 id="MMap文件系统存储"><a href="#MMap文件系统存储" class="headerlink" title="MMap文件系统存储"></a>MMap文件系统存储</h3><p>index.store.type = mmapfs</p>
-<h3 id="内存存储"><a href="#内存存储" class="headerlink" title="内存存储"></a>内存存储</h3><p>index.store.type = memory</p>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h3 id="过滤器缓存"><a href="#过滤器缓存" class="headerlink" title="过滤器缓存"></a>过滤器缓存</h3><p>负责缓存查询中使用的过滤器的执行结果</p>
-<h3 id="字段数据缓存"><a href="#字段数据缓存" class="headerlink" title="字段数据缓存"></a>字段数据缓存</h3><p>将这个字段的所有数据都缓存起来，代价很高</p>
-<h2 id="段与段合并的理解"><a href="#段与段合并的理解" class="headerlink" title="段与段合并的理解"></a>段与段合并的理解</h2><p>倒排索引是由段（Segment）组成的，段存储在硬盘（Disk）文件中。索引段不是实时更新的，这意味着，段在写入硬盘之后，就不再被更新。在删除文档时，ElasticSearch引擎把已删除的文档的信息存储在一个单独的文件中，在搜索数据时，ElasticSearch引擎首先从段中执行查询，再从查询结果中过滤被删除的文档，这意味着，段中存储着被删除的文档，这使得段中含有”正常文档“的密度降低。多个段可以通过段合并（Segment Merge）操作把“已删除”的文档将从段中物理删除，把未删除的文档合并到一个新段中，新段中没有”已删除文档“，因此，段合并操作能够提高索引的查找速度，但是，段合并是IO密集型操作，需要消耗大量的硬盘IO。</p>
-<h3 id="顺排索引"><a href="#顺排索引" class="headerlink" title="顺排索引"></a>顺排索引</h3><p>在ElasticSearch中，倒排索引的各个段（segment）的数据存储在硬盘文件上，从整个倒排索引的段中读取字段数据之后，ElasticSearch引擎首先反转词条和文档之间的关系，创建文档和词条之间的关系，即创建顺排索引，然后把顺排索引存储在JVM的堆内存中。把倒排索引加载到fielddata结构是一个非常消耗硬盘IO资源的过程，因此，数据一旦被加载到内存，最好保持在内存中，直到索引段(segment)的生命周期结束。默认情况下，倒排索引的每个段(segment)，都会创建相应的fielddata结构，以存储字符类型的分析字段值，但是，需要注意的是，分配的JVM堆内存是有限的，Fileddata把数据存储在内存中，会占用过多的JVM堆内存，甚至耗尽JVM赖以正常运行的内存空间，反而会降低ElasticSearch引擎的查询性能。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" data-id="cjimrfyub004mtpcadbsfq5ol" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch存储/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/准实时/">准实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -396,7 +403,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源组件/">开源组件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源组件/">开源组件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -407,6 +414,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/20/解决方案专题/分布式锁/">处理JSON大文件的几种方案</a>
+          </li>
         
           <li>
             <a href="/2018/06/13/操作系统/Linux/开发者必备Linux命令/">开发者必备Linux命令</a>
@@ -422,10 +433,6 @@
         
           <li>
             <a href="/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/">elasticsearch优化建议</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/24/分布式/Elasticsearch/elasticsearch存储/">elasticsearch存储</a>
           </li>
         
       </ul>
