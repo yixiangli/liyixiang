@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/2pc.png">
 <meta property="og:image" content="https://yixiangli.github.io/img/cap.png">
-<meta property="og:updated_time" content="2018-06-20T06:49:15.000Z">
+<meta property="og:updated_time" content="2018-06-20T06:52:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式事务理论">
 <meta name="twitter:description" content="2PC-传统的分布式事务协议说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结">
@@ -161,7 +161,11 @@
 <h2 id="一致性模型"><a href="#一致性模型" class="headerlink" title="一致性模型"></a>一致性模型</h2><p><strong>强一致性</strong><br>当更新操作完成之后，任何多个后续进程或者线程的访问都会返回最新的更新过的值。这种是对用户最友好的，就是用户上一次写什么，下一次就保证能读到什么。但是这种实现对性能影响较大。</p>
 <p><strong>弱一致性</strong><br>系统并不保证续进程或者线程的访问都会返回最新的更新后的值。系统在数据写入成功之后，不承诺立即可以读到最新写入的值，也不会具体的承诺多久之后可以读到。但会尽可能保证在某个时间级别（比如秒级别）之后，可以让数据达到一致性状态。</p>
 <p><strong>最终一致性</strong><br>弱一致性的特定形式。系统保证在没有后续更新的前提下，系统最终返回上一次更新操作的值。在没有故障发生的前提下，不一致窗口的时间主要受通信延迟，系统负载和副本复制情况等因素影响。</p>
-<h1 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h1>
+<h1 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h1><p>此方案是 eBay 的架构师 Dan Pritchett 在 2008 年 ACM上发表文章提出。<br>BASE理论是对CAP理论的延伸，是对CAP理论中一致性和可用性权衡的结果，其来源于对大规模互联网系统分布式实践的总结， 是基于CAP定理逐步演化而来的。<br>BASE理论的核心思想是：面对大型高可用可扩展的分布式系统，即使无法做到强一致性，但每个应用都可以根据自身业务特点，采用适当的方式来使系统达到最终一致性。<br>其核心指：基本可用（Basically Available）、软状态（ Soft State）、最终一致性（ Eventual Consistency）。</p>
+<p><strong>基本可用（Basically Available）</strong><br>基本可用是指分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用。</p>
+<p><strong>软状态（ Soft State）</strong><br>软状态是指允许系统存在中间状态，而该中间状态不会影响系统整体可用性，即允许系统在不同节点的数据副本之间进行数据同步的过程存在延时。</p>
+<p><strong>最终一致性（ Eventual Consistency）</strong></p>
+
       
     </div>
     <footer class="article-footer">
