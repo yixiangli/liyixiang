@@ -15,7 +15,9 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/2pc.png">
 <meta property="og:image" content="https://yixiangli.github.io/img/cap.png">
-<meta property="og:updated_time" content="2018-06-20T06:52:15.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/tcc.png">
+<meta property="og:image" content="https://yixiangli.github.io/img/tcc_use.png">
+<meta property="og:updated_time" content="2018-06-22T03:20:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式事务理论">
 <meta name="twitter:description" content="2PC-传统的分布式事务协议说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结">
@@ -115,7 +117,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2PC-传统的分布式事务协议"><span class="toc-number">1.</span> <span class="toc-text">2PC-传统的分布式事务协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CAP理论"><span class="toc-number">2.</span> <span class="toc-text">CAP理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一致性模型"><span class="toc-number">2.1.</span> <span class="toc-text">一致性模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BASE理论"><span class="toc-number">3.</span> <span class="toc-text">BASE理论</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2PC-传统的分布式事务协议"><span class="toc-number">1.</span> <span class="toc-text">2PC-传统的分布式事务协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CAP理论"><span class="toc-number">2.</span> <span class="toc-text">CAP理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一致性模型"><span class="toc-number">2.1.</span> <span class="toc-text">一致性模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BASE理论"><span class="toc-number">3.</span> <span class="toc-text">BASE理论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#柔性事务概述"><span class="toc-number">4.</span> <span class="toc-text">柔性事务概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#柔性事务应用"><span class="toc-number">4.1.</span> <span class="toc-text">柔性事务应用</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="2PC-传统的分布式事务协议"><a href="#2PC-传统的分布式事务协议" class="headerlink" title="2PC-传统的分布式事务协议"></a>2PC-传统的分布式事务协议</h1><p>说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结果，并最终指示这些节点是否要把操作结果进行真正的提交。</p>
@@ -165,6 +167,21 @@
 <p><strong>基本可用（Basically Available）</strong><br>基本可用是指分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用。</p>
 <p><strong>软状态（ Soft State）</strong><br>软状态是指允许系统存在中间状态，而该中间状态不会影响系统整体可用性，即允许系统在不同节点的数据副本之间进行数据同步的过程存在延时。</p>
 <p><strong>最终一致性（ Eventual Consistency）</strong></p>
+<h1 id="柔性事务概述"><a href="#柔性事务概述" class="headerlink" title="柔性事务概述"></a>柔性事务概述</h1><p>阿里的柔性事务（遵循BASE理论）是相对于ACID刚性事务而言的。其实就是根据不同的业务场景使用不同的方法，牺牲强一致性，以最终一致性来换取系统的可用性。换句或说，在业务过程中可以容忍一定时间内的数据不一致。<br><img src="/img/tcc.png" alt="TCC"></p>
+<p>阿里所说的柔性事务分为：两阶段型、补偿型、异步确保型、最大努力通知型几种</p>
+<hr>
+<p><strong>1、两阶段型</strong><br>就是分布式事务两阶段提交，对应技术上的XA、JTA/JTS。这是分布式环境下事务处理的典型模式。</p>
+<p><strong>2、补偿型</strong><br>它的理念是提供一种基于补偿的事务处理模型。<br>假设，两个事务 A 与 B 共同构成一个原子性的分布式事务，依次先后执行。<br>A 的事务如果执行顺利，那么事务A就先行提交，如果事务B也执行顺利，则事务B也提交，整个事务就算完成。<br>但是如果事务B执行失败，事务B本身回滚，这时事务A已经被提交，所以需要执行一个补偿操作，将已经提交的事务A执行进行反操作，恢复到未执行前事务A的状态。<br>这样的事务模型，是牺牲了一定的隔离性和一致性的，但是提高了 long-running 事务的可用性。<br>一句话概括：各业务方提供回滚接口。</p>
+<p><strong>3、异步确保型（基于消息的分布式事务）</strong><br>这类事务机制将一个大的分布式事务分成多个本地小事务。首先主事务本地先行提交，然后通过消息中间件通知从事务，从事务从消息中间件获取信息后执行并提交事务并。<br>可以看出这是一种异步事务机制，只能保证最终一致性，但可用性非常高，不会因为故障而发生阻塞。<br>另外，主事务已经先行提交，如果因为从事务无法提交，要回滚主事务还是比较麻烦，所以这种模式只适用于那种理论上大概率会成功的业务情况，也即是说，从事务的失败只可能是由于故障引起，而非业务逻辑原因。</p>
+<p><strong>4、最大努力通知型</strong><br>这个模型比较简单，比如：支付成功后给用户手机推送消息，失败后按策略不断重试即可，理论上认为，它最终一定会成功。</p>
+<hr>
+<h2 id="柔性事务应用"><a href="#柔性事务应用" class="headerlink" title="柔性事务应用"></a>柔性事务应用</h2><p>TCC协议是柔性事务的典型运用，由阿里提出并布道。<br>借鉴传统的2PC，阿里提出了新的TCC协议，TCC协议将一个任务拆分成Try、Confirm、Cancel 三个步骤。<br>正常的流程会先执行Try，如果执行没有问题，再执行Confirm，如果执行过程中出了问题，则执行操作的逆操Cancel。</p>
+<p><img src="/img/tcc_use.png" alt="TCC"></p>
+<p>一个完整的TCC事务参与方包括三部分：</p>
+<p><strong>主业务服务：</strong>主业务服务为整个事务活动的发起方。</p>
+<p><strong>从业务服务：</strong>从业务服务负责提供TCC业务操作，是整个业务活动的操作方。从业务服务必须实现Try、Confirm和Cancel三个接口，供主业务服务调用。<br>由于Confirm和Cancel操作可能被重复调用，故要求Confirm和Cancel两个接口必须是幂等的。</p>
+<p><strong>业务活动管理器：</strong>业务活动管理器管理控制整个业务活动，包括记录维护TCC全局事务的事务状态和每个从业务服务的子事务状态，并在业务活动提交时确认所有的TCC型操作的confirm操作，在业务活动取消时调用所有TCC型操作的cancel操作</p>
+<p>可见整个TCC事务对于主业务服务来说是透明的，它只需要负责发起事务，并告诉事务管理器参与者及其参与顺序，剩余的事则由事务管理器协调各个从业务服务各自干去处理。<br>从流程上讲，它是基于一个两阶段的提交协议，只不过它把数据层的两阶段协议放在了应用层实现。<br>但是，在执行出现问题的时候，有一定的自我修复能力，如果任何一个参与者出现了问题，协调者通过执行逆操作来取消之前的操作，达到最终的一致状态。 可以说，它的理念是提供一种基于补偿的事务处理模型。<br>所以说，他是一种基于补偿型及两阶段型的混合模式。<br>TCC事务协议，实际上把数据库层的二阶段提交上提到了应用层来实现，对于数据库来说是一阶段提交，规避了数据库层的2PC性能低下问题。<br>但是，TCC需要较的高开发成本，首先每个子业务都需要有相应的 try、comfirm、Cancel操作，实现相应的补偿逻辑，且对业务代码侵入严重；<br>除此之外，还要考虑，完成一个完善的TCC事务管理器所需要付出的代价。</p>
 
       
     </div>
