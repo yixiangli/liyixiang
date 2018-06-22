@@ -90,7 +90,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/20/解决方案专题/分布式锁/">处理JSON大文件的几种方案</a>
+      <a class="article-title" href="/2018/06/20/解决方案专题/分布式锁/">分布式锁</a>
     </h1>
   
 
@@ -108,29 +108,19 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-      	<!-- Table of Contents -->
-    
         <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>分布式锁，是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作。如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。 【by 维基百科】</p>
 <hr>
-<p>结合目前我做的业务场景，举三个例子</p>
-<p><strong>场景一：</strong> 从前端界面发起一笔创建单据请求，如果前端没有做防重处理，那么可能在某一个时刻会有两笔一样的单据请求同时到达系统后台。</p>
-<p><strong>场景二：</strong> 在App中下订单的时候，点击确认之后，没反应（可能由于接口响应慢），就又点击了几次。在这种情况下，如果无法保证该接口的幂等性，那么将会出现重复下单问题。</p>
-<p><strong>场景三：</strong> 在物流调拨系统中，根据需求计划量允许多次发运，但积累发运量不允许大于需求计划量，那么在分布式系统中可能就会存在同一时刻多条发运请求需要累加实发量，导致最终实发超出计划量</p>
-<hr>
-<p>总结一下，目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论<a href="http://www.fishfly.cn/2017/04/27/分布式/分布式事务理论/" target="_blank" rel="external">分布式事务理论</a>告诉我们“任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。”所以，很多系统在设计之初就要对这三者做出取舍。在互联网领域的绝大多数的场景中，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证“最终一致性”，只要这个最终时间是在用户可以接受的范围内即可。在很多场景中，我们为了保证数据的最终一致性，需要很多的技术方案来支持，比如分布式事务、分布式锁等。有的时候，我们需要保证一个方法在同一时间内只能被同一个线程执行。在单机环境中，Java中其实提供了很多并发处理相关的API，但是这些API在分布式场景中就无能为力了。也就是说单纯的Java Api并不能提供分布式锁的能力。所以针对分布式锁的实现目前有多种方案。</p>
-<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ol>
-<li>基于数据库锁或数据库排它锁</li>
-<li>zookeeper分布式锁，基于自增节点</li>
-<li>redis分布式锁，基于setnx命令</li>
-<li>memcache分布式锁，基于add函数</li>
-</ol>
-<hr>
-
+<p>结合目前我做的业务场景，举三个例子<br>
+        
+          <p class="article-more-link">
+            <a href="/2018/06/20/解决方案专题/分布式锁/#more">阅读全文</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/" data-id="cjipfnwwa001xmmca2e0u7opr" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/" data-id="cjipfr96r0021n8ca7gkgurbt" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/06/20/解决方案专题/分布式锁/">评论</a>
@@ -185,7 +175,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/" data-id="cjipfnwyx0068mmcavecwpo2c" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/" data-id="cjipfr9960066n8caxoko0m7b" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/06/13/操作系统/Linux/开发者必备Linux命令/">评论</a>
@@ -244,7 +234,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/" data-id="cjipfnx0z00djmmca99rr1mjt" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/" data-id="cjipfr9bg00djn8ca24jnq0sb" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/05/06/语言/Java/J2EE/编码规范/">评论</a>
@@ -299,7 +289,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjipfnwy7004xmmcaq7sixboi" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjipfr98l004wn8caeknocv0i" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/">评论</a>
@@ -357,7 +347,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjipfnwy5004wmmcarppoqyq3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjipfr98l004xn8capmli863g" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/">评论</a>
@@ -416,7 +406,7 @@
       <ul>
         
           <li>
-            <a href="/2018/06/20/解决方案专题/分布式锁/">处理JSON大文件的几种方案</a>
+            <a href="/2018/06/20/解决方案专题/分布式锁/">分布式锁</a>
           </li>
         
           <li>
