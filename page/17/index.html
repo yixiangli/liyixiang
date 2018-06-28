@@ -119,7 +119,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式/行为型/设计模式－行为型/" data-id="cjiyah8240072w7cax8azj6c7" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/16/设计模式/行为型/设计模式－行为型/" data-id="cjiybit0p00720jcaccm0qpw8" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/16/设计模式/行为型/设计模式－行为型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/16/设计模式/行为型/设计模式－行为型/">评论</a>
@@ -174,7 +174,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/语言/Java/J2SE/JavaNIO/" data-id="cjiyah84500dxw7caaj2qhmqb" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/语言/Java/J2SE/JavaNIO/" data-id="cjiybit3700ee0jcahiqz8ztj" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/语言/Java/J2SE/JavaNIO/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/语言/Java/J2SE/JavaNIO/">评论</a>
@@ -226,7 +226,10 @@
 </ol>
 <p>（1）Callable任务执行后可以具有返回值，在任务执行过程中也可以抛出异常，而 Runnable 和 Thread 都不行<br>（2）运行Callable任务可以拿到一个Future对象，表示异步计算的结果。它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果，而 Runable 和 Thread 都不行<br>（3）Thread 是通过实现 Runnable 接口实现的，因此可以认为 Thread 是 Runnable 的子类</p>
 <p>Thread 与 Runnable不再详述，主要介绍下Callable</p>
-<h3 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h3><h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p><img src="/img/thread_state.jpg" alt="线程状态转换图"></p>
+<h3 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h3><p>Callable 接口是使用 ExecutorService.submit 方法调用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">package com.lyx.ag.power.callable;</div><div class="line"></div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.concurrent.*;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @User: liyixiang</div><div class="line"> * @Date: 2018/6/28</div><div class="line"> * @TODO:</div><div class="line"> *      Callable方式实现多线程</div><div class="line">*/</div><div class="line">public class ThreadCaller implements Callable&lt;Boolean&gt; &#123;</div><div class="line"></div><div class="line">    private int id;</div><div class="line"></div><div class="line">    public ThreadCaller(int id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Boolean call() throws Exception &#123;</div><div class="line">        System.out.println(&quot;回调了call函数&quot;);</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">class Test &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        ExecutorService exec = Executors.newCachedThreadPool();</div><div class="line">        ArrayList&lt;Future&lt;Boolean&gt;&gt; results = new ArrayList();</div><div class="line">        for (int i = 0; i &lt; 10; ++i) &#123;</div><div class="line">            results.add(exec.submit(new ThreadCaller(i)));</div><div class="line">        &#125;</div><div class="line">        for (Future&lt;Boolean&gt; fs : results) &#123;</div><div class="line">            try &#123;</div><div class="line">                System.out.println(fs.get());</div><div class="line">            &#125; catch (InterruptedException | ExecutionException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; finally &#123;</div><div class="line">                exec.shutdown();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从这段代码可以看出,Callable具有返回值，通过对Future的处理可以异步获取到线程处理的结果</p>
+<h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p><img src="/img/thread_state.jpg" alt="线程状态转换图"></p>
 <p><strong>Blocked</strong><br>一般只有synchronized这种monitor锁才会出现这种状态</p>
 <p><strong>Waiting</strong><br>无超时的等待，无法自动恢复，必须notify或者Interrupt信号<br>ReentrantLock.lock()的无参方法调用也会Waiting</p>
 <p><strong>TimeWaiting</strong><br>有超时的等待，sleep wait join等指定超时值。</p>
@@ -240,7 +243,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/13/语言/Java/J2SE/Java线程基础/" data-id="cjiyah84m00eiw7casqioj90z" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/13/语言/Java/J2SE/Java线程基础/" data-id="cjiybit3h00ez0jca83v83gls" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/13/语言/Java/J2SE/Java线程基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/语言/Java/J2SE/Java线程基础/">评论</a>
@@ -295,7 +298,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/12/语言/Java/J2SE/Java异常剖析/" data-id="cjiyah84a00ebw7ca8mbp8y1f" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/12/语言/Java/J2SE/Java异常剖析/" data-id="cjiybit3g00ew0jcai3gwskcm" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/12/语言/Java/J2SE/Java异常剖析/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/语言/Java/J2SE/Java异常剖析/">评论</a>
@@ -351,7 +354,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/10/服务化/微服务/SPI/" data-id="cjiyah81t006mw7cam29tpcgp" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/10/服务化/微服务/SPI/" data-id="cjiybit0e006m0jcaf1pdrjyh" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/10/服务化/微服务/SPI/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/10/服务化/微服务/SPI/">评论</a>
