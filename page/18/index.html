@@ -118,7 +118,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/Java中的日志/" data-id="cjiyc35ik00dv1ncazpxgiaej" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/Java中的日志/" data-id="cjj3nsoqp00dxf8cagohnygyw" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/Java中的日志/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/语言/Java/J2SE/Java中的日志/">评论</a>
@@ -195,7 +195,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/JavaIO/" data-id="cjiyc35ij00ds1nca4p1b39zl" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/JavaIO/" data-id="cjj3nsoqo00duf8cazxi4751l" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/08/语言/Java/J2SE/JavaIO/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/语言/Java/J2SE/JavaIO/">评论</a>
@@ -250,7 +250,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/06/语言/Java/JVM/内存模型/" data-id="cjiyc35jg00f41ncayyjlkcax" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/06/语言/Java/JVM/内存模型/" data-id="cjj3nsor900f1f8ca1q2f81f0" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/06/语言/Java/JVM/内存模型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/06/语言/Java/JVM/内存模型/">评论</a>
@@ -297,7 +297,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/04/操作系统/Linux/Linux基本介绍/" data-id="cjiyc35fn00621ncaax63fc77" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/02/04/操作系统/Linux/Linux基本介绍/" data-id="cjj3nsonj006af8caovr6szzn" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/02/04/操作系统/Linux/Linux基本介绍/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/04/操作系统/Linux/Linux基本介绍/">评论</a>
@@ -339,7 +339,13 @@
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="什么是并发"><a href="#什么是并发" class="headerlink" title="什么是并发"></a>什么是并发</h1><h2 id="Java中的并发"><a href="#Java中的并发" class="headerlink" title="Java中的并发"></a>Java中的并发</h2><p>Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueue<br>Java 7 引入Fork/Join</p>
+        <h1 id="什么是并发"><a href="#什么是并发" class="headerlink" title="什么是并发"></a>什么是并发</h1><h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><p>先贴一张类图<br><img src="/img/Lock框架.png" alt="Lock类图"></p>
+<h3 id="Lock-Interface"><a href="#Lock-Interface" class="headerlink" title="Lock Interface"></a>Lock Interface</h3><p>源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public interface Lock &#123;</div><div class="line">    void lock();</div><div class="line">    void lockInterruptibly() throws InterruptedException;  // 可以响应中断</div><div class="line">    boolean tryLock();</div><div class="line">    boolean tryLock(long time, TimeUnit unit) throws InterruptedException;  // 可以响应中断</div><div class="line">    void unlock();</div><div class="line">    Condition newCondition();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>lock() 获取锁。如果锁已被其他线程获取，则进行等待,如果采用Lock，必须主动去释放锁，并且在发生异常时，不会自动释放锁。因此，一般来说，使用Lock必须在try…catch…块中进行，并且将释放锁的操作放在finally块中进行，以保证锁一定被被释放，防止死锁的发生</li>
+</ol>
+<h2 id="Java中的并发"><a href="#Java中的并发" class="headerlink" title="Java中的并发"></a>Java中的并发</h2><p>Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueue<br>Java 7 引入Fork/Join</p>
 <h3 id="什么是AQS"><a href="#什么是AQS" class="headerlink" title="什么是AQS"></a>什么是AQS</h3><p>AQS的全称为（AbstractQueuedSynchronizer），这个类也是在java.util.concurrent.locks下面，是JDK1.5提供的一个基于FIFO等待队列实现的一个用于实现同步器的基础框架，各种同步工具类内部都有一个如下定义的内部结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abstract static class Sync extends AbstractQueuedSynchronizer</div></pre></td></tr></table></figure></p>
         
           <p class="article-more-link">
@@ -350,7 +356,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/24/语言/Java/J2SE/Java并发编程/" data-id="cjiyc35ip00e61ncanaqpl6mg" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/01/24/语言/Java/J2SE/Java并发编程/" data-id="cjj3nsoqt00e8f8cann59k7gi" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/01/24/语言/Java/J2SE/Java并发编程/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/24/语言/Java/J2SE/Java并发编程/">评论</a>
@@ -409,7 +415,7 @@
       <ul>
         
           <li>
-            <a href="/2018/06/28/计划清单/">每日一更</a>
+            <a href="/2018/07/02/计划清单/">每日一更</a>
           </li>
         
           <li>

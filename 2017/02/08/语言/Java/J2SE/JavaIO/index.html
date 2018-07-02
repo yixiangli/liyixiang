@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="I/Oinput/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。 Java中的I/O概念一    输入与输出：一定要清楚，要以程序（计算机）为本体，输入就是向程序输入的流，而输出就是程序向外输出，而不是以人（程序员）为主体。 基础流   类型 输入流 输出流     字节流 InputStream OutputStream   字符流 Reader">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-28T16:05:00.000Z">
+<meta property="og:updated_time" content="2018-06-29T08:34:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaIO">
 <meta name="twitter:description" content="I/Oinput/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。 Java中的I/O概念一    输入与输出：一定要清楚，要以程序（计算机）为本体，输入就是向程序输入的流，而输出就是程序向外输出，而不是以人（程序员）为主体。 基础流   类型 输入流 输出流     字节流 InputStream OutputStream   字符流 Reader">
@@ -112,7 +112,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#I-O"><span class="toc-number">1.</span> <span class="toc-text">I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中的I-O"><span class="toc-number">1.1.</span> <span class="toc-text">Java中的I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础流"><span class="toc-number">1.1.1.</span> <span class="toc-text">基础流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-number">1.1.2.</span> <span class="toc-text">节点流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理流"><span class="toc-number">1.1.3.</span> <span class="toc-text">处理流</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#I-O"><span class="toc-number">1.</span> <span class="toc-text">I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中的I-O"><span class="toc-number">1.1.</span> <span class="toc-text">Java中的I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础流"><span class="toc-number">1.1.1.</span> <span class="toc-text">基础流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-number">1.1.2.</span> <span class="toc-text">节点流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理流"><span class="toc-number">1.1.3.</span> <span class="toc-text">处理流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化"><span class="toc-number">1.2.</span> <span class="toc-text">序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#serialVersionUID"><span class="toc-number">1.2.1.</span> <span class="toc-text">serialVersionUID</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h1><p>input/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。</p>
@@ -235,6 +235,13 @@
 </tr>
 </tbody>
 </table>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><h3 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h3><p>首先介绍Serializable序列化的工作机制：<br>    序列化的时候系统会把当前类的serialVersionUID 写入序列化的存储介质中，当反序列化的时候系统会去检测介质中的serialVersionUID，看它是否和当前类的serialVersionUID一致，如果一致就说明序列化的类的版本和当前类的版本是相同的，这个时候可以成功反序列化，否则就说明当前类和序列化的类相比发生了某些变换，比如成员变量的数量，类型可能发生了改变，这个时候就会抛异常，反序列化失败。</p>
+<p>举个例子<br>比如说你的内存不够用了，那计算机就要将内存里面的一部分对象暂时的保存到硬盘中，等到要用的时候再读入到内存中，硬盘的那部分存储空间就是所谓的虚拟内存,在比如过你要将某个特定的对象保存到文件中，我隔几天在把它拿出来用，那么这时候就要实现Serializable接口，而serialVersionUID就是保证存入硬盘时的对象与读取出来的对象保持一致，否则谁偷偷的改了你的文件内容你都不知道，那你的程序就完犊子了</p>
+<p><strong>生成规则</strong></p>
+<ol>
+<li>一个是默认的1L，比如：private static final long serialVersionUID = 1L;</li>
+<li>一个是根据类名、接口名、成员方法及属性等来生成一个64位的哈希字段，</li>
+</ol>
 
       
     </div>
@@ -318,7 +325,7 @@
       <ul>
         
           <li>
-            <a href="/2018/06/28/计划清单/">每日一更</a>
+            <a href="/2018/07/02/计划清单/">每日一更</a>
           </li>
         
           <li>
