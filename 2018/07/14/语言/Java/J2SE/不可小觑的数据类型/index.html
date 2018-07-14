@@ -5,18 +5,18 @@
   
   <title>不可小觑的数据类型 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 内置数据类型Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。 bytebyte 数据类型是8位、有符号的，以二进制补码表示的整数；最小值是 -128（-2^7）；最大值是 127（2^7-1）；默认值是 0；byte 类型用在大型数组中节约空间，主要代替整数，因为 byte">
+  <meta name="description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 默认值 对应类     整型 byte 8 1 Byte 0 Byte   整型 short 16 2 Short 0 Short   整型 int 32 4 Integer 0 Integer   整型 long 64 8 Long">
 <meta name="keywords" content="数据类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不可小觑的数据类型">
 <meta property="og:url" content="https://yixiangli.github.io/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 内置数据类型Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。 bytebyte 数据类型是8位、有符号的，以二进制补码表示的整数；最小值是 -128（-2^7）；最大值是 127（2^7-1）；默认值是 0；byte 类型用在大型数组中节约空间，主要代替整数，因为 byte">
+<meta property="og:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 默认值 对应类     整型 byte 8 1 Byte 0 Byte   整型 short 16 2 Short 0 Short   整型 int 32 4 Integer 0 Integer   整型 long 64 8 Long">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-14T03:28:55.000Z">
+<meta property="og:updated_time" content="2018-07-14T03:40:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不可小觑的数据类型">
-<meta name="twitter:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 内置数据类型Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。 bytebyte 数据类型是8位、有符号的，以二进制补码表示的整数；最小值是 -128（-2^7）；最大值是 127（2^7-1）；默认值是 0；byte 类型用在大型数组中节约空间，主要代替整数，因为 byte">
+<meta name="twitter:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 默认值 对应类     整型 byte 8 1 Byte 0 Byte   整型 short 16 2 Short 0 Short   整型 int 32 4 Integer 0 Integer   整型 long 64 8 Long">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -112,10 +112,100 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java中的数据类型"><span class="toc-number">1.</span> <span class="toc-text">Java中的数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#内置数据类型"><span class="toc-number">1.1.</span> <span class="toc-text">内置数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#byte"><span class="toc-number">1.1.1.</span> <span class="toc-text">byte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#short："><span class="toc-number">1.1.2.</span> <span class="toc-text">short：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int："><span class="toc-number">1.1.3.</span> <span class="toc-text">int：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#long："><span class="toc-number">1.1.4.</span> <span class="toc-text">long：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float："><span class="toc-number">1.1.5.</span> <span class="toc-text">float：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#double："><span class="toc-number">1.1.6.</span> <span class="toc-text">double：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boolean："><span class="toc-number">1.1.7.</span> <span class="toc-text">boolean：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#char："><span class="toc-number">1.1.8.</span> <span class="toc-text">char：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#转义字符序列"><span class="toc-number">1.1.8.1.</span> <span class="toc-text">转义字符序列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用类型"><span class="toc-number">1.2.</span> <span class="toc-text">引用类型</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java中的数据类型"><span class="toc-number">1.</span> <span class="toc-text">Java中的数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型大宽表"><span class="toc-number">1.1.</span> <span class="toc-text">类型大宽表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置数据类型"><span class="toc-number">1.2.</span> <span class="toc-text">内置数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#byte"><span class="toc-number">1.2.1.</span> <span class="toc-text">byte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#short："><span class="toc-number">1.2.2.</span> <span class="toc-text">short：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int："><span class="toc-number">1.2.3.</span> <span class="toc-text">int：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#long："><span class="toc-number">1.2.4.</span> <span class="toc-text">long：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float："><span class="toc-number">1.2.5.</span> <span class="toc-text">float：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#double："><span class="toc-number">1.2.6.</span> <span class="toc-text">double：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boolean："><span class="toc-number">1.2.7.</span> <span class="toc-text">boolean：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#char："><span class="toc-number">1.2.8.</span> <span class="toc-text">char：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#转义字符序列"><span class="toc-number">1.2.8.1.</span> <span class="toc-text">转义字符序列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用类型"><span class="toc-number">1.3.</span> <span class="toc-text">引用类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换"><span class="toc-number">1.4.</span> <span class="toc-text">转换</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="Java中的数据类型"><a href="#Java中的数据类型" class="headerlink" title="Java中的数据类型"></a>Java中的数据类型</h1><p><strong>Java有两大数据类型:</strong><br>内置数据类型<br>引用数据类型</p>
+<h2 id="类型大宽表"><a href="#类型大宽表" class="headerlink" title="类型大宽表"></a>类型大宽表</h2><p>上来先整一张类型相关的大宽表，方面查阅</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>类型</th>
+<th>大小（bit）</th>
+<th>占用字节</th>
+<th>默认值</th>
+<th>对应类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整型</td>
+<td>byte</td>
+<td>8</td>
+<td>1</td>
+<td>Byte</td>
+<td>0</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>整型</td>
+<td>short</td>
+<td>16</td>
+<td>2</td>
+<td>Short</td>
+<td>0</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>整型</td>
+<td>int</td>
+<td>32</td>
+<td>4</td>
+<td>Integer</td>
+<td>0</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>整型</td>
+<td>long</td>
+<td>64</td>
+<td>8</td>
+<td>Long</td>
+<td>0</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td>float</td>
+<td>32</td>
+<td>4</td>
+<td>Float</td>
+<td>0.0</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td>double</td>
+<td>64</td>
+<td>8</td>
+<td>Double</td>
+<td>0.0</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>布尔型</td>
+<td>boolean</td>
+<td>1</td>
+<td>1</td>
+<td>Boolean</td>
+<td>\u0000</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>字符型</td>
+<td>char</td>
+<td>16</td>
+<td>2</td>
+<td>Character</td>
+<td>false</td>
+<td>Char</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<a id="more"></a>
 <h2 id="内置数据类型"><a href="#内置数据类型" class="headerlink" title="内置数据类型"></a>内置数据类型</h2><p>Java语言提供了八种基本类型。六种数字类型（四个整数型，两个浮点型），一种字符类型，还有一种布尔型。</p>
 <h3 id="byte"><a href="#byte" class="headerlink" title="byte"></a>byte</h3><p>byte 数据类型是8位、有符号的，以二进制补码表示的整数；<br>最小值是 -128（-2^7）；<br>最大值是 127（2^7-1）；<br>默认值是 0；<br>byte 类型用在大型数组中节约空间，主要代替整数，因为 byte 变量占用的空间只有 int 类型的四分之一；<br>例子：byte a = 100，byte b = -50。</p>
 <h3 id="short："><a href="#short：" class="headerlink" title="short："></a>short：</h3><p>short 数据类型是 16 位、有符号的以二进制补码表示的整数<br>最小值是 -32768（-2^15）；<br>最大值是 32767（2^15 - 1）；<br>short 数据类型也可以像 byte 那样节省空间。一个short变量是int型变量所占空间的二分之一；<br>默认值是 0；<br>例子：short s = 1000，short r = -20000。</p>
@@ -188,7 +278,7 @@
 <li>所有引用类型的默认值都是null。</li>
 <li>一个引用变量可以用来引用任何与之兼容的类型。</li>
 </ol>
-
+<h2 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h2>
       
     </div>
     <footer class="article-footer">
