@@ -5,18 +5,18 @@
   
   <title>不可小觑的数据类型 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 默认值 对应类     整型 byte 8 1 Byte 0 Byte   整型 short 16 2 Short 0 Short   整型 int 32 4 Integer 0 Integer   整型 long 64 8 Long">
+  <meta name="description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 对应类 默认值     整型 byte 8 1 Byte 0    整型 short 16 2 Short 0    整型 int 32 4 Integer 0   整型 long 64 8 Long 0    浮点型 float 3">
 <meta name="keywords" content="数据类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不可小觑的数据类型">
 <meta property="og:url" content="https://yixiangli.github.io/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 默认值 对应类     整型 byte 8 1 Byte 0 Byte   整型 short 16 2 Short 0 Short   整型 int 32 4 Integer 0 Integer   整型 long 64 8 Long">
+<meta property="og:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 对应类 默认值     整型 byte 8 1 Byte 0    整型 short 16 2 Short 0    整型 int 32 4 Integer 0   整型 long 64 8 Long 0    浮点型 float 3">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-14T03:42:13.000Z">
+<meta property="og:updated_time" content="2018-07-14T03:57:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不可小觑的数据类型">
-<meta name="twitter:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 默认值 对应类     整型 byte 8 1 Byte 0 Byte   整型 short 16 2 Short 0 Short   整型 int 32 4 Integer 0 Integer   整型 long 64 8 Long">
+<meta name="twitter:description" content="Java中的数据类型Java有两大数据类型:内置数据类型引用数据类型 类型大宽表上来先整一张类型相关的大宽表，方面查阅     类别 类型 大小（bit） 占用字节 对应类 默认值     整型 byte 8 1 Byte 0    整型 short 16 2 Short 0    整型 int 32 4 Integer 0   整型 long 64 8 Long 0    浮点型 float 3">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -112,7 +112,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java中的数据类型"><span class="toc-number">1.</span> <span class="toc-text">Java中的数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型大宽表"><span class="toc-number">1.1.</span> <span class="toc-text">类型大宽表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置数据类型"><span class="toc-number">1.2.</span> <span class="toc-text">内置数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#byte"><span class="toc-number">1.2.1.</span> <span class="toc-text">byte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#short："><span class="toc-number">1.2.2.</span> <span class="toc-text">short：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int："><span class="toc-number">1.2.3.</span> <span class="toc-text">int：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#long："><span class="toc-number">1.2.4.</span> <span class="toc-text">long：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float："><span class="toc-number">1.2.5.</span> <span class="toc-text">float：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#double："><span class="toc-number">1.2.6.</span> <span class="toc-text">double：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boolean："><span class="toc-number">1.2.7.</span> <span class="toc-text">boolean：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#char："><span class="toc-number">1.2.8.</span> <span class="toc-text">char：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#转义字符序列"><span class="toc-number">1.2.8.1.</span> <span class="toc-text">转义字符序列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用类型"><span class="toc-number">1.3.</span> <span class="toc-text">引用类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换"><span class="toc-number">1.4.</span> <span class="toc-text">转换</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java中的数据类型"><span class="toc-number">1.</span> <span class="toc-text">Java中的数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#类型大宽表"><span class="toc-number">1.1.</span> <span class="toc-text">类型大宽表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置数据类型"><span class="toc-number">1.2.</span> <span class="toc-text">内置数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#byte"><span class="toc-number">1.2.1.</span> <span class="toc-text">byte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#short："><span class="toc-number">1.2.2.</span> <span class="toc-text">short：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int："><span class="toc-number">1.2.3.</span> <span class="toc-text">int：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#long："><span class="toc-number">1.2.4.</span> <span class="toc-text">long：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#float："><span class="toc-number">1.2.5.</span> <span class="toc-text">float：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#double："><span class="toc-number">1.2.6.</span> <span class="toc-text">double：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#浮点数精度问题"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">浮点数精度问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boolean："><span class="toc-number">1.2.7.</span> <span class="toc-text">boolean：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#char："><span class="toc-number">1.2.8.</span> <span class="toc-text">char：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#转义字符序列"><span class="toc-number">1.2.8.1.</span> <span class="toc-text">转义字符序列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用类型"><span class="toc-number">1.3.</span> <span class="toc-text">引用类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转换"><span class="toc-number">1.4.</span> <span class="toc-text">转换</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="Java中的数据类型"><a href="#Java中的数据类型" class="headerlink" title="Java中的数据类型"></a>Java中的数据类型</h1><p><strong>Java有两大数据类型:</strong><br>内置数据类型<br>引用数据类型</p>
@@ -125,8 +125,8 @@
 <th>类型</th>
 <th>大小（bit）</th>
 <th>占用字节</th>
-<th>默认值</th>
 <th>对应类</th>
+<th>默认值</th>
 </tr>
 </thead>
 <tbody>
@@ -136,8 +136,7 @@
 <td>8</td>
 <td>1</td>
 <td>Byte</td>
-<td>0</td>
-<td>Byte</td>
+<td>0 </td>
 </tr>
 <tr>
 <td>整型</td>
@@ -145,8 +144,7 @@
 <td>16</td>
 <td>2</td>
 <td>Short</td>
-<td>0</td>
-<td>Short</td>
+<td>0 </td>
 </tr>
 <tr>
 <td>整型</td>
@@ -155,7 +153,6 @@
 <td>4</td>
 <td>Integer</td>
 <td>0</td>
-<td>Integer</td>
 </tr>
 <tr>
 <td>整型</td>
@@ -163,8 +160,7 @@
 <td>64</td>
 <td>8</td>
 <td>Long</td>
-<td>0</td>
-<td>Long</td>
+<td>0 </td>
 </tr>
 <tr>
 <td>浮点型</td>
@@ -172,8 +168,7 @@
 <td>32</td>
 <td>4</td>
 <td>Float</td>
-<td>0.0</td>
-<td>Float</td>
+<td>0.0 </td>
 </tr>
 <tr>
 <td>浮点型</td>
@@ -182,7 +177,6 @@
 <td>8</td>
 <td>Double</td>
 <td>0.0</td>
-<td>Double</td>
 </tr>
 <tr>
 <td>布尔型</td>
@@ -190,8 +184,7 @@
 <td>1</td>
 <td>1</td>
 <td>Boolean</td>
-<td>\u0000</td>
-<td>Boolean</td>
+<td>\u0000 </td>
 </tr>
 <tr>
 <td>字符型</td>
@@ -200,7 +193,6 @@
 <td>2</td>
 <td>Character</td>
 <td>false</td>
-<td>Char</td>
 </tr>
 <tr>
 <td>高精度整型</td>
@@ -225,8 +217,9 @@
 <h3 id="short："><a href="#short：" class="headerlink" title="short："></a>short：</h3><p>short 数据类型是 16 位、有符号的以二进制补码表示的整数<br>最小值是 -32768（-2^15）；<br>最大值是 32767（2^15 - 1）；<br>short 数据类型也可以像 byte 那样节省空间。一个short变量是int型变量所占空间的二分之一；<br>默认值是 0；<br>例子：short s = 1000，short r = -20000。</p>
 <h3 id="int："><a href="#int：" class="headerlink" title="int："></a>int：</h3><p>int 数据类型是32位、有符号的以二进制补码表示的整数；<br>最小值是 -2,147,483,648（-2^31）；<br>最大值是 2,147,483,647（2^31 - 1）；<br>一般地整型变量默认为 int 类型；<br>默认值是 0 ；<br>例子：int a = 100000, int b = -200000。</p>
 <h3 id="long："><a href="#long：" class="headerlink" title="long："></a>long：</h3><p>long 数据类型是 64 位、有符号的以二进制补码表示的整数；<br>最小值是 -9,223,372,036,854,775,808（-2^63）；<br>最大值是 9,223,372,036,854,775,807（2^63 -1）；<br>这种类型主要使用在需要比较大整数的系统上；<br>默认值是 0L；<br>例子： long a = 100000L，Long b = -200000L。<br>“L”理论上不分大小写，但是若写成”l”容易与数字”1”混淆，不容易分辩。所以最好大写。</p>
-<h3 id="float："><a href="#float：" class="headerlink" title="float："></a>float：</h3><p>float 数据类型是单精度、32位、符合IEEE 754标准的浮点数；<br>float 在储存大型浮点数组的时候可节省内存空间；<br>默认值是 0.0f；<br>浮点数不能用来表示精确的值，如货币；<br>例子：float f1 = 234.5f。</p>
-<h3 id="double："><a href="#double：" class="headerlink" title="double："></a>double：</h3><p>double 数据类型是双精度、64 位、符合IEEE 754标准的浮点数；<br>浮点数的默认类型为double类型；<br>double类型同样不能表示精确的值，如货币；<br>默认值是 0.0d；<br>例子：double d1 = 123.4。</p>
+<h3 id="float："><a href="#float：" class="headerlink" title="float："></a>float：</h3><p>float 数据类型是单精度、32位、符合IEEE 754标准的浮点数；<br>float 在储存大型浮点数组的时候可节省内存空间；<br>默认值是 0.0f；<br>浮点数不能用来表示精确的值，如货币；<br>例子：float f1 = 234.5f。<br><strong>float的位数组成</strong><br>1bit（符号位）<br>8bits（指数位）<br>23bits（尾数位）<br><strong>范围</strong><br>float的指数范围为-2^7~2^7-1(即-128~127)，因此float的范围为-2^128 ~ +2^127</p>
+<h3 id="double："><a href="#double：" class="headerlink" title="double："></a>double：</h3><p>double 数据类型是双精度、64 位、符合IEEE 754标准的浮点数；<br>浮点数的默认类型为double类型；<br>double类型同样不能表示精确的值，如货币；<br>默认值是 0.0d；<br>例子：double d1 = 123.4。<br><strong>double的位数组成</strong><br>1bit（符号位）<br>11bits（指数位）<br>52bits（尾数位）<br><strong>范围</strong><br>double的指数范围为-2^10~2^10-1(即-1024~1023)，因此double的范围为-2^1024 ~ +2^1023</p>
+<h4 id="浮点数精度问题"><a href="#浮点数精度问题" class="headerlink" title="浮点数精度问题"></a>浮点数精度问题</h4><p>float和double的精度是由尾数的位数来决定的。浮点数在内存中是按科学计数法来存储的，其整数部分始终是一个隐含着的“1”，由于它是不变的的，故不能对精度造成影响<br>float：2^23 = 8388608，一共七位，这意味着最多能有7位有效数字，但绝对能保证的为6位，也即float的精度为6~7位有效数字；<br>double：2^52 = 4503599627370496，一共16位，同理，double的精度为15~16位。</p>
 <h3 id="boolean："><a href="#boolean：" class="headerlink" title="boolean："></a>boolean：</h3><p>boolean数据类型表示一位的信息；<br>只有两个取值：true 和 false；<br>这种类型只作为一种标志来记录 true/false 情况；<br>默认值是 false；<br>例子：boolean one = true。</p>
 <h3 id="char："><a href="#char：" class="headerlink" title="char："></a>char：</h3><p>char类型是一个单一的 16 位 Unicode 字符；<br>最小值是 \u0000（即为0）；<br>最大值是 \uffff（即为65,535）；<br>char 数据类型可以储存任何字符；<br>例子：char letter = ‘A’;。</p>
 <h4 id="转义字符序列"><a href="#转义字符序列" class="headerlink" title="转义字符序列"></a>转义字符序列</h4><table>
