@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="MySQL隔离级别说到MySQL隔离级别，就不得不提到MySQL的存储引擎 存储引擎MyISAM:5.1及之前默认的存储引擎,不支持事务、外键；只有索引缓存（index buffer）；提供表级锁，只有select语句时不锁，其他情况上锁；适于select多而更新较少的应用，如web 论坛、cms等。 InnoDB：5.1后默认的存储引擎. 支持事务、外键；innode buffer既缓存数据又缓">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-19T07:21:39.000Z">
+<meta property="og:updated_time" content="2018-07-19T07:30:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL隔离级别,锁">
 <meta name="twitter:description" content="MySQL隔离级别说到MySQL隔离级别，就不得不提到MySQL的存储引擎 存储引擎MyISAM:5.1及之前默认的存储引擎,不支持事务、外键；只有索引缓存（index buffer）；提供表级锁，只有select语句时不锁，其他情况上锁；适于select多而更新较少的应用，如web 论坛、cms等。 InnoDB：5.1后默认的存储引擎. 支持事务、外键；innode buffer既缓存数据又缓">
@@ -112,7 +112,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL隔离级别"><span class="toc-number">1.</span> <span class="toc-text">MySQL隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#存储引擎"><span class="toc-number">1.1.</span> <span class="toc-text">存储引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-number">1.2.</span> <span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#锁的特点"><span class="toc-number">1.2.1.</span> <span class="toc-text">锁的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁模式"><span class="toc-number">1.2.2.</span> <span class="toc-text">锁模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#表级锁"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">表级锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#各种锁的适用场景"><span class="toc-number">1.2.3.</span> <span class="toc-text">各种锁的适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁"><span class="toc-number">1.2.4.</span> <span class="toc-text">死锁</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL隔离级别"><span class="toc-number">1.</span> <span class="toc-text">MySQL隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#存储引擎"><span class="toc-number">1.1.</span> <span class="toc-text">存储引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#锁"><span class="toc-number">1.2.</span> <span class="toc-text">锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#锁的特点"><span class="toc-number">1.2.1.</span> <span class="toc-text">锁的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#锁模式"><span class="toc-number">1.2.2.</span> <span class="toc-text">锁模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#表级锁"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">表级锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#行级锁"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">行级锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#各种锁的适用场景"><span class="toc-number">1.2.3.</span> <span class="toc-text">各种锁的适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁"><span class="toc-number">1.2.4.</span> <span class="toc-text">死锁</span></a></li></ol></li></ol></li></ol>
         </div>
     
         <h1 id="MySQL隔离级别"><a href="#MySQL隔离级别" class="headerlink" title="MySQL隔离级别"></a>MySQL隔离级别</h1><p>说到MySQL隔离级别，就不得不提到MySQL的存储引擎</p>
@@ -130,6 +130,7 @@
 </ol>
 <h3 id="锁模式"><a href="#锁模式" class="headerlink" title="锁模式"></a>锁模式</h3><p>锁按功能又可分为读锁、写锁；<br>按共享级别分为：共享锁、排他锁、意向共享锁、意向排他锁。</p>
 <h4 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h4><p>MySQL的表级锁有两种模式：表共享读锁（Table Read Lock）和表独占写锁（Table Write Lock）。<br>MyISAM表的读操作，不会阻塞其他用户对同一表的读请求，但会阻塞对同一表的写请求；对MyISAM表的写操作，则会阻塞其他用户对同一表的读和写操作；MyISAM表的读操作与写操作之间，以及写操作之间都是串行的,因此当一个线程获得对一个表的写锁后，只有持有锁的线程可以对表进行更新操作。其他线程的读、写操作都会等待，直到锁被释放为止。</p>
+<h4 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h4><p>InnoDB实现了以下两种类型的行锁。<br><strong>共享锁（S）：</strong><br>允许一个事务去读一行，阻止其他事务获得相同数据集的排他锁。<br><strong>排他锁（X)：</strong><br>允许获得排他锁的事务更新数据，阻止其他事务取得相同数据集的共享读锁和排他写锁。另外，为了允许行锁和表锁共存，实现多粒度锁机制，InnoDB还有两种内部使用的意向锁（Intention Locks），这两种意向锁都是表锁。<br><strong>意向共享锁（IS）：</strong><br>事务打算给数据行加行共享锁，事务在给一个数据行加共享锁前必须先取得该表的IS锁。<br><strong>意向排他锁（IX）：</strong><br>事务打算给数据行加行排他锁，事务在给一个数据行加排他锁前必须先取得该表的IX锁。</p>
 <h3 id="各种锁的适用场景"><a href="#各种锁的适用场景" class="headerlink" title="各种锁的适用场景"></a>各种锁的适用场景</h3><p>表级锁更适合于以查询为主，只有少量按索引条件更新数据的应用，如Web应用<br>行级锁则更适合于有大量按索引条件并发更新数据，同时又有并发查询的应用，如一些在线事务处理系统</p>
 <h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。<br>表级锁不会产生死锁。所以解决死锁主要还是针对于最常用的InnoDB。</p>
 
