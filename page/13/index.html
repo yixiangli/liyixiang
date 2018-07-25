@@ -82,6 +82,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-基础知识集锦/事务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/27/基础知识集锦/事务/">事务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/04/27/基础知识集锦/事务/" class="article-date">
+  <time datetime="2017-04-26T16:14:38.000Z" itemprop="datePublished">2017-04-27</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础知识集锦/">基础知识集锦</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h1><p>什么是事务？我的理解就是做一件事情，且这件事情是一个独立的工作单元，拿咱们的研发来说，那就是【需求分析-&gt;设计-&gt;研发-&gt;测试-&gt;上线】整个环节，且缺一不可。回到理论解释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">事务是并发控制的基本单位。它是一个涉及到大量CPU和I/O操作的操作序列，这些操作作为一个处理单元来对待，要么都执行，要么都不执行，它是一个不可分割的工作单位</div></pre></td></tr></table></figure>
+<p>举个老生常谈的例子：</p>
+<pre><code>银行转账工作：从一个账号扣款并使另一个账号增款，这两个操作要么都执行，要么都不执行。事务是数据库维护数据一致性的单位，在每个事务结束时，都能保持数据一致性。 
+</code></pre><h2 id="事务的标准定义"><a href="#事务的标准定义" class="headerlink" title="事务的标准定义"></a>事务的标准定义</h2><p>指作为单个逻辑工作单元执行的一系列操作，而这些逻辑工作单元需要具有原子性，一致性，隔离性和持久性四个属性，统称为ACID特性。 </p>
+<p><strong>Atomicity（原子性）：</strong> 事务中包含的操作被看做一个逻辑单元，这个逻辑单元中的操作要么都完成，要么都失败。<br>事务的各元素不可分是一个完整操作。<br><strong>Consistency（一致性）：</strong> 事物完成时数据必须是一致的，也就是说和事物开始之前，数据存储中的数据处于一致状态，保证数据的无损。<br><strong>Isolation（隔离性）：</strong> 事务允许多个用户对同一个数据进行并发访问，而不破坏数据的正确性和完整性。同时，并行事务的修改必须与其他并行事务的修改相互独立，不应该以任何方式依赖于或影响其他事务。<br><strong>Durability（持久性）：</strong> 事务结束后,事务处理的结果必须能够得到固化。系统必须保证任何故障都不会引起事务表示的不一致性。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/事务/" data-id="cjk0jtykx000ikhca59p5ryda" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/04/27/基础知识集锦/事务/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/基础知识集锦/事务/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务/">事务</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-基础知识集锦/网络安全" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -121,13 +178,68 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/网络安全/" data-id="cjk0jqqxm000njdcagzwb0arn" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/基础知识集锦/网络安全/" data-id="cjk0jtyl0000qkhcabj6983y4" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/基础知识集锦/网络安全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/基础知识集锦/网络安全/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/漏洞/">漏洞</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-分布式/分布式事务理论" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/27/分布式/分布式事务理论/">分布式事务理论</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/04/27/分布式/分布式事务理论/" class="article-date">
+  <time datetime="2017-04-26T16:06:19.000Z" itemprop="datePublished">2017-04-27</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/分布式/">分布式</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2PC-传统的分布式事务协议"><a href="#2PC-传统的分布式事务协议" class="headerlink" title="2PC-传统的分布式事务协议"></a>2PC-传统的分布式事务协议</h1><p>说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结果，并最终指示这些节点是否要把操作结果进行真正的提交。</p>
+<p>如下图所示，整个过程可有协调者（事务管理器）和若干事务参与者两种角色，这里的事务参与者可理解为各节点的数据库。<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/04/27/分布式/分布式事务理论/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/04/27/分布式/分布式事务理论/" data-id="cjk0jtyki0004khca83wccjrx" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/04/27/分布式/分布式事务理论/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/分布式/分布式事务理论/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2PC/">2PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CAP/">CAP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCC/">TCC</a></li></ul>
 
     </footer>
   </div>
@@ -181,68 +293,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/分布式/负载均衡/" data-id="cjk0jqqxa0008jdcaof6b5al1" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/27/分布式/负载均衡/" data-id="cjk0jtykp0008khcato6f3717" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/27/分布式/负载均衡/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/分布式/负载均衡/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RANDOM/">RANDOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/负载均衡/">负载均衡</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-分布式/分布式事务理论" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/27/分布式/分布式事务理论/">分布式事务理论</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/04/27/分布式/分布式事务理论/" class="article-date">
-  <time datetime="2017-04-26T16:06:19.000Z" itemprop="datePublished">2017-04-27</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/分布式/">分布式</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2PC-传统的分布式事务协议"><a href="#2PC-传统的分布式事务协议" class="headerlink" title="2PC-传统的分布式事务协议"></a>2PC-传统的分布式事务协议</h1><p>说起事务，根本上是解决数据一致性的问题。我们先来看看传统的分布式事务解决方案。早期分布式事务最常用的解决方案就是二阶段提交。在分布式系统中，每个节点虽然可以知晓自己本服务的操作结果，却很难准确知道所依赖其他服务节点的操作结果。基于此，两阶段提交的核心思想是：当一个事务跨越多个节点时，为了保持事务的ACID特性，需要引入一个作为协调者的组件，来统一掌控所有参与节点的操作结果，并最终指示这些节点是否要把操作结果进行真正的提交。</p>
-<p>如下图所示，整个过程可有协调者（事务管理器）和若干事务参与者两种角色，这里的事务参与者可理解为各节点的数据库。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/04/27/分布式/分布式事务理论/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/04/27/分布式/分布式事务理论/" data-id="cjk0jqqx30004jdcafhu2055q" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/04/27/分布式/分布式事务理论/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/分布式/分布式事务理论/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2PC/">2PC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CAP/">CAP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCC/">TCC</a></li></ul>
 
     </footer>
   </div>
@@ -291,69 +348,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/04/25/分布式/Zookeeper/Zookeeper理论/" data-id="cjk0jqr0n005kjdca1m5yc5oi" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2017/04/25/分布式/Zookeeper/Zookeeper理论/" data-id="cjk0jtyne005kkhcaql7hhyoc" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2017/04/25/分布式/Zookeeper/Zookeeper理论/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/25/分布式/Zookeeper/Zookeeper理论/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zookeeper/">Zookeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/选举/">选举</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-存储/数据库/MongoDB/MongoDB-常用命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/25/存储/数据库/MongoDB/MongoDB-常用命令/">MongoDB-常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/04/25/存储/数据库/MongoDB/MongoDB-常用命令/" class="article-date">
-  <time datetime="2017-04-25T03:51:24.000Z" itemprop="datePublished">2017-04-25</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/存储/">存储</a>►<a class="article-category-link" href="/categories/存储/数据库/">数据库</a>►<a class="article-category-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><p>学习命令，按照我们平时使用的场景与步骤来讲解，循序渐进</p>
-<h2 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h2><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>mongo –port=27017 –host=127.0.0.1 -uadmin -pmima –authenticationDatabase admin</p>
-<p><strong>参数详解：</strong><br>–port ： 端口<br>–host ： 地址<br>-u ： 用户<br>-p ： 密码<br>–authenticationDatabase ： 验证权限的数据库<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/04/25/存储/数据库/MongoDB/MongoDB-常用命令/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/04/25/存储/数据库/MongoDB/MongoDB-常用命令/" data-id="cjk0jqr3k00dojdca0ak96hsq" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/04/25/存储/数据库/MongoDB/MongoDB-常用命令/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/25/存储/数据库/MongoDB/MongoDB-常用命令/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CRUD/">CRUD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文档型/">文档型</a></li></ul>
 
     </footer>
   </div>
@@ -406,6 +407,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/22/文档/CodeReview/">CodeReview</a>
           </li>
         
@@ -419,10 +424,6 @@
         
           <li>
             <a href="/2018/07/19/存储/数据库/MVCC/">理解MVCC</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/">不可小觑的数据类型</a>
           </li>
         
       </ul>

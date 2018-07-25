@@ -6,15 +6,15 @@
   <title>Spring事务传播机制 | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Spring中的事务Spring事务管理器Spring并不直接管理事务，而是提供了多种事务管理器，他们将事务管理的职责委托给hibernate或者JTA等持久化机制所提供的相关平台框架的事务来实现。 Spring事务管理器的接口位于spring-tx包下org.springframework.transaction.PlatformTransactionManager接口，Spring各个平台如J">
-<meta name="keywords" content="spring,IOC,AOP">
+<meta name="keywords" content="事务,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring事务传播机制">
-<meta property="og:url" content="https://yixiangli.github.io/2017/04/24/语言/Java/J2EE/框架/Spring事务传播机制/index.html">
+<meta property="og:url" content="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="Spring中的事务Spring事务管理器Spring并不直接管理事务，而是提供了多种事务管理器，他们将事务管理的职责委托给hibernate或者JTA等持久化机制所提供的相关平台框架的事务来实现。 Spring事务管理器的接口位于spring-tx包下org.springframework.transaction.PlatformTransactionManager接口，Spring各个平台如J">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/Spring事务管理.jpg">
-<meta property="og:updated_time" content="2018-07-24T09:31:45.000Z">
+<meta property="og:updated_time" content="2018-07-25T03:07:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring事务传播机制">
 <meta name="twitter:description" content="Spring中的事务Spring事务管理器Spring并不直接管理事务，而是提供了多种事务管理器，他们将事务管理的职责委托给hibernate或者JTA等持久化机制所提供的相关平台框架的事务来实现。 Spring事务管理器的接口位于spring-tx包下org.springframework.transaction.PlatformTransactionManager接口，Spring各个平台如J">
@@ -99,8 +99,8 @@
       </header>
     
     <div class="article-meta">
-    	<a href="/2017/04/24/语言/Java/J2EE/框架/Spring事务传播机制/" class="article-date">
-  <time datetime="2017-04-24T03:36:15.000Z" itemprop="datePublished">2017-04-24</time>
+    	<a href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/" class="article-date">
+  <time datetime="2018-07-24T03:36:15.000Z" itemprop="datePublished">2018-07-24</time>
 </a>
     	
   <div class="article-category">
@@ -184,13 +184,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/04/24/语言/Java/J2EE/框架/Spring事务传播机制/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
       
       
-        <a href="https://yixiangli.github.io/2017/04/24/语言/Java/J2EE/框架/Spring事务传播机制/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/24/语言/Java/J2EE/框架/Spring事务传播机制/">评论</a>
+        <a href="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/">AOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IOC/">IOC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务/">事务</a></li></ul>
 
     </footer>
   </div>
@@ -198,19 +198,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/25/存储/数据库/MongoDB/MongoDB-基础原理与概念/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          MongoDB-基础原理与概念
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/24/语言/Java/J2EE/框架/Spring/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/07/22/文档/CodeReview/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Spring</div>
+      <div class="article-nav-title">CodeReview</div>
     </a>
   
 </nav>
@@ -262,6 +253,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/22/文档/CodeReview/">CodeReview</a>
           </li>
         
@@ -275,10 +270,6 @@
         
           <li>
             <a href="/2018/07/19/存储/数据库/MVCC/">理解MVCC</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/">不可小觑的数据类型</a>
           </li>
         
       </ul>

@@ -82,6 +82,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-语言/Java/J2EE/框架/Spring事务传播机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/" class="article-date">
+  <time datetime="2018-07-24T03:36:15.000Z" itemprop="datePublished">2018-07-24</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/J2EE/">J2EE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring中的事务"><a href="#Spring中的事务" class="headerlink" title="Spring中的事务"></a>Spring中的事务</h1><h2 id="Spring事务管理器"><a href="#Spring事务管理器" class="headerlink" title="Spring事务管理器"></a>Spring事务管理器</h2><p>Spring并不直接管理事务，而是提供了多种事务管理器，他们将事务管理的职责委托给hibernate或者JTA等持久化机制所提供的相关平台框架的事务来实现。</p>
+<p>Spring事务管理器的接口位于spring-tx包下org.springframework.transaction.PlatformTransactionManager接口，Spring各个平台如JDBC、Hibernate等都提供了对应的事务管理器</p>
+<h3 id="Spring事务管理核心接口"><a href="#Spring事务管理核心接口" class="headerlink" title="Spring事务管理核心接口"></a>Spring事务管理核心接口</h3><p><img src="/img/Spring事务管理.jpg" alt="接口继承结构"></p>
+<p>Spring事务管理为不同的事务API提供一致的编程模型，如JTA、JDBC、Hibernate、JPA。下面分别介绍各个平台框架实现事务管理的机制。<br>
+        
+          <p class="article-more-link">
+            <a href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/" data-id="cjk0jtyrw00j3khcab097mfvt" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务/">事务</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-文档/CodeReview" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -119,7 +176,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/22/文档/CodeReview/" data-id="cjk0jqqy8001rjdcazg5dwo66" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/22/文档/CodeReview/" data-id="cjk0jtylf001gkhcahuk2kaqj" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/22/文档/CodeReview/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/22/文档/CodeReview/">评论</a>
@@ -177,7 +234,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/" data-id="cjk0jqr3o00dujdcasbds7wmb" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/" data-id="cjk0jtyq200drkhca13s7e6uo" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">评论</a>
@@ -233,7 +290,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/" data-id="cjk0jqr0r005vjdca35leue1u" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/" data-id="cjk0jtynj005skhcaakcs5qef" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/数据库事务理论/">评论</a>
@@ -287,162 +344,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MVCC/" data-id="cjk0jqr0o005njdcapgm4eb5c" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MVCC/" data-id="cjk0jtynf005mkhcawunsv6i0" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/MVCC/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/MVCC/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务/">事务</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-语言/Java/J2SE/不可小觑的数据类型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/">不可小觑的数据类型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/" class="article-date">
-  <time datetime="2018-07-14T03:02:43.000Z" itemprop="datePublished">2018-07-14</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/J2SE/">J2SE</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java中的数据类型"><a href="#Java中的数据类型" class="headerlink" title="Java中的数据类型"></a>Java中的数据类型</h1><p><strong>Java有两大数据类型:</strong><br>内置数据类型<br>引用数据类型</p>
-<h2 id="类型大宽表"><a href="#类型大宽表" class="headerlink" title="类型大宽表"></a>类型大宽表</h2><p>上来先整一张类型相关的大宽表，方面查阅</p>
-<hr>
-<table>
-<thead>
-<tr>
-<th>类别</th>
-<th>类型</th>
-<th>大小（bit）</th>
-<th>占用字节</th>
-<th>对应类</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>整型</td>
-<td>byte</td>
-<td>8</td>
-<td>1</td>
-<td>Byte</td>
-<td>0 </td>
-</tr>
-<tr>
-<td>整型</td>
-<td>short</td>
-<td>16</td>
-<td>2</td>
-<td>Short</td>
-<td>0 </td>
-</tr>
-<tr>
-<td>整型</td>
-<td>int</td>
-<td>32</td>
-<td>4</td>
-<td>Integer</td>
-<td>0</td>
-</tr>
-<tr>
-<td>整型</td>
-<td>long</td>
-<td>64</td>
-<td>8</td>
-<td>Long</td>
-<td>0 </td>
-</tr>
-<tr>
-<td>浮点型</td>
-<td>float</td>
-<td>32</td>
-<td>4</td>
-<td>Float</td>
-<td>0.0 </td>
-</tr>
-<tr>
-<td>浮点型</td>
-<td>double</td>
-<td>64</td>
-<td>8</td>
-<td>Double</td>
-<td>0.0</td>
-</tr>
-<tr>
-<td>布尔型</td>
-<td>boolean</td>
-<td>1</td>
-<td>1</td>
-<td>Boolean</td>
-<td>\u0000 </td>
-</tr>
-<tr>
-<td>字符型</td>
-<td>char</td>
-<td>16</td>
-<td>2</td>
-<td>Character</td>
-<td>false</td>
-</tr>
-<tr>
-<td>高精度整型</td>
-<td>.</td>
-<td>.</td>
-<td>.</td>
-<td>BigInteger</td>
-</tr>
-<tr>
-<td>高精度浮点型</td>
-<td>.</td>
-<td>.</td>
-<td>.</td>
-<td>BigDecimal</td>
-</tr>
-</tbody>
-</table>
-<hr>
-        
-          <p class="article-more-link">
-            <a href="/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/" data-id="cjk0jqr4e00f9jdcasd1x7jvm" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/14/语言/Java/J2SE/不可小觑的数据类型/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据类型/">数据类型</a></li></ul>
 
     </footer>
   </div>
@@ -495,6 +403,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/22/文档/CodeReview/">CodeReview</a>
           </li>
         
@@ -508,10 +420,6 @@
         
           <li>
             <a href="/2018/07/19/存储/数据库/MVCC/">理解MVCC</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/">不可小觑的数据类型</a>
           </li>
         
       </ul>

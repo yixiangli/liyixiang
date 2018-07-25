@@ -82,6 +82,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-分布式/Elasticsearch/elasticsearch优化建议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/">elasticsearch优化建议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" class="article-date">
+  <time datetime="2018-04-24T13:33:19.000Z" itemprop="datePublished">2018-04-24</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/分布式/">分布式</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="elasticsearch优化"><a href="#elasticsearch优化" class="headerlink" title="elasticsearch优化"></a>elasticsearch优化</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>Near Real-Time Search<br>默认的设置是1秒，也就是说文档从Index请求到对外可见能够被搜到，最少要1秒钟，强制的，你的网络和CPU再快也不行</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>可以使用ES的路由机制，将同一索引内的具有相同特征（比如具有相同的userId）的文档全部存储于一个节点上，这样我们之后的查询都可以直接定位到这个节点上，而不用将查询广播道所有的节点上；</p>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>节点 = 分片 * （副本数 + 1）</p>
+<h2 id="ES本身的不足"><a href="#ES本身的不足" class="headerlink" title="ES本身的不足"></a>ES本身的不足</h2><ol>
+<li>与DB相比本身不支持事务</li>
+<li>权限管理相对比较弱</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjk0jtyn70055khcag0vyxuua" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/准实时/">准实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-分布式/Elasticsearch/elasticsearch存储" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -123,7 +181,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" data-id="cjk0jqr0g005ajdcafakjt1iu" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" data-id="cjk0jtyn90058khca8q31xenc" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch存储/">评论</a>
@@ -177,7 +235,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/22/分布式/异步确保型分布式事务探讨/" data-id="cjk0jqqx40005jdcaxb3r39z8" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/22/分布式/异步确保型分布式事务探讨/" data-id="cjk0jtykj0005khca6i75m4dj" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/22/分布式/异步确保型分布式事务探讨/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/22/分布式/异步确保型分布式事务探讨/">评论</a>
@@ -233,7 +291,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/" data-id="cjk0jqr0k005fjdca11oy0f92" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/" data-id="cjk0jtyna005akhcaillcfi50" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/">评论</a>
@@ -287,64 +345,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/" data-id="cjk0jqqxx0018jdcar1iwugx2" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/" data-id="cjk0jtyld001ekhcas1uariin" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/01/29/开源组件/Log4j2中RollingFile的文件滚动更新机制/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Log4j/">Log4j</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-工具/记一次坑爹的Mac数据迁移" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/25/工具/记一次坑爹的Mac数据迁移/">记一次坑爹的Mac数据迁移</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2018/01/25/工具/记一次坑爹的Mac数据迁移/" class="article-date">
-  <time datetime="2018-01-25T07:00:12.000Z" itemprop="datePublished">2018-01-25</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-      	<!-- Table of Contents -->
-    
-        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1>
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2018/01/25/工具/记一次坑爹的Mac数据迁移/" data-id="cjk0jqqxz001bjdcagp5ngjdg" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2018/01/25/工具/记一次坑爹的Mac数据迁移/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/01/25/工具/记一次坑爹的Mac数据迁移/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Macbook/">Macbook</a></li></ul>
 
     </footer>
   </div>
@@ -397,6 +404,10 @@
       <ul>
         
           <li>
+            <a href="/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/22/文档/CodeReview/">CodeReview</a>
           </li>
         
@@ -410,10 +421,6 @@
         
           <li>
             <a href="/2018/07/19/存储/数据库/MVCC/">理解MVCC</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/">不可小觑的数据类型</a>
           </li>
         
       </ul>
