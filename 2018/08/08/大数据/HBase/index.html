@@ -8,12 +8,12 @@
   <meta name="description" content="什么是HBase HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。 HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。 它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HBase-基础介绍">
-<meta property="og:url" content="https://yixiangli.github.io/2018/01/11/大数据/HBase/index.html">
+<meta property="og:url" content="https://yixiangli.github.io/2018/08/08/大数据/HBase/index.html">
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="什么是HBase HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。 HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。 它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/hbase_demo.png">
-<meta property="og:updated_time" content="2018-08-09T03:16:21.000Z">
+<meta property="og:updated_time" content="2018-08-09T03:21:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase-基础介绍">
 <meta name="twitter:description" content="什么是HBase HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。 HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。 它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据">
@@ -98,8 +98,8 @@
       </header>
     
     <div class="article-meta">
-    	<a href="/2018/01/11/大数据/HBase/" class="article-date">
-  <time datetime="2018-01-11T07:12:25.000Z" itemprop="datePublished">2018-01-11</time>
+    	<a href="/2018/08/08/大数据/HBase/" class="article-date">
+  <time datetime="2018-08-08T03:12:25.000Z" itemprop="datePublished">2018-08-08</time>
 </a>
     	
   <div class="article-category">
@@ -156,20 +156,102 @@
 <li>列是键值对的集合。</li>
 </ul>
 <p>下面给出的表是HBase模式的一个例子。<br><img src="/img/hbase_demo.png" alt="HBase模型存储"></p>
-<h3 id="面向列和面向行"><a href="#面向列和面向行" class="headerlink" title="面向列和面向行"></a>面向列和面向行</h3><p>面向列的数据库是存储数据表作为数据列的部分，而不是作为行数据。总之它们拥有列族。<br>| 行式数据库 | 列式数据库 |<br>|—|—|<br>|这样的数据库被设计为小数目的行和列|面向列的数据库设计的巨大表|<br>|适用于联机事务处理（OLTP）|适用于在线分析处理（OLAP）|</p>
-<h2 id="HBase-amp-RDBMS"><a href="#HBase-amp-RDBMS" class="headerlink" title="HBase &amp; RDBMS"></a>HBase &amp; RDBMS</h2><p>数据在 RDBMS 中的排布示例<br><strong>RDBMS:</strong><br>| ID | 姓 | 名 | 密码 | 时间戳 |<br>|—|—|—|—|—|<br>|1|张|三|111| 20160719 |<br>|2|李|四|222| 20160720 |</p>
-<p>数据在 HBase 中的排布（逻辑上）<br><strong>HBase:</strong><br>| Row-Key | Value（CF、Qualifier、Version）|<br>|1|info{‘姓’: ‘张’，’名’:’三’}<br>pwd{‘密码’: ‘111’}|<br>|2|Info{‘姓’: ‘李’，’名’:’四’}<br>pwd{‘密码’: ‘222’}|</p>
-<p>从数据结构上可以看出，HBase 是按照 CF 来存储数据的。针对HBase 中的排布我们看到了两个 CF，分别是 info 和 pwd，info 存储着姓名相关列的数据，而 pwd 则是密码相关的数据，那么以info为例，看看数据在 HBase 中的真实排布是怎样的</p>
-<p>| Row-Key | CF:Column-Key | 时间戳 | Cell Value | |—|—|—|—|<br>|1|info:fn|123456789|三|<br>|1|info:ln|123456789|张|<br>|2|info:fn|123456789|四|<br>|2|info:ln|123456789|李|</p>
+<h3 id="面向列和面向行"><a href="#面向列和面向行" class="headerlink" title="面向列和面向行"></a>面向列和面向行</h3><p>面向列的数据库是存储数据表作为数据列的部分，而不是作为行数据。总之它们拥有列族。</p>
+<table>
+<thead>
+<tr>
+<th>行式数据库</th>
+<th>列式数据库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>这样的数据库被设计为小数目的行和列</td>
+<td>面向列的数据库设计的巨大表</td>
+</tr>
+<tr>
+<td>适用于联机事务处理（OLTP）</td>
+<td>适用于在线分析处理（OLAP）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="HBase-amp-RDBMS"><a href="#HBase-amp-RDBMS" class="headerlink" title="HBase &amp; RDBMS"></a>HBase &amp; RDBMS</h2><p>数据在 RDBMS 中的排布示例<br><strong>RDBMS:</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>姓</th>
+<th>名</th>
+<th>密码</th>
+<th>时间戳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>张</td>
+<td>三</td>
+<td>111</td>
+<td>20160719</td>
+</tr>
+<tr>
+<td>2</td>
+<td>李</td>
+<td>四</td>
+<td>222</td>
+<td>20160720</td>
+</tr>
+</tbody>
+</table>
+<p>数据在 HBase 中的排布（逻辑上）<br><strong>HBase:</strong></p>
+<p>| Row-Key | Value（CF、Qualifier、Version）|<br>|1|info{‘姓’: ‘张’，’名’:’三’}<br>pwd{‘密码’: ‘111’}|<br>|2|Info{‘姓’: ‘李’，’名’:’四’}<br>pwd{‘密码’: ‘222’}|</p>
+<p>从数据结构上可以看出，HBase 是按照 CF 来存储数据的。针对HBase 中的排布我们看到了两个 CF，分别是 info 和 pwd，info 存储着姓名相关列的数据，而 pwd 则是密码相关的数据，那么以info为例，看看数据在 HBase 中的真实排布是怎样的呢？</p>
+<table>
+<thead>
+<tr>
+<th>Row-Key</th>
+<th>CF:Column-Key</th>
+<th>时间戳</th>
+<th>Cell Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>info:fn</td>
+<td>123456789</td>
+<td>三</td>
+</tr>
+<tr>
+<td>1</td>
+<td>info:ln</td>
+<td>123456789</td>
+<td>张</td>
+</tr>
+<tr>
+<td>2</td>
+<td>info:fn</td>
+<td>123456789</td>
+<td>四</td>
+</tr>
+<tr>
+<td>2</td>
+<td>info:ln</td>
+<td>123456789</td>
+<td>李</td>
+</tr>
+</tbody>
+</table>
+<p>上表中的 fn 和 ln 称之为 Column-key 或者 Qulifimer。在 Hbase 中，Row-key 加上 CF 加上 Qulifier 再加上一个时间戳才可以定位到一个单元格数据（Hbase 中每个单元格默认有 3 个时间戳的版本数据）。初学者，在一开始接触这些概念是很容易混淆。其实不管是 CF 还是 Qulifier 都是客户定义出来的。也就是说在 HBase 中创建表格时，就需要指定表格的 CF、Row-key 以及 Qulifier。我们会在后续的介绍中，尝试指定这些相关的概念，以便加深理解。这里我们先通过下图理解下 HBase 中，逻辑上的数据排布与物理上的数据排布之间的关系。</p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2018/01/11/大数据/HBase/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2018/08/08/大数据/HBase/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
       
       
-        <a href="https://yixiangli.github.io/2018/01/11/大数据/HBase/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/01/11/大数据/HBase/">评论</a>
+        <a href="https://yixiangli.github.io/2018/08/08/大数据/HBase/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/08/08/大数据/HBase/">评论</a>
       
       
     </footer>
@@ -178,19 +260,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/11/工具/IDEA功能介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          IDEA功能介绍
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/27/设计模式/创建型/原型/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/08/06/大数据/开篇-初识大数据/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">原型</div>
+      <div class="article-nav-title">开篇-初识大数据</div>
     </a>
   
 </nav>
@@ -242,6 +315,10 @@
       <ul>
         
           <li>
+            <a href="/2018/08/08/大数据/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/06/大数据/开篇-初识大数据/">开篇-初识大数据</a>
           </li>
         
@@ -255,10 +332,6 @@
         
           <li>
             <a href="/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">MySQL隔离级别,锁</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/19/存储/数据库/数据库事务理论/">数据库事务理论</a>
           </li>
         
       </ul>

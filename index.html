@@ -82,6 +82,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-大数据/HBase" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/08/大数据/HBase/">HBase-基础介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/08/08/大数据/HBase/" class="article-date">
+  <time datetime="2018-08-08T03:12:25.000Z" itemprop="datePublished">2018-08-08</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大数据/">大数据</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是HBase"><a href="#什么是HBase" class="headerlink" title="什么是HBase"></a>什么是HBase</h1><ol>
+<li>HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。</li>
+<li>HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。</li>
+<li>它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据。使用HBase在HDFS读取消费/随机访问数据。 HBase在Hadoop的文件系统之上，并提供了读写访问。</li>
+</ol>
+<h2 id="HBase-amp-HDFS"><a href="#HBase-amp-HDFS" class="headerlink" title="HBase &amp; HDFS"></a>HBase &amp; HDFS</h2><table>
+<thead>
+<tr>
+<th>HDFS</th>
+<th>HBase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDFS不支持快速单独记录查找</td>
+<td>HBase提供在较大的表快速查找</td>
+</tr>
+<tr>
+<td>HDFS是适于存储大容量文件的分布式文件系统</td>
+<td>HBase是建立在HDFS之上的数据库</td>
+</tr>
+<tr>
+<td>它提供的数据只能顺序访问</td>
+<td>HBase内部使用哈希表和提供随机接入，并且其存储索引，可将在HDFS文件中的数据进行快速查找</td>
+</tr>
+<tr>
+<td>它提供了高延迟批量处理;没有批处理概念</td>
+<td>它提供了数十亿条记录低延迟访问单个行记录（随机存取）</td>
+</tr>
+</tbody>
+</table>
+        
+          <p class="article-more-link">
+            <a href="/2018/08/08/大数据/HBase/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/08/08/大数据/HBase/" data-id="cjklzx8tv000zvqcav5xqwu8y" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/08/08/大数据/HBase/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/08/08/大数据/HBase/">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-大数据/开篇-初识大数据" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -124,7 +206,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/08/06/大数据/开篇-初识大数据/" data-id="cjklzqsug0010uycalzqt7raw" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/08/06/大数据/开篇-初识大数据/" data-id="cjklzx8tw0011vqcar58brxtw" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/08/06/大数据/开篇-初识大数据/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/08/06/大数据/开篇-初识大数据/">评论</a>
@@ -181,7 +263,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/" data-id="cjklzqt1700j9uyca1rwwwn0f" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/" data-id="cjklzx91000jbvqcaa29b61io" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/24/语言/Java/J2EE/框架/Spring事务传播机制/">评论</a>
@@ -236,7 +318,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/22/文档/CodeReview/" data-id="cjklzqsuv001wuycaxkx56q3v" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/22/文档/CodeReview/" data-id="cjklzx8ua001xvqcadmcursko" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/22/文档/CodeReview/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/22/文档/CodeReview/">评论</a>
@@ -294,69 +376,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/" data-id="cjklzqszc00e1uycahmrljznv" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/" data-id="cjklzx8yz00dwvqcau1yqwyid" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-存储/数据库/数据库事务理论" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/19/存储/数据库/数据库事务理论/">数据库事务理论</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2018/07/19/存储/数据库/数据库事务理论/" class="article-date">
-  <time datetime="2018-07-19T03:42:22.000Z" itemprop="datePublished">2018-07-19</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/存储/">存储</a>►<a class="article-category-link" href="/categories/存储/数据库/">数据库</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="数据库事务理论"><a href="#数据库事务理论" class="headerlink" title="数据库事务理论"></a>数据库事务理论</h1><p>基础的事务理论可以参考我另一篇博客，本文主要详解数据库相关事务理论</p>
-<h2 id="SQL的四种隔离级别"><a href="#SQL的四种隔离级别" class="headerlink" title="SQL的四种隔离级别"></a>SQL的四种隔离级别</h2><p><strong>READ UNCOMMITTED(未提交读)</strong><br>在READ UNCOMMITTED级别，事务的修改即使没有commit，对其他事务也是可见的，也被称为脏读（DirtyRead）。</p>
-<p><strong>READ COMMITTED(提交读)</strong><br>大部分数据库默认的隔离级别为READ COMMITTED(但MySQL不是)。和UNCOMMITTED相对，在没有commit之前所有的修改对其他事务都是不可见的，也被称作不可重复读(nonrepeatable read)。</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/07/19/存储/数据库/数据库事务理论/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/" data-id="cjklzqsww0060uyca05ydsj5u" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/数据库事务理论/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事务/">事务</a></li></ul>
 
     </footer>
   </div>
@@ -409,6 +435,10 @@
       <ul>
         
           <li>
+            <a href="/2018/08/08/大数据/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/06/大数据/开篇-初识大数据/">开篇-初识大数据</a>
           </li>
         
@@ -422,10 +452,6 @@
         
           <li>
             <a href="/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">MySQL隔离级别,锁</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/19/存储/数据库/数据库事务理论/">数据库事务理论</a>
           </li>
         
       </ul>

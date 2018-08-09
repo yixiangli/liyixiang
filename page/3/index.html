@@ -82,6 +82,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-语言/Java/J2EE/编码规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/06/语言/Java/J2EE/编码规范/">编码规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/05/06/语言/Java/J2EE/编码规范/" class="article-date">
+  <time datetime="2018-05-06T12:21:07.000Z" itemprop="datePublished">2018-05-06</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/语言/">语言</a>►<a class="article-category-link" href="/categories/语言/Java/">Java</a>►<a class="article-category-link" href="/categories/语言/Java/J2EE/">J2EE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="一些编码规范"><a href="#一些编码规范" class="headerlink" title="一些编码规范"></a>一些编码规范</h1><h2 id="XXO的概念"><a href="#XXO的概念" class="headerlink" title="XXO的概念"></a>XXO的概念</h2><h3 id="DAO"><a href="#DAO" class="headerlink" title="DAO"></a>DAO</h3><p>　　DAO（Data Access Object）数据访问对象，它是一个面向对象的数据库接口，负责持久层的操作，为业务层提供接口，主要用来封装对数据库的访问，常见操作无外乎 CURD。我们也可以认为一个 DAO 对应一个 POJO 的对象，它位于业务逻辑与数据库资源中间，可以结合 PO 对数据库进行相关的操作。</p>
+<h3 id="PO"><a href="#PO" class="headerlink" title="PO"></a>PO</h3><p>　　PO（Persistent Object）持久层对象，它是由一组属性和属性的get和set方法组成，最简单的 PO 就是对应数据库中某个表中的一条记录（也就是说，我们可以将数据库表中的一条记录理解为一个持久层对象），多个记录可以用 PO 的集合，PO 中应该不包含任何对数据库的操作。PO 的属性是跟数据库表的字段一一对应的，此外 PO 对象需要实现序列化接口。</p>
+<h3 id="BO"><a href="#BO" class="headerlink" title="BO"></a>BO</h3><p>　　BO（Business Object）业务层对象，是简单的真实世界的软件抽象，通常位于中间层。BO 的主要作用是把业务逻辑封装为一个对象，这个对象可以包括一个或多个其它的对象。举一个求职简历的例子，每份简历都包括教育经历、项目经历等，我们可以让教育经历和项目经历分别对应一个 PO，这样在我们建立对应求职简历的 BO 对象处理简历的时候，让每个 BO 都包含这些 PO 即可。</p>
+<h3 id="VO"><a href="#VO" class="headerlink" title="VO"></a>VO</h3><p>　　VO（Value Object）值对象，通常用于业务层之间的数据传递，和 PO 一样也是仅仅包含数据而已，但 VO 应该是抽象出的业务对象，可以和表对应，也可以不对应，这根据业务的需要。 如果锅碗瓢盆分别为对应的业务对象的话，那么整个碗柜就是一个值对象。此外，VO 也可以称为页面对象，如果称为页面对象的话，那么它所代表的将是整个页面展示层的对象，也可以由需要的业务对象进行组装而来。</p>
+<h3 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h3><p>　　DTO（Data Transfer Object）数据传输对象，主要用于远程调用等需要大量传输对象的地方，比如我们有一个交易订单表，含有 25 个字段，那么其对应的 PO 就有 25 个属性，但我们的页面上只需要显示 5 个字段，因此没有必要把整个 PO 对象传递给客户端，这时我们只需把仅有 5 个属性的 DTO 把结果传递给客户端即可，而且如果用这个对象来对应界面的显示对象，那此时它的身份就转为 VO。使用 DTO 的好处有两个，一是能避免传递过多的无用数据，提高数据的传输速度；二是能隐藏后端的表结构。常见的用法是：将请求的数据或属性组装成一个 RequestDTO，再将响应的数据或属性组装成一个 ResponseDTO.</p>
+<h3 id="POJO"><a href="#POJO" class="headerlink" title="POJO"></a>POJO</h3><p>　　POJO（Plain Ordinary Java Object）简单的 Java 对象，实际就是普通的 JavaBeans，是为了避免和 EJB（Enterprise JavaBean）混淆所创造的简称。POJO 实质上可以理解为简单的实体类，其中有一些属性及其getter和setter方法的类，没有业务逻辑，也不允许有业务方法，也不能携带有connection之类的方法。POJO 是 JavaEE 世界里面最灵活的对象，在简单系统中，如果从数据库到页面展示都是 POJO 的话，它可以是 DTO；如果从数据库中到业务处理中都是 POJO 的话，它可以是 BO；如果从数据库到整个页面的展示的话，它也可以是 VO. 
+　　</p>
+<h3 id="一张图总结"><a href="#一张图总结" class="headerlink" title="一张图总结"></a>一张图总结</h3><p><img src="/img/code_standard.png" alt="编码规范"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/" data-id="cjklzx8z500e8vqcazb8003wd" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/05/06/语言/Java/J2EE/编码规范/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/05/06/语言/Java/J2EE/编码规范/">评论</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-分布式/Elasticsearch/elasticsearch基础知识" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -121,7 +178,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjklzqswi005euycajirbxg8c" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/" data-id="cjklzx8vy0059vqca8c1s31ut" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch基础知识/">评论</a>
@@ -179,7 +236,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjklzqswi005duycayphpencm" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/" data-id="cjklzx8vy0058vqcaty4znl9g" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch优化建议/">评论</a>
@@ -238,7 +295,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" data-id="cjklzqswk005guycaun3vj5fa" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/" data-id="cjklzx8w0005bvqca52xvw7zp" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/24/分布式/Elasticsearch/elasticsearch存储/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/分布式/Elasticsearch/elasticsearch存储/">评论</a>
@@ -292,69 +349,13 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/04/22/分布式/异步确保型分布式事务探讨/" data-id="cjklzqstt0005uycav0socgw4" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/22/分布式/异步确保型分布式事务探讨/" data-id="cjklzx8tj000avqcahhoaao2d" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/04/22/分布式/异步确保型分布式事务探讨/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/22/分布式/异步确保型分布式事务探讨/">评论</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rocket-MQ/">Rocket MQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步确保/">异步确保</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-分布式/Elasticsearch/elasticsearch安装与集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/">elasticsearch安装与集群搭建</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/" class="article-date">
-  <time datetime="2018-02-05T07:33:19.000Z" itemprop="datePublished">2018-02-05</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/分布式/">分布式</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="elasticsearch"><a href="#elasticsearch" class="headerlink" title="elasticsearch"></a>elasticsearch</h1><p>elastic: 有弹力的，可伸缩的<br>search: 搜索</p>
-<h2 id="单机安装流程"><a href="#单机安装流程" class="headerlink" title="单机安装流程"></a>单机安装流程</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="external">https://www.elastic.co/downloads/elasticsearch</a><br>截止今日 目前使用的版本为6.1.3</p>
-<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><p>tar -vxf elasticsearch-6.1.3.tar<br>cd elasticsearch-6.1.3 进入目录</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/" data-id="cjklzqswl005iuycahsgj9jgg" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/02/05/分布式/Elasticsearch/elasticsearch安装与集群搭建/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/准实时/">准实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
 
     </footer>
   </div>
@@ -407,6 +408,10 @@
       <ul>
         
           <li>
+            <a href="/2018/08/08/大数据/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/06/大数据/开篇-初识大数据/">开篇-初识大数据</a>
           </li>
         
@@ -420,10 +425,6 @@
         
           <li>
             <a href="/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">MySQL隔离级别,锁</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/19/存储/数据库/数据库事务理论/">数据库事务理论</a>
           </li>
         
       </ul>
