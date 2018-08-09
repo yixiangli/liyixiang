@@ -13,7 +13,7 @@
 <meta property="og:description" content="什么是HBase HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。 HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。 它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/hbase_demo.png">
-<meta property="og:updated_time" content="2018-08-08T11:13:13.000Z">
+<meta property="og:updated_time" content="2018-08-09T03:16:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase-基础介绍">
 <meta name="twitter:description" content="什么是HBase HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。 HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。 它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据">
@@ -157,8 +157,10 @@
 </ul>
 <p>下面给出的表是HBase模式的一个例子。<br><img src="/img/hbase_demo.png" alt="HBase模型存储"></p>
 <h3 id="面向列和面向行"><a href="#面向列和面向行" class="headerlink" title="面向列和面向行"></a>面向列和面向行</h3><p>面向列的数据库是存储数据表作为数据列的部分，而不是作为行数据。总之它们拥有列族。<br>| 行式数据库 | 列式数据库 |<br>|—|—|<br>|这样的数据库被设计为小数目的行和列|面向列的数据库设计的巨大表|<br>|适用于联机事务处理（OLTP）|适用于在线分析处理（OLAP）|</p>
-<h2 id="HBase-amp-RDBMS"><a href="#HBase-amp-RDBMS" class="headerlink" title="HBase &amp; RDBMS"></a>HBase &amp; RDBMS</h2><p><strong>RDBMS:</strong><br>| ID | 姓 | 名 | 密码 | 时间戳 |<br>|—|—|—|—|—|</p>
-<p><strong>HBase:</strong></p>
+<h2 id="HBase-amp-RDBMS"><a href="#HBase-amp-RDBMS" class="headerlink" title="HBase &amp; RDBMS"></a>HBase &amp; RDBMS</h2><p>数据在 RDBMS 中的排布示例<br><strong>RDBMS:</strong><br>| ID | 姓 | 名 | 密码 | 时间戳 |<br>|—|—|—|—|—|<br>|1|张|三|111| 20160719 |<br>|2|李|四|222| 20160720 |</p>
+<p>数据在 HBase 中的排布（逻辑上）<br><strong>HBase:</strong><br>| Row-Key | Value（CF、Qualifier、Version）|<br>|1|info{‘姓’: ‘张’，’名’:’三’}<br>pwd{‘密码’: ‘111’}|<br>|2|Info{‘姓’: ‘李’，’名’:’四’}<br>pwd{‘密码’: ‘222’}|</p>
+<p>从数据结构上可以看出，HBase 是按照 CF 来存储数据的。针对HBase 中的排布我们看到了两个 CF，分别是 info 和 pwd，info 存储着姓名相关列的数据，而 pwd 则是密码相关的数据，那么以info为例，看看数据在 HBase 中的真实排布是怎样的</p>
+<p>| Row-Key | CF:Column-Key | 时间戳 | Cell Value | |—|—|—|—|<br>|1|info:fn|123456789|三|<br>|1|info:ln|123456789|张|<br>|2|info:fn|123456789|四|<br>|2|info:ln|123456789|李|</p>
 
       
     </div>
@@ -176,19 +178,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/25/工具/记一次坑爹的Mac数据迁移/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/01/11/工具/IDEA功能介绍/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          记一次坑爹的Mac数据迁移
+          IDEA功能介绍
         
       </div>
     </a>
   
   
-    <a href="/2018/01/11/工具/IDEA功能介绍/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/12/27/设计模式/创建型/原型/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">IDEA功能介绍</div>
+      <div class="article-nav-title">原型</div>
     </a>
   
 </nav>
