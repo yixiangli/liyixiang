@@ -13,7 +13,9 @@
 <meta property="og:description" content="什么是HBase HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。 HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。 它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://yixiangli.github.io/img/hbase_demo.png">
-<meta property="og:updated_time" content="2018-08-09T03:21:24.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/hbase模块.png">
+<meta property="og:image" content="https://yixiangli.github.io/img/hbase工作原理.png">
+<meta property="og:updated_time" content="2018-08-09T03:46:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase-基础介绍">
 <meta name="twitter:description" content="什么是HBase HBase是建立在Hadoop文件系统之上的分布式面向列的数据库。它是一个开源项目，是横向扩展的。 HBase是一个数据模型，类似于谷歌的大表设计，可以提供快速随机访问海量结构化数据。它利用了Hadoop的文件系统（HDFS）提供的容错能力。 它是Hadoop的生态系统，提供对数据的随机实时读/写访问，是Hadoop文件系统的一部分。人们可以直接或通过HBase的存储HDFS数据">
@@ -113,7 +115,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是HBase"><span class="toc-number">1.</span> <span class="toc-text">什么是HBase</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase-amp-HDFS"><span class="toc-number">1.1.</span> <span class="toc-text">HBase & HDFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase的存储机制"><span class="toc-number">1.2.</span> <span class="toc-text">HBase的存储机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面向列和面向行"><span class="toc-number">1.2.1.</span> <span class="toc-text">面向列和面向行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase-amp-RDBMS"><span class="toc-number">1.3.</span> <span class="toc-text">HBase & RDBMS</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是HBase"><span class="toc-number">1.</span> <span class="toc-text">什么是HBase</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase-amp-HDFS"><span class="toc-number">1.1.</span> <span class="toc-text">HBase & HDFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase的存储机制"><span class="toc-number">1.2.</span> <span class="toc-text">HBase的存储机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面向列和面向行"><span class="toc-number">1.2.1.</span> <span class="toc-text">面向列和面向行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase-amp-RDBMS"><span class="toc-number">1.3.</span> <span class="toc-text">HBase & RDBMS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase-相关的模块以及-HBase-表格的特性"><span class="toc-number">1.4.</span> <span class="toc-text">HBase 相关的模块以及 HBase 表格的特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBase的工作原理"><span class="toc-number">1.5.</span> <span class="toc-text">HBase的工作原理</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="什么是HBase"><a href="#什么是HBase" class="headerlink" title="什么是HBase"></a>什么是HBase</h1><ol>
@@ -243,6 +245,26 @@
 </tbody>
 </table>
 <p>上表中的 fn 和 ln 称之为 Column-key 或者 Qulifimer。在 Hbase 中，Row-key 加上 CF 加上 Qulifier 再加上一个时间戳才可以定位到一个单元格数据（Hbase 中每个单元格默认有 3 个时间戳的版本数据）。初学者，在一开始接触这些概念是很容易混淆。其实不管是 CF 还是 Qulifier 都是客户定义出来的。也就是说在 HBase 中创建表格时，就需要指定表格的 CF、Row-key 以及 Qulifier。我们会在后续的介绍中，尝试指定这些相关的概念，以便加深理解。这里我们先通过下图理解下 HBase 中，逻辑上的数据排布与物理上的数据排布之间的关系。</p>
+<h2 id="HBase-相关的模块以及-HBase-表格的特性"><a href="#HBase-相关的模块以及-HBase-表格的特性" class="headerlink" title="HBase 相关的模块以及 HBase 表格的特性"></a>HBase 相关的模块以及 HBase 表格的特性</h2><p>前面我们提到过 HBase 也是构建于 HDFS 之上，这是正确的，但也不是完全正确。HBase 其实也支持直接在本地文件系统之上运行，不过这样的 HBase 只能运行在一台机器上，那么对于分布式大数据的环境是没有意义的（这也是所谓的 HBase 的单机模式）。一般只用于测试或者验证某一个 HBase 的功能，后面我们在详细的介绍 HBase 的几种运行模式。这里我们只要记得在分布式的生产环境中，HBase 需要运行在 HDFS 之上，以 HDFS 作为其基础的存储设施。HBase 上层提供了访问的数据的 Java API 层，供应用访问存储在 HBase 的数据。在 HBase 的集群中主要由 Master 和 Region Server 组成，以及 Zookeeper，具体模块如下图所示</p>
+<p><img src="/img/hbase模块.png" alt="HBase模块"></p>
+<p>接下来，我们简单的一一介绍下 HBase 中相关模块的作用。</p>
+<ul>
+<li><p>Master ：<br>HBase Master 用于协调多个 Region Server，侦测各个 Region Server 之间的状态，并平衡 Region Server 之间的负载。HBase Master 还有一个职责就是负责分配 Region 给 Region Server。HBase 允许多个 Master 节点共存，但是这需要 Zookeeper 的帮助。不过当多个 Master 节点共存时，只有一个 Master 是提供服务的，其他的 Master 节点处于待命的状态。当正在工作的 Master 节点宕机时，其他的 Master 则会接管 HBase 的集群。</p>
+</li>
+<li><p>Region Server ：<br>对于一个 Region Server 而言，其包括了多个 Region。Region Server 的作用只是管理表格，以及实现读写操作。Client 直接连接 Region Server，并通信获取 HBase 中的数据。对于 Region 而言，则是真实存放 HBase 数据的地方，也就说 Region 是 HBase 可用性和分布式的基本单位。如果当一个表格很大，并由多个 CF 组成时，那么表的数据将存放在多个 Region 之间，并且在每个 Region 中会关联多个存储的单元（Store）。</p>
+</li>
+<li><p>Zookeeper ：<br>对于 HBase 而言，Zookeeper 的作用是至关重要的。首先 Zookeeper 是作为 HBase Master 的 HA 解决方案。也就是说，是 Zookeeper 保证了至少有一个 HBase Master 处于运行状态。并且 Zookeeper 负责 Region 和 Region Server 的注册。其实 Zookeeper 发展到目前为止，已经成为了分布式大数据框架中容错性的标准框架。不光是 HBase，几乎所有的分布式大数据相关的开源框架，都依赖于 Zookeeper 实现 HA。</p>
+</li>
+</ul>
+<h2 id="HBase的工作原理"><a href="#HBase的工作原理" class="headerlink" title="HBase的工作原理"></a>HBase的工作原理</h2><p><img src="/img/hbase工作原理.png" alt="HBase工作原理"></p>
+<p>在上面的图中，我们需要注意几个我们之前没有提到的概念：Store、MemStore、StoreFile 以及 HFile。带着这几个新的概念，我们完整的梳理下整个 HBase 的工作流程。<br>首先我们需要知道 HBase 的集群是通过 Zookeeper 来进行机器之前的协调，也就是说 HBase Master 与 Region Server 之间的关系是依赖 Zookeeper 来维护。当一个 Client 需要访问 HBase 集群时，Client 需要先和 Zookeeper 来通信，然后才会找到对应的 Region Server。每一个 Region Server 管理着很多个 Region。对于 HBase 来说，Region 是 HBase 并行化的基本单元。因此，数据也都存储在 Region 中。这里我们需要特别注意，每一个 Region 都只存储一个 Column Family 的数据，并且是该 CF 中的一段（按 Row 的区间分成多个 Region）。Region 所能存储的数据大小是有上限的，当达到该上限时（Threshold），Region 会进行分裂，数据也会分裂到多个 Region 中，这样便可以提高数据的并行化，以及提高数据的容量。每个 Region 包含着多个 Store 对象。每个 Store 包含一个 MemStore，和一个或多个 HFile。MemStore 便是数据在内存中的实体，并且一般都是有序的。当数据向 Region 写入的时候，会先写入 MemStore。当 MemStore 中的数据需要向底层文件系统倾倒（Dump）时（例如 MemStore 中的数据体积到达 MemStore 配置的最大值），Store 便会创建 StoreFile，而 StoreFile 就是对 HFile 一层封装。所以 MemStore 中的数据会最终写入到 HFile 中，也就是磁盘 IO。由于 HBase 底层依靠 HDFS，因此 HFile 都存储在 HDFS 之中。这便是整个 HBase 工作的原理简述。</p>
+<p>因此抽象出来，需要关注以下几个组件名词</p>
+<ul>
+<li>Store：每个 Region 包含着多个 Store 对象</li>
+<li>MemStore：每个 Store 包含一个 MemStore，MemStore 便是数据在内存中的实体，并且一般都是有序的。当数据向 Region 写入的时候，会先写入 MemStore</li>
+<li>StoreFile：StoreFile 就是对 HFile 一层封装，也存储在HDFS之中</li>
+<li>HFile：磁盘 IO，HFile都存储在HDFS之中</li>
+</ul>
 
       
     </div>
