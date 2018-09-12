@@ -13,10 +13,14 @@
 <meta property="og:site_name" content="不忘初心">
 <meta property="og:description" content="I/Oinput/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。 Java中的I/O概念一    输入与输出：一定要清楚，要以程序（计算机）为本体，输入就是向程序输入的流，而输出就是程序向外输出，而不是以人（程序员）为主体。 基础流   类型 输入流 输出流     字节流 InputStream OutputStream   字符流 Reader">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-29T08:34:06.000Z">
+<meta property="og:image" content="https://yixiangli.github.io/img/BIO.png">
+<meta property="og:image" content="https://yixiangli.github.io/img/NIO.png">
+<meta property="og:image" content="https://yixiangli.github.io/img/AIO.png">
+<meta property="og:updated_time" content="2018-09-12T08:09:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaIO">
 <meta name="twitter:description" content="I/Oinput/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。 Java中的I/O概念一    输入与输出：一定要清楚，要以程序（计算机）为本体，输入就是向程序输入的流，而输出就是程序向外输出，而不是以人（程序员）为主体。 基础流   类型 输入流 输出流     字节流 InputStream OutputStream   字符流 Reader">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/BIO.png">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -112,7 +116,7 @@
     
         <div id="toc" class="toc-article">
             <strong class="toc-title">文章目录</strong>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#I-O"><span class="toc-number">1.</span> <span class="toc-text">I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中的I-O"><span class="toc-number">1.1.</span> <span class="toc-text">Java中的I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础流"><span class="toc-number">1.1.1.</span> <span class="toc-text">基础流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-number">1.1.2.</span> <span class="toc-text">节点流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理流"><span class="toc-number">1.1.3.</span> <span class="toc-text">处理流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化"><span class="toc-number">1.2.</span> <span class="toc-text">序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#serialVersionUID"><span class="toc-number">1.2.1.</span> <span class="toc-text">serialVersionUID</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#I-O"><span class="toc-number">1.</span> <span class="toc-text">I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中的I-O"><span class="toc-number">1.1.</span> <span class="toc-text">Java中的I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础流"><span class="toc-number">1.1.1.</span> <span class="toc-text">基础流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-number">1.1.2.</span> <span class="toc-text">节点流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理流"><span class="toc-number">1.1.3.</span> <span class="toc-text">处理流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化"><span class="toc-number">1.2.</span> <span class="toc-text">序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#serialVersionUID"><span class="toc-number">1.2.1.</span> <span class="toc-text">serialVersionUID</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BIO"><span class="toc-number">1.3.</span> <span class="toc-text">BIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NIO"><span class="toc-number">1.4.</span> <span class="toc-text">NIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AIO"><span class="toc-number">1.5.</span> <span class="toc-text">AIO</span></a></li></ol></li></ol>
         </div>
     
         <h1 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h1><p>input/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。</p>
@@ -242,6 +246,9 @@
 <li>一个是默认的1L，比如：private static final long serialVersionUID = 1L;</li>
 <li>一个是根据类名、接口名、成员方法及属性等来生成一个64位的哈希字段，</li>
 </ol>
+<h2 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h2><p><img src="/img/BIO.png" alt="BIO数据处理模型"></p>
+<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p><img src="/img/NIO.png" alt="NIO数据处理模型"></p>
+<h2 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h2><p><img src="/img/AIO.png" alt="AIO数据处理模型"></p>
 
       
     </div>
@@ -261,19 +268,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/02/10/服务化/微服务/SPI/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/02/08/语言/Java/J2SE/Java中的日志/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          SPI
+          Java中的日志
         
       </div>
     </a>
   
   
-    <a href="/2017/02/08/语言/Java/J2SE/Java中的日志/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/02/06/语言/Java/JVM/内存模型/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java中的日志</div>
+      <div class="article-nav-title">内存模型</div>
     </a>
   
 </nav>
