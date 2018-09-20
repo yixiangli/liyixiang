@@ -82,6 +82,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-存储/数据库/MySQL/MySQL隔离级别,锁" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">MySQL隔离级别,锁</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/" class="article-date">
+  <time datetime="2018-07-19T15:38:58.000Z" itemprop="datePublished">2018-07-19</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/存储/">存储</a>►<a class="article-category-link" href="/categories/存储/数据库/">数据库</a>►<a class="article-category-link" href="/categories/存储/数据库/MySQL/">MySQL</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MySQL隔离级别"><a href="#MySQL隔离级别" class="headerlink" title="MySQL隔离级别"></a>MySQL隔离级别</h1><p>说到MySQL隔离级别，就不得不提到MySQL的存储引擎</p>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p><strong>MyISAM:</strong><br>5.1及之前默认的存储引擎,不支持事务、外键；只有索引缓存（index buffer）；提供表级锁，只有select语句时不锁，其他情况上锁；适于select多而更新较少的应用，如web 论坛、cms等。</p>
+<p><strong>InnoDB：</strong><br>5.1后默认的存储引擎. 支持事务、外键；innode buffer既缓存数据又缓存索引；提供行级锁；适用于需要事务支持的应用。</p>
+<p><strong>Memory：</strong><br>内存表，数据不稳定，如果mysql换了，则数据也就消失了</p>
+<p><strong>NDB:</strong><br>支持事务、行级锁；数据及索引缓存；但不够稳定</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/" data-id="cjmad02d300e7l0ca36ve0k57" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/锁/">锁</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-存储/数据库/数据库事务理论" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -120,7 +178,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/" data-id="cjlyv81ip006096cahcd5ycyd" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/" data-id="cjmad02ad0067l0cavqphieiq" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/数据库事务理论/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/数据库事务理论/">评论</a>
@@ -174,7 +232,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MVCC/" data-id="cjlyv81ik005u96ca7zkdvpuc" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/19/存储/数据库/MVCC/" data-id="cjmad02aa0060l0caberjxg12" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/19/存储/数据库/MVCC/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/19/存储/数据库/MVCC/">评论</a>
@@ -323,7 +381,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/" data-id="cjlyv81lr00fi96cahw1ci3tk" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/" data-id="cjmad02e500g7l0cadhxnvwsv" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/07/14/语言/Java/J2SE/不可小觑的数据类型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/07/14/语言/Java/J2SE/不可小觑的数据类型/">评论</a>
@@ -379,7 +437,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/" data-id="cjlyv81gr002a96caf911pai0" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/" data-id="cjmad028h002fl0caiuqg1qkq" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2018/06/20/解决方案专题/分布式锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/06/20/解决方案专题/分布式锁/">评论</a>
@@ -397,65 +455,10 @@
 
 
   
-    <article id="post-操作系统/Linux/开发者必备Linux命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/13/操作系统/Linux/开发者必备Linux命令/">开发者必备Linux命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2018/06/13/操作系统/Linux/开发者必备Linux命令/" class="article-date">
-  <time datetime="2018-06-13T06:59:55.000Z" itemprop="datePublished">2018-06-13</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>►<a class="article-category-link" href="/categories/操作系统/Linux/">Linux</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h1><h2 id="Top"><a href="#Top" class="headerlink" title="Top"></a>Top</h2><p>【第一行】<br>等同于命令uptime<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">15:09:07 up 265 days, 23:44,  1 user,  load average: 0.01, 0.08, 0.14</div></pre></td></tr></table></figure></p>
-<p>15:09:07           当前时间<br>up 265 days       系统运行时间<br>1 user               当前登录用户数<br>load average: 0.01, 0.08, 0.14   系统负载，即任务队列的平均长度，三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/06/13/操作系统/Linux/开发者必备Linux命令/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/" data-id="cjlyv81j1006y96cadi5cmw73" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2018/06/13/操作系统/Linux/开发者必备Linux命令/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/06/13/操作系统/Linux/开发者必备Linux命令/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -480,7 +483,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源组件/">开源组件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识集锦/">基础知识集锦</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源组件/">开源组件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/Linux/">Linux</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/">语言</a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/">Java</a><span class="category-list-count">24</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2EE/">J2EE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语言/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/收藏之路/">收藏之路</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/读万卷书/">读万卷书</a><span class="category-list-count">3</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -497,6 +500,10 @@
           </li>
         
           <li>
+            <a href="/2018/08/06/大数据/Spark本地安装/">Spark本地安装</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/06/大数据/开篇-初识大数据/">开篇-初识大数据</a>
           </li>
         
@@ -506,10 +513,6 @@
         
           <li>
             <a href="/2018/07/22/文档/CodeReview/">CodeReview</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/19/存储/数据库/MySQL/MySQL隔离级别,锁/">MySQL隔离级别,锁</a>
           </li>
         
       </ul>
