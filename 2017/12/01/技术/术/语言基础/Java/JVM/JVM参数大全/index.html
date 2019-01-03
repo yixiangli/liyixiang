@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JVM参数全集 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JVM参数根据JVM参数以-X开头或-XX开头将JVM参数分成两个部分：1) 以-X开头的都是非标准的（这些参数并不能保证在所有的JVM上都被实现），而且如果在新版本有什么改动也不会发布通知。2）以-XX开头的都是不稳定的并且不推荐在生产环境中使用。这些参数的改动也不会发布通知。">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM参数全集">
+<meta property="og:url" content="https://yixiangli.github.io/2017/12/01/技术/术/语言基础/Java/JVM/JVM参数大全/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="JVM参数根据JVM参数以-X开头或-XX开头将JVM参数分成两个部分：1) 以-X开头的都是非标准的（这些参数并不能保证在所有的JVM上都被实现），而且如果在新版本有什么改动也不会发布通知。2）以-XX开头的都是不稳定的并且不推荐在生产环境中使用。这些参数的改动也不会发布通知。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yixiangli.github.io/img/jvm_02.jpg">
+<meta property="og:updated_time" content="2019-01-03T12:34:58.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM参数全集">
+<meta name="twitter:description" content="JVM参数根据JVM参数以-X开头或-XX开头将JVM参数分成两个部分：1) 以-X开头的都是非标准的（这些参数并不能保证在所有的JVM上都被实现），而且如果在新版本有什么改动也不会发布通知。2）以-XX开头的都是不稳定的并且不推荐在生产环境中使用。这些参数的改动也不会发布通知。">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/jvm_02.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-技术/术/语言基础/Java/JVM/JVM参数大全" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JVM参数全集
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/12/01/技术/术/语言基础/Java/JVM/JVM参数大全/" class="article-date">
+  <time datetime="2017-12-01T04:07:29.000Z" itemprop="datePublished">2017-12-01</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM参数"><span class="toc-number">1.</span> <span class="toc-text">JVM参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM参数种类"><span class="toc-number">1.1.</span> <span class="toc-text">JVM参数种类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础参数"><span class="toc-number">1.1.1.</span> <span class="toc-text">基础参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一张脑图（网上找的哈）"><span class="toc-number">1.2.</span> <span class="toc-text">一张脑图（网上找的哈）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一份较为普通的JVM参数配置"><span class="toc-number">1.2.1.</span> <span class="toc-text">一份较为普通的JVM参数配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些调优建议"><span class="toc-number">1.2.2.</span> <span class="toc-text">一些调优建议</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="JVM参数"><a href="#JVM参数" class="headerlink" title="JVM参数"></a>JVM参数</h1><p>根据JVM参数以-X开头或-XX开头将JVM参数分成两个部分：<br>1) 以-X开头的都是非标准的（这些参数并不能保证在所有的JVM上都被实现），而且如果在新版本有什么改动也不会发布通知。<br>2）以-XX开头的都是不稳定的并且不推荐在生产环境中使用。这些参数的改动也不会发布通知。</p>
+<a id="more"></a>
+<h2 id="JVM参数种类"><a href="#JVM参数种类" class="headerlink" title="JVM参数种类"></a>JVM参数种类</h2><p>1) 布尔型参数选项：-XX:+ 打开， -XX:- 关闭。（比如-XX:+PrintGCDetails）<br>2) 数字型参数选项通过-XX:&lt;名称&gt;=&lt;设定&gt;。数字可以是 m/M(兆字节)，k/K(千字节)，g/G(G字节)。比如：32K表示32768字节。（比如-XX:-XX:NewRatio=4）<br>3) 字符行参数选项通过-XX:&lt;名称&gt;=&lt;设定&gt;，通常用来指定一个文件，路径，或者一个命令列表。（比如-XX:HeapDumpPath=./java_pid.hprof）</p>
+<h3 id="基础参数"><a href="#基础参数" class="headerlink" title="基础参数"></a>基础参数</h3><p>1) 跟 Java 堆大小相关的 JV M 内存参数<br>下面三个 JVM 参数用来指定堆的初始大小和最大值以及堆栈大小<br> -Xms        设置 Java 堆的初始化大小<br> -Xmx       设置最大的 Java 堆大小<br> -Xss        设置Java线程堆栈大小<br> -Xmn       设置新生代空间大小</p>
+<p>2) 关于打印垃圾收集器详情的 JVM 参数<br>  -XX:+PrintGC / -verbose:gc 记录 GC 运行以及运行时间，一般用来查看 GC 是否是应用的瓶颈<br>  -XX:+PrintGCDetails  记录 GC 运行时的详细数据信息，包括新生成对象的占用内存大小以及耗费时间等，包含-XX:+PrintGC<br>  -XX:-PrintGCTimeStamps   打印垃圾收集的时间戳,以基准时间的形式<br>  -XX:+PrintGCDateStamps  打印垃圾收集的时间戳,以日期的形式<br>  -Xloggc: $LOG_PATH/$MODULE.gc.log  GC日志路径配置<br>  -XX:+PrintHeapAtGC 在进行GC的前后打印出堆的信息<br>  -XX:+PrintTenuringDistribution  在每次新生代GC时，输出幸存区中对象的年龄分布</p>
+<p>3) 设置 Java 垃圾收集器行为的 JVM 参数<br>-XX:+UseSerialGC<br>指定新生使用新生代串行收集器和老年代串行收集器, 当以client模式运行时, 它是默认的垃圾收集器<br>特点：单线程, Java应用程序中的线程都需要暂停(Stop-The-World) ,使用复制算法<br>-XX:+UseParNewGC<br>指定新生代使用ParNew回收器,<br>特点:将串行回收多线程化, 使用复制算法，垃圾回收时, 暂停应用线程,只不过由于是多线程回收, 在多核CPU上，回收效率会高于串行回收器, 反之在单核CPU， 效率会不如串行回收器<br>-XX:+UseParallelGC　　<br>新生代用ParallelGC回收器,支持自适应的GC调节策略,通过-XX: +UseRSAdaptiveSizePolicy调节,同ParNew回收器一样,不同的地方在于,它非常关注系统的吞吐量(通过参数控制)<br>-XX:ParallelGCThreads    并行收集器的线程数（最好与处理器数目相等）<br>-XX:MaxGCPauseMillis=n(单位ms)<br>设置垃圾回收的最大停顿时间<br>-XX:GCTimeRatio=n(n在0-100之间),设置吞吐量的大小, 假设值为n, 那系统将花费不超过1/(n+1)的时间用于垃圾回收<br>-XX:+UseParallelOldGC　<br>ParallelGC回收器的老年代版本, 同样关注系统吞吐量<br>CMS回收器相关参数<br>特征：并发回收, 非独占式的回收器, 大部分时候应用程序不会停止运行,针对年老代的回收器, 使用并发标记清除算法, 因此回收后会有内存碎片,可以使参数设置进行内存碎片的压缩整理,与ParallelGC和ParallelOldGC不同,CMS主要关注系统停顿时间<br>-XX:UseConcMarkSweepGC 启用<br>默认回收线程数: (并行GC线程数+3)/4，也可用-XX:ParallelCMSThreads=10指定<br>-XX:+CMSClassUnloadingEnabled 来启用持久代使用 CMS<br>-XX:+UseCMSCompactAtFullCollection 启动碎片整理功能，每次 Full GC 后都会整理<br>-XX:CMSFullGCsBeforeCompaction=2 指定多少次 Full GC 后才整理。<br>-XX:CMSInitiatingOccupancyFraction=85  ( 默认 68%)  在默认设置下，CMS收集器在老年代使用了68%的空间后就会被激活，这是一个偏保守的设置，如果在应用中老年代增长不是太快，可以适当调高参数<br>-XX:CMSInitiatingPermOccupancyFraction=70 设置Perm Gen使用到达多少比率时触发<br>-XX:+UseCMSInitiatingOccupancyOnly JVM通过CMSInitiatingOccupancyFraction的值进行每一次CMS收集，而不仅仅是第一次<br>-XX:+DisableExplicitGC  禁止代码中显示调用GC<br>-XX:+ScavengeBeforeFullGC  在Full GC前触发一次Minor GC (默认配置)</p>
+<p>4)JVM调试参数，用于远程调试<br>-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000</p>
+<p>5) 关于性能诊断的 JVM 参数<br>-Xprof<br>-Xrunhprof</p>
+<p>6) 关于类路径方面的 JVM 参数<br>-Xbootclasspath用来指定你需要加载，但不想通过校验的类路径。JVM 会对所有的类在加载前进行校验并为每个类通过一个int数值来应用。这个是保证 JVM 稳定的必要过程，但比较耗时，如果你希望跳过这个过程，就把你的类通过这个参数来指定。</p>
+<p>7) 用于修改 Perm Gen 大小的 JVM 参数<br>下面的这三个参数主要用来解决 JVM 错误： java.lang.OutOfMemoryError:Perm Gen Space.<br>-XX:PermSize   设置持久代初始值<br>-XX:MaxPermSize  设置持久代最大值<br>-XX:NewRatio=2  设置Old区size / Young区size的比值，配置后-XX:NewSize配置失效，默认是2<br>-XX:SurvivorRatio  设置Eden与survivor区大小比例<br>-XX:NewSize  设置年轻代大小，通常和-XX:MaxNewSize设置成同样大小，防止年轻代的内存伸缩。<br>-XX:MaxNewSize<br>-XX:MaxTenuringThreshold:   垃圾最大年龄，survivor区超过年龄对象进入 old区，默认15<br>-XX:pretenureSizeThreshold   对于大于 pretenureSizeThreshold 的大对象直接存放在 Old 中,默认1024byte<br>-XX:MaxDirectMemorySize  堆外内存</p>
+<p>8) 用来跟踪类加载和卸载的信息<br>-XX:+TraceClassLoading和 -XX:+TraceClassUnloading 用来打印类被加载和卸载的过程信息，这个用来诊断应用的内存泄漏问题非常有用。</p>
+<p>9) JVM switches related to logging<br>-XX:+TraceClassLoading and -XX:+TraceClassUnloading print information class loads and unloads. Useful for investigating if you have a class leak or if old classes (like JITed Ruby methods in JRuby) are getting collected or not.You can read more about logging in Java on my post 10 Tips while logging in Java<br>-XX:+PrintCompilation prints out the name of each Java method Hotspot decides to JIT compile. The list will usually show a bunch of core Java class methods initially, and then turn to methods in your application. In JRuby, it eventually starts to show Ruby methods as well</p>
+<p>10) 用于调试目的的 JVM 开关参数<br>-XX:HeapDumpPath=./java_pid.hprof  Path to directory or file name for heap dump.<br>-XX:-PrintConcurrentLocks        Print java.util.concurrent locks in Ctrl-Break thread dump.<br>-XX:-PrintCommandLineFlags   Print flags that appeared on the command line.</p>
+<h2 id="一张脑图（网上找的哈）"><a href="#一张脑图（网上找的哈）" class="headerlink" title="一张脑图（网上找的哈）"></a>一张脑图（网上找的哈）</h2><p><img src="/img/jvm_02.jpg" alt="jvm脑图"></p>
+<h3 id="一份较为普通的JVM参数配置"><a href="#一份较为普通的JVM参数配置" class="headerlink" title="一份较为普通的JVM参数配置"></a>一份较为普通的JVM参数配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/usr/local/java8/bin/java -server -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Djava.io.tmpdir=/tmp</div><div class="line">-Djava.net.preferIPv6Addresses=false   如果系统中开启了IPV6协议（比如window7），java网络编程经常会获取到IPv6的地址,因此禁用IPv6，保证获取的是IPv4的地址</div><div class="line">-XX:+DisableExplicitGC   关闭System.gc()</div><div class="line">-XX:+UseConcMarkSweepGC   启用CMS作为垃圾回收器</div><div class="line">-XX:CMSInitiatingOccupancyFraction=80   ( 默认 68%)  在默认设置下，CMS收集器在老年代使用了68%的空间后就会被激活，这是一个偏保守的设置，如果在应用中老年代增长不是太快，可以适当调高参数</div><div class="line">-XX:+PrintGCDetails   记录 GC 运行时的详细数据信息，包括新生成对象的占用内存大小以及耗费时间等，包含-XX:+PrintGC</div><div class="line">-XX:+PrintGCTimeStamps  打印垃圾收集的时间戳,以基准时间的形式</div><div class="line">-XX:+PrintGCDateStamps  打印垃圾收集的时间戳,以日期的形式</div><div class="line">-XX:+PrintHeapAtGC      在进行GC的前后打印出堆的信息</div><div class="line">-XX:+PrintTenuringDistribution   在每次新生代GC时，输出幸存区中对象的年龄分布</div><div class="line">-XX:+UseGCLogFileRotation   启用GC日志文件的自动转储</div><div class="line">-XX:NumberOfGCLogFiles=5     GC日志文件的循环数目</div><div class="line">-XX:GCLogFileSize=512M      控制GC日志文件的大小</div><div class="line">-XX:NewRatio=2          设置Old区size / Young区size的比值，配置后-XX:NewSize配置失效，默认是2</div><div class="line">-XX:SurvivorRatio=8     设置Eden与survivor区大小比例</div><div class="line">-XX:MetaspaceSize=256M      初始空间大小，达到该值就会触发垃圾收集进行类型卸载，同时GC会对该值进行调整：如果释放了大量的空间，就适当降低该值；如果释放了很少的空间，那么在不超过MaxMetaspaceSize时，适当提高该值。（since java8）</div><div class="line">-XX:MaxMetaspaceSize=256M   最大空间，默认是没有限制的。 （since java8）</div><div class="line">-XX:+HeapDumpOnOutOfMemoryError     让JVM在发生内存溢出时自动的生成堆内存快照</div><div class="line">-XX:ReservedCodeCacheSize=128m      保留代码占用的内存容量</div><div class="line">-XX:InitialCodeCacheSize=128m       初始化代码占用的内存容量</div><div class="line">-Xmx4g          设置最大的 Java 堆大小</div><div class="line">-Xms4g          设置 Java 堆的初始化大小</div><div class="line">-Xloggc:/User/liyixiang/gc.log       gcLog目录路径</div><div class="line">-XX:ErrorFile=/opt/logs/com.sankuai.mall.ams.ams/ams.hs_err_%p.log    errorLog目录路径</div><div class="line">-XX:HeapDumpPath=/User/liyixiang/heap_err.log heap dump路径</div></pre></td></tr></table></figure>
+<h3 id="一些调优建议"><a href="#一些调优建议" class="headerlink" title="一些调优建议"></a>一些调优建议</h3><p><strong>-XX:CMSInitiatingOccupancyFraction=80 和-XX:+UseCMSInitiatingOccupancyOnly</strong><br>这两个设置一般配合使用,一般用于『降低CMS GC频率或者增加频率、减少GC时长』的需求<br>-XX:CMSInitiatingOccupancyFraction=80 是指设定CMS在对内存占用率达到80%的时候开始GC(因为CMS会有浮动垃圾,所以一般都较早启动GC);<br>-XX:+UseCMSInitiatingOccupancyOnly 只是用设定的回收阈值(上面指定的80%),如果不指定,JVM仅在第一次使用设定值,后续则自动调整</p>
+<p>一般建议这两个参数一同设置，如果不设置-XX:+UseCMSInitiatingOccupancyOnly 则80%这个阀值只在第一次有效，之后JVM就会根据历史回收经验来确定回收阀值，这个阀值是无法确定的，而设置该参数后，该参数可以理解为一种兜底策略，在最坏情况下能保证perm达到80%时进行回收，而不足80%但达到JVM调整的阀值，也会进行回收。</p>
+<p><strong>-XX:+DisableExplicitGC</strong><br>显式垃圾收集是一个非常糟糕的主意——就像将您和一个疯狂的斗牛犬锁在一个电话亭里。尽管调用的语法是依赖实现的，但如果您的JVM正在运行一个分代的 垃圾回收器（大多数是）System.gc();强迫VM执行一个堆的“全部清扫”，虽然有的没有必要。全部清扫比一个常规GC操作要昂贵好几个数量级， 这只是个简单数学问题。Sun的工程师为这个特殊的人工错误提供一个JVM标 志；-XX:+DisableExplicitGC标志自动将System.gc()调用转换成一个空操作，为您提供运行代码的机会</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/12/01/技术/术/语言基础/Java/JVM/JVM参数大全/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/12/01/技术/术/语言基础/Java/JVM/JVM参数大全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/12/01/技术/术/语言基础/Java/JVM/JVM参数大全/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/05/技术/道/设计模式/设计模式总览/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          设计模式总览
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/01/技术/术/语言基础/Java/JVM/Java神器-垃圾回收/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java神器-垃圾回收</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/03/技术/道/设计模式/行为型/责任链/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/08/技术/术/存储/数据库/HBase/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/道/大数据/开篇-初识大数据/">开篇-初识大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/术/语言基础/Java/J2EE/框架/Spark本地安装/">Spark本地安装</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/技术/术/语言基础/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2019 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

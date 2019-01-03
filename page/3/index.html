@@ -82,7 +82,7 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-技术/道/设计模式/行为型/设计模式－行为型" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-技术/道/分布式与服务化/分布式锁" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -90,42 +90,43 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/16/技术/道/设计模式/行为型/设计模式－行为型/">设计模式－行为型</a>
+      <a class="article-title" href="/2018/06/20/技术/道/分布式与服务化/分布式锁/">分布式锁</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-    	<a href="/2017/02/16/技术/道/设计模式/行为型/设计模式－行为型/" class="article-date">
-  <time datetime="2017-02-16T06:45:02.000Z" itemprop="datePublished">2017-02-16</time>
+    	<a href="/2018/06/20/技术/道/分布式与服务化/分布式锁/" class="article-date">
+  <time datetime="2018-06-20T07:00:23.000Z" itemprop="datePublished">2018-06-20</time>
 </a>
     	
   <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/道/">道</a>►<a class="article-category-link" href="/categories/技术/道/设计模式/">设计模式</a>►<a class="article-category-link" href="/categories/技术/道/设计模式/行为型/">行为型</a>
+    <a class="article-category-link" href="/categories/解决方案专题/">解决方案专题</a>►<a class="article-category-link" href="/categories/解决方案专题/分布式/">分布式</a>
   </div>
 
   	</div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h1><p>说到行为型，个人理解其实就是在软件设计过程中针对动态过程的一种设计方法，不同于结构型，行为型更侧重于局部特征。</p>
-<h2 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h2><p>迭代器模式            Iterator<br>中介者模式            Mediator<br>备忘录模式            Memento<br>观察者模式            Observer<br>状态模式                State<br>策略模式                Strategy<br>模板方法模式             Template<br>访问者模式            Visitor<br>职责连模式            Chain<br>命令模式             Command</p>
+        <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>分布式锁，是控制分布式系统之间同步访问共享资源的一种方式。在分布式系统中，常常需要协调他们的动作。如果不同的系统或是同一个系统的不同主机之间共享了一个或一组资源，那么访问这些资源的时候，往往需要互斥来防止彼此干扰来保证一致性，在这种情况下，便需要使用到分布式锁。 【by 维基百科】</p>
+<hr>
+<p>结合目前我做的业务场景，举三个例子<br>
         
           <p class="article-more-link">
-            <a href="/2017/02/16/技术/道/设计模式/行为型/设计模式－行为型/#more">阅读全文</a>
+            <a href="/2018/06/20/技术/道/分布式与服务化/分布式锁/#more">阅读全文</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/02/16/技术/道/设计模式/行为型/设计模式－行为型/" data-id="cjqgjv5lr001y29caev9xe5k7" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/06/20/技术/道/分布式与服务化/分布式锁/" data-id="cjqgn0b2m0017f9cabrrdwenz" class="article-share-link">分享</a>
 	  
       
-        <a href="https://yixiangli.github.io/2017/02/16/技术/道/设计模式/行为型/设计模式－行为型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/16/技术/道/设计模式/行为型/设计模式－行为型/">评论</a>
+        <a href="https://yixiangli.github.io/2018/06/20/技术/道/分布式与服务化/分布式锁/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/06/20/技术/道/分布式与服务化/分布式锁/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/策略/">策略</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/行为型/">行为型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/观察/">观察</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lock/">lock</a></li></ul>
 
     </footer>
   </div>
@@ -137,7 +138,7 @@
 
 
   
-    <article id="post-技术/道/操作系统/Linux/Linux命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-技术/术/语言基础/Java/J2EE/编码规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -145,129 +146,19 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/19/技术/道/操作系统/Linux/Linux命令详解/">Linux命令详解</a>
+      <a class="article-title" href="/2018/05/06/技术/术/语言基础/Java/J2EE/编码规范/">编码规范</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-    	<a href="/2017/01/19/技术/道/操作系统/Linux/Linux命令详解/" class="article-date">
-  <time datetime="2017-01-19T02:59:55.000Z" itemprop="datePublished">2017-01-19</time>
+    	<a href="/2018/05/06/技术/术/语言基础/Java/J2EE/编码规范/" class="article-date">
+  <time datetime="2018-05-06T12:21:07.000Z" itemprop="datePublished">2018-05-06</time>
 </a>
     	
   <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/道/">道</a>►<a class="article-category-link" href="/categories/技术/道/操作系统/">操作系统</a>►<a class="article-category-link" href="/categories/技术/道/操作系统/Linux/">Linux</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h1><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>链接是操作系统中的一个重要功能，最常见的就是windows桌面上那一排排快捷方式，其实并不是真正的源文件，而是从源文件目录中找到程序入口点（也就是可执行文件），设置的一个链接，这样可以方便用户在桌面上就可以轻松得操作各种应用程序，不用再到每个文件夹下面去找执行文件，Linux也同理</p>
-<h3 id="硬链接-amp-软链接"><a href="#硬链接-amp-软链接" class="headerlink" title="硬链接&amp;软链接"></a>硬链接&amp;软链接</h3><p>在Linux中链接分为硬链接(hard link)与软链接(symbolic link)<br>为了分清区别，博主特别找了台服务器尝试下</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/19/技术/道/操作系统/Linux/Linux命令详解/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/01/19/技术/道/操作系统/Linux/Linux命令详解/" data-id="cjqgjv5l1001j29cabvzoaoy9" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/01/19/技术/道/操作系统/Linux/Linux命令详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/19/技术/道/操作系统/Linux/Linux命令详解/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-技术/道/设计模式/结构型/设计模式－结构型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/技术/道/设计模式/结构型/设计模式－结构型/">设计模式－结构型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/01/18/技术/道/设计模式/结构型/设计模式－结构型/" class="article-date">
-  <time datetime="2017-01-18T03:35:47.000Z" itemprop="datePublished">2017-01-18</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/道/">道</a>►<a class="article-category-link" href="/categories/技术/道/设计模式/">设计模式</a>►<a class="article-category-link" href="/categories/技术/道/设计模式/结构型/">结构型</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h1><p>软件工程来源于建筑，设计模式来源于生活，设计模式本身是某种特定场景下的一种解决方案，而结构型侧重于处理一些代码层次结构问题的解决方法。</p>
-<h2 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h2><p>代理模式             Proxy<br>适配器模式               Adapter<br>桥接模式            Bridge<br>装饰器模式               Decorator<br>外观模式            Facade<br>组合模式            Composite<br>享元模式            Flyweight</p>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/18/技术/道/设计模式/结构型/设计模式－结构型/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/技术/道/设计模式/结构型/设计模式－结构型/" data-id="cjqgjv5ln001t29cakfa5xemv" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2017/01/18/技术/道/设计模式/结构型/设计模式－结构型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/技术/道/设计模式/结构型/设计模式－结构型/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构型/">结构型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/适配器/">适配器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-技术/道/设计模式/创建型/设计模式－创建型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/18/技术/道/设计模式/创建型/设计模式－创建型/">设计模式－创建型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2017/01/18/技术/道/设计模式/创建型/设计模式－创建型/" class="article-date">
-  <time datetime="2017-01-18T03:34:56.000Z" itemprop="datePublished">2017-01-18</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/道/">道</a>►<a class="article-category-link" href="/categories/技术/道/设计模式/">设计模式</a>►<a class="article-category-link" href="/categories/技术/道/设计模式/创建型/">创建型</a>
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a>
   </div>
 
   	</div>
@@ -275,28 +166,129 @@
       
       	<!-- Table of Contents -->
     
-        <h1 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h1><p>设计模式来源于生活，在面向对象的世界里，世间万物皆对象，那么对象的创建方式就存在多种多样，自然也就形成了几种通用的设计模式。</p>
-<h2 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h2><p>单例模式             SingleTon<br>原型模式         Prototype<br>建造者模式         Builder<br>简单工厂               SimpleFactory<br>工厂模式         Factory<br>抽象工厂模式     AbstractFactory</p>
-<h3 id="工厂，工厂"><a href="#工厂，工厂" class="headerlink" title="工厂，工厂"></a>工厂，工厂</h3><p>工厂，生产产品的地方，因此也是创建型设计模式中的一大类，而且派生出多个设计模式样例。</p>
-<h4 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h4><p>看demo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月15日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		简单工厂</div><div class="line"> */</div><div class="line">public class SimpleFactory &#123;</div><div class="line"></div><div class="line">	public Product createProduct(String name)&#123;</div><div class="line">		 if(&quot;A&quot;.equals(name))&#123;</div><div class="line">			 return new ProductA(&quot;A&quot;);</div><div class="line">		 &#125;else &#123;</div><div class="line">			 return new ProductB(&quot;B&quot;);</div><div class="line">		 &#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> *</div><div class="line"> * @author liyixiang</div><div class="line"> * 		产品接口</div><div class="line"> */</div><div class="line">interface Product&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//产品A</div><div class="line">class ProductA implements Product &#123;</div><div class="line">	String name;</div><div class="line">	public ProductA(String name) &#123;</div><div class="line">		// TODO Auto-generated constructor stub</div><div class="line">		this.name = name;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//产品B</div><div class="line">class ProductB implements Product &#123;</div><div class="line">	String name;</div><div class="line">	public ProductB(String name) &#123;</div><div class="line">		// TODO Auto-generated constructor stub</div><div class="line">		this.name = name;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>总结一下就是一个工厂类，一个产品接口（其实也可以是一个抽象类，甚至一个普通的父类，但通常我们觉得接口是最稳定的，所以基本不需要考虑普通父类的情况），和一群实现了产品接口的具体产品，而这个工厂类，根据传入的参数去创造一个具体的实现类，并向上转型为接口作为结果返回。<br>缺点：<br>    扩展性很差，随着产品的升级进化，工厂类需要if else的改动，违反开闭原则，当然其实这个设计模式是大部分程序员最常用的。。。不承认也不行。</p>
-<h4 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h4><p>既然简单工厂被吐槽了，那么就进化一下吧</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月15日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		工厂方法</div><div class="line"> * 		比简单工厂就是将工厂部分给抽象化</div><div class="line"> */</div><div class="line">public interface Factory &#123;</div><div class="line">	Product getProduct();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class FactoryA implements Factory &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public Product getProduct() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return new ProductA();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">class FactoryB implements Factory &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public Product getProduct() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return new ProductB();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//产品</div><div class="line">interface Product &#123;&#125;</div><div class="line"></div><div class="line">class ProductA implements Product &#123;&#125;</div><div class="line"></div><div class="line">class ProductB implements Product &#123;&#125;</div></pre></td></tr></table></figure>
-<p>look,复杂的if else被Factory和他的孩子们替代了，如果现在再来一个产品C，那么就实现一个工厂C就可以了，遵循开闭原则，但是追求完美的小伙伴会觉得，工厂方法还是存在一些问题，因为只能生产Product这种类型的产品，那么我们再进化一波</p>
-<h4 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月15日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> * 		抽象工厂</div><div class="line"> * 		基于工厂方法，我们再变形，把产品也抽象一下</div><div class="line"> */</div><div class="line">//抽象产品1</div><div class="line">interface Product&#123;&#125;</div><div class="line">//抽象产品2</div><div class="line">interface Product1&#123;&#125;</div><div class="line"></div><div class="line">//产品群</div><div class="line">class ProductA implements Product&#123;&#125;</div><div class="line">class ProductB implements Product&#123;&#125;</div><div class="line">class ProductA1 implements Product1&#123;&#125;</div><div class="line">class ProductB1 implements Product1&#123;&#125;</div><div class="line"></div><div class="line">public interface AbstractFactory &#123;</div><div class="line">	//创建Product类</div><div class="line">	Product createProduct();</div><div class="line">	//创建Product1类</div><div class="line">	Product1 createProduct1();</div><div class="line">&#125;</div><div class="line"></div><div class="line">//A工厂就负责生产A产品</div><div class="line">class FactoryA implements AbstractFactory&#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public Product createProduct() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return new ProductA();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public Product1 createProduct1() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return new ProductA1();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//B工厂就负责生产B产品</div><div class="line">class FactoryB implements AbstractFactory&#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public Product createProduct() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return new ProductB();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public Product1 createProduct1() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return new ProductB1();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>简直神奇，是不是<br>最后总结一波，工厂方法是对简单工厂中工厂类进行抽象，而抽象工厂是将产品也进行了抽象，在实际开发工作中，要根据实际情况选择，也不要因为抽象工厂可能更抽象化而增加代码复杂度。</p>
+        <h1 id="一些编码规范"><a href="#一些编码规范" class="headerlink" title="一些编码规范"></a>一些编码规范</h1><h2 id="XXO的概念"><a href="#XXO的概念" class="headerlink" title="XXO的概念"></a>XXO的概念</h2><h3 id="DAO"><a href="#DAO" class="headerlink" title="DAO"></a>DAO</h3><p>　　DAO（Data Access Object）数据访问对象，它是一个面向对象的数据库接口，负责持久层的操作，为业务层提供接口，主要用来封装对数据库的访问，常见操作无外乎 CURD。我们也可以认为一个 DAO 对应一个 POJO 的对象，它位于业务逻辑与数据库资源中间，可以结合 PO 对数据库进行相关的操作。</p>
+<h3 id="PO"><a href="#PO" class="headerlink" title="PO"></a>PO</h3><p>　　PO（Persistent Object）持久层对象，它是由一组属性和属性的get和set方法组成，最简单的 PO 就是对应数据库中某个表中的一条记录（也就是说，我们可以将数据库表中的一条记录理解为一个持久层对象），多个记录可以用 PO 的集合，PO 中应该不包含任何对数据库的操作。PO 的属性是跟数据库表的字段一一对应的，此外 PO 对象需要实现序列化接口。</p>
+<h3 id="BO"><a href="#BO" class="headerlink" title="BO"></a>BO</h3><p>　　BO（Business Object）业务层对象，是简单的真实世界的软件抽象，通常位于中间层。BO 的主要作用是把业务逻辑封装为一个对象，这个对象可以包括一个或多个其它的对象。举一个求职简历的例子，每份简历都包括教育经历、项目经历等，我们可以让教育经历和项目经历分别对应一个 PO，这样在我们建立对应求职简历的 BO 对象处理简历的时候，让每个 BO 都包含这些 PO 即可。</p>
+<h3 id="VO"><a href="#VO" class="headerlink" title="VO"></a>VO</h3><p>　　VO（Value Object）值对象，通常用于业务层之间的数据传递，和 PO 一样也是仅仅包含数据而已，但 VO 应该是抽象出的业务对象，可以和表对应，也可以不对应，这根据业务的需要。 如果锅碗瓢盆分别为对应的业务对象的话，那么整个碗柜就是一个值对象。此外，VO 也可以称为页面对象，如果称为页面对象的话，那么它所代表的将是整个页面展示层的对象，也可以由需要的业务对象进行组装而来。</p>
+<h3 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h3><p>　　DTO（Data Transfer Object）数据传输对象，主要用于远程调用等需要大量传输对象的地方，比如我们有一个交易订单表，含有 25 个字段，那么其对应的 PO 就有 25 个属性，但我们的页面上只需要显示 5 个字段，因此没有必要把整个 PO 对象传递给客户端，这时我们只需把仅有 5 个属性的 DTO 把结果传递给客户端即可，而且如果用这个对象来对应界面的显示对象，那此时它的身份就转为 VO。使用 DTO 的好处有两个，一是能避免传递过多的无用数据，提高数据的传输速度；二是能隐藏后端的表结构。常见的用法是：将请求的数据或属性组装成一个 RequestDTO，再将响应的数据或属性组装成一个 ResponseDTO.</p>
+<h3 id="POJO"><a href="#POJO" class="headerlink" title="POJO"></a>POJO</h3><p>　　POJO（Plain Ordinary Java Object）简单的 Java 对象，实际就是普通的 JavaBeans，是为了避免和 EJB（Enterprise JavaBean）混淆所创造的简称。POJO 实质上可以理解为简单的实体类，其中有一些属性及其getter和setter方法的类，没有业务逻辑，也不允许有业务方法，也不能携带有connection之类的方法。POJO 是 JavaEE 世界里面最灵活的对象，在简单系统中，如果从数据库到页面展示都是 POJO 的话，它可以是 DTO；如果从数据库中到业务处理中都是 POJO 的话，它可以是 BO；如果从数据库到整个页面的展示的话，它也可以是 VO.
+　　</p>
+<h3 id="一张图总结"><a href="#一张图总结" class="headerlink" title="一张图总结"></a>一张图总结</h3><p><img src="/img/code_standard.png" alt="编码规范"></p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2017/01/18/技术/道/设计模式/创建型/设计模式－创建型/" data-id="cjqgjv5l6001p29ca3smskrqz" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/05/06/技术/术/语言基础/Java/J2EE/编码规范/" data-id="cjqgn0b7x00bjf9ca3lsvsklt" class="article-share-link">分享</a>
 	  
       
-        <a href="https://yixiangli.github.io/2017/01/18/技术/道/设计模式/创建型/设计模式－创建型/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/18/技术/道/设计模式/创建型/设计模式－创建型/">评论</a>
+        <a href="https://yixiangli.github.io/2018/05/06/技术/术/语言基础/Java/J2EE/编码规范/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/05/06/技术/术/语言基础/Java/J2EE/编码规范/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/创建型/">创建型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单例/">单例</a></li></ul>
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-技术/术/中间件/Elasticsearch/elasticsearch基础知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch基础知识/">elasticsearch基础知识</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch基础知识/" class="article-date">
+  <time datetime="2018-04-24T15:33:19.000Z" itemprop="datePublished">2018-04-24</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/分布式/">分布式</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="elasticsearch基础知识"><a href="#elasticsearch基础知识" class="headerlink" title="elasticsearch基础知识"></a>elasticsearch基础知识</h1><h2 id="基础名词解释"><a href="#基础名词解释" class="headerlink" title="基础名词解释"></a>基础名词解释</h2><ul>
+<li>Cluster:集群，由一个或多个Elasticsearch节点组成</li>
+<li>Node:节点，组成Elasticsearch集群的服务单元，同一个集群内节点名称不能重复，通常在一个节点上分配一个或者多个分片</li>
+<li>Shards:分片，索引数据量太大时，通常会将一个索引上的数据进行水平拆分，拆分出来的每个数据块为一个分片，在一个多分片的索引中写入数据，通过路由来确定具体写入到哪个分片，所以创建索引时就需要指定分片数量，且后期无法修改，每个分片都是Lucene中的一个索引文件，每个分片必须有一个主分片和零到多个副本分片</li>
+<li>Replica:备份也叫做副本，是对主分片的备份，主分片和副本分片都可以对外提供查询服务，写操作先在主分片上完成，然后分发到备份分片上，同理其他分布式系统，主分片出现问题时，会通过选举出一个备份分片作为新的主分片</li>
+<li>Index：索引，Index相当于关系型数据库的DataBase，由一个或多个分片组成，集群唯一</li>
+<li>Type：类型，索引的内部逻辑分区，一般把有共性的文档放到一个类型里面，相当于关系型数据库的table。</li>
+<li>Document：文档，Json结构，这点跟MongoDB差不多，id唯一标识</li>
+<li>Settings:对集群中索引的定义，如一个索引默认分片数，副本数</li>
+<li>Mapping:类似于关系型数据库中的表结构信息，用于定义索引中(Field)字段的存储类型，分词方式，是否存储等等，值得注意的是，Elasticsearch中的mapping可以动态识别，不需要手动创建，会根据数据格式自动识别他的类型，但是有些特殊属性配置（是否分词，选用什么分词器等等）那就需要手动设置mapping了，个人建议都采用手工设置的方式。</li>
+</ul>
+<h3 id="为何要分片"><a href="#为何要分片" class="headerlink" title="为何要分片"></a>为何要分片</h3><p>分片有两个好处，一个是可以水平扩展，另一个是可以并发提高性能。在网络环境下，可能会有各种导致分片无法正常工作的问题，所以需要有失败预案。ES支持把分片拷贝出一份或者多份，称为副本分片，简称副本。副本有两个好处，一个是实现高可用（HA，High Availability），另一个是利用副本提高并发检索性能。<br>分片和副本的数量可以在创建index的时候指定，index创建之后，只能修改副本数量，不能修改分片。</p>
+<h3 id="节点划分"><a href="#节点划分" class="headerlink" title="节点划分"></a>节点划分</h3><ul>
+<li>主节点（Master Node）：负责创建索引，删除索引，分配索引以及追踪集群节点的状态，这里注意，Elasticsearch中的主节点不需要转发请求，收集结果，用户的请求可以发往任意一个节点，在配置文件中设置<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node.master = true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>来设置该节点为候选主节点，候选指的是可以被选举成主节点，而不是当前就是主节点</p>
+<ul>
+<li><p>数据节点（Data Node）：负责数据存储和相关操作，比如针对索引数据的crud,数据节点对机器性能要求较高，通过配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node.data=true</div></pre></td></tr></table></figure>
+</li>
+<li><p>客户端节点(Client Node)：既不做主节点也不做数据节点，只负责请求的分发和汇总，配置为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">node.master = false</div><div class="line">node.data=false</div></pre></td></tr></table></figure>
+</li>
+<li><p>部落节点（Tribe Node）:部落节点可以跨越多个集群，接收每个集群的状态，合并成一个全局集群的状态，也可以读写全部集群的索引，配置为</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tribe:</div><div class="line">  one:cluster.name :  cluster_one</div><div class="line">  two:cluster.name :  cluster_two</div></pre></td></tr></table></figure>
+<p>据说tribe node在Elasticsearch 7.0移除，所以不推荐使用</p>
+<ul>
+<li>协调节点（Coorinating Node）：只是一种角色，而不是真实的Elasticsearch节点，所以也无法通过配置来标识，他的作用就是上文说到的支持把请求语句分发到其他的节点，那么所有的节点都可以看做是协调节点，因此，协调节点会对CPU I/0 要求比较高</li>
+</ul>
+<h2 id="健康状态："><a href="#健康状态：" class="headerlink" title="健康状态："></a>健康状态：</h2><p>安装了head插件之后，可以在web上看到集群健康状态，</p>
+<ul>
+<li>Green 集群处于绿色表示当前一切正常，</li>
+<li>Yellow 集群处于黄色表示当前有些副本不正常，但是主分片正常，也就是可用性被弱化</li>
+<li>Red 集群处于红色表示部分数据无法正常提供，也就是至少有一个分片的主分片以及它的全部副本分片都不可用，数据层面上只能返回部分数据，写入可能会存在异常<br>绿色和黄色状态下，集群都是能提供完整数据的，红色状态下集群提供的数据是有缺失的。</li>
+</ul>
+<h2 id="3C"><a href="#3C" class="headerlink" title="3C"></a>3C</h2><h3 id="共识性（Consensus）"><a href="#共识性（Consensus）" class="headerlink" title="共识性（Consensus）"></a>共识性（Consensus）</h3><p>Elasticsearch 并未采用常见的Raft Paxos算法以及成熟中间件Zookeeper,而是自己实现的系统zen discovery.作者解释的原因是因为zen discovery不仅完成共识的工作，也加入了监控集群状态的功能</p>
+<h3 id="并发（Concurreny）"><a href="#并发（Concurreny）" class="headerlink" title="并发（Concurreny）"></a>并发（Concurreny）</h3><p>Elasticsearch作为分布式系统，在写请求发送到主分片的同时，会以并行的方式发送给备份分片，但是会发现存在无序的问题，因此Elasticsearch采用乐观并发锁的形式保证</p>
+<h4 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h4><h5 id="悲观并发控制（PCC）"><a href="#悲观并发控制（PCC）" class="headerlink" title="悲观并发控制（PCC）"></a>悲观并发控制（PCC）</h5><p>这一点在关系数据库中被广泛使用。假设这种情况很容易发生，我们就可以阻止对这一资源的访问。典型的例子就是当我们在读取一个数据前先锁定这一行，然后确保只有读取到数据的这个线程可以修改这一行数据。</p>
+<h5 id="乐观并发控制（OCC）"><a href="#乐观并发控制（OCC）" class="headerlink" title="乐观并发控制（OCC）"></a>乐观并发控制（OCC）</h5><p>乐观并发控制其实就是一种乐观锁，另一种常用的乐观锁则是多版本并发控制（MVCC）</p>
+<ul>
+<li>OCC:用来解决写-写冲突的无锁并发控制，认为事务间竞争不激烈，就先进行修改，在提交事务前检查数据是否发生变化，如果变化了则放弃并重试，OCC类似于自旋锁，适用于低数据竞争且写冲突较少的情况</li>
+<li>MVCC:用来解决读-写冲突的无锁并发控制，为事务分配单向增长的时间戳，为每个修改保存一个版本号，版本与事务时间戳关联，读操作只读该事务开始前的数据库快照，这样读写操作互相不阻塞的同时，也解决了脏读和不可重复读的问题<br>Elasticsearch所使用的是MVCC。每当有索引、put和删除的操作时，无论文档有没有变化，它的_version都会增加。Elasticsearch使用_version来确保所有的改变操作都被正确排序。如果一个旧的版本出现在新版本之后，它就会被忽略掉。<br>当我们再执行同样的索引请求，并依旧指定相同version时，Elasticsearch就会返回一个409 Conflict的响应码，返回内容如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;error&quot; : &quot;VersionConflictEngineException[[website][2] [blog][1]:</div><div class="line">             version conflict, current [2], provided [1]]&quot;,</div><div class="line">  &quot;status&quot; : 409</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="一致性（Consistency）"><a href="#一致性（Consistency）" class="headerlink" title="一致性（Consistency）"></a>一致性（Consistency）</h3><p>Elasticsearch的一致性是在写入前先检查有多少个分片可以写入，如果达到写入条件，则进行写入操作，否则Elasticsearch会等待更多的分片出现，默认为一分钟<br>有如下三种设置来判断是否允许写操作：</p>
+<ul>
+<li>One:只要主分片可用，就可以写入</li>
+<li>All:必须主分片和全部副本都可用，才写入</li>
+<li>Quorum:Elasticsearch默认选项，当大部分分片可用时写入<br>公式：int(primary + number_of_replicas/2)+1</li>
+</ul>
+<p>Elasticsearch还有一种配置，为了保证搜索请求返回的结果是最新版本，可以配置replication=sync来确保，写操作在主分片和备份分片都写入并返回结果才成功，如果对写入性能要求较高，可以设置replication=async，则只要主分片写入完成，就会返回写成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch基础知识/" data-id="cjqgn0b3z0046f9ca91npzm4a" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch基础知识/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch基础知识/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/准实时/">准实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
 
     </footer>
   </div>
@@ -308,7 +300,7 @@
 
 
   
-    <article id="post-技术/道/操作系统/Linux/Linux内核参数优化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-技术/术/中间件/Elasticsearch/elasticsearch优化建议" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -316,19 +308,19 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/27/技术/道/操作系统/Linux/Linux内核参数优化/">Linux内核参数优化</a>
+      <a class="article-title" href="/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch优化建议/">elasticsearch优化建议</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-    	<a href="/2016/12/27/技术/道/操作系统/Linux/Linux内核参数优化/" class="article-date">
-  <time datetime="2016-12-27T09:14:22.000Z" itemprop="datePublished">2016-12-27</time>
+    	<a href="/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch优化建议/" class="article-date">
+  <time datetime="2018-04-24T13:33:19.000Z" itemprop="datePublished">2018-04-24</time>
 </a>
     	
   <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/道/">道</a>►<a class="article-category-link" href="/categories/技术/道/操作系统/">操作系统</a>►<a class="article-category-link" href="/categories/技术/道/操作系统/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/分布式/">分布式</a>
   </div>
 
   	</div>
@@ -336,22 +328,84 @@
       
       	<!-- Table of Contents -->
     
-        <h1 id="内核参数"><a href="#内核参数" class="headerlink" title="内核参数"></a>内核参数</h1><p>/etc/sysctl.conf</p>
-<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><p>net.ipv4.tcp_fin_timeout<br>默认60s，减小fin_timeout，减少TIME_WAIT连接数量。<br>net.ipv4.tcp_tw_reuse = 1<br>表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；<br>net.ipv4.tcp_tw_recycle = 1<br>表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。<br>net.ipv4.tcp_syncookies = 1<br>表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；<br>net.ipv4.tcp_keepalive_time = 1200<br>表示当keepalive起用的时候，TCP发送keepalive消息的频度。缺省是2小时，改为20分钟。<br>net.ipv4.ip_local_port_range = 10000 65000<br>表示用于向外连接的端口范围。缺省情况下很小：32768到61000，改为10000到65000。（注意：这里不要将最低值设的太低，否则可能会占用掉正常的端口！）<br>net.ipv4.tcp_max_syn_backlog = 8192<br>表示SYN队列的长度，默认为1024，加大队列长度为8192，可以容纳更多等待连接的网络连接数。<br>net.ipv4.tcp_max_tw_buckets = 5000<br>表示系统同时保持TIME_WAIT的最大数量，如果超过这个数字，TIME_WAIT将立刻被清除并打印警告信息。默 认为180000，改为5000。对于Apache、Nginx等服务器，上几行的参数可以很好地减少TIME_WAIT套接字数量，但是对于 Squid，效果却不大。此项参数可以控制TIME_WAIT的最大数量，避免Squid服务器被大量的TIME_WAIT拖死。</p>
-<h2 id="一些经验"><a href="#一些经验" class="headerlink" title="一些经验"></a>一些经验</h2><p>（1）遇到过一次故障：查看/var/log/messages系统日志发现possible SYN flooding on port 80. Sending cookies （类似syn洪水攻击）后经查询断定是请求过大导致<br>net.ipv4.tcp_syncookies = 1  配置这个参数有一定的效果，但如果量过大，还是会gg的<br>（2）time-wait数量快速回收<br>查看服务器time-wait数量 sudo netstat -antp |grep TIME_WAIT |wc -l<br>net.ipv4.tcp_tw_reuse = 1<br>net.ipv4.tcp_tw_recycle = 1<br>配置这两个参数可以大大减少time_wait数量，不信你就试试</p>
-<h2 id="生效"><a href="#生效" class="headerlink" title="生效"></a>生效</h2><p>sysctl -p</p>
+        <h1 id="elasticsearch优化"><a href="#elasticsearch优化" class="headerlink" title="elasticsearch优化"></a>elasticsearch优化</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>Near Real-Time Search<br>默认的设置是1秒，也就是说文档从Index请求到对外可见能够被搜到，最少要1秒钟，强制的，你的网络和CPU再快也不行</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>可以使用ES的路由机制，将同一索引内的具有相同特征（比如具有相同的userId）的文档全部存储于一个节点上，这样我们之后的查询都可以直接定位到这个节点上，而不用将查询广播道所有的节点上；</p>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><p>节点 = 分片 * （副本数 + 1）</p>
+<h2 id="ES本身的不足"><a href="#ES本身的不足" class="headerlink" title="ES本身的不足"></a>ES本身的不足</h2><ol>
+<li>与DB相比本身不支持事务</li>
+<li>权限管理相对比较弱</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/27/技术/道/操作系统/Linux/Linux内核参数优化/" data-id="cjqgjv5l2001k29cayohsomb3" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch优化建议/" data-id="cjqgn0b41004af9caei0pcm1r" class="article-share-link">分享</a>
 	  
       
-        <a href="https://yixiangli.github.io/2016/12/27/技术/道/操作系统/Linux/Linux内核参数优化/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/27/技术/道/操作系统/Linux/Linux内核参数优化/">评论</a>
+        <a href="https://yixiangli.github.io/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch优化建议/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch优化建议/">评论</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内核/">内核</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/准实时/">准实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-技术/术/中间件/Elasticsearch/elasticsearch存储" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch存储/">elasticsearch存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch存储/" class="article-date">
+  <time datetime="2018-04-24T03:33:19.000Z" itemprop="datePublished">2018-04-24</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/分布式/">分布式</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <h1 id="elasticsearch存储模块"><a href="#elasticsearch存储模块" class="headerlink" title="elasticsearch存储模块"></a>elasticsearch存储模块</h1><h2 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h2><h3 id="简单文件系统存储"><a href="#简单文件系统存储" class="headerlink" title="简单文件系统存储"></a>简单文件系统存储</h3><p>index.store.type = simplefs</p>
+<h3 id="新I-O文件系统存储"><a href="#新I-O文件系统存储" class="headerlink" title="新I/O文件系统存储"></a>新I/O文件系统存储</h3><p>index.store.type = niofs</p>
+<h3 id="MMap文件系统存储"><a href="#MMap文件系统存储" class="headerlink" title="MMap文件系统存储"></a>MMap文件系统存储</h3><p>index.store.type = mmapfs</p>
+<h3 id="内存存储"><a href="#内存存储" class="headerlink" title="内存存储"></a>内存存储</h3><p>index.store.type = memory</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h3 id="过滤器缓存"><a href="#过滤器缓存" class="headerlink" title="过滤器缓存"></a>过滤器缓存</h3><p>负责缓存查询中使用的过滤器的执行结果</p>
+<h3 id="字段数据缓存"><a href="#字段数据缓存" class="headerlink" title="字段数据缓存"></a>字段数据缓存</h3><p>将这个字段的所有数据都缓存起来，代价很高</p>
+<h2 id="段与段合并的理解"><a href="#段与段合并的理解" class="headerlink" title="段与段合并的理解"></a>段与段合并的理解</h2><p>倒排索引是由段（Segment）组成的，段存储在硬盘（Disk）文件中。索引段不是实时更新的，这意味着，段在写入硬盘之后，就不再被更新。在删除文档时，ElasticSearch引擎把已删除的文档的信息存储在一个单独的文件中，在搜索数据时，ElasticSearch引擎首先从段中执行查询，再从查询结果中过滤被删除的文档，这意味着，段中存储着被删除的文档，这使得段中含有”正常文档“的密度降低。多个段可以通过段合并（Segment Merge）操作把“已删除”的文档将从段中物理删除，把未删除的文档合并到一个新段中，新段中没有”已删除文档“，因此，段合并操作能够提高索引的查找速度，但是，段合并是IO密集型操作，需要消耗大量的硬盘IO。</p>
+<h3 id="顺排索引"><a href="#顺排索引" class="headerlink" title="顺排索引"></a>顺排索引</h3><p>在ElasticSearch中，倒排索引的各个段（segment）的数据存储在硬盘文件上，从整个倒排索引的段中读取字段数据之后，ElasticSearch引擎首先反转词条和文档之间的关系，创建文档和词条之间的关系，即创建顺排索引，然后把顺排索引存储在JVM的堆内存中。把倒排索引加载到fielddata结构是一个非常消耗硬盘IO资源的过程，因此，数据一旦被加载到内存，最好保持在内存中，直到索引段(segment)的生命周期结束。默认情况下，倒排索引的每个段(segment)，都会创建相应的fielddata结构，以存储字符类型的分析字段值，但是，需要注意的是，分配的JVM堆内存是有限的，Fileddata把数据存储在内存中，会占用过多的JVM堆内存，甚至耗尽JVM赖以正常运行的内存空间，反而会降低ElasticSearch引擎的查询性能。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch存储/" data-id="cjqgn0b400047f9cathxgmgug" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch存储/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2018/04/24/技术/术/中间件/Elasticsearch/elasticsearch存储/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/准实时/">准实时</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/搜索/">搜索</a></li></ul>
 
     </footer>
   </div>
@@ -366,7 +420,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -391,7 +445,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -404,23 +458,23 @@
       <ul>
         
           <li>
-            <a href="/2018/04/22/技术/道/分布式与服务化/异步确保型分布式事务探讨/">异步确保型分布式事务探讨</a>
+            <a href="/2019/01/03/技术/道/设计模式/行为型/责任链/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2017/12/27/技术/道/设计模式/创建型/原型/">原型</a>
+            <a href="/2018/08/08/技术/术/存储/数据库/HBase/HBase/">HBase-基础介绍</a>
           </li>
         
           <li>
-            <a href="/2017/12/22/技术/道/设计模式/创建型/建造者/">建造者</a>
+            <a href="/2018/08/06/技术/道/大数据/开篇-初识大数据/">开篇-初识大数据</a>
           </li>
         
           <li>
-            <a href="/2017/12/21/技术/道/设计模式/行为型/模板方法/">模板方法</a>
+            <a href="/2018/08/06/技术/术/语言基础/Java/J2EE/框架/Spark本地安装/">Spark本地安装</a>
           </li>
         
           <li>
-            <a href="/2017/12/21/技术/道/设计模式/创建型/单例/">单例</a>
+            <a href="/2018/07/24/技术/术/语言基础/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
           </li>
         
       </ul>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人主页">
+<meta property="og:type" content="website">
+<meta property="og:title" content="不忘初心">
+<meta property="og:url" content="https://yixiangli.github.io/page/12/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="个人主页">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="不忘初心">
+<meta name="twitter:description" content="个人主页">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-技术/术/语言基础/Java/J2SE/Java线程基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/13/技术/术/语言基础/Java/J2SE/Java线程基础/">Java线程基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/13/技术/术/语言基础/Java/J2SE/Java线程基础/" class="article-date">
+  <time datetime="2017-02-13T03:06:23.000Z" itemprop="datePublished">2017-02-13</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h1><h2 id="创建多线程的三种方式"><a href="#创建多线程的三种方式" class="headerlink" title="创建多线程的三种方式"></a>创建多线程的三种方式</h2><p>java.lang 包提供了三种实现多线程开发的工具：</p>
+<ol>
+<li>Callable 接口</li>
+<li>Runnable 接口</li>
+<li>Thread 类</li>
+</ol>
+<p>（1）Callable任务执行后可以具有返回值，在任务执行过程中也可以抛出异常，而 Runnable 和 Thread 都不行<br>（2）运行Callable任务可以拿到一个Future对象，表示异步计算的结果。它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果，而 Runable 和 Thread 都不行<br>（3）Thread 是通过实现 Runnable 接口实现的，因此可以认为 Thread 是 Runnable 的子类</p>
+<p>Thread 与 Runnable不再详述，主要介绍下Callable</p>
+<h3 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h3><p>Callable 接口是使用 ExecutorService.submit 方法调用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">package com.lyx.ag.power.callable;</div><div class="line"></div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.concurrent.*;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @User: liyixiang</div><div class="line"> * @Date: 2018/6/28</div><div class="line"> * @TODO:</div><div class="line"> *      Callable方式实现多线程</div><div class="line">*/</div><div class="line">public class ThreadCaller implements Callable&lt;Boolean&gt; &#123;</div><div class="line"></div><div class="line">    private int id;</div><div class="line"></div><div class="line">    public ThreadCaller(int id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Boolean call() throws Exception &#123;</div><div class="line">        System.out.println(&quot;回调了call函数&quot;);</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">class Test &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        ExecutorService exec = Executors.newCachedThreadPool();</div><div class="line">        ArrayList&lt;Future&lt;Boolean&gt;&gt; results = new ArrayList();</div><div class="line">        for (int i = 0; i &lt; 10; ++i) &#123;</div><div class="line">            results.add(exec.submit(new ThreadCaller(i)));</div><div class="line">        &#125;</div><div class="line">        for (Future&lt;Boolean&gt; fs : results) &#123;</div><div class="line">            try &#123;</div><div class="line">                System.out.println(fs.get());</div><div class="line">            &#125; catch (InterruptedException | ExecutionException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; finally &#123;</div><div class="line">                exec.shutdown();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从这段代码可以看出,Callable具有返回值，通过对Future的处理可以异步获取到线程处理的结果</p>
+<h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><p><img src="/img/thread_state.jpg" alt="线程状态转换图"></p>
+<p><strong>Blocked</strong><br>一般只有synchronized这种monitor锁才会出现这种状态</p>
+<p><strong>Waiting</strong><br>无超时的等待，无法自动恢复，必须notify或者Interrupt信号<br>ReentrantLock.lock()的无参方法调用也会Waiting</p>
+<p><strong>TimeWaiting</strong><br>有超时的等待，sleep wait join等指定超时值。</p>
+<h3 id="interrupt-amp-interrupted-amp-isInterrupted"><a href="#interrupt-amp-interrupted-amp-isInterrupted" class="headerlink" title="interrupt&amp;interrupted&amp;isInterrupted"></a>interrupt&amp;interrupted&amp;isInterrupted</h3><p>interrupt是一个用于设置线程中断标志的方法，阅读源码发现实际上调用了一个interrupt0的native方法来中断当前线程，这里注意只是将这个线程设置成中断状态（这个状态和java线程基本状态无关）,运行这个例子就很清楚了<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/13/技术/术/语言基础/Java/J2SE/Java线程基础/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/13/技术/术/语言基础/Java/J2SE/Java线程基础/" data-id="cjqgn0b8p00ckf9caikrf4ua4" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/13/技术/术/语言基础/Java/J2SE/Java线程基础/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/13/技术/术/语言基础/Java/J2SE/Java线程基础/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/run/">run</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-技术/术/语言基础/Java/J2SE/Java异常剖析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/12/技术/术/语言基础/Java/J2SE/Java异常剖析/">Java异常剖析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/12/技术/术/语言基础/Java/J2SE/Java异常剖析/" class="article-date">
+  <time datetime="2017-02-12T09:38:05.000Z" itemprop="datePublished">2017-02-12</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>顾名思义，非正常的，在程序的世界里，非正常执行的例子不胜枚举，所以处理异常也作为每位程序猿们日常开发必须的课题。</p>
+<h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><p>还记得博主人生第一次面试（当时是面去哪儿）就栽到这里了。<br>先发一张图<br><img src="/img/exception.jpg" alt="异常结构图"></p>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/12/技术/术/语言基础/Java/J2SE/Java异常剖析/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/12/技术/术/语言基础/Java/J2SE/Java异常剖析/" data-id="cjqgn0b8i00c6f9ca1uexxjx5" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/12/技术/术/语言基础/Java/J2SE/Java异常剖析/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/12/技术/术/语言基础/Java/J2SE/Java异常剖析/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exception/">Exception</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常/">异常</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-技术/道/分布式与服务化/微服务/SPI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/10/技术/道/分布式与服务化/微服务/SPI/">SPI</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/10/技术/道/分布式与服务化/微服务/SPI/" class="article-date">
+  <time datetime="2017-02-10T09:06:16.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/服务化/">服务化</a>►<a class="article-category-link" href="/categories/服务化/微服务/">微服务</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一段废话"><a href="#一段废话" class="headerlink" title="一段废话"></a>一段废话</h1><p>博主之前在研究dubbo时，发现dubbo中有关于spi的设计理念，一直没有太明白，最近看类加载时突然看到spi,所以就仔细研究一下</p>
+<h2 id="什么是SPI"><a href="#什么是SPI" class="headerlink" title="什么是SPI"></a>什么是SPI</h2><p>简写：Service Provider Interface，服务提供接口<br>在面向对象编程中，面向接口编程应当成为一种习惯，优秀的接口定义对于系统扩展性有着很大的帮助，提及扩展性，就自然引入了spi的概念。某天，你接到一个开发任务，需要提供一个crud的服务，那么首先就要定义接口，编写实现类，经过时间的推移，现有实现类无法满足需求，那么现在有两种方案，1.将现有接口做逻辑兼容，2.派生出一个新类实现接口，编写新功能，很显然，第二种方案更好，尤其是针对客户端直接调用的web接口，还必须维护老版本的功能。那么客户端在使用新旧接口时就可以利用spi的特性。<br>因此spi的基本定义如下：<br>    为了实现在模块装配的时候能不在程序里动态指明，这就需要一种服务发现机制。Java spi就是提供这样的一个机制：为某个接口寻找服务实现的机制。有点类似IOC的思想，就是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要。</p>
+<h2 id="怎么用"><a href="#怎么用" class="headerlink" title="怎么用"></a>怎么用</h2>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/10/技术/道/分布式与服务化/微服务/SPI/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/10/技术/道/分布式与服务化/微服务/SPI/" data-id="cjqgn0b52005ff9cax1ryggee" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/10/技术/道/分布式与服务化/微服务/SPI/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/10/技术/道/分布式与服务化/微服务/SPI/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spi-类加载/">spi 类加载</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-技术/术/语言基础/Java/J2SE/JavaIO" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/08/技术/术/语言基础/Java/J2SE/JavaIO/">JavaIO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/08/技术/术/语言基础/Java/J2SE/JavaIO/" class="article-date">
+  <time datetime="2017-02-08T10:29:41.000Z" itemprop="datePublished">2017-02-08</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h1><p>input/output的缩写，是一组输入输出接口。计算机是一种高效处理数据的工具，必然会涉及到输入输出。</p>
+<h2 id="Java中的I-O"><a href="#Java中的I-O" class="headerlink" title="Java中的I/O"></a>Java中的I/O</h2><p>概念一<br>    输入与输出：一定要清楚，要以程序（计算机）为本体，输入就是向程序输入的流，而输出就是程序向外输出，而不是以人（程序员）为主体。</p>
+<h3 id="基础流"><a href="#基础流" class="headerlink" title="基础流"></a>基础流</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>输入流</th>
+<th>输出流</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字节流</td>
+<td>InputStream</td>
+<td>OutputStream</td>
+</tr>
+<tr>
+<td>字符流</td>
+<td>Reader</td>
+<td>Writer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="节点流"><a href="#节点流" class="headerlink" title="节点流"></a>节点流</h3>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/08/技术/术/语言基础/Java/J2SE/JavaIO/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/08/技术/术/语言基础/Java/J2SE/JavaIO/" data-id="cjqgn0b8000bnf9cahl9sfc97" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/08/技术/术/语言基础/Java/J2SE/JavaIO/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/技术/术/语言基础/Java/J2SE/JavaIO/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/I-O/">I/O</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-技术/术/语言基础/Java/J2SE/Java中的日志" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/08/技术/术/语言基础/Java/J2SE/Java中的日志/">Java中的日志</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/02/08/技术/术/语言基础/Java/J2SE/Java中的日志/" class="article-date">
+  <time datetime="2017-02-08T10:29:41.000Z" itemprop="datePublished">2017-02-08</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是日志"><a href="#什么是日志" class="headerlink" title="什么是日志"></a>什么是日志</h1><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/08/技术/术/语言基础/Java/J2SE/Java中的日志/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2017/02/08/技术/术/语言基础/Java/J2SE/Java中的日志/" data-id="cjqgn0b8400bvf9caiyc9bf58" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2017/02/08/技术/术/语言基础/Java/J2SE/Java中的日志/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/02/08/技术/术/语言基础/Java/J2SE/Java中的日志/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/I-O/">I/O</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/11/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/13/">下一页 &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/03/技术/道/设计模式/行为型/责任链/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/08/技术/术/存储/数据库/HBase/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/道/大数据/开篇-初识大数据/">开篇-初识大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/术/语言基础/Java/J2EE/框架/Spark本地安装/">Spark本地安装</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/技术/术/语言基础/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2019 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

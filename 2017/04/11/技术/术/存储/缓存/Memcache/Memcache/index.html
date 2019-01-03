@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Memcache | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/ 一些概念Memcache : 项目名称memcached : 主文件程序名 结构HashMap，基于内存的分布式key-value，但是注意，Memcache本身完全不具备分布式功能，首先看一张图，一个网友画的，挺不错，直接贴过来了。">
+<meta name="keywords" content="cache">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memcache">
+<meta property="og:url" content="https://yixiangli.github.io/2017/04/11/技术/术/存储/缓存/Memcache/Memcache/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/ 一些概念Memcache : 项目名称memcached : 主文件程序名 结构HashMap，基于内存的分布式key-value，但是注意，Memcache本身完全不具备分布式功能，首先看一张图，一个网友画的，挺不错，直接贴过来了。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yixiangli.github.io/img/memcache.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/hash.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/hash-ring.png">
+<meta property="og:image" content="https://yixiangli.github.io/img/hash-ring-addNode.png">
+<meta property="og:image" content="https://yixiangli.github.io/img/memcache-struct.jpg">
+<meta property="og:updated_time" content="2017-11-28T16:24:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Memcache">
+<meta name="twitter:description" content="Memcache一种分布式缓存，不啰嗦介绍，官方网站为http://memcached.org/ 一些概念Memcache : 项目名称memcached : 主文件程序名 结构HashMap，基于内存的分布式key-value，但是注意，Memcache本身完全不具备分布式功能，首先看一张图，一个网友画的，挺不错，直接贴过来了。">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/memcache.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-技术/术/存储/缓存/Memcache/Memcache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Memcache
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/04/11/技术/术/存储/缓存/Memcache/Memcache/" class="article-date">
+  <time datetime="2017-04-11T06:44:31.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/存储/">存储</a>►<a class="article-category-link" href="/categories/存储/缓存/">缓存</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Memcache"><span class="toc-number">1.</span> <span class="toc-text">Memcache</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些概念"><span class="toc-number">1.1.</span> <span class="toc-text">一些概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-number">1.2.</span> <span class="toc-text">结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读写流程"><span class="toc-number">1.2.1.</span> <span class="toc-text">读写流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由算法"><span class="toc-number">1.2.2.</span> <span class="toc-text">路由算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#余数Hash"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">余数Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一致性Hash"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">一致性Hash</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存结构模型"><span class="toc-number">1.2.3.</span> <span class="toc-text">内存结构模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#结构模型"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">结构模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内存分配原理"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">内存分配原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特性与限制"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">特性与限制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Memcache指令"><span class="toc-number">1.2.4.</span> <span class="toc-text">Memcache指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数设置"><span class="toc-number">1.2.5.</span> <span class="toc-text">参数设置</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="Memcache"><a href="#Memcache" class="headerlink" title="Memcache"></a>Memcache</h1><p>一种分布式缓存，不啰嗦介绍，官方网站为<a href="http://memcached.org/" target="_blank" rel="external">http://memcached.org/</a></p>
+<h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><p>Memcache : 项目名称<br>memcached : 主文件程序名</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>HashMap，基于内存的分布式key-value，但是注意，Memcache本身完全不具备分布式功能，首先看一张图，一个网友画的，挺不错，直接贴过来了。<br><img src="/img/memcache.jpg" alt="Memcache模型"></p>
+<a id="more"></a>
+<p>从图上得知，实现分布式，完全依赖于客户端程序调度，引出Memcache读写流程</p>
+<h3 id="读写流程"><a href="#读写流程" class="headerlink" title="读写流程"></a>读写流程</h3><p>1、外部应用输入需要写缓存的数据<br>2、API将Key输入路由算法模块，路由算法根据Key和MemCache集群服务器列表得到一台服务器编号<br>3、由服务器编号得到MemCache及其的ip地址和端口号<br>4、API调用通信模块和指定编号的服务器通信，将数据写入该服务器，完成一次分布式缓存的写操作</p>
+<p>读缓存和写缓存一样，只要使用相同的路由算法和服务器列表，只要应用程序查询的是相同的Key，MemCache客户端总是访问相同的客户端去读取数据，只要服务器中还缓存着该数据，就能保证缓存命中。</p>
+<h3 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h3><p>刚才介绍了Memcache的读写流程，提到了客户端根据Key值，通过路由算法找到相应的服务，因此Memcache路由算法重中之重。对于路由算法相信大家并不陌生，在工作中遇到比如分表，大表拆小表，都是需要相应的路由算法，而场景不同，路由算法也不尽相同，当然最常见的肯定还是余数Hash</p>
+<h4 id="余数Hash"><a href="#余数Hash" class="headerlink" title="余数Hash"></a>余数Hash</h4><p>根据对象的hashCode，做求余计算，余数相同的划分为同一区域。由于HashCode随机性比较强，所以使用余数Hash路由算法就可以保证缓存数据在整个MemCache服务器集群中有比较均衡的分布。乍一看这个方案还是很完美的，但是实际上忽略了一个重要的问题，那就是伸缩性。我提一个问题，随着业务的扩张Memcache服务集群不够用了，需要扩容，那么对于缓存数据来说就是一场灾难。文字描述的不够详细，不妨举个例子，原来有HashCode为0~19的20个数据，那么：</p>
+<p><img src="/img/hash.jpg" alt="余数Hash伸缩例子"></p>
+<p>如果扩容到20+的台数，只有前三个HashCode对应的Key是命中的，也就是15%，代表着绝大多数的数据都进行了迁移，如果这是个为防止数据库压力过大而设置的缓存层，那么就面临着大量报警吧。由这个case可知，缓存数据命中率随着服务扩容而大大下降，对于一套分布式缓存服务是令人难以接受的，那么有没有缓存数据命中率随着服务扩容而上升的算法呢，还真有，往下看。</p>
+<h4 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h4><p>数据结构和算法不分家，先介绍下一致性Hash算法采用的数据结构</p>
+<p><img src="/img/hash-ring.png" alt="Hash环结构"></p>
+<p>加一个节点</p>
+<p><img src="/img/hash-ring-addNode.png" alt="Hash环结构加节点"></p>
+<p>具体算法过程：先构造一个长度为2^32的整数环（这个环被称作一致性Hash环）根据节点名称的Hash值（其分布范围为[0,2^32 - 1]）将缓存服务器阶段设置在这个Hash环上。然后根据需要缓存的数据的Key值计算得到Hash值（其分布范围也同样为[0,2^32 - 1]），然后在Hash环上顺时针查找举例这个KEY的hash值最近的缓存服务器节点，完成KEY到服务器的Hash映射查找。</p>
+<p>优化策略：将每台物理服务器虚拟为一组虚拟缓存服务器，将虚拟服务器的Hash值放置在Hash环上，key在换上先找到虚拟服务器节点，再得到物理服务器的信息。</p>
+<p>一台物理服务器设置多少个虚拟服务器节点合适呢？经验值：150。</p>
+<h3 id="内存结构模型"><a href="#内存结构模型" class="headerlink" title="内存结构模型"></a>内存结构模型</h3><p>先看一张图：<br><img src="/img/memcache-struct.jpg" alt="Memcache内存模式"></p>
+<h4 id="结构模型"><a href="#结构模型" class="headerlink" title="结构模型"></a>结构模型</h4><p>从上图看，主要Memcache内存空间主要涉及slab_class、slab、page、chunk四个概念，并且互为包含的关系，下面具体介绍。</p>
+<p><strong> slab </strong><br>MemCache将内存空间分为一组slab</p>
+<p><strong> page </strong><br>每个slab分成若干个page,每个page默认是1M,所以如果slab有100M，那么就会有100个page</p>
+<p><strong> chunk </strong><br>每个page分成若干组chunk,chunk是真正存放数据的地方，同一个slab里面的chunk的大小是固定的,也决定了slab_class</p>
+<p><strong> slab_class </strong><br>相同大小chunk的slab被组织在一起，称为slab_class</p>
+<h4 id="内存分配原理"><a href="#内存分配原理" class="headerlink" title="内存分配原理"></a>内存分配原理</h4><p>介绍完了结构模型，接下来就是探究一下内存分配的原理，总结几个规则<br>1.一个value存放的位置由它本身的大小决定<br>2.value总是会被存放到与chunk大小最接近的一个slab中<br>3.申请内存是以page为单位的，所以在放入第一个数据的时候，无论大小为多少，都会有1M大小的page被分配给该slab。<br>4.slab内存满后会通过LRU算法进行回收（前提是必须开启-M）,且MemCache的LRU算法不是针对全局的，只是针对slab的<br>5.MemCache存放的value大小是有限制的，最大1M,原因就是page为1M</p>
+<h4 id="特性与限制"><a href="#特性与限制" class="headerlink" title="特性与限制"></a>特性与限制</h4><p>这一段完全摘自网络，大家随意看看就好<br>1.MemCache中可以保存的item数据量是没有限制的，只要内存足够<br>2.MemCache单进程在32位机中最大使用内存为2G，64位机则没有限制<br>3.Key最大为250个字节，超过该长度无法存储<br>4.单个item最大数据是1MB，超过1MB的数据不予存储<br>5.MemCache服务端是不安全的，比如已知某个MemCache节点，可以直接telnet过去，并通过flush_all让已经存在的键值对立即失效<br>6.不能够遍历MemCache中所有的item，因为这个操作的速度相对缓慢且会阻塞其他的操作<br>7.MemCache的高性能源自于两阶段哈希结构：第一阶段在客户端，通过Hash算法根据Key值算出一个节点；第二阶段在服务端，通过一个内部的Hash算法，查找真正的item并返回给客户端。从实现的角度看，MemCache是一个非阻塞的、基于事件的服务器程序<br>8.MemCache设置添加某一个Key值的时候，传入expiry为0表示这个Key值永久有效，这个Key值也会在30天之后失效，见memcache.c的源代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#define REALTIME_MAXDELTA 60*60*24*30</div><div class="line">static rel_time_t realtime(const time_t exptime) &#123;</div><div class="line">       if (exptime == 0) return 0;</div><div class="line">       if (exptime &gt; REALTIME_MAXDELTA) &#123;                       </div><div class="line">              if (exptime &lt;= process_started)                         </div><div class="line">                      return (rel_time_t)1;                                 </div><div class="line">              return (rel_time_t)(exptime - process_started);  </div><div class="line">       &#125; else &#123;                                                                  </div><div class="line">              return (rel_time_t)(exptime + current_time);     </div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个失效的时间是memcache源码里面写的，开发者没有办法改变MemCache的Key值失效时间为30天这个限制</p>
+<h3 id="Memcache指令"><a href="#Memcache指令" class="headerlink" title="Memcache指令"></a>Memcache指令</h3><p>telnet      连接Memcache<br>get            返回Key对应的Value值<br>add         添加一个Key值，没有则添加成功并提示STORED，有则失败并提示NOT_STORED<br>set          无条件地设置一个Key值，没有就增加，有就覆盖，操作成功提示STORED<br>replace     按照相应的Key值替换数据，如果Key值不存在则会操作失败<br>stats        返回MemCache通用统计信息（下面有详细解读）<br>stats items    返回各个slab中item的数目和最老的item的年龄（最后一次访问距离现在的秒数）<br>stats slabs    返回MemCache运行期间创建的每个slab的信息（下面有详细解读）<br>version        返回当前MemCache版本号<br>flush_all    清空所有键值，但不会删除items，所以此时MemCache依旧占用内存<br>quit        关闭连接</p>
+<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p>-f<br>相邻slab内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例<br>-M<br>如果MemCache启动没有追加-M（禁止LRU，这种情况下slab内存不够会报Out Of Memory错误)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/04/11/技术/术/存储/缓存/Memcache/Memcache/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/04/11/技术/术/存储/缓存/Memcache/Memcache/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/11/技术/术/存储/缓存/Memcache/Memcache/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/">cache</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/17/技术/术/存储/缓存/缓存概述/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          缓存概述
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/06/技术/道/分布式与服务化/限流/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">限流</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/03/技术/道/设计模式/行为型/责任链/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/08/技术/术/存储/数据库/HBase/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/道/大数据/开篇-初识大数据/">开篇-初识大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/术/语言基础/Java/J2EE/框架/Spark本地安装/">Spark本地安装</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/技术/术/语言基础/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2019 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

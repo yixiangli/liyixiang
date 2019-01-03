@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MessageQueue大全 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+<meta name="keywords" content="ActiveMQ,RabbitMQ,ZeroMQ,Redis,Kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MessageQueue大全">
+<meta property="og:url" content="https://yixiangli.github.io/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yixiangli.github.io/img/mq_idempotency_up.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/mq_idempotency_down.jpg">
+<meta property="og:updated_time" content="2019-01-03T13:17:50.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MessageQueue大全">
+<meta name="twitter:description" content="what is MessageQueue什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用 场景使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/mq_idempotency_up.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-技术/术/中间件/MQ/MessageQueue大全" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MessageQueue大全
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/" class="article-date">
+  <time datetime="2016-10-09T02:43:58.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/中间件/">中间件</a>►<a class="article-category-link" href="/categories/技术/术/中间件/MQ/">MQ</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-MessageQueue"><span class="toc-number">1.</span> <span class="toc-text">what is MessageQueue</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.1.</span> <span class="toc-text">场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#何时该用"><span class="toc-number">1.1.1.</span> <span class="toc-text">何时该用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据驱动的任务依赖"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">数据驱动的任务依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#上游不关心多下游执行结果"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">上游不关心多下游执行结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行时间长，走异步处理"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">执行时间长，走异步处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#何时不该用"><span class="toc-number">1.1.2.</span> <span class="toc-text">何时不该用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#上游实时关注执行结果"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">上游实时关注执行结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构设计"><span class="toc-number">1.2.</span> <span class="toc-text">架构设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#消息必达"><span class="toc-number">1.2.1.</span> <span class="toc-text">消息必达</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#幂等性保证"><span class="toc-number">1.2.2.</span> <span class="toc-text">幂等性保证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种常见的队列中间件"><span class="toc-number">1.3.</span> <span class="toc-text">几种常见的队列中间件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息队列常见模型"><span class="toc-number">1.4.</span> <span class="toc-text">消息队列常见模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计模式"><span class="toc-number">1.5.</span> <span class="toc-text">设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JMS"><span class="toc-number">1.5.1.</span> <span class="toc-text">JMS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基础组件"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">基础组件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swiftq"><span class="toc-number">1.5.2.</span> <span class="toc-text">swiftq</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#几个概念"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">几个概念</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Direct"><span class="toc-number">1.5.2.1.1.</span> <span class="toc-text">Direct</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Fanout"><span class="toc-number">1.5.2.1.2.</span> <span class="toc-text">Fanout</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Topic"><span class="toc-number">1.5.2.1.3.</span> <span class="toc-text">Topic</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ActiveMQ"><span class="toc-number">1.5.3.</span> <span class="toc-text">ActiveMQ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RabbitMQ"><span class="toc-number">1.5.4.</span> <span class="toc-text">RabbitMQ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZeroMQ"><span class="toc-number">1.5.5.</span> <span class="toc-text">ZeroMQ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis"><span class="toc-number">1.5.6.</span> <span class="toc-text">Redis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka"><span class="toc-number">1.5.7.</span> <span class="toc-text">Kafka</span></a></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="what-is-MessageQueue"><a href="#what-is-MessageQueue" class="headerlink" title="what is MessageQueue"></a>what is MessageQueue</h1><p>什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复杂，理解困难，重则难以持续维护，不得不重写，因此，对于深入MQ来说，就需要分析他的使用场景<br><a id="more"></a></p>
+<h3 id="何时该用"><a href="#何时该用" class="headerlink" title="何时该用"></a>何时该用</h3><p>－数据驱动的任务依赖<br>－上游不关心多下游执行结果<br>－执行时间长，走异步处理</p>
+<h4 id="数据驱动的任务依赖"><a href="#数据驱动的任务依赖" class="headerlink" title="数据驱动的任务依赖"></a>数据驱动的任务依赖</h4><p>cron是常见的定时任务，有些时候我们可能有这样的需求:<br>夜里一点跑 cron A 输入参数 无  执行结果 a<br>夜里三点跑 cron B 输入参数 a  执行结果 b<br>夜里五点跑 cron C 输入参数 b  执行结果 全部成功</p>
+<p>那么常见的做法就是写三个不同的脚本，分别定时，形成这种依赖关系，第二天上班来看看cron C最终的执行结果。<br>通常情况下都没有问题，但是如果正巧某一天cron B出了问题，遇到了什么网络抖动，硬件资源不足等等问题，执行了2个半小时才输出结果b，那么可想而知，cron C在夜里五点开始执行肯定是错误的。因此cron定时表的缺点如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1）如果有一个任务执行时间超过了预留buffer的时间，将会得到错误的结果，因为后置任务不清楚前置任务是否执行成功，此时要手动重跑任务，还有可能要调整定时表</div><div class="line">2）总任务的执行时间很长，总是要预留很多buffer，如果前置任务提前完成，后置任务不会提前开始</div><div class="line">3）如果一个任务被多个任务依赖，这个任务将会称为关键路径，定时表很难体现依赖关系，容易出错</div><div class="line">4）如果有一个任务的执行时间要调整，将会有多个任务的执行时间要调整</div></pre></td></tr></table></figure>
+<p>那我们采用MQ来解耦会怎样呢？<br>具体方案无非就是上一个任务完成发执行完成消息，通知第二个任务开启，以此类推。优点如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）不需要预留buffer，上游任务执行完，下游任务总会在第一时间被执行</div><div class="line">2）依赖多个任务，被多个任务依赖都很好处理，只需要订阅相关消息即可</div><div class="line">3）有任务执行时间变化，下游任务都不需要调整执行时间</div></pre></td></tr></table></figure>
+<h4 id="上游不关心多下游执行结果"><a href="#上游不关心多下游执行结果" class="headerlink" title="上游不关心多下游执行结果"></a>上游不关心多下游执行结果</h4><p>讲道理总得举例子，这种场景我们就拿视频行业媒资系统为例，熟悉业务的人应该知道（不熟悉的可以百度下媒资是什么），媒资系统主要任务就是维护视频专辑等meta信息以及存储介质，并提供给各个视频类app,终端产品。那么媒资系统就是上游，各个视频类app,终端产品就是下游，其实对于媒资系统而言，信息变更，如视频上下线，meta信息变更，都需要告诉下游实时更新，但是无需关心下游如何去更新他们自己的界面展示，信息存储等，只需要告诉他们某某视频有变更，你来查询吧，那么这个时候就可以采用MQ<br>我们先分析如果不使用MQ会出现哪些问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）视频更新信息这个操作的整体执行时间会随着下游数量变得非常长</div><div class="line">2）下游服务出现问题，可能导致上游系统也出现故障</div><div class="line">3）最恶心的一点，新接入了一个下游，上游要修改代码</div></pre></td></tr></table></figure>
+<p>那么如何优化呢，具体方案是，采用MQ解耦：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1）视频信息更新成功后，向MQ发一个消息</div><div class="line">2）哪个下游关注“视频信息更新”这类消息，主动去MQ订阅</div></pre></td></tr></table></figure></p>
+<p>如一部火热的电视剧更新了最新集数，TV端，mobile端都需要同步这个信息，那么就可以去订阅这个消息。因此采用MQ的优点是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）上游执行时间短</div><div class="line">2）上下游逻辑+物理解耦，除了与MQ有物理连接，模块之间都不相互依赖</div><div class="line">3）新增一个下游消息关注方，上游不需要修改任何代码</div></pre></td></tr></table></figure></p>
+<h4 id="执行时间长，走异步处理"><a href="#执行时间长，走异步处理" class="headerlink" title="执行时间长，走异步处理"></a>执行时间长，走异步处理</h4><p>这个场景肯定也要举个栗子，这个可以拿智能互联项目来说，项目背景我在这篇文章不介绍了哈，其中一个主要功能就是设备信息管理服务，手机/TV等客户端会在开启app的时候上报他们的设备信息，服务端会做相应的逻辑处理，返回客户端一个唯一标识，并将数据入库。当客户端量大或者晚高峰的时候，大量用户同时开启app，服务端压力激增，这个时候就需要异步处理，削峰降流。</p>
+<p>具体方案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1）请求到达，执行核心逻辑，组织返回状态，返回结果。</div><div class="line">2）操作库／公网调用等等操作异步执行。</div><div class="line">3）如果异步执行的结果请求方也需要知道，回调之。</div></pre></td></tr></table></figure></p>
+<h3 id="何时不该用"><a href="#何时不该用" class="headerlink" title="何时不该用"></a>何时不该用</h3><p>－上游实时关注执行结果</p>
+<h4 id="上游实时关注执行结果"><a href="#上游实时关注执行结果" class="headerlink" title="上游实时关注执行结果"></a>上游实时关注执行结果</h4><p>纯粹的接口实时调用，需要知道下游的执行结果成功与否，并强依赖这个结果。</p>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><h3 id="消息必达"><a href="#消息必达" class="headerlink" title="消息必达"></a>消息必达</h3><p>先申明，个人认为这个命题肯定是个理想命题，至少目前市面上的MQ没有敢吹消息百分百不丢失，不过设计MQ时，消息必达是个必须攻克的难点问题，如何做到呢？主要应该这两个方面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">（1）消息落地</div><div class="line">（2）消息超时、重传、确认</div></pre></td></tr></table></figure></p>
+<h3 id="幂等性保证"><a href="#幂等性保证" class="headerlink" title="幂等性保证"></a>幂等性保证</h3><p>先说说幂等性，幂等性是系统的接口对外一种承诺(而不是实现), 承诺只要调用接口成功, 外部多次调用对系统的影响是一致的. 声明为幂等的接口会认为外部调用失败是常态, 并且失败之后必然会有重试，因此，幂等性其实也就是重复，MQ作为中间过程，势必需要考虑消息重发问题以及重复消息问题的处理，对于重复这个词在开发的角度肯定就自然而然的想到了唯一，那么如何实现幂等性，就取决于如何设置唯一性，保证MQ接收到一条消息后无论出现何种原因都只给下游输出一条消息。</p>
+<p>借用比较好的文章分析这个问题<br><img src="/img/mq_idempotency_up.jpg" alt="上半段保证幂等性"><br><img src="/img/mq_idempotency_down.jpg" alt="下半段保证幂等性"></p>
+<p><strong> 上半段 </strong><br>MQ-client生成inner-msg-id，保证上半段幂等。<br>这个ID全局唯一，业务无关，由MQ保证。</p>
+<p><strong> 下半段 </strong><br>业务发送方带入biz-id，业务接收方去重保证段等。<br>这个ID对单业务唯一（如订单ID，设备ID，视频ID），业务相关，对MQ透明。</p>
+<p><strong> 结论 </strong><br>幂等性，不仅对MQ有要求，对业务上下游也有要求。</p>
+<h2 id="几种常见的队列中间件"><a href="#几种常见的队列中间件" class="headerlink" title="几种常见的队列中间件"></a>几种常见的队列中间件</h2><ul>
+<li>jms</li>
+<li>swiftq</li>
+<li>activeMQ</li>
+<li>rabbitmq</li>
+<li>zeromq</li>
+<li>redis</li>
+<li>kafka</li>
+</ul>
+<h2 id="消息队列常见模型"><a href="#消息队列常见模型" class="headerlink" title="消息队列常见模型"></a>消息队列常见模型</h2><p><strong> 点对点 </strong><br>一种p2p模型,发送者与接收者通过Queue进行消息交互<br>只有一个发送者，一个接收者<br>无需时间依赖性，接收者不需要提前订阅<br>发送者不关心接收者是否在线<br>接收者收到消息，会进行确认ack</p>
+<p><strong> 发布／订阅 </strong><br>一种1:n模型，发送者与接收者通过Topic订阅来交互，发布者在某Topic上发布消息，只要订阅了该Topic的接收者都能收到消息<br>一个发布者，n个订阅者<br>有时间依赖性，接收者必须提前订阅<br>接收者必须处于活跃状态以接收消息，除非进行持久化</p>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>观察者模式</p>
+<h3 id="JMS"><a href="#JMS" class="headerlink" title="JMS"></a>JMS</h3><p>java自带的消息服务。</p>
+<h4 id="基础组件"><a href="#基础组件" class="headerlink" title="基础组件"></a>基础组件</h4><p>JMS应用程序由如下基本模块组成：</p>
+<p>管理对象（Administered objects）<br>连接工厂（Connection Factories）<br>目的地（Destination）<br>连接对象（Connections）<br>会话（Sessions）<br>消息生产者（Message Producers）<br>消息消费者（Message Consumers）<br>消息监听者（Message Listeners）</p>
+<h3 id="swiftq"><a href="#swiftq" class="headerlink" title="swiftq"></a>swiftq</h3><p>swiftq估计很多人都不认识，这是leEco公司基于QPID0.14版本封装的消息队列中间件集群，与QPID一样，基于AMQP－0-10协议。</p>
+<h4 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h4><p>Broker: 接收和分发消息的应用，一个Server就是Message Broker，如果是swiftq集群，那么一个client可以连接集群中的任意一个Broker，当Broker宕机，可以随时failover到其他Broker上。</p>
+<p>Exchange:在AMQP协议模型中，所有生产端发送的message都先经过Exchange服务，该服务主要功能为路由转发，转发主要分为三类</p>
+<h5 id="Direct"><a href="#Direct" class="headerlink" title="Direct"></a>Direct</h5><p>点对点模型，根据routingKey来转发消息，如果message的routingKey与binding一致，则进行转发。</p>
+<h5 id="Fanout"><a href="#Fanout" class="headerlink" title="Fanout"></a>Fanout</h5><p>广播模型，生产者与消费者往往一对多，上游发送的message，下游的消费者都能接收到，一般用在上游数据更新通知下游各个业务方的场景</p>
+<h5 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h5><p>发布／订阅模型，根据通配规则，exchange将消息发送至相应的queue中，如”news.#”<br>通配规则：<br>“#”通配任何零个或多个word<br>“*”通配任何单个word<br>因此，订阅了如news.US | news.CN等订阅者可以收到这条消息。</p>
+<h3 id="ActiveMQ"><a href="#ActiveMQ" class="headerlink" title="ActiveMQ"></a>ActiveMQ</h3><h3 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h3><p>基于AMQP－0-9-1</p>
+<h3 id="ZeroMQ"><a href="#ZeroMQ" class="headerlink" title="ZeroMQ"></a>ZeroMQ</h3><h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h3 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h3>
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/10/09/技术/术/中间件/MQ/MessageQueue大全/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZeroMQ/">ZeroMQ</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/19/技术/术/持续集成/Git/Git使用手册/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Git使用手册
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/28/一些文章/美国签证血泪史/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">美国签证血泪史</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/03/技术/道/设计模式/行为型/责任链/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/08/技术/术/存储/数据库/HBase/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/道/大数据/开篇-初识大数据/">开篇-初识大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/术/语言基础/Java/J2EE/框架/Spark本地安装/">Spark本地安装</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/技术/术/语言基础/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2019 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>

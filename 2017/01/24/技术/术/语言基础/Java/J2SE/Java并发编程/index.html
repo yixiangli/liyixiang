@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java并发编程 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是并发Lock先贴一张类图 Lock Interface源码 12345678public interface Lock &amp;#123;    void lock();    void lockInterruptibly() throws InterruptedException;  // 可以响应中断    boolean tryLock();    boolean tryLock(long">
+<meta name="keywords" content="线程,concurrent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发编程">
+<meta property="og:url" content="https://yixiangli.github.io/2017/01/24/技术/术/语言基础/Java/J2SE/Java并发编程/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="什么是并发Lock先贴一张类图 Lock Interface源码 12345678public interface Lock &amp;#123;    void lock();    void lockInterruptibly() throws InterruptedException;  // 可以响应中断    boolean tryLock();    boolean tryLock(long">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yixiangli.github.io/img/Lock框架.png">
+<meta property="og:updated_time" content="2019-01-03T12:38:01.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发编程">
+<meta name="twitter:description" content="什么是并发Lock先贴一张类图 Lock Interface源码 12345678public interface Lock &amp;#123;    void lock();    void lockInterruptibly() throws InterruptedException;  // 可以响应中断    boolean tryLock();    boolean tryLock(long">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/Lock框架.png">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-技术/术/语言基础/Java/J2SE/Java并发编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java并发编程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/01/24/技术/术/语言基础/Java/J2SE/Java并发编程/" class="article-date">
+  <time datetime="2017-01-24T02:44:49.000Z" itemprop="datePublished">2017-01-24</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是并发"><span class="toc-number">1.</span> <span class="toc-text">什么是并发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lock"><span class="toc-number">1.1.</span> <span class="toc-text">Lock</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lock-Interface"><span class="toc-number">1.1.1.</span> <span class="toc-text">Lock Interface</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java中的并发"><span class="toc-number">1.2.</span> <span class="toc-text">Java中的并发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是AQS"><span class="toc-number">1.2.1.</span> <span class="toc-text">什么是AQS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayBlockingQueue"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">ArrayBlockingQueue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LinkedBlockingQueue"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">LinkedBlockingQueue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ConcurrentLinkedQueue"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">ConcurrentLinkedQueue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">HashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HashMap多线程场景下存在的问题"><span class="toc-number">1.2.1.4.1.</span> <span class="toc-text">HashMap多线程场景下存在的问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ConcurrentHashMap"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">ConcurrentHashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ConcurrentHashMap的size操作"><span class="toc-number">1.2.1.5.1.</span> <span class="toc-text">ConcurrentHashMap的size操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CountDownLatch"><span class="toc-number">1.2.2.</span> <span class="toc-text">CountDownLatch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CyclicBarrier"><span class="toc-number">1.2.3.</span> <span class="toc-text">CyclicBarrier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Fork-Join"><span class="toc-number">1.2.4.</span> <span class="toc-text">什么是Fork/Join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAS"><span class="toc-number">1.2.5.</span> <span class="toc-text">CAS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CAS的不完美"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">CAS的不完美</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何保证线程安全"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">如何保证线程安全</span></a></li></ol></li></ol></li></ol></li></ol>
+        </div>
+    
+        <h1 id="什么是并发"><a href="#什么是并发" class="headerlink" title="什么是并发"></a>什么是并发</h1><h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><p>先贴一张类图<br><img src="/img/Lock框架.png" alt="Lock类图"></p>
+<h3 id="Lock-Interface"><a href="#Lock-Interface" class="headerlink" title="Lock Interface"></a>Lock Interface</h3><p>源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public interface Lock &#123;</div><div class="line">    void lock();</div><div class="line">    void lockInterruptibly() throws InterruptedException;  // 可以响应中断</div><div class="line">    boolean tryLock();</div><div class="line">    boolean tryLock(long time, TimeUnit unit) throws InterruptedException;  // 可以响应中断</div><div class="line">    void unlock();</div><div class="line">    Condition newCondition();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>lock() 获取锁. 如果锁已被其他线程获取,则进行等待,如果采用Lock，必须主动去释放锁，并且在发生异常时，不会自动释放锁。因此，一般来说，使用Lock必须在try…catch…块中进行，并且将释放锁的操作放在finally块中进行，以保证锁一定被被释放，防止死锁的发生</li>
+</ol>
+<p><strong>使用：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Lock lock = ...;</div><div class="line">lock.lock();</div><div class="line">try&#123;</div><div class="line">    //处理任务</div><div class="line">&#125;catch(Exception ex)&#123;</div><div class="line"></div><div class="line">&#125;finally&#123;</div><div class="line">    lock.unlock();   //释放锁</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>tryLock()方法是有返回值的，它表示用来尝试获取锁，如果获取成功，则返回true,如果获取失败（即锁已被其他线程获取），则返回false，也就说这个方法无论如何都会立即返回。在拿不到锁时不会一直在那等待。</p>
+</li>
+<li><p>tryLock(long time, TimeUnit unit)方法和tryLock()方法是类似的，只不过区别在于这个方法在拿不到锁时会等待一定的时间，在时间期限之内如果还拿不到锁,就返回false,如果一开始拿到锁或者在等待期间内拿到了锁，则返回true。</p>
+</li>
+</ol>
+<p><strong>使用：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Lock lock = ...;</div><div class="line">if(lock.tryLock()) &#123;</div><div class="line">     try&#123;</div><div class="line">         //处理任务</div><div class="line">     &#125;catch(Exception ex)&#123;</div><div class="line"></div><div class="line">     &#125;finally&#123;</div><div class="line">         lock.unlock();   //释放锁</div><div class="line">     &#125;</div><div class="line">&#125;else &#123;</div><div class="line">    //如果不能获取锁，则直接做其他事情</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>lockInterruptibly()方法比较特殊，当通过这个方法去获取锁时，如果线程正在等待获取锁，则这个线程能够响应中断，即中断线程的等待状态。也就是说，当两个q线程同时通过lock.lockInterruptibly()获取某个锁时，假若此时线程A获取到了锁，而线程B只有在等待，那么对线程B调用threadB.interrupt()方法能够中断线程B的等待过程，且由于lockInterruptibly()的声明中抛出了异常，所以lock.lockInterruptibly()必须放在try块中或者在调用lockInterruptibly()的方法外声明抛出InterruptedException,另外要强调的是，当一个线程获取了锁之后，是不会被interrupt()方法中断的(单独调用interrupt()方法不能中断正在运行过程中的线程，只能中断阻塞过程中的线程)而用synchronized修饰的话，当一个线程处于等待某个锁的状态，是无法被中断的，只有一直等待下去。</li>
+</ol>
+<p><strong>使用：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public void method() throws InterruptedException &#123;</div><div class="line">    lock.lockInterruptibly();</div><div class="line">    try &#123;  </div><div class="line">     //.....</div><div class="line">    &#125;</div><div class="line">    finally &#123;</div><div class="line">        lock.unlock();</div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Java中的并发"><a href="#Java中的并发" class="headerlink" title="Java中的并发"></a>Java中的并发</h2><p>Java 5 引入java.util.concurrent包，ExecutorService诞生，并引入CountDownLathc,CyclicBarrier、Semaphore、ConcurrentHashMap和BlockingQueue<br>Java 7 引入Fork/Join</p>
+<h3 id="什么是AQS"><a href="#什么是AQS" class="headerlink" title="什么是AQS"></a>什么是AQS</h3><p>AQS的全称为（AbstractQueuedSynchronizer），这个类也是在java.util.concurrent.locks下面，是JDK1.5提供的一个基于FIFO等待队列实现的一个用于实现同步器的基础框架，各种同步工具类内部都有一个如下定义的内部结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">abstract static class Sync extends AbstractQueuedSynchronizer</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h4 id="ArrayBlockingQueue"><a href="#ArrayBlockingQueue" class="headerlink" title="ArrayBlockingQueue"></a>ArrayBlockingQueue</h4><p>一个由数组支持的有界阻塞队列<br>一旦创建，无法扩容容量<br>试图向已满队列中放入元素会导致操作受阻塞，从空队列提取元素也会阻塞<br>支持生产者和消费者线程进行排序的可选公平策略，默认非公平，公平会降低吞吐量，但减少可变性和“不平衡性”<br>只使用一个lock来控制互斥访问</p>
+<h4 id="LinkedBlockingQueue"><a href="#LinkedBlockingQueue" class="headerlink" title="LinkedBlockingQueue"></a>LinkedBlockingQueue</h4><p>一个基于链表的，范围任意的blocking queue.<br>吞吐量一般高于基于数组的队列，但并发场景下性能差<br>可选的容量范围防止队列无限扩展，默认Interger.MAX_VALUE<br>如果生产者速度但与消费者速度，也许还没有等到队列满阻塞，系统内存就有可能已被消耗殆尽。<br>使用了2个lock，一个takelock和一个putlock，读写分离，并发效率更高</p>
+<h4 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h4><p>ArrayBlockingQueue和LinkedBlockingQueue都是使用lock来实现，都属于阻塞式队列，而ConcurrentLinkedQueue使用循环CAS来实现，是非阻塞式的”lock-free”</p>
+<p>基于链表的无界队列，使用循环CAS来实现非阻塞</p>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>HashMap线程不安全,多线程场景下进行put操作会引起死循环，导致CPU利用率接近100%</p>
+<h5 id="HashMap多线程场景下存在的问题"><a href="#HashMap多线程场景下存在的问题" class="headerlink" title="HashMap多线程场景下存在的问题"></a>HashMap多线程场景下存在的问题</h5><p>1.多线程put操作后，get操作导致死循环。<br>2.多线程put非null元素后，get操作得到null值。<br>3.多线程put操作，导致元素丢失。</p>
+<p><strong>死循环原理</strong><br>1.HashMap的put操作rehash会导致死循环<br>2.如果扩容前相邻的两个Entry在扩容后还是分配到相同的table位置上，就会出现死循环的BUG</p>
+<h4 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><p>HashMap线程不安全<br>HashTable使用synchronized来保证线程安全，但线程竞争激烈的情况下效率非常低下<br>ConcurrentHashMap采用Segment分段技术，将数据分为若干段，形成多段锁，多线程访问时就大大减少竞争，提高并发访问</p>
+<p>ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成，Segment是一种可重入锁ReentrantLock，一个ConcurrentHashMap里包含一个Segment数组，Segment的结构和HashMap类似，是一种数组和链表结构， 一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素， 每个Segment守护者一个HashEntry数组里的元素,当对HashEntry数组的数据进行修改时，必须首先获得它对应的Segment锁。</p>
+<p>通过按位与的哈希算法来定位segments数组的索引，必须保证segments数组的长度是2的N次方，注意concurrencyLevel的最大大小是65535，意味着segments数组的长度最大为65536，对应的二进制是16位。</p>
+<h5 id="ConcurrentHashMap的size操作"><a href="#ConcurrentHashMap的size操作" class="headerlink" title="ConcurrentHashMap的size操作"></a>ConcurrentHashMap的size操作</h5><p>ConcurrentHashMap的做法是先尝试2次通过不锁住Segment的方式来统计各个Segment大小，如果统计的过程中，容器的count发生了变化，则再采用加锁的方式来统计所有Segment的大小。<br>那么ConcurrentHashMap是如何判断在统计的时候容器是否发生了变化呢？使用modCount变量，在put , remove和clean方法里操作元素前都会将变量modCount进行加1，那么在统计size前后比较modCount是否发生变化，从而得知容器的大小是否发生变化。</p>
+<h3 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h3><p>javadoc<br>CountDownLatch: A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.</p>
+<p>//调用await()方法的线程会被挂起，它会等待直到count值为0才继续执行<br>public void await() throws InterruptedException { };   </p>
+<p>//和await()类似，只不过等待一定的时间后count值还没变为0的话就会继续执行<br>public boolean await(long timeout, TimeUnit unit) throws InterruptedException { };  </p>
+<p>//将count值减1 ，这个count值就是CountDownLatch初始化的时候传入的值<br>public void countDown() { };  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月27日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class CountRunnable implements Runnable&#123;</div><div class="line"></div><div class="line">	private CountDownLatch begin,end;</div><div class="line">	private List&lt;Integer&gt; subList;</div><div class="line"></div><div class="line">	public CountRunnable(List&lt;Integer&gt; subList, CountDownLatch begin,CountDownLatch end) &#123;</div><div class="line">		// TODO Auto-generated constructor stub</div><div class="line">		this.subList = subList;  </div><div class="line">        this.begin = begin;  </div><div class="line">        this.end = end;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void run() &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		try &#123;</div><div class="line">			begin.await();</div><div class="line">			if (subList != null) &#123;  </div><div class="line">                for (int i : subList) &#123;  </div><div class="line">                    System.out.println(&quot;线程&quot; + Thread.currentThread().getName() + &quot;, i = &quot; + i);  </div><div class="line">                &#125;  </div><div class="line">            &#125;</div><div class="line">		&#125; catch (InterruptedException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; finally&#123;  </div><div class="line">            System.out.println(System.currentTimeMillis() + &quot;,线程&quot; + Thread.currentThread().getName() + &quot;,开始执行！&quot;);  </div><div class="line">            //end线程组准备</div><div class="line">            end.countDown();  </div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月27日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class BatchWithCountDownLatch &#123;</div><div class="line"></div><div class="line">	private static final int MAX = 3;</div><div class="line"></div><div class="line">	public static void list(List&lt;Integer&gt; list)&#123;</div><div class="line">		if(null == list)&#123;</div><div class="line">			list = new ArrayList&lt;&gt;();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		for(int i=0;i&lt;100;i++)&#123;</div><div class="line">			list.add(i);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</div><div class="line">		list(list);</div><div class="line"></div><div class="line">		//把list拆分</div><div class="line">		int mod = list.size()%MAX;</div><div class="line">		int threadCount = mod == 0 ? list.size()/MAX : list.size()/MAX+1;</div><div class="line"></div><div class="line">		ExecutorService executors = Executors.newFixedThreadPool(threadCount);</div><div class="line">		CountDownLatch begin = new CountDownLatch(1);</div><div class="line">		CountDownLatch end = new CountDownLatch(threadCount);</div><div class="line"></div><div class="line">		for(int i=0;i&lt;threadCount;i++)&#123;</div><div class="line">			int subsize = (i+1)*MAX;</div><div class="line">			//这里先执行线程池run</div><div class="line">            executors.execute(new CountRunnable(list.subList(i * MAX, subsize &gt; list.size() ? list.size() : subsize),begin,end));  </div><div class="line">		&#125;</div><div class="line"></div><div class="line">		System.out.println(&quot;开始 !&quot;);</div><div class="line">		//闭锁放开，千军万马狂奔 begin的CountDownLatch await方法阻塞消除</div><div class="line">        begin.countDown();  </div><div class="line">        long startTime = System.currentTimeMillis();  </div><div class="line"></div><div class="line">        try &#123;  </div><div class="line">        	//end组的线程都阻塞</div><div class="line">            end.await();  </div><div class="line">        &#125; catch (InterruptedException e) &#123;  </div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125; finally &#123;  </div><div class="line">            System.out.println(&quot;线程&quot; + Thread.currentThread().getName() + &quot;,&quot; + System.currentTimeMillis() + &quot;, 所有线程已完成，开始进入下一步！&quot;);  </div><div class="line">            System.out.println(&quot;花费时间 -&gt; &quot; + (System.currentTimeMillis() - startTime) + &quot; ms&quot;);  </div><div class="line">        &#125;  </div><div class="line">        System.out.println(&quot;开始进入第二步操作! &quot;);        </div><div class="line">        System.out.println(&quot;end! &quot;);  </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其实CountDownLatch的用法很好理解，首先await方法是线程的闭锁，一执行到这里就会判断count的大小，跟进源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public void await() throws InterruptedException &#123;</div><div class="line">        sync.acquireSharedInterruptibly(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">public final void acquireSharedInterruptibly(int arg)</div><div class="line">            throws InterruptedException &#123;</div><div class="line">        if (Thread.interrupted())</div><div class="line">            throw new InterruptedException();</div><div class="line">        if (tryAcquireShared(arg) &lt; 0)</div><div class="line">            doAcquireSharedInterruptibly(arg);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">protected int tryAcquireShared(int acquires) &#123;</div><div class="line">            return (getState() == 0) ? 1 : -1;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>会发现这里最终会根据getState()==0这个结果来判断线程是否中断，那么这个状态是怎么来的呢，看看CountDownLatch初始化时的源码吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public CountDownLatch(int count) &#123;</div><div class="line">        if (count &lt; 0) throw new IllegalArgumentException(&quot;count &lt; 0&quot;);</div><div class="line">        this.sync = new Sync(count);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">private static final class Sync extends AbstractQueuedSynchronizer &#123;</div><div class="line">        private static final long serialVersionUID = 4982264981922014374L;</div><div class="line"></div><div class="line">        Sync(int count) &#123;</div><div class="line">            setState(count);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        ….</div></pre></td></tr></table></figure>
+<p>果然，在CountDownLatch初始化的时候，就设置了state属性，这个state属性是Node内部类的一个volatile变量，可以从源码得知。说完了await方法，那么countdown方法就很好解释了，应该就是操纵这个闭锁的钥匙，先开车，看看源码怎么写的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public void countDown() &#123;</div><div class="line">        sync.releaseShared(1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">protected boolean tryReleaseShared(int releases) &#123;</div><div class="line">            // Decrement count; signal when transition to zero</div><div class="line">            for (;;) &#123;</div><div class="line">                int c = getState();</div><div class="line">                if (c == 0)</div><div class="line">                    return false;</div><div class="line">                int nextc = c-1;</div><div class="line">                if (compareAndSetState(c, nextc))</div><div class="line">                    return nextc == 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p>看到了吧，int nextc = c -1;说明countdown方法是某线程将state数减1的过程。好了，通过几段源码就对CountDownLatch熟悉了。总结一下<br>（1）CountDownLatch是用来同步一个或者多个执行多个任务的线程。它只能使用一次。<br>（2）CountDownLatch是做减计数，当count值为0时，线程突破await，开始向下执行。<br>（3）CountDownLatch强调的是一个线程等其他多个线程完成某件事情。</p>
+<h3 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h3><p>javadoc<br>CyclicBarrier : A synchronization aid that allows a set of threads to all wait for each other to reach a common barrier point.</p>
+<p>先看一个demo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @developer liyixiang</div><div class="line"> * @date 2017年2月27日</div><div class="line"> * @since JDK 1.8</div><div class="line"> * @function</div><div class="line"> */</div><div class="line">public class CyclicBarrierTest &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) throws InterruptedException &#123;  </div><div class="line">        CyclicBarrier cyclicBarrier = new CyclicBarrier(5, new Runnable() &#123;  </div><div class="line">            @Override  </div><div class="line">            public void run() &#123;  </div><div class="line">                System.out.println(&quot;线程组执行结束&quot;);  </div><div class="line">            &#125;  </div><div class="line">        &#125;);  </div><div class="line">        for (int i = 0; i &lt; 5; i++) &#123;  </div><div class="line">            new Thread(new readNum(i,cyclicBarrier)).start();  </div><div class="line">        &#125;  </div><div class="line">        //CyclicBarrier 可以重复利用，  </div><div class="line">        // 这个是CountDownLatch做不到的  </div><div class="line">//        for (int i = 11; i &lt; 16; i++) &#123;  </div><div class="line">//            new Thread(new readNum(i,cyclicBarrier)).start();  </div><div class="line">//        &#125;  </div><div class="line">    &#125;  </div><div class="line">    static class readNum  implements Runnable&#123;  </div><div class="line">        private int id;  </div><div class="line">        private CyclicBarrier cyc;  </div><div class="line">        public readNum(int id,CyclicBarrier cyc)&#123;  </div><div class="line">            this.id = id;  </div><div class="line">            this.cyc = cyc;  </div><div class="line">        &#125;  </div><div class="line">        @Override  </div><div class="line">        public void run() &#123;  </div><div class="line">            synchronized (this)&#123;  </div><div class="line">                System.out.println(&quot;id:&quot;+id);  </div><div class="line">                try &#123;  </div><div class="line">                    cyc.await();  </div><div class="line">                    System.out.println(&quot;线程组任务&quot; + id + &quot;结束，其他任务继续&quot;);  </div><div class="line">                &#125; catch (Exception e) &#123;  </div><div class="line">                    e.printStackTrace();  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">id:2</div><div class="line">id:0</div><div class="line">id:4</div><div class="line">id:1</div><div class="line">id:3</div><div class="line">线程组执行结束</div><div class="line">线程组任务1结束，其他任务继续</div><div class="line">线程组任务4结束，其他任务继续</div><div class="line">线程组任务3结束，其他任务继续</div><div class="line">线程组任务0结束，其他任务继续</div><div class="line">线程组任务2结束，其他任务继续</div></pre></td></tr></table></figure></p>
+<p>从结果看，关键点就在CyclicBarrier的await方法，还是这个节奏，看源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">public int await() throws InterruptedException, BrokenBarrierException &#123;</div><div class="line">        try &#123;</div><div class="line">            return dowait(false, 0L);</div><div class="line">        &#125; catch (TimeoutException toe) &#123;</div><div class="line">            throw new Error(toe); // cannot happen</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">进dowait方法看，方法较长，截取重要部分</div><div class="line"> 第一部分</div><div class="line"> int index = --count;</div><div class="line">            if (index == 0) &#123;  // tripped</div><div class="line">                boolean ranAction = false;</div><div class="line">                try &#123;</div><div class="line">                    final Runnable command = barrierCommand;</div><div class="line">                    if (command != null)</div><div class="line">                        command.run();</div><div class="line">                    ranAction = true;</div><div class="line">                    nextGeneration();</div><div class="line">                    return 0;</div><div class="line">                &#125; finally &#123;</div><div class="line">                    if (!ranAction)</div><div class="line">                        breakBarrier();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">第二部分</div><div class="line">for (;;) &#123;</div><div class="line">                try &#123;</div><div class="line">                    if (!timed)</div><div class="line">                        trip.await();</div><div class="line">                    else if (nanos &gt; 0L)</div><div class="line">                        nanos = trip.awaitNanos(nanos);</div><div class="line">                &#125; catch (InterruptedException ie) &#123;</div><div class="line">                    if (g == generation &amp;&amp; ! g.broken) &#123;</div><div class="line">                        breakBarrier();</div><div class="line">                        throw ie;</div><div class="line">                    &#125; else &#123;</div><div class="line">                        // We&apos;re about to finish waiting even if we had not</div><div class="line">                        // been interrupted, so this interrupt is deemed to</div><div class="line">                        // &quot;belong&quot; to subsequent execution.</div><div class="line">                        Thread.currentThread().interrupt();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div></pre></td></tr></table></figure>
+<p>从源码可以看出，执行顺序就是先执行传入的实现Runnable接口的线程类run方法，再检测await的状态，通过count控制是否执行run，继续跟代码能看到，count初始值为parties，也就是构造CyclicBarrier时传入的线程数。<br>那么问题来了。。网上在说CountDownLatch和CyclicBarrier的异同点时，都说CountDownLatch是减计数器，CyclicBarrier是加计数器，但是貌似源代码也是- -count操作，不过咱们要这么理解，CyclicBarrier让一个线程达到屏障时被阻塞，直到最后一个线程达到屏障时，屏障才会开门，所有被屏障拦截的线程才会继续执行，这是一种积累的过程。而CountDownLatch</p>
+<p>。不过对于CyclicBarrier来说，也总结一下<br> （1）CyclicBarrier初始化时规定一个数目，然后计算调用了CyclicBarrier.await()进入等待的线程数。当线程数达到了这个数目时，所有进入等待状态的线程被唤醒并继续。<br> （2）CyclicBarrier就象它名字的意思一样，可看成是个障碍， 所有的线程必须到齐后才能一起通过这个障碍。<br> （3）CyclicBarrier初始时还可带一个Runnable的参数， 此Runnable任务在CyclicBarrier的数目达到后，所有其它线程被唤醒前被执行。<br> （4）最重要一点，CyclicBarrier是可以重复使用的。</p>
+<h3 id="什么是Fork-Join"><a href="#什么是Fork-Join" class="headerlink" title="什么是Fork/Join"></a>什么是Fork/Join</h3><p>（1）多核<br>（2）分治&amp;递归</p>
+<p>1.把大任务拆分为多个小的Fork，通过这些Fock去处理任务。<br>2.处理任务完毕后Join起来，合并结果。</p>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><p>Compare and swap,每一个CAS操作过程都包含三个运算符：一个内存地址V，一个旧的期望的值A和一个新值B，操作的时候如果这个地址上存放的值等于这个旧的期望的值A，则将地址上的值赋为新值B，否则不做任何操作。CAS的基本思路就是，如果这个地址上的值和期望的值相等，则给其赋予新值，否则不做任何事儿，但是要返回原值是多少。大致原理用代码表示为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class SimulatedCAS &#123;  </div><div class="line">    private int value;  </div><div class="line"></div><div class="line">    public synchronized int getValue() &#123;  </div><div class="line">        return value;  </div><div class="line">    &#125;  </div><div class="line">    public synchronized int compareAndSwap(int expectedValue, int newValue) &#123;  </div><div class="line">        int oldValue = value;  </div><div class="line">        if (value == expectedValue)  </div><div class="line">            value = newValue;  </div><div class="line">        return oldValue;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总结一个流程，方便更清晰的理解CAS：<br>1、AtomicInteger里面的value原始值为3，即主内存中AtomicInteger的value为3，根据Java内存模型，线程1和线程2各自持有一份value的副本，值为3<br>2、线程1运行到第三行获取到当前的value为3，线程切换<br>3、线程2开始运行，获取到value为3，利用CAS对比内存中的值也为3，比较成功，修改内存，此时内存中的value改变比方说是4，线程切换<br>4、线程1恢复运行，利用CAS比较发现自己的value为3，内存中的value为4，得到一个重要的结论–&gt;此时value正在被另外一个线程修改，所以我不能去修改它<br>5、线程1的compareAndSet失败，循环判断，因为value是volatile修饰的，所以它具备可见性的特性，线程2对于value的改变能被线程1看到，只要线程1发现当前获取的value是4，内存中的value也是4，说明线程2对于value的修改已经完毕并且线程1可以尝试去修改它<br>6、最后说一点，比如说此时线程3也准备修改value了，没关系，因为比较-交换是一个原子操作不可被打断，线程3修改了value，线程1进行compareAndSet的时候必然返回的false，这样线程1会继续循环去获取最新的value并进行compareAndSet，直至获取的value和内存中的value一致为止</p>
+<h4 id="CAS的不完美"><a href="#CAS的不完美" class="headerlink" title="CAS的不完美"></a>CAS的不完美</h4><p>ABA问题，从上述例子解释也就是说本身内存是3，线程1修改成4而后又修改成3，但是对于线程2来说内存值和预期值是保持一致的。那么java.util.concurrent包为了解决这个问题，提供了一个带有标记的原子引用类”AtomicStampedReference”，它可以通过控制变量值的版本来保证CAS的正确性，不过比较鸡肋，毕竟这种场景并不影响并发修改，不过如果真有这种场景，还是使用互斥信号量解决更加高效。</p>
+<h4 id="如何保证线程安全"><a href="#如何保证线程安全" class="headerlink" title="如何保证线程安全"></a>如何保证线程安全</h4><p>其实我们在语言层面是没有做任何同步的操作的，大家也可以看到Atomic源码没有任何锁加在上面，可它为什么是线程安全的呢？这就是Atomic包下这些类的奥秘：语言层面不做处理，我们将其交给硬件—CPU和内存，利用CPU的多处理能力，实现硬件层面的阻塞，再加上volatile变量的特性即可实现基于原子操作的线程安全。所以说，CAS并不是无阻塞，只是阻塞并非在语言、线程方面，而是在硬件层面，所以无疑这样的操作会更快更高效！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/01/24/技术/术/语言基础/Java/J2SE/Java并发编程/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/01/24/技术/术/语言基础/Java/J2SE/Java并发编程/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/01/24/技术/术/语言基础/Java/J2SE/Java并发编程/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/concurrent/">concurrent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/06/技术/术/语言基础/Java/JVM/内存模型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          内存模型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/24/技术/术/语言基础/Java/J2EE/框架/Netty实战/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Netty实战</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/">分布式</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/分布式/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/存储/">存储</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/存储/缓存/">缓存</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">58</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">37</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/文档/">文档</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/">服务化</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/">解决方案专题</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/分布式/">分布式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/解决方案专题/海量数据处理/">海量数据处理</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/">这就是人生</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/这就是人生/行万里路/">行万里路</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/01/03/技术/道/设计模式/行为型/责任链/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/08/技术/术/存储/数据库/HBase/HBase/">HBase-基础介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/道/大数据/开篇-初识大数据/">开篇-初识大数据</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/技术/术/语言基础/Java/J2EE/框架/Spark本地安装/">Spark本地安装</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/技术/术/语言基础/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2019 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>
