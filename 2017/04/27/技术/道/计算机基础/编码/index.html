@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>编码 | 不忘初心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基础概念 字符表(Character repertoire)一个系统需要支持哪些字符,字符的集合 编码字符集(CCS:Coded Character Set)给字符表里的抽象字符编上一个数字，字符集合到一个整数集合的映射 字符编码表(CEF:Character Encoding Form)将CCS里字符对应的整数转换成有限长度的比特值，便于以后计算机使用一定长度的二进制形式表示该整数 字符编码方案">
+<meta name="keywords" content="编码,UTF-8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编码">
+<meta property="og:url" content="https://yixiangli.github.io/2017/04/27/技术/道/计算机基础/编码/index.html">
+<meta property="og:site_name" content="不忘初心">
+<meta property="og:description" content="基础概念 字符表(Character repertoire)一个系统需要支持哪些字符,字符的集合 编码字符集(CCS:Coded Character Set)给字符表里的抽象字符编上一个数字，字符集合到一个整数集合的映射 字符编码表(CEF:Character Encoding Form)将CCS里字符对应的整数转换成有限长度的比特值，便于以后计算机使用一定长度的二进制形式表示该整数 字符编码方案">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-03T11:33:19.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编码">
+<meta name="twitter:description" content="基础概念 字符表(Character repertoire)一个系统需要支持哪些字符,字符的集合 编码字符集(CCS:Coded Character Set)给字符表里的抽象字符编上一个数字，字符集合到一个整数集合的映射 字符编码表(CEF:Character Encoding Form)将CCS里字符对应的整数转换成有限长度的比特值，便于以后计算机使用一定长度的二进制形式表示该整数 字符编码方案">
+  
+    <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/css/images/xiang.jpg">
+  
+  
+    <!-- 网上说改成useso 亲测更慢-->
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="/css/duoshuo.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不忘初心</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逆风前行</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">目录</a>
+        
+          <a class="main-nav-link" href="https://github.com/yixiangli">GitHub</a>
+        
+          <a class="main-nav-link" href="/sitemap.xml">网站地图</a>
+        
+      </nav>
+      <nav id="sub-nav">    
+      <!-- 	
+               	
+          	<a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+              
+      -->  
+      	  	<a id="nav-search-btn" class="nav-icon" title="搜索"></a>       	                  		      
+	    	<a class="nav-icon" href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+	        <a class="nav-icon" href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+	        <a class="nav-icon" href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+	        <a class="nav-icon" href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yixiangli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-技术/道/计算机基础/编码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      编码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/04/27/技术/道/计算机基础/编码/" class="article-date">
+  <time datetime="2017-04-26T16:17:48.000Z" itemprop="datePublished">2017-04-27</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/道/">道</a>►<a class="article-category-link" href="/categories/技术/道/计算机基础/">计算机基础</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础概念"><span class="toc-number">1.</span> <span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ASCII"><span class="toc-number">1.1.</span> <span class="toc-text">ASCII</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ISO-8859-1-Latin-1"><span class="toc-number">1.2.</span> <span class="toc-text">ISO-8859-1(Latin-1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unicode"><span class="toc-number">1.3.</span> <span class="toc-text">Unicode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GBK"><span class="toc-number">1.4.</span> <span class="toc-text">GBK</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解释"><span class="toc-number">1.4.1.</span> <span class="toc-text">解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符编码"><span class="toc-number">1.4.2.</span> <span class="toc-text">字符编码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UTF-8-UTF-16-UTF-32"><span class="toc-number">1.5.</span> <span class="toc-text">UTF-8 UTF-16 UTF-32</span></a></li></ol></li></ol>
+        </div>
+    
+        <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><ul>
+<li>字符表(Character repertoire)<br>一个系统需要支持哪些字符,字符的集合</li>
+<li>编码字符集(CCS:Coded Character Set)<br>给字符表里的抽象字符编上一个数字，字符集合到一个整数集合的映射</li>
+<li>字符编码表(CEF:Character Encoding Form)<br>将CCS里字符对应的整数转换成有限长度的比特值，便于以后计算机使用<br>一定长度的二进制形式表示该整数</li>
+<li>字符编码方案(CES:Character Encoding Scheme)<br>对于CEF得到的比特值具体如何在计算机中进行存储，传输。<br>因为存在大端小端的问题，这就会跟具体的操作系统相关</li>
+</ul>
+<a id="more"></a>
+<h2 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h2><pre><code>ASCII一共定义了128个字符，使用了一个字节的7位
+</code></pre><p>A -&gt; 0100 0001。ASCII直接完成了现代编码模型的前三步工作CR-CCS-CEF。<br>语言千万种，表示不全</p>
+<p>##混乱时代<br>    一个字节可以表示8位，ASCII只用了7位，那么剩下一位就被各种语言扩展<br>但是仅汉字就有10万多个，一个字节的256表示方式怎么能够满足呢。<br>产生了各种多字节的表示一个字符方法(gbk就是其中一种)</p>
+<h2 id="ISO-8859-1-Latin-1"><a href="#ISO-8859-1-Latin-1" class="headerlink" title="ISO-8859-1(Latin-1)"></a>ISO-8859-1(Latin-1)</h2><h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><pre><code>Unicode是属于编码字符集（CCS）的范围，将需要表示的字符表中的每个字符映射成
+</code></pre><p>一个数字，这个数字被称为相应字符的码点（code point）<br>如“严”字在Unicode中对应的码点是U+0x4E25。</p>
+<h2 id="GBK"><a href="#GBK" class="headerlink" title="GBK"></a>GBK</h2><pre><code>GBK是国家标准GB2312基础上扩容后兼容GB2312的标准。
+</code></pre><p>GBK的文字编码是用双字节来表示的，即不论中、英文字符均使用双字节来表示，<br>为了区分中文，将其最高位都设定成1。GBK包含全部中文字符，是国家编码，<br>通用性比UTF8差，不过UTF8占用的数据库比GBD大。</p>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong>注意理解<strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong><br>    unicode，gbk(简体中文)和大五码（繁体中文）就是编码的值，而utf-8,uft-16之类就是这个值的表现形式．<br>而前面那三种编码是一兼容的，同一个汉字，那三个码值是完全不一样的．<br>如＂汉＂的unicode值与gbk就是不一样的，假设unicode为a040，gbk为b030，而uft-8码，<br>就是把那个值表现的形式．utf-8码完全只针对unicode来组织的，<br>如果ＧＢＫ要转ＵＴＦ－８必须先转unicode码，再转utf-8就好．</p>
+<h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><pre><code>刚才提到的码点是什么数字，(jdk中称为codePoint,详见String类)我们就把这个数字转换成相应的二进制表示，
+</code></pre><p>例如“严”在Unicode中对应的数字是0x4E25,他的二进制是100 1110 0010 0101，<br>也就是严这个字需要两个字节进行存储。</p>
+<p><strong>缺点:</strong><br>    还有其他语系的存在，到底该使用几个字节表示一个字符<br><strong>解决：</strong><br>    用变长的字节来存储一个字符<br>UTF-8(Unicode Transformation Format-8)<br>unicode|utf-8 对应关系(pic/unicode|utf-8.png)<br><strong>规则：</strong><br>    已知“严”的unicode是4E25（100111000100101），根据上表，可以发现4E25<br>处在第三行的范围内（0000 0800-0000 FFFF），因此“严”的UTF-8编码需要三个字<br>节，即格式是“1110xxxx 10xxxxxx 10xxxxxx”。然后，从“严”的最后一个二进制位开<br>始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，“严”的UTF-8编码是<br>“11100100 10111000 10100101”，转换成十六进制就是0xE4B8A5。</p>
+<h2 id="UTF-8-UTF-16-UTF-32"><a href="#UTF-8-UTF-16-UTF-32" class="headerlink" title="UTF-8 UTF-16 UTF-32"></a>UTF-8 UTF-16 UTF-32</h2><p>UTF后边的数字代表的是码元的大小<br>码 元（Code Unit）是指一个已编码的文本中具有最短的比特组合的单元。<br>对于UTF-8来说，码元是8比特长；对于UTF-16来说，码元是16比特长。<br>换一种说法 就是UTF-8的是以一个字节为最小单位的，UTF-16是以两个字节为最小单位的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/04/27/技术/道/计算机基础/编码/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/04/27/技术/道/计算机基础/编码/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/04/27/技术/道/计算机基础/编码/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UTF-8/">UTF-8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编码/">编码</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/17/技术/道/数据结构与算法/查找/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          查找
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/27/技术/道/分布式与服务化/分布式事务理论/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">分布式事务理论</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">关于我 ● About Me</h3>
+  <ul class="widget about-me">
+    <li><img class="author" title="About me" src="/css/images/me.png" /></li>
+    
+    <li><a href="https://yixiangli.github.io/liyixiang/about/">liyixiang</a></li>
+    
+    <li>程序猿 / 前行者</li>
+    
+    <li>微信公众号：平凡程序猿</li>
+    
+  </ul>
+</div>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类 ● Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/22/技术/道/分布式与服务化/异步确保型分布式事务探讨/">异步确保型分布式事务探讨</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/27/技术/道/设计模式/创建型/原型/">原型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/22/技术/道/设计模式/创建型/建造者/">建造者</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/21/技术/道/设计模式/行为型/模板方法/">模板方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/21/技术/道/设计模式/创建型/单例/">单例</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+<div class="widget-wrap">
+  <h3 class="widget-title">友情链接 ● Links</h3>
+  <ul class="widget">
+    
+    <li><a href="http://blog.ziwenzou.com/" target="_BLANK">●&emsp;James的主页－生态首席架构师</a></li>
+    
+    <li><a href="http://iloveudan.com/" target="_BLANK">●&emsp;熊格拉的主页</a></li>
+    
+    <li><a href="http://my.oschina.net/liyixiangBlog/blog" target="_BLANK">●&emsp;博主的－开源中国博客</a></li>
+    
+    <li><a href="http://www.mysunshinedreams.com/" target="_BLANK">●&emsp;Sunshine全栈特级工程师</a></li>
+    
+  </ul>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title">微博 ● Weibo </h3>
+  <div class="widget" style="padding: 0px">
+	<iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=3&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3173821640&verifier=3894badf&dpc=1"></iframe>
+  </div>
+</div>
+  
+
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  
+  <!--
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Liyixiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+  -->
+  
+  <div class="outer">
+    <div id="footer-info" class="inner" style="text-align:center;">
+      <table width="100%" border="0">
+        <tr>
+          <td style="text-align:left">
+            Copyright &copy; 2016-2019 Liyixiang<br>
+            Powered by <a href="https://github.com/yixiangli" target="_blank">liyixiang</a>         
+          </td>
+          <td style="text-align:right">
+            <div style="font-family: FontAwesome;font-size: 20px;">
+            <a href="http://weibo.com/3173821640" title="微博" target="_blank">&#61834;</a>&nbsp;
+            <a href="http://www.renren.com/287137027" title="人人" target="_blank">&#61835;</a>&nbsp;
+            <a href="http://user.qzone.qq.com/394244674" title="QQ空间" target="_blank">&#61680;</a>&nbsp;
+            <a href="https://www.facebook.com/yixiang.li.92" title="Facebook" target="_blank">&#61594;</a>&nbsp;
+            <a href="https://www.linkedin.com/in/liyixiang93" title="LinkedIn" target="_blank">&#61665;</a>&nbsp;
+            <a href="https://github.com/yixiangli" title="GitHub" target="_blank">&#61595;</a>&nbsp;
+            </div><br>
+            <a href="/sitemap.xml">网站地图</a>&nbsp; &nbsp;
+            <a href="/atom.xml">订阅本站</a>&nbsp; &nbsp;
+            <a href="mailto:liyixiang@le.com" target="_blank">联系博主</a>&nbsp; &nbsp;     
+			<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260342233'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260342233' type='text/javascript'%3E%3C/script%3E"));</script>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">目录</a>
+  
+    <a href="https://github.com/yixiangli" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/sitemap.xml" class="mobile-nav-link">网站地图</a>
+  
+</nav>
+    <!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+这里不但将 Google 的 jQuery 替换成了 SAE 的，随后还进行了一个判断，如果获取新浪的 jQuery 失败，则使用本网站自己的 jQuery。为了让这段代码有效，我们要去 jQuery 官方下载合适版本的 jQuery 并将其放到 source\js\ 目录下，命名为 jquery-2.0.3.min.js。 还有一点需要特别注意，那就是 jQuery 这个文件在 hexo 生成博客时会被解析，因此一定要将 jQuery 文件开头处的 //@ sourceMappingURL=jquery-2.0.3.min.map 这一行代码删去，否则会导致博客无法生成。
+-->
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+<!--
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+-->
+// ]]>
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="bottom-btn">
+
+	<a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+	<script src="/js/gotop.js"></script>
+	<!--
+	<script src="/js/gotop.js"></script>
+	-->
+
+</div>
+<script src="/js/script.js"></script>
+
+<!-- Baidu Share Start --->
+<script>window._bd_share_config={"common":{"bdSnsKey":{"tsina":"1714312189"},"bdWbuid":3173821640,"bdText":"","bdMini":"2","bdMiniList":["douban","kaixin001","tieba","tsohu","sqq","youdao","qingbiji","mail","linkedin","mshare","copy","print"],"bdPic":"http://www.devchen.com/SharePic.png","bdStyle":"1","bdSize":"24"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!--- Baidu Share End --->
+
+  </div>
+</body>
+</html>
