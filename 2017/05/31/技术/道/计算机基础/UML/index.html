@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档 | 不忘初心</title>
+  <title>UML | 不忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人主页">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不忘初心">
-<meta property="og:url" content="https://yixiangli.github.io/archives/index.html">
+  <meta name="description" content="UML一句话通俗易懂，程序员协作沟通的一种语言，一般以图的方式来描述关系。">
+<meta name="keywords" content="泛化,类图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UML">
+<meta property="og:url" content="https://yixiangli.github.io/2017/05/31/技术/道/计算机基础/UML/index.html">
 <meta property="og:site_name" content="不忘初心">
-<meta property="og:description" content="个人主页">
+<meta property="og:description" content="UML一句话通俗易懂，程序员协作沟通的一种语言，一般以图的方式来描述关系。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://yixiangli.github.io/img/Generalization.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/Realization.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/Dependency.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/Association.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/Aggregation.jpg">
+<meta property="og:image" content="https://yixiangli.github.io/img/Compostion.jpg">
+<meta property="og:updated_time" content="2019-01-03T11:25:11.071Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不忘初心">
-<meta name="twitter:description" content="个人主页">
+<meta name="twitter:title" content="UML">
+<meta name="twitter:description" content="UML一句话通俗易懂，程序员协作沟通的一种语言，一般以图的方式来描述关系。">
+<meta name="twitter:image" content="https://yixiangli.github.io/img/Generalization.jpg">
   
     <link rel="alternate" href="/atom.xml" title="不忘初心" type="application/atom+xml">
   
@@ -80,39 +89,75 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
+        <section id="main"><article id="post-技术/道/计算机基础/UML" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
     
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/05/31/技术/道/计算机基础/UML/" class="archive-article-date">
-  <time datetime="2017-05-31T06:38:10.000Z" itemprop="datePublished">5月 31</time>
-</a>
-      
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/31/技术/道/计算机基础/UML/">UML</a>
+    <h1 class="article-title" itemprop="name">
+      UML
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2017/05/31/技术/道/计算机基础/UML/" class="article-date">
+  <time datetime="2017-05-31T06:38:10.000Z" itemprop="datePublished">2017-05-31</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/道/">道</a>►<a class="article-category-link" href="/categories/技术/道/计算机基础/">计算机基础</a>
   </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+      	<!-- Table of Contents -->
+    
+        <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目录</strong>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UML"><span class="toc-number">1.</span> <span class="toc-text">UML</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系模型"><span class="toc-number">1.1.</span> <span class="toc-text">关系模型</span></a></li></ol></li></ol>
+        </div>
+    
+        <h1 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h1><p>一句话通俗易懂，程序员协作沟通的一种语言，一般以图的方式来描述关系。</p>
+<a id="more"></a>
+<h2 id="关系模型"><a href="#关系模型" class="headerlink" title="关系模型"></a>关系模型</h2><p><strong>继承</strong><br>Java语言中就是extends的概念<br><img src="/img/Generalization.jpg" alt="继承"></p>
+<p><strong>实现</strong><br>Java语言中就是implements的概念<br><img src="/img/Realization.jpg" alt="实现"></p>
+<p><strong>依赖</strong><br>类A使用了类B，但两者是一种弱引用的关系，具有偶然性，临时性，B类的变化会影响到A，仅仅是使用。<br><img src="/img/Dependency.jpg" alt="依赖"></p>
+<p><strong>关联</strong><br>比依赖关系强，一般是长期性的，而且双方的关系一般是平等的，关联可以是单向或双向，代码层面可以理解为类属性或者全局变量的概念<br><img src="/img/Association.jpg" alt="关联"></p>
+<p><strong>聚合</strong><br>聚合体现的是部分与整体的关系,（has-a）关系,且整体与部分之间是可分离的，他们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享<br><img src="/img/Aggregation.jpg" alt="聚合"></p>
+<p><strong>组合</strong><br>比聚合更苛刻，虽然也是体现部分与整体（contains-a）的关系，但此时整体与部分是不可分的，整体的生命周期结束也就意味着部分的生命周期结束；这种关系比聚合更强，也称为强聚合<br><img src="/img/Compostion.jpg" alt="组合"></p>
+<p>关系所表现的强弱程度依次为：组合&gt;聚合&gt;关联&gt;依赖；</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <div class="bdsharebuttonbox"><a href="https://yixiangli.github.io/2017/05/31/技术/道/计算机基础/UML/">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook">Facebook</a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter">Twitter</a><a href="#" class="bds_more" data-cmd="more">其他平台</a></div>
+      
+      
+        <a href="https://yixiangli.github.io/2017/05/31/技术/道/计算机基础/UML/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2017/05/31/技术/道/计算机基础/UML/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/泛化/">泛化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类图/">类图</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+  
 </article>
-  
-  
-    </div></section>
-  
+
+
+<section id="comments">
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="/js/uyan.js"></script>
+</section>
+
+
 
 </section>
         
