@@ -82,6 +82,132 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-技术/术/存储/缓存/Redis/Redis指南" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/25/技术/术/存储/缓存/Redis/Redis指南/">Redis指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/12/25/技术/术/存储/缓存/Redis/Redis指南/" class="article-date">
+  <time datetime="2016-12-25T09:53:23.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/存储/">存储</a>►<a class="article-category-link" href="/categories/技术/术/存储/缓存/">缓存</a>►<a class="article-category-link" href="/categories/技术/术/存储/缓存/Redis/">Redis</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>废话不多说，官方文档在此<br><a href="http://doc.redisfans.com" target="_blank" rel="external">http://doc.redisfans.com</a></p>
+<hr>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p><strong>使用者角度</strong></p>
+<ul>
+<li>string</li>
+<li>list</li>
+<li>hash</li>
+<li>set</li>
+<li>sorted set</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/25/技术/术/存储/缓存/Redis/Redis指南/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2016/12/25/技术/术/存储/缓存/Redis/Redis指南/" data-id="cjqwj422m00c9kjcan3rr1hwd" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2016/12/25/技术/术/存储/缓存/Redis/Redis指南/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/技术/术/存储/缓存/Redis/Redis指南/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/">cache</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-技术/术/语言基础/Java/J2SE/Java集合详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/25/技术/术/语言基础/Java/J2SE/Java集合详解/">Java集合详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+    	<a href="/2016/12/25/技术/术/语言基础/Java/J2SE/Java集合详解/" class="article-date">
+  <time datetime="2016-12-25T09:47:34.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    	
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/">语言基础</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/">Java</a>►<a class="article-category-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a>
+  </div>
+
+  	</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="集合-Or-容器"><a href="#集合-Or-容器" class="headerlink" title="集合 Or 容器"></a>集合 Or 容器</h1><p>java.util.*</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p><img src="/img/collection.jpg" alt="集合结构图"></p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>Java1.5引入了泛型，泛型允许我们为集合提供一个可以容纳的对象类型<br>解决了两个问题：<br>（1）对某集合定义泛型后，如果添加非泛型类型的任何元素，会在编译时报错，避免在运行期出现ClassCastException<br>（2）不需要使用显式转换和instanceOf操作符，代码更整洁</p>
+<h2 id="集合框架类"><a href="#集合框架类" class="headerlink" title="集合框架类"></a>集合框架类</h2><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="HashMap多线程并发可能存在的问题"><a href="#HashMap多线程并发可能存在的问题" class="headerlink" title="HashMap多线程并发可能存在的问题"></a>HashMap多线程并发可能存在的问题</h3><h4 id="get死循环"><a href="#get死循环" class="headerlink" title="get死循环"></a>get死循环</h4><p>多线程同时进行put操作后，都同时rehash操作，导致Entry List出现循环引用，get会出现死循环，导致CPU飙升，多线程都被Hang住</p>
+<h4 id="get数据丢失"><a href="#get数据丢失" class="headerlink" title="get数据丢失"></a>get数据丢失</h4><p>看createEntry方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void createEntry(int hash, K key, V value, int bucketIndex) &#123;</div><div class="line">        Entry&lt;K,V&gt; e = table[bucketIndex];</div><div class="line">        table[bucketIndex] = new Entry&lt;&gt;(hash, key, value, e);</div><div class="line">        size++;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>该方法中请注意new Entry（）构造方法，如果在多线程场景下两个线程同时获取到了e实例，那么在赋值给table时有一个成功有一个丢失。</p>
+<h4 id="put非null元素后get出来的却是null"><a href="#put非null元素后get出来的却是null" class="headerlink" title="put非null元素后get出来的却是null"></a>put非null元素后get出来的却是null</h4><p>源码</p>
+<h3 id="Enumeration和Iterator接口的区别"><a href="#Enumeration和Iterator接口的区别" class="headerlink" title="Enumeration和Iterator接口的区别"></a>Enumeration和Iterator接口的区别</h3><p>Enumeration的速度是Iterator的两倍，也使用更少的内存。Enumeration是非常基础的，也满足了基础的需要。但是，与Enumeration相比，Iterator更加安全，因为当一个集合正在被遍历的时候，它会阻止其它线程去修改集合。迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者从集合中移除元素，而Enumeration不能做到</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>equals AND deepEquals<br>(1) deepEquals用于判定两个指定数组彼此是否深层相等，此方法适用于任意深度的嵌套数组。<br>(2) equals用于判定两个数组是否相等，如果两个数组以相同顺序包含相同元素，则返回true，否则返回false。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/12/25/技术/术/语言基础/Java/J2SE/Java集合详解/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	    <a data-url="https://yixiangli.github.io/2016/12/25/技术/术/语言基础/Java/J2SE/Java集合详解/" data-id="cjqwj423500ddkjcatkwt5kjl" class="article-share-link">分享</a>
+	  
+      
+        <a href="https://yixiangli.github.io/2016/12/25/技术/术/语言基础/Java/J2SE/Java集合详解/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/25/技术/术/语言基础/Java/J2SE/Java集合详解/">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/List/">List</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Map/">Map</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Set/">Set</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合/">集合</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-技术/术/语言基础/Java/J2SE/Java关键字" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -118,7 +244,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/19/技术/术/语言基础/Java/J2SE/Java关键字/" data-id="cjqgt22ea00cmqys61n76583q" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/19/技术/术/语言基础/Java/J2SE/Java关键字/" data-id="cjqwj422x00czkjcanrd2sek5" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/19/技术/术/语言基础/Java/J2SE/Java关键字/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/19/技术/术/语言基础/Java/J2SE/Java关键字/">评论</a>
@@ -172,7 +298,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/12/07/技术/术/中间件/Zookeeper/Zookeeper实战/" data-id="cjqgt22ae004rqys6nc10jqfg" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/12/07/技术/术/中间件/Zookeeper/Zookeeper实战/" data-id="cjqwj41zd004lkjcajikl88jx" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/12/07/技术/术/中间件/Zookeeper/Zookeeper实战/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/12/07/技术/术/中间件/Zookeeper/Zookeeper实战/">评论</a>
@@ -234,7 +360,7 @@
     </div>
     <footer class="article-footer">
 	  
-	    <a data-url="https://yixiangli.github.io/2016/11/10/技术/术/持续集成/Maven/Maven一探究竟/" data-id="cjqgt22am004xqys68t2m8aa2" class="article-share-link">分享</a>
+	    <a data-url="https://yixiangli.github.io/2016/11/10/技术/术/持续集成/Maven/Maven一探究竟/" data-id="cjqwj42090058kjcaj4e4bxa6" class="article-share-link">分享</a>
 	  
       
         <a href="https://yixiangli.github.io/2016/11/10/技术/术/持续集成/Maven/Maven一探究竟/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/11/10/技术/术/持续集成/Maven/Maven一探究竟/">评论</a>
@@ -252,123 +378,10 @@
 
 
   
-    <article id="post-技术/术/持续集成/Git/Git使用手册" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/19/技术/术/持续集成/Git/Git使用手册/">Git使用手册</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/10/19/技术/术/持续集成/Git/Git使用手册/" class="article-date">
-  <time datetime="2016-10-19T06:24:19.000Z" itemprop="datePublished">2016-10-19</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/持续集成/">持续集成</a>►<a class="article-category-link" href="/categories/技术/术/持续集成/Git/">Git</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>GitHub作为一个神奇的仓库，还是很6的，顺便贴一下博主的github，<a href="https://github.com/yixiangli" target="_blank" rel="external">https://github.com/yixiangli</a></p>
-<h2 id="一张图"><a href="#一张图" class="headerlink" title="一张图"></a>一张图</h2><p><img src="/img/git-command.png" alt="Git命令详解"></p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>同步远程分支<br>git remote update origin –prune</p>
-<p>远程分支拉取到本地，并新建该分支<br>git checkout origin/dev -b dev</p>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h4 id="git-add-之后后悔了"><a href="#git-add-之后后悔了" class="headerlink" title="git add 之后后悔了"></a>git add 之后后悔了</h4><p>别担心 git reset一下就好，对了 千万不要- -hard哈</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/10/19/技术/术/持续集成/Git/Git使用手册/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/10/19/技术/术/持续集成/Git/Git使用手册/" data-id="cjqgt22aa004nqys6apofdz7t" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/10/19/技术/术/持续集成/Git/Git使用手册/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/10/19/技术/术/持续集成/Git/Git使用手册/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub配置/">GitHub配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-技术/术/中间件/MQ/MessageQueue大全" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/">MessageQueue大全</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-    	<a href="/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/" class="article-date">
-  <time datetime="2016-10-09T02:43:58.000Z" itemprop="datePublished">2016-10-09</time>
-</a>
-    	
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术/">技术</a>►<a class="article-category-link" href="/categories/技术/术/">术</a>►<a class="article-category-link" href="/categories/技术/术/中间件/">中间件</a>►<a class="article-category-link" href="/categories/技术/术/中间件/MQ/">MQ</a>
-  </div>
-
-  	</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="what-is-MessageQueue"><a href="#what-is-MessageQueue" class="headerlink" title="what is MessageQueue"></a>what is MessageQueue</h1><p>什么是消息队列？一种跨进程的通信机制，用于上下游传递消息，是现代互联网企业常用的一种用于服务解耦，异步处理，请求削峰等需求的消息中间件，对于互联网高并发场景的支撑起到了重要的作用</p>
-<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>使用一项技术的前提就是在了解这项技术的同时，分析这项技术的使用场景，就像设计模式，并不是23种设计模式一起用上，系统就能无比强大，使用不当会造成严重的后果，轻则扩展性差，架构复杂，理解困难，重则难以持续维护，不得不重写，因此，对于深入MQ来说，就需要分析他的使用场景<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	    <a data-url="https://yixiangli.github.io/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/" data-id="cjqgt229w004bqys656eplvb2" class="article-share-link">分享</a>
-	  
-      
-        <a href="https://yixiangli.github.io/2016/10/09/技术/术/中间件/MQ/MessageQueue大全/#uyan_frame" class="ds-thread-count article-comment-link" data-thread-key="2016/10/09/技术/术/中间件/MQ/MessageQueue大全/">评论</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZeroMQ/">ZeroMQ</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/14/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/16/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/16/">下一页 &raquo;</a>
   </nav>
 </section>
         
@@ -393,7 +406,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类 ● Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/一些文章/">一些文章</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">73</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Elasticsearch/">Elasticsearch</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/缓存/">缓存</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/缓存/Memcache/">Memcache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/缓存/Redis/">Redis</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/一些文章/">一些文章</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">73</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/">器</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用命令/">常用命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/器/常用工具/">常用工具</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/">术</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/">中间件</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Elasticsearch/">Elasticsearch</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/MQ/">MQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Nginx/">Nginx</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/中间件/Zookeeper/">Zookeeper</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/">存储</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/">数据库</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MongoDB/">MongoDB</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/数据库/MySQL/">MySQL</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/缓存/">缓存</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/缓存/Memcache/">Memcache</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/存储/缓存/Redis/">Redis</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/">持续集成</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Git/">Git</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/持续集成/Maven/">Maven</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/">语言基础</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/">Java</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/">J2EE</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2EE/框架/">框架</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/J2SE/">J2SE</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/术/语言基础/Java/JVM/">JVM</a><span class="category-list-count">5</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/">道</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/">分布式与服务化</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/RPC/">RPC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/分布式与服务化/微服务/">微服务</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/大数据/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/">操作系统</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/操作系统/Linux/">Linux</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/数据结构与算法/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/计算机基础/">计算机基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/">设计模式</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/创建型/">创建型</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/结构型/">结构型</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/道/设计模式/行为型/">行为型</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/技术/">技术</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/技术/大型网站系统与Java中间件实践/">大型网站系统与Java中间件实践</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -404,6 +417,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/01/06/读书笔记/技术/大型网站系统与Java中间件实践/">大型网站系统与Java中间件实践</a>
+          </li>
         
           <li>
             <a href="/2018/08/08/技术/术/存储/数据库/HBase/HBase/">HBase-基础介绍</a>
@@ -419,10 +436,6 @@
         
           <li>
             <a href="/2018/07/24/技术/术/语言基础/Java/J2EE/框架/Spring事务传播机制/">Spring事务传播机制</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/22/一些文章/CodeReview/">CodeReview</a>
           </li>
         
       </ul>
